@@ -1,4 +1,4 @@
-const { configure, presets } = require("eslint-kit");
+const { configure, presets } = require("eslint-kit")
 
 module.exports = configure({
     extend: {
@@ -12,4 +12,4 @@ module.exports = configure({
         presets.prettier(),
         presets.typescript(),
     ],
-});
+})

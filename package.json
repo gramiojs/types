@@ -6,6 +6,7 @@
     "description": "Telegram Bot Api types for gramio",
     "types": "types/index.d.ts",
     "scripts": {
+        "prepublishOnly": "bun generate",
         "generate": "bun src/index.ts"
     },
     "author": "kravets",
