@@ -13,19 +13,25 @@ type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>
 
 Prerequire - [`rust`](https://www.rust-lang.org/)
 
-1. Clone [repo](https://github.com/ark0f/tg-bot-api) to the `src` folder
+1. Clone [this repo](https://github.com/kravetsone/gramio-types) and open it
+
+```
+git clone https://github.com/kravetsone/gramio-types.git
+```
+
+2. Clone [repo](https://github.com/ark0f/tg-bot-api) to the `src` folder
 
 ```bash
 git clone https://github.com/ark0f/tg-bot-api.git
 ```
 
-2. Run the JSON schema generator in the cloned folder
+3. Run the JSON schema generator in the cloned folder
 
 ```bash
 cargo run --package gh-pages-generator --bin gh-pages-generator -- dev
 ```
 
-3. Run types code-generation from the root of the project
+4. Run types code-generation from the root of the project
 
 ```bash
 bun generate
@@ -37,4 +43,4 @@ or, if you don't use `bun`, use `tsx`
 npx tsx src/index.ts
 ```
 
-4. Profit! Check out the types of Telegram Bot API in `types` folder!
+5. Profit! Check out the types of Telegram Bot API in `types` folder!

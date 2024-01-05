@@ -1,6 +1,6 @@
 {
     "name": "@gramio/types",
-    "version": "7.0.0",
+    "version": "7.0.0-rc",
     "homepage": "https://github.com/kravetsone/gramio-types",
     "readme": "https://github.com/kravetsone/gramio-types",
     "description": "Telegram Bot Api types for gramio",
