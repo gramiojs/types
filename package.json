@@ -1,9 +1,22 @@
 {
     "name": "@gramio/types",
-    "version": "7.0.0-r1",
+    "version": "7.0.0",
+    "homepage": "https://github.com/kravetsone/gramio-types",
+    "readme": "https://github.com/kravetsone/gramio-types",
     "description": "Telegram Bot Api types for gramio",
-    "main": "dist/index.js",
-    "scripts": {},
+    "types": "types/index.d.ts",
+    "scripts": {
+        "generate": "bun src/index.ts"
+    },
     "author": "kravets",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.10.6",
+        "eslint": "^8.41.0",
+        "eslint-kit": "^10.0.0",
+        "prettier": "^3.0.0"
+    },
+    "files": [
+        "types"
+    ]
 }
