@@ -3,8 +3,8 @@ const { configure, presets } = require("eslint-kit");
 module.exports = configure({
     extend: {
         rules: {
-            "@typescript-eslint/no-namespace": "off"
-        }
+            "@typescript-eslint/no-namespace": "off",
+        },
     },
     presets: [
         presets.imports(),
