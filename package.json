@@ -1,0 +1,9 @@
+{
+    "name": "@gramio/types",
+    "version": "7.0.0-r1",
+    "description": "Telegram Bot Api types for gramio",
+    "main": "dist/index.js",
+    "scripts": {},
+    "author": "kravets",
+    "license": "ISC"
+}
