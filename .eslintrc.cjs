@@ -4,6 +4,7 @@ module.exports = configure({
     extend: {
         rules: {
             "@typescript-eslint/no-namespace": "off",
+            "@typescript-eslint/no-empty-interface": "off",
         },
     },
     presets: [
