@@ -1,16 +1,25 @@
 {
     "name": "@gramio/types",
-    "version": "7.0.0-rc",
+    "version": "7.0.1",
     "homepage": "https://github.com/kravetsone/gramio-types",
     "readme": "https://github.com/kravetsone/gramio-types",
-    "description": "Telegram Bot Api types for gramio",
+    "description": "Code-generated Telegram Bot API types",
+    "author": "kravets",
+    "license": "ISC",
+    "keywords": [
+        "telegram",
+        "bot",
+        "tba",
+        "types",
+        "telegram-bot-api",
+        "code-generated",
+        "api"
+    ],
     "types": "types/index.d.ts",
     "scripts": {
         "prepublishOnly": "bun generate",
         "generate": "bun src/index.ts"
     },
-    "author": "kravets",
-    "license": "ISC",
     "devDependencies": {
         "@types/node": "^20.10.6",
         "eslint": "^8.41.0",
