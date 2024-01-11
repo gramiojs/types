@@ -3,7 +3,7 @@ import { IBotApi } from "../types"
 import { Properties } from "./properties"
 
 //TODO: unify and refactor
-export class Methods {
+export class Params {
     static generateMany(methods: IBotApi.IMethod[]) {
         return methods.flatMap(this.generate)
     }

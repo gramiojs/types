@@ -1,7 +1,7 @@
 import fs from "node:fs/promises"
 import prettier from "prettier"
-import { ApiMethods, Methods, Objects } from "./bot-api-schema-entities/index"
 import { PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config"
+import { ApiMethods, Objects, Params } from "./entities"
 import { generateHeader } from "./helpers"
 import { IBotApi } from "./types"
 
@@ -21,19 +21,19 @@ const files: IGeneratedFile[] = [
         lines: [header, Objects.generateMany(schema.objects)],
     },
     {
-        path: "./types/api-params.d.ts",
+        path: "./types/params.d.ts",
         lines: [
             header,
             [`import * as Objects from "./objects"`, ""],
-            Methods.generateMany(schema.methods),
+            Params.generateMany(schema.methods),
         ],
     },
     {
-        path: "./types/api-methods.d.ts",
+        path: "./types/methods.d.ts",
         lines: [
             header,
             [
-                `import * as Params from "./api-params"`,
+                `import * as Params from "./params"`,
                 `import * as Objects from "./objects"`,
                 "",
                 "type TCallApi<T, R> = (params: T) => Promise<R>",
@@ -48,8 +48,8 @@ const files: IGeneratedFile[] = [
     {
         path: "./types/index.d.ts",
         lines: [
-            [`export * from "./api-methods"`],
-            [`export * from "./api-params"`],
+            [`export * from "./methods"`],
+            [`export * from "./params"`],
             [`export * from "./objects"`],
         ],
     },
