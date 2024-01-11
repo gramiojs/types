@@ -1,5 +1,9 @@
 # Code-generated Telegram Bot API types
 
+### Versioning
+
+7.0.x types - for 7.0 Telegram Bot API
+
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
 ```ts
@@ -9,9 +13,12 @@ type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>
 //   ^? type SendMessageReturn = Promise<TelegramMessage>
 ```
 
-### Versioning
+## Imports
 
-7.0.x types - for 7.0 Telegram Bot API
+-   `index` - exports everything in the section
+-   `methods` - exports `ApiMethods` which describes the api functions
+-   `objects` - exports objects with the `Telegram` prefix (for example [Update](https://core.telegram.org/bots/api/#update))
+-   `params` - exports params that are used in `methods`
 
 ### Write you own type-safe TBA API wrapper
 
