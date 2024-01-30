@@ -3,6 +3,8 @@ name: Update Types
 on:
     schedule:
         - cron: "0 * * * *"
+    workflow_dispatch:
+
 jobs:
     update_types:
         runs-on: ubuntu-latest
