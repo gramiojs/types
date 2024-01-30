@@ -37,9 +37,9 @@ const files: IGeneratedFile[] = [
 				`import * as Params from "./params"`,
 				`import * as Objects from "./objects"`,
 				"",
-				"type TCallApi<T, R> = (params: T) => Promise<R>",
-				"type TCallApiWithoutParams<R> = () => Promise<R>",
-				"type TCallApiWithOptionalParams<T, R> = (params?: T) => Promise<R>",
+				"type CallApi<T, R> = (params: T) => Promise<R>",
+				"type CallApiWithoutParams<R> = () => Promise<R>",
+				"type CallApiWithOptionalParams<T, R> = (params?: T) => Promise<R>",
 				"",
 			],
 
