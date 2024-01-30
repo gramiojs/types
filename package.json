@@ -15,13 +15,16 @@
         "code-generated",
         "api"
     ],
+    "main": "./types/index.js",
     "types": "./types/index.d.ts",
     "exports": {
         ".": {
-            "types": "./types/index.d.ts"
+            "types": "./types/index.d.ts",
+            "default": "./types/index.js"
         },
         "./*": {
-            "types": "./types/*.d.ts"
+            "types": "./types/*.d.ts",
+            "default": "./types/index.js"
         }
     },
     "scripts": {

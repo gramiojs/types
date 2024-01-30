@@ -65,7 +65,7 @@ Prerequire - [`rust`](https://www.rust-lang.org/)
 git clone https://github.com/kravetsone/gramio-types.git
 ```
 
-2. Clone [repo](https://github.com/ark0f/tg-bot-api) with TBA parser to the `src` folder
+2. Clone [repo](https://github.com/ark0f/tg-bot-api) with TBA parser to the «`src`» folder
 
 ```bash
 git clone https://github.com/ark0f/tg-bot-api.git
