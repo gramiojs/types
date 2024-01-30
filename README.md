@@ -1,4 +1,4 @@
-# Code-generated Telegram Bot API types
+# Code-generated and Auto-published Telegram Bot API types
 
 ### Versioning
 
@@ -55,7 +55,12 @@ api.sendMessage({
 });
 ```
 
-## Generate types
+### Auto-update package
+
+This library is updated automatically to the latest version of the Telegram Bot Api in case of changes thanks to CI CD!
+If the github action failed, there are no changes in the bot api
+
+## Generate types manually
 
 Prerequire - [`rust`](https://www.rust-lang.org/)
 
@@ -74,7 +79,7 @@ git clone https://github.com/ark0f/tg-bot-api.git
 3. Run the JSON schema generator in the `cloned` folder
 
 ```bash
-cargo run --package gh-pages-generator --bin gh-pages-generator -- dev
+cd tg-bot-api && cargo run --package gh-pages-generator --bin gh-pages-generator -- dev && cd ..
 ```
 
 4. Run types code-generation from the `root` of the project

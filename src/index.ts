@@ -1,13 +1,13 @@
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
 import prettier from "prettier";
-import { PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
+import { OUTPUT_PATH, PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
 import { ApiMethods, Objects, Params } from "./entities";
 import { generateHeader } from "./helpers";
 import { IBotApi } from "./types";
 
 export interface IGeneratedFile {
-	path: string;
+	name: string;
 	lines: string[][];
 }
 
@@ -18,11 +18,11 @@ const header = generateHeader(schema.version, schema.recent_changes);
 
 const files: IGeneratedFile[] = [
 	{
-		path: "./types/objects.d.ts",
+		name: "objects.d.ts",
 		lines: [header, Objects.generateMany(schema.objects)],
 	},
 	{
-		path: "./types/params.d.ts",
+		name: "params.d.ts",
 		lines: [
 			header,
 			[`import * as Objects from "./objects"`, ""],
@@ -30,7 +30,7 @@ const files: IGeneratedFile[] = [
 		],
 	},
 	{
-		path: "./types/methods.d.ts",
+		name: "methods.d.ts",
 		lines: [
 			header,
 			[
@@ -47,7 +47,7 @@ const files: IGeneratedFile[] = [
 		],
 	},
 	{
-		path: "./types/index.d.ts",
+		name: "index.d.ts",
 		lines: [
 			[`export * from "./methods"`],
 			[`export * from "./params"`],
@@ -55,16 +55,16 @@ const files: IGeneratedFile[] = [
 		],
 	},
 	{
-		path: "./types/index.js",
+		name: "index.js",
 		lines: [["export {}"]],
 	},
 ];
 
-if (!existsSync("./types")) await fs.mkdir("./types");
+if (!existsSync(OUTPUT_PATH)) await fs.mkdir(OUTPUT_PATH);
 
 for await (const file of files) {
 	await fs.writeFile(
-		file.path,
+		`${OUTPUT_PATH}/${file.name}`,
 		await prettier.format(file.lines.flat().join("\n"), PRETTIER_OPTIONS),
 	);
 }

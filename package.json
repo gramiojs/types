@@ -3,7 +3,7 @@
     "version": "7.0.3",
     "homepage": "https://github.com/gramiojs/types",
     "readme": "https://github.com/gramiojs/types",
-    "description": "Code-generated Telegram Bot API types",
+    "description": "Code-generated and Auto-published Telegram Bot API types",
     "author": "kravets",
     "license": "ISC",
     "keywords": [
@@ -13,18 +13,20 @@
         "types",
         "telegram-bot-api",
         "code-generated",
+        "auto-published",
+        "cicd",
         "api"
     ],
-    "main": "./types/index.js",
-    "types": "./types/index.d.ts",
+    "main": "./out/index.js",
+    "types": "./out/index.d.ts",
     "exports": {
         ".": {
-            "types": "./types/index.d.ts",
-            "default": "./types/index.js"
+            "types": "./out/index.d.ts",
+            "default": "./out/index.js"
         },
         "./*": {
-            "types": "./types/*.d.ts",
-            "default": "./types/index.js"
+            "types": "./out/*.d.ts",
+            "default": "./out/index.js"
         }
     },
     "scripts": {
@@ -39,6 +41,6 @@
         "prettier": "^3.2.4"
     },
     "files": [
-        "types"
+        "out"
     ]
 }
