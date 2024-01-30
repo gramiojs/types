@@ -7,9 +7,9 @@
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
 ```ts
-import type { ApiMethods } from "@gramio/types"
+import type { ApiMethods } from "@gramio/types";
 
-type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>
+type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>;
 //   ^? type SendMessageReturn = Promise<TelegramMessage>
 ```
 
@@ -23,10 +23,10 @@ type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>
 ### Write you own type-safe TBA API wrapper
 
 ```typescript
-import { stringify } from "node:querystring"
-import type { ApiMethods } from "@gramio/types"
+import { stringify } from "node:querystring";
+import type { ApiMethods } from "@gramio/types";
 
-const TOKEN = ""
+const TOKEN = "";
 
 const api = new Proxy<ApiMethods>({} as ApiMethods, {
     get: (_target, method: string) => async (args: Record<string, any>) => {
@@ -36,23 +36,23 @@ const api = new Proxy<ApiMethods>({} as ApiMethods, {
             "/" +
             method +
             `?` +
-            stringify(args)
+            stringify(args);
 
         const response = await fetch(url, {
             method: "GET",
-        })
+        });
 
-        const data = await response.json()
-        if (!response.ok) throw new Error("some error")
+        const data = await response.json();
+        if (!response.ok) throw new Error("some error");
 
-        return data.result
+        return data.result;
     },
-})
+});
 
 api.sendMessage({
     chat_id: 1,
     text: "msg",
-})
+});
 ```
 
 ## Generate types
@@ -65,7 +65,7 @@ Prerequire - [`rust`](https://www.rust-lang.org/)
 git clone https://github.com/kravetsone/gramio-types.git
 ```
 
-2. Clone [repo](https://github.com/ark0f/tg-bot-api) with TBA parser to the «`src`» folder
+2. Clone [repo](https://github.com/ark0f/tg-bot-api) with TBA parser in the `cloned` folder
 
 ```bash
 git clone https://github.com/ark0f/tg-bot-api.git
