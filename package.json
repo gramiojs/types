@@ -1,6 +1,6 @@
 {
     "name": "@gramio/types",
-    "version": "7.0.3",
+    "version": "7.0.2",
     "homepage": "https://github.com/gramiojs/types",
     "readme": "https://github.com/gramiojs/types",
     "description": "Code-generated Telegram Bot API types",
@@ -29,7 +29,6 @@
     },
     "scripts": {
         "cicd": "bun scripts/cicd.ts",
-        "prepublishOnly": "bun generate",
         "generate": "bun src/index.ts",
         "lint": "bunx @biomejs/biome check ./src",
         "lint:fix": "bun lint --apply"

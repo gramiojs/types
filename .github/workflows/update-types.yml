@@ -40,3 +40,15 @@ jobs:
               uses: EndBug/add-and-commit@v9
               with:
                   message: "chore(TBA): regenerate types and update hash"
+
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.x"
+                  registry-url: "https://registry.npmjs.org"
+                  scope: "@gramio"
+
+            - name: Publish package
+              run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
