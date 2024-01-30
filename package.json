@@ -28,6 +28,7 @@
         }
     },
     "scripts": {
+        "cicd": "bun scripts/cicd.ts",
         "prepublishOnly": "bun generate",
         "generate": "bun src/index.ts",
         "lint": "bunx @biomejs/biome check ./src",
