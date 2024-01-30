@@ -32,3 +32,6 @@ jobs:
 
             - name: Show types
               run: cat types/methods.d.ts
+
+            - name: Set some variable
+              run: echo "VERSION=7.0" >> "$GITHUB_ENV"
