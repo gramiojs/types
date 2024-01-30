@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
 import prettier from "prettier";
 import { PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
@@ -58,6 +59,8 @@ const files: IGeneratedFile[] = [
 		lines: [["export {}"]],
 	},
 ];
+
+if (!existsSync("./types")) await fs.mkdir("./types");
 
 for await (const file of files) {
 	await fs.writeFile(
