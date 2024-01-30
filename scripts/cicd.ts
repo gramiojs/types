@@ -11,7 +11,7 @@ const hash = createHash("sha1").update(schemaFile).digest("hex");
 const previousHash = await fs.readFile("./hash.txt").then(String);
 if (previousHash === hash) {
 	console.log("No changes in Telegram Bot Api Schema");
-	process.exit(0);
+	process.exit(1);
 }
 
 const schema = JSON.parse(String(schemaFile)) as IBotApi.ISchema;
