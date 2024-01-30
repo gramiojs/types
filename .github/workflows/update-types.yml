@@ -13,14 +13,16 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Install Rust
-              uses: actions-rs/toolchain@v1
-
             - name: Install Bun
               uses: oven-sh/setup-bun@v1
 
             - name: Clone TBA Schema parser repo
               run: git clone https://github.com/ark0f/tg-bot-api.git
+
+            - name: Install Rust
+              uses: actions-rs/toolchain@v1
+              with:
+                  toolchain: stable
 
             - name: Generate TBA Schema
               run: cd tg-bot-api && cargo run --package gh-pages-generator --bin gh-pages-generator -- dev
