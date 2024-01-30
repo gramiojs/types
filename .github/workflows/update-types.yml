@@ -1,0 +1,23 @@
+name: Update Types
+
+on:
+    schedule:
+        - cron: "0 * * * *"
+jobs:
+    update_types:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: LS1
+              run: ls
+
+            - name: Checkout TBA schema parser
+              uses: actions/checkout@v4
+              with:
+                  repository: ark0f/tg-bot-api
+
+            - name: LS2
+              run: ls
