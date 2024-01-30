@@ -1,44 +1,44 @@
 {
-  "name": "@gramio/types",
-  "version": "7.0.2",
-  "homepage": "https://github.com/kravetsone/gramio-types",
-  "readme": "https://github.com/kravetsone/gramio-types",
-  "description": "Code-generated Telegram Bot API types",
-  "author": "kravets",
-  "license": "ISC",
-  "keywords": [
-    "telegram",
-    "bot",
-    "tba",
-    "types",
-    "telegram-bot-api",
-    "code-generated",
-    "api"
-  ],
-  "main": "./types/index.js",
-  "types": "./types/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "default": "./types/index.js"
+    "name": "@gramio/types",
+    "version": "7.0.2",
+    "homepage": "https://github.com/gramiojs/types",
+    "readme": "https://github.com/gramiojs/types",
+    "description": "Code-generated Telegram Bot API types",
+    "author": "kravets",
+    "license": "ISC",
+    "keywords": [
+        "telegram",
+        "bot",
+        "tba",
+        "types",
+        "telegram-bot-api",
+        "code-generated",
+        "api"
+    ],
+    "main": "./types/index.js",
+    "types": "./types/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "default": "./types/index.js"
+        },
+        "./*": {
+            "types": "./types/*.d.ts",
+            "default": "./types/index.js"
+        }
     },
-    "./*": {
-      "types": "./types/*.d.ts",
-      "default": "./types/index.js"
-    }
-  },
-  "scripts": {
-    "prepublishOnly": "bun generate",
-    "generate": "bun src/index.ts",
-    "lint": "bunx @biomejs/biome check ./src",
-    "lint:fix": "bun lint --apply"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "1.5.3",
-    "@types/node": "^20.10.6",
-    "prettier": "^3.2.4"
-  },
-  "files": [
-    "types"
-  ]
+    "scripts": {
+        "prepublishOnly": "bun generate",
+        "generate": "bun src/index.ts",
+        "lint": "bunx @biomejs/biome check ./src",
+        "lint:fix": "bun lint --apply"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.5.3",
+        "@types/node": "^20.10.6",
+        "prettier": "^3.2.4"
+    },
+    "files": [
+        "types"
+    ]
 }

@@ -37,7 +37,7 @@ export function generateHeader(
 	return [
 		"/**",
 		`* Based on Bot Api v${version.major}.${version.minor}.${version.patch} (${recentChanges.day}.${recentChanges.month}.${recentChanges.year})`,
-		`* Generated at ${new Date().toLocaleString()} using {@link https://github.com/kravetsone/gramio-types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators`,
+		`* Generated at ${new Date().toLocaleString()} using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators`,
 		"*/",
 	];
 }

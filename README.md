@@ -59,10 +59,10 @@ api.sendMessage({
 
 Prerequire - [`rust`](https://www.rust-lang.org/)
 
-1. Clone [this repo](https://github.com/kravetsone/gramio-types) and open it
+1. Clone [this repo](https://github.com/gramiojs/types) and open it
 
 ```bash
-git clone https://github.com/kravetsone/gramio-types.git
+git clone https://github.com/gramiojs/types.git
 ```
 
 2. Clone [repo](https://github.com/ark0f/tg-bot-api) with TBA parser in the `cloned` folder
