@@ -70,7 +70,7 @@ Prerequire - [`rust`](https://www.rust-lang.org/)
 git clone https://github.com/gramiojs/types.git
 ```
 
-2. Clone [repo](https://github.com/ark0f/tg-bot-api) with TBA parser in the `cloned` folder
+2. Clone [repo](https://github.com/ark0f/tg-bot-api) with Telegram Bot Api schema generator
 
 ```bash
 git clone https://github.com/ark0f/tg-bot-api.git

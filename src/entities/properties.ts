@@ -25,6 +25,8 @@ export const typesRemapper: TTypeRemapper = {
 				)
 			);
 
+		if (property.default) return `"${property.default}"`;
+
 		return "string";
 	},
 	bool: () => "boolean",
