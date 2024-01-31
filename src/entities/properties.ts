@@ -29,7 +29,11 @@ export const typesRemapper: TTypeRemapper = {
 
 		return "string";
 	},
-	bool: () => "boolean",
+	bool: (property) => {
+		if (property.default) return `${property.default}`;
+
+		return "boolean";
+	},
 	//[INFO] Reference to other object.
 	reference: (property, _, objectType) => {
 		return (
