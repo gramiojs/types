@@ -38,7 +38,7 @@ export const typesRemapper: TTypeRemapper = {
 		return "string";
 	},
 	bool: (property) => {
-		if (property.default) return `${property.default}`;
+		if ("default" in property) return `${property.default}`;
 
 		return "boolean";
 	},
