@@ -14,6 +14,87 @@ export interface IGeneratedFile {
 const schemaFile = await fs.readFile(SCHEMA_FILE_PATH);
 const schema = JSON.parse(String(schemaFile)) as IBotApi.ISchema;
 
+schema.objects.push({
+	name: "APIResponseOk",
+	description:
+		"If 'ok' equals True, the request was successful and the result of the query can be found in the 'result' field.",
+	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
+	properties: [
+		{
+			name: "ok",
+			description: "If 'ok' equals True, the request was successful",
+			type: "bool",
+			required: true,
+			default: true,
+		},
+		{
+			name: "result",
+			description: "The result of the query can be found in the 'result' field",
+			type: "bool",
+			//![INFO] some hack for make result: Record<string, unknown>
+			default: "Record<string, unknown>",
+			required: true,
+		},
+	],
+});
+
+schema.objects.push({
+	name: "APIResponseError",
+	description:
+		"In case of an unsuccessful request, 'ok' equals false and the error is explained in the 'description'. An Integer 'error_code' field is also returned, but its contents are subject to change in the future. Some errors may also have an optional field 'parameters' of the type ResponseParameters, which can help to automatically handle the error.",
+	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
+	properties: [
+		{
+			name: "ok",
+			description: "In case of an unsuccessful request, 'ok' equals false",
+			type: "bool",
+			required: true,
+			default: false,
+		},
+		{
+			name: "description",
+			description: "The error is explained in the 'description'",
+			type: "string",
+			required: true,
+		},
+		{
+			name: "error_code",
+			description:
+				"An Integer 'error_code' field is also returned, but its contents are subject to change in the future",
+			type: "integer",
+			required: true,
+		},
+		{
+			name: "parameters",
+			description:
+				"Some errors may also have an optional field 'parameters' of the type [ResponseParameters](https://core.telegram.org/bots/api/#responseparameters), which can help to automatically handle the error.",
+			type: "reference",
+			reference: "ResponseParameters",
+			required: true,
+		},
+	],
+});
+
+export type APIResponse = APIResponseOk | APIResponseError;
+
+schema.objects.push({
+	name: "APIResponse",
+	description: "Union type of Response",
+	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
+	type: "any_of",
+	any_of: [
+		{
+			type: "reference",
+			reference: "APIResponseOk",
+		},
+		{
+			type: "reference",
+			reference: "APIResponseError",
+		},
+		// JSON-SCHEMA to ts wrong result?
+	] as IBotApi.IArgument[],
+});
+
 const header = generateHeader(schema.version, schema.recent_changes);
 
 const files: IGeneratedFile[] = [
