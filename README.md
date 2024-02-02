@@ -28,27 +28,23 @@ If the github action failed, there are no changes in the bot api
 ### Write you own type-safe TBA API wrapper
 
 ```typescript
-import { stringify } from "node:querystring";
-import type { ApiMethods } from "@gramio/types";
+import type { ApiMethods, TelegramAPIResponse } from "@gramio/types";
 
+const TBA_BASE_URL = "https://api.telegram.org/bot";
 const TOKEN = "";
 
-const api = new Proxy<ApiMethods>({} as ApiMethods, {
-    get: (_target, method: string) => async (args: Record<string, any>) => {
-        const url =
-            `http://api.telegram.org/bot` +
-            TOKEN +
-            "/" +
-            method +
-            `?` +
-            stringify(args);
-
-        const response = await fetch(url, {
-            method: "GET",
+const api = new Proxy({} as ApiMethods, {
+    get: (_target, method: string) => async (args: Record<string, unknown>) => {
+        const response = await fetch(`${TBA_BASE_URL}${TOKEN}/${method}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(params),
         });
 
-        const data = await response.json();
-        if (!response.ok) throw new Error("some error");
+        const data = (await response.json()) as TelegramAPIResponse;
+        if (!data.ok) throw new Error(`Some error occurred in ${method}`);
 
         return data.result;
     },
