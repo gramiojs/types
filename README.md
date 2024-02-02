@@ -13,6 +13,11 @@ type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>;
 //   ^? type SendMessageReturn = Promise<TelegramMessage>
 ```
 
+### Auto-update package
+
+This library is updated automatically to the latest version of the Telegram Bot Api in case of changes thanks to CI CD!
+If the github action failed, there are no changes in the bot api
+
 ## Imports
 
 -   `index` - exports everything in the section
@@ -51,14 +56,23 @@ const api = new Proxy<ApiMethods>({} as ApiMethods, {
 
 api.sendMessage({
     chat_id: 1,
-    text: "msg",
+    text: "message",
 });
 ```
 
-### Auto-update package
+#### Usage with [`@gramio/keyboards`](https://github.com/gramiojs/keyboards)
 
-This library is updated automatically to the latest version of the Telegram Bot Api in case of changes thanks to CI CD!
-If the github action failed, there are no changes in the bot api
+```typescript
+import { Keyboard } from "@gramio/keyboards";
+
+// the code from the example above
+
+api.sendMessage({
+    chat_id: 1,
+    text: "message with keyboard",
+    reply_markup: new Keyboard().text("button text"),
+});
+```
 
 ## Generate types manually
 
@@ -94,4 +108,4 @@ or, if you don't use `bun`, use `tsx`
 npx tsx src/index.ts
 ```
 
-5. Profit! Check out the types of Telegram Bot API in `types` folder!
+5. Profit! Check out the types of Telegram Bot API in `out` folder!

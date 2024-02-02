@@ -10,6 +10,14 @@ type TTypeRemapper = Record<
 		objectType: TObjectType,
 	) => string
 >;
+
+const markups = [
+	"ReplyKeyboardMarkup",
+	"InlineKeyboardMarkup",
+	"ReplyKeyboardRemove",
+	"ForceReply",
+];
+
 //TODO: json schema to (T, params[T])
 export const typesRemapper: TTypeRemapper = {
 	float: () => "number",
@@ -36,11 +44,17 @@ export const typesRemapper: TTypeRemapper = {
 	},
 	//[INFO] Reference to other object.
 	reference: (property, _, objectType) => {
-		return (
+		const reference =
 			(objectType === "object" ? "" : "Objects.") +
 			OBJECTS_PREFIX +
-			TextEditor.uppercaseFirstLetter(property.reference!)
-		);
+			// TODO: maybe this uppercase useless?
+			TextEditor.uppercaseFirstLetter(property.reference!);
+
+		// ![INFO] Some hack for better DX with @gramio/keyboards
+		if (markups.includes(property.reference!))
+			return `${reference} | { toJSON(): ${reference} }`;
+
+		return reference;
 	},
 	any_of: (property, object, objectType) => {
 		return property
