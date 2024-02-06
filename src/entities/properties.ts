@@ -69,7 +69,7 @@ export const typesRemapper: TTypeRemapper = {
 			objectType,
 		);
 
-		return `${type}[]`;
+		return `(${type})[]`;
 	},
 };
 
