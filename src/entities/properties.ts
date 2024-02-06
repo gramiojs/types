@@ -24,6 +24,12 @@ export const typesRemapper: TTypeRemapper = {
 	integer: () => "number",
 	//[INFO] no need in enumeration because union types generate before that
 	string: (property: IBotApi.IProperty, object, objectType) => {
+		//TODO: maybe place it to another place?
+		if (property.name === "media")
+			return `${
+				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
+			}InputFile | string`;
+
 		if (property.enumeration)
 			return (
 				(objectType === "object" ? OBJECTS_PREFIX : "") +

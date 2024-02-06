@@ -75,8 +75,6 @@ schema.objects.push({
 	],
 });
 
-export type APIResponse = APIResponseOk | APIResponseError;
-
 schema.objects.push({
 	name: "APIResponse",
 	description: "Union type of Response",
@@ -94,6 +92,20 @@ schema.objects.push({
 		// JSON-SCHEMA to ts wrong result?
 	] as IBotApi.IArgument[],
 });
+
+const InputFile = schema.objects.find((x) => x.name === "InputFile");
+
+if (InputFile) {
+	InputFile.type = "any_of";
+	InputFile.any_of = [
+		// TODO: improve typings by JSON Schema
+		{
+			required: true,
+			type: "bool",
+			default: "File",
+		} as IBotApi.IArgument,
+	];
+}
 
 const header = generateHeader(schema.version, schema.recent_changes);
 
