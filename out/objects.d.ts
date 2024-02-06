@@ -1,6 +1,6 @@
 /**
  * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/5/2024, 12:42:06 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Generated at 2/6/2024, 10:47:36 AM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 
 /**
