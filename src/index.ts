@@ -98,13 +98,18 @@ const InputFile = schema.objects.find((x) => x.name === "InputFile");
 if (InputFile) {
 	InputFile.type = "any_of";
 	InputFile.any_of = [
-		// TODO: improve typings by JSON Schema
 		{
 			required: true,
 			type: "bool",
 			default: "File",
-		} as IBotApi.IArgument,
-	];
+		},
+		{
+			required: true,
+			type: "bool",
+			default: "Promise<File>",
+		},
+		// TODO: improve typings by JSON Schema
+	] as IBotApi.IArgument[];
 }
 
 const header = generateHeader(schema.version, schema.recent_changes);
