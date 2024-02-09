@@ -1,6 +1,6 @@
 /**
  * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/6/2024, 10:05:53 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Generated at 2/7/2024, 6:50:09 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 
 /**
@@ -3625,7 +3625,7 @@ export interface TelegramInputMediaDocument {
  *
  * {@link https://core.telegram.org/bots/api/#inputfile | [Documentation]}
  */
-export type TelegramInputFile = File
+export type TelegramInputFile = File | Promise<File>
 
 export type TelegramStickerType = "regular" | "mask" | "custom_emoji"
 
