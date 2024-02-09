@@ -27,7 +27,7 @@ If the github action failed, there are no changes in the bot api
 -   `objects` - exports objects with the `Telegram` prefix (for example [Update](https://core.telegram.org/bots/api/#update))
 -   `params` - exports params that are used in `methods`
 
-### Write you own type-safe TBA API wrapper
+### Write you own type-safe Telegram Bot API wrapper
 
 ```typescript
 import type { ApiMethods, TelegramAPIResponse } from "@gramio/types";
