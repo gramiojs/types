@@ -1,7 +1,6 @@
-import { exec } from "node:child_process";
+import { execSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
-import { EOL } from "node:os";
 import { version } from "../package.json";
 import { SCHEMA_FILE_PATH } from "../src/config";
 import { IBotApi } from "../src/types";
@@ -20,17 +19,18 @@ const schema = JSON.parse(String(schemaFile)) as IBotApi.ISchema;
 const [major, minor] = version.split(".").map(Number);
 
 if (major !== schema.version.major || minor !== schema.version.minor) {
-	exec(
+	execSync(
 		`npm pkg set version=${schema.version.major}.${schema.version.minor}.${schema.version.patch}`,
 	);
-} else exec("npm version patch --no-git-tag-version");
+} else execSync("npm version patch --no-git-tag-version");
 
 await fs.writeFile("./hash.txt", hash);
 
 if (process.env.GITHUB_OUTPUT) {
-	exec("npm pkg get version", async (err, version) => {
-		if (err) throw err;
+	const version = String(execSync("npm pkg get version"));
 
-		await fs.appendFile(process.env.GITHUB_OUTPUT!, `version=${version}${EOL}`);
-	});
+	await fs.appendFile(
+		process.env.GITHUB_OUTPUT!,
+		`version=${version.replace(/"/gi, "")}`,
+	);
 }
