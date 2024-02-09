@@ -63,3 +63,4 @@ jobs:
                   body: "regenerate types"
                   draft: false
                   prerelease: false
+                  generateReleaseNotes: true
