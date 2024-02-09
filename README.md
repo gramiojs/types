@@ -13,14 +13,14 @@ type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>;
 //   ^? type SendMessageReturn = Promise<TelegramMessage>
 ```
 
-[API Types References](https://tsdocs.dev/docs/@gramio/types)
+Please see [API Types References](https://tsdocs.dev/docs/@gramio/types)
 
 ### Auto-update package
 
 This library is updated automatically to the latest version of the Telegram Bot Api in case of changes thanks to CI CD!
 If the github action failed, there are no changes in the bot api
 
-## Imports
+## Imports (after `@gramio/`)
 
 -   `index` - exports everything in the section
 -   `methods` - exports `ApiMethods` which describes the api functions

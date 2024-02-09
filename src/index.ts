@@ -149,7 +149,9 @@ const files: IGeneratedFile[] = [
 		lines: [
 			[`export * from "./methods"`],
 			[`export * from "./params"`],
+			[`export * as TelegramParams from "./params"`],
 			[`export * from "./objects"`],
+			[`export * as TelegramObjects from "./objects"`],
 		],
 	},
 	{
