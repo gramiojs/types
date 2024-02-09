@@ -38,7 +38,7 @@ const TOKEN = "";
 const api = new Proxy({} as ApiMethods, {
     get:
         <T extends keyof ApiMethods>(_target: ApiMethods, method: T) =>
-        (params: Parameters<ApiMethods[T]>[0]) => {
+        async (params: Parameters<ApiMethods[T]>[0]) => {
             const response = await fetch(`${TBA_BASE_URL}${TOKEN}/${method}`, {
                 method: "POST",
                 headers: {
