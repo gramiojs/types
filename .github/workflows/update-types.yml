@@ -30,7 +30,8 @@ jobs:
             - name: Generate TBA Schema
               run: cd tg-bot-api && cargo run --package gh-pages-generator --bin gh-pages-generator -- dev
 
-            - name: Get hash from schema
+            - id: cicd
+              name: Get hash from schema
               run: bun cicd
 
             - name: Generate types
@@ -39,7 +40,7 @@ jobs:
             - name: Commit and Push changes
               uses: EndBug/add-and-commit@v9
               with:
-                  message: "chore(TBA): regenerate types and update hash"
+                  message: "release v${{ steps.cicd.outputs.version }}"
 
             - name: Install Node
               uses: actions/setup-node@v4
@@ -52,3 +53,13 @@ jobs:
               run: npm publish
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: GitHub Release
+              uses: ncipollo/release-action@v1
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  tag: v${{ steps.cicd.outputs.version }}
+                  name: v${{ steps.cicd.outputs.version }}
+                  body: "regenerate types"
+                  draft: false
+                  prerelease: false

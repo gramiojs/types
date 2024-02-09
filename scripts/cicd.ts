@@ -1,6 +1,7 @@
 import { exec } from "node:child_process";
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
+import { EOL } from "node:os";
 import { version } from "../package.json";
 import { SCHEMA_FILE_PATH } from "../src/config";
 import { IBotApi } from "../src/types";
@@ -25,3 +26,11 @@ if (major !== schema.version.major || minor !== schema.version.minor) {
 } else exec("npm version patch --no-git-tag-version");
 
 await fs.writeFile("./hash.txt", hash);
+
+if (process.env.GITHUB_OUTPUT) {
+	exec("npm pkg get version", async (err, version) => {
+		if (err) throw err;
+
+		await fs.appendFile(process.env.GITHUB_OUTPUT!, `version=${version}${EOL}`);
+	});
+}
