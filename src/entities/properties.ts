@@ -34,6 +34,17 @@ export const typesRemapper: TTypeRemapper = {
 		if (property.name === "parse_mode")
 			return `"HTML" | "MarkdownV2" | "Markdown"`;
 
+		// ![INFO] for better UX with FormattableString (sorry)
+		if (
+			property.description?.includes("after entities parsing") ||
+			property.name === "message_text"
+		)
+			return `(string | {
+			text: string;
+			entities: ${
+				objectType === "object" ? "" : "Objects."
+			}TelegramMessageEntity[];})`;
+
 		if (property.enumeration)
 			return (
 				(objectType === "object" ? OBJECTS_PREFIX : "") +

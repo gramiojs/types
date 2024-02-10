@@ -74,6 +74,10 @@ api.sendMessage({
 });
 ```
 
+#### With File uploading support
+
+[Documentation](https://gramio.netlify.app/files/usage-without-gramio.html#write-you-own-type-safe-tba-api-wrapper-with-file-uploading-support)
+
 ## Generate types manually
 
 Prerequire - [`rust`](https://www.rust-lang.org/)
