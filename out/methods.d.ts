@@ -1,6 +1,6 @@
 /**
  * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/10/2024, 11:43:03 AM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Generated at 2/10/2024, 9:23:27 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 import * as Params from "./params"
 import * as Objects from "./objects"

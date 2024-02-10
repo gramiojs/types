@@ -1,6 +1,6 @@
 /**
  * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/10/2024, 11:43:03 AM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Generated at 2/10/2024, 9:23:27 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 
 /**
@@ -885,7 +885,7 @@ export interface TelegramReplyParameters {
     /**
      * *Optional*. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, and *custom\_emoji* entities. The message will fail to send if the quote isn't found in the original message.
      */
-    quote?: string
+    quote?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the quote. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -3425,7 +3425,7 @@ export interface TelegramInputMediaPhoto {
     /**
      * *Optional*. Caption of the photo to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -3461,7 +3461,7 @@ export interface TelegramInputMediaVideo {
     /**
      * *Optional*. Caption of the video to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -3513,7 +3513,7 @@ export interface TelegramInputMediaAnimation {
     /**
      * *Optional*. Caption of the animation to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the animation caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -3561,7 +3561,7 @@ export interface TelegramInputMediaAudio {
     /**
      * *Optional*. Caption of the audio to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -3605,7 +3605,7 @@ export interface TelegramInputMediaDocument {
     /**
      * *Optional*. Caption of the document to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -3989,7 +3989,7 @@ export interface TelegramInlineQueryResultPhoto {
     /**
      * *Optional*. Caption of the photo to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4060,7 +4060,7 @@ export interface TelegramInlineQueryResultGif {
     /**
      * *Optional*. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4131,7 +4131,7 @@ export interface TelegramInlineQueryResultMpeg4Gif {
     /**
      * *Optional*. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4189,7 +4189,7 @@ export interface TelegramInlineQueryResultVideo {
     /**
      * *Optional*. Caption of the video to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4251,7 +4251,7 @@ export interface TelegramInlineQueryResultAudio {
     /**
      * *Optional*. Caption, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4305,7 +4305,7 @@ export interface TelegramInlineQueryResultVoice {
     /**
      * *Optional*. Caption, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4355,7 +4355,7 @@ export interface TelegramInlineQueryResultDocument {
     /**
      * *Optional*. Caption of the document to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4645,7 +4645,7 @@ export interface TelegramInlineQueryResultCachedPhoto {
     /**
      * *Optional*. Caption of the photo to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4691,7 +4691,7 @@ export interface TelegramInlineQueryResultCachedGif {
     /**
      * *Optional*. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4737,7 +4737,7 @@ export interface TelegramInlineQueryResultCachedMpeg4Gif {
     /**
      * *Optional*. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4817,7 +4817,7 @@ export interface TelegramInlineQueryResultCachedDocument {
     /**
      * *Optional*. Caption of the document to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4867,7 +4867,7 @@ export interface TelegramInlineQueryResultCachedVideo {
     /**
      * *Optional*. Caption of the video to be sent, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4913,7 +4913,7 @@ export interface TelegramInlineQueryResultCachedVoice {
     /**
      * *Optional*. Caption, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -4955,7 +4955,7 @@ export interface TelegramInlineQueryResultCachedAudio {
     /**
      * *Optional*. Caption, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -5003,7 +5003,7 @@ export interface TelegramInputTextMessageContent {
     /**
      * Text of the message to be sent, 1-4096 characters
      */
-    message_text: string
+    message_text: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */

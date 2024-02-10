@@ -1,6 +1,6 @@
 /**
  * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/10/2024, 11:43:03 AM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Generated at 2/10/2024, 9:23:27 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 import * as Objects from "./objects"
 
@@ -76,7 +76,7 @@ export interface SendMessageParams {
     /**
      * Text of the message to be sent, 1-4096 characters after entities parsing
      */
-    text: string
+    text: string | { toString(): string }
     /**
      * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -189,7 +189,7 @@ export interface CopyMessageParams {
     /**
      * New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the new caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -271,7 +271,7 @@ export interface SendPhotoParams {
     /**
      * Photo caption (may also be used when resending photos by *file\_id*), 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -326,7 +326,7 @@ export interface SendAudioParams {
     /**
      * Audio caption, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -397,7 +397,7 @@ export interface SendDocumentParams {
     /**
      * Document caption (may also be used when resending documents by *file\_id*), 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -468,7 +468,7 @@ export interface SendVideoParams {
     /**
      * Video caption (may also be used when resending videos by *file\_id*), 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -543,7 +543,7 @@ export interface SendAnimationParams {
     /**
      * Animation caption (may also be used when resending animation by *file\_id*), 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the animation caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -598,7 +598,7 @@ export interface SendVoiceParams {
     /**
      * Voice message caption, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -935,7 +935,7 @@ export interface SendPollParams {
     /**
      * Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing
      */
-    explanation?: string
+    explanation?: string | { toString(): string }
     /**
      * Mode for parsing entities in the explanation. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -1799,7 +1799,7 @@ export interface EditMessageTextParams {
     /**
      * New text of the message, 1-4096 characters after entities parsing
      */
-    text: string
+    text: string | { toString(): string }
     /**
      * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
@@ -1836,7 +1836,7 @@ export interface EditMessageCaptionParams {
     /**
      * New caption of the message, 0-1024 characters after entities parsing
      */
-    caption?: string
+    caption?: string | { toString(): string }
     /**
      * Mode for parsing entities in the message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
