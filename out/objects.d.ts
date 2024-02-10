@@ -1,6 +1,6 @@
 /**
  * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/9/2024, 9:19:04 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Generated at 2/10/2024, 11:43:03 AM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 
 /**
@@ -3429,7 +3429,7 @@ export interface TelegramInputMediaPhoto {
     /**
      * *Optional*. Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -3465,7 +3465,7 @@ export interface TelegramInputMediaVideo {
     /**
      * *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -3517,7 +3517,7 @@ export interface TelegramInputMediaAnimation {
     /**
      * *Optional*. Mode for parsing entities in the animation caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -3565,7 +3565,7 @@ export interface TelegramInputMediaAudio {
     /**
      * *Optional*. Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -3609,7 +3609,7 @@ export interface TelegramInputMediaDocument {
     /**
      * *Optional*. Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -3993,7 +3993,7 @@ export interface TelegramInlineQueryResultPhoto {
     /**
      * *Optional*. Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4064,7 +4064,7 @@ export interface TelegramInlineQueryResultGif {
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4135,7 +4135,7 @@ export interface TelegramInlineQueryResultMpeg4Gif {
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4193,7 +4193,7 @@ export interface TelegramInlineQueryResultVideo {
     /**
      * *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4255,7 +4255,7 @@ export interface TelegramInlineQueryResultAudio {
     /**
      * *Optional*. Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4309,7 +4309,7 @@ export interface TelegramInlineQueryResultVoice {
     /**
      * *Optional*. Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4359,7 +4359,7 @@ export interface TelegramInlineQueryResultDocument {
     /**
      * *Optional*. Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4649,7 +4649,7 @@ export interface TelegramInlineQueryResultCachedPhoto {
     /**
      * *Optional*. Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4695,7 +4695,7 @@ export interface TelegramInlineQueryResultCachedGif {
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4741,7 +4741,7 @@ export interface TelegramInlineQueryResultCachedMpeg4Gif {
     /**
      * *Optional*. Mode for parsing entities in the caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4821,7 +4821,7 @@ export interface TelegramInlineQueryResultCachedDocument {
     /**
      * *Optional*. Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4871,7 +4871,7 @@ export interface TelegramInlineQueryResultCachedVideo {
     /**
      * *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4917,7 +4917,7 @@ export interface TelegramInlineQueryResultCachedVoice {
     /**
      * *Optional*. Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -4959,7 +4959,7 @@ export interface TelegramInlineQueryResultCachedAudio {
     /**
      * *Optional*. Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
@@ -5007,7 +5007,7 @@ export interface TelegramInputTextMessageContent {
     /**
      * *Optional*. Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    parse_mode?: string
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * *Optional*. List of special entities that appear in message text, which can be specified instead of *parse\_mode*
      */
