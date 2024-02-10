@@ -30,6 +30,10 @@ export const typesRemapper: TTypeRemapper = {
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
 			}InputFile | string`;
 
+		// ![INFO] better typings for https://core.telegram.org/bots/api#formatting-options
+		if (property.name === "parse_mode")
+			return `"HTML" | "MarkdownV2" | "Markdown"`;
+
 		if (property.enumeration)
 			return (
 				(objectType === "object" ? OBJECTS_PREFIX : "") +
