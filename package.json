@@ -6,6 +6,7 @@
     "description": "Code-generated and Auto-published Telegram Bot API types",
     "author": "kravets",
     "license": "ISC",
+    "type": "commonjs",
     "keywords": [
         "telegram",
         "bot",

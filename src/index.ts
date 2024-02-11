@@ -156,7 +156,7 @@ const files: IGeneratedFile[] = [
 	},
 	{
 		name: "index.js",
-		lines: [["export {}"]],
+		lines: [["module.exports = {}"]],
 	},
 ];
 
