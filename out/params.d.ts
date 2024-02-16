@@ -1,6 +1,6 @@
 /**
- * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/10/2024, 9:23:27 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Based on Bot Api v7.1.0 (16.2.2024)
+ * Generated at 2/16/2024, 12:25:24 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 import * as Objects from "./objects"
 
@@ -1163,7 +1163,7 @@ export interface PromoteChatMemberParams {
      */
     is_anonymous?: boolean
     /**
-     * Pass *True* if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
+     * Pass *True* if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
      */
     can_manage_chat?: boolean
     /**
@@ -1191,6 +1191,18 @@ export interface PromoteChatMemberParams {
      */
     can_invite_users?: boolean
     /**
+     * Pass *True* if the administrator can post stories to the chat
+     */
+    can_post_stories?: boolean
+    /**
+     * Pass *True* if the administrator can edit stories posted by other users
+     */
+    can_edit_stories?: boolean
+    /**
+     * Pass *True* if the administrator can delete stories posted by other users
+     */
+    can_delete_stories?: boolean
+    /**
      * Pass *True* if the administrator can post messages in the channel, or access channel statistics; channels only
      */
     can_post_messages?: boolean
@@ -1202,18 +1214,6 @@ export interface PromoteChatMemberParams {
      * Pass *True* if the administrator can pin messages, supergroups only
      */
     can_pin_messages?: boolean
-    /**
-     * Pass *True* if the administrator can post stories in the channel; channels only
-     */
-    can_post_stories?: boolean
-    /**
-     * Pass *True* if the administrator can edit stories posted by other users; channels only
-     */
-    can_edit_stories?: boolean
-    /**
-     * Pass *True* if the administrator can delete stories posted by other users; channels only
-     */
-    can_delete_stories?: boolean
     /**
      * Pass *True* if the user is allowed to create, rename, close, and reopen forum topics, supergroups only
      */

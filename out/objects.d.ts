@@ -1,6 +1,6 @@
 /**
- * Based on Bot Api v7.0.0 (29.12.2023)
- * Generated at 2/10/2024, 9:23:27 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Based on Bot Api v7.1.0 (16.2.2024)
+ * Generated at 2/16/2024, 12:25:24 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 
 /**
@@ -297,6 +297,10 @@ export interface TelegramChat {
      */
     slow_mode_delay?: number
     /**
+     * *Optional*. For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     */
+    unrestrict_boost_count?: number
+    /**
      * *Optional*. The time after which all messages sent to the chat will be automatically deleted; in seconds. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
      */
     message_auto_delete_time?: number
@@ -324,6 +328,10 @@ export interface TelegramChat {
      * *Optional*. *True*, if the bot can change the group sticker set. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
      */
     can_set_sticker_set?: boolean
+    /**
+     * *Optional*. For supergroups, the name of the group's custom emoji sticker set. Custom emoji from this set can be used by all users and bots in the group. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     */
+    custom_emoji_sticker_set_name?: string
     /**
      * *Optional*. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
      */
@@ -357,6 +365,10 @@ export interface TelegramMessage {
      */
     sender_chat?: TelegramChat
     /**
+     * *Optional*. If the sender of the message boosted the chat, the number of boosts added by the user
+     */
+    sender_boost_count?: number
+    /**
      * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
      */
     date: number
@@ -388,6 +400,10 @@ export interface TelegramMessage {
      * *Optional*. For replies that quote part of the original message, the quoted part of the message
      */
     quote?: TelegramTextQuote
+    /**
+     * *Optional*. For replies to a story, the original story
+     */
+    reply_to_story?: TelegramStory
     /**
      * *Optional*. Bot through which the message was sent
      */
@@ -572,6 +588,10 @@ export interface TelegramMessage {
      * *Optional*. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
      */
     proximity_alert_triggered?: TelegramProximityAlertTriggered
+    /**
+     * *Optional*. Service message: user boosted the chat
+     */
+    boost_added?: TelegramChatBoostAdded
     /**
      * *Optional*. Service message: forum topic created
      */
@@ -1157,11 +1177,20 @@ export interface TelegramDocument {
 }
 
 /**
- * This object represents a message about a forwarded story in the chat. Currently holds no information.
+ * This object represents a story.
  *
  * {@link https://core.telegram.org/bots/api/#story | [Documentation]}
  */
-export interface TelegramStory {}
+export interface TelegramStory {
+    /**
+     * Chat that posted the story
+     */
+    chat: TelegramChat
+    /**
+     * Unique identifier for the story in the chat
+     */
+    id: number
+}
 
 /**
  * This object represents a video file.
@@ -1527,6 +1556,18 @@ export interface TelegramMessageAutoDeleteTimerChanged {
      * New auto-delete time for messages in the chat; in seconds
      */
     message_auto_delete_time: number
+}
+
+/**
+ * This object represents a service message about a user boosting a chat.
+ *
+ * {@link https://core.telegram.org/bots/api/#chatboostadded | [Documentation]}
+ */
+export interface TelegramChatBoostAdded {
+    /**
+     * Number of boosts added by the user
+     */
+    boost_count: number
 }
 
 /**
@@ -2312,7 +2353,7 @@ export interface TelegramChatAdministratorRights {
      */
     is_anonymous: boolean
     /**
-     * *True*, if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
+     * *True*, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
      */
     can_manage_chat: boolean
     /**
@@ -2340,6 +2381,18 @@ export interface TelegramChatAdministratorRights {
      */
     can_invite_users: boolean
     /**
+     * *True*, if the administrator can post stories to the chat
+     */
+    can_post_stories: boolean
+    /**
+     * *True*, if the administrator can edit stories posted by other users
+     */
+    can_edit_stories: boolean
+    /**
+     * *True*, if the administrator can delete stories posted by other users
+     */
+    can_delete_stories: boolean
+    /**
      * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; channels only
      */
     can_post_messages?: boolean
@@ -2351,18 +2404,6 @@ export interface TelegramChatAdministratorRights {
      * *Optional*. *True*, if the user is allowed to pin messages; groups and supergroups only
      */
     can_pin_messages?: boolean
-    /**
-     * *Optional*. *True*, if the administrator can post stories in the channel; channels only
-     */
-    can_post_stories?: boolean
-    /**
-     * *Optional*. *True*, if the administrator can edit stories posted by other users; channels only
-     */
-    can_edit_stories?: boolean
-    /**
-     * *Optional*. *True*, if the administrator can delete stories posted by other users; channels only
-     */
-    can_delete_stories?: boolean
     /**
      * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
      */
@@ -2472,7 +2513,7 @@ export interface TelegramChatMemberAdministrator {
      */
     is_anonymous: boolean
     /**
-     * *True*, if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
+     * *True*, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
      */
     can_manage_chat: boolean
     /**
@@ -2500,6 +2541,18 @@ export interface TelegramChatMemberAdministrator {
      */
     can_invite_users: boolean
     /**
+     * *True*, if the administrator can post stories to the chat
+     */
+    can_post_stories: boolean
+    /**
+     * *True*, if the administrator can edit stories posted by other users
+     */
+    can_edit_stories: boolean
+    /**
+     * *True*, if the administrator can delete stories posted by other users
+     */
+    can_delete_stories: boolean
+    /**
      * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; channels only
      */
     can_post_messages?: boolean
@@ -2511,18 +2564,6 @@ export interface TelegramChatMemberAdministrator {
      * *Optional*. *True*, if the user is allowed to pin messages; groups and supergroups only
      */
     can_pin_messages?: boolean
-    /**
-     * *Optional*. *True*, if the administrator can post stories in the channel; channels only
-     */
-    can_post_stories?: boolean
-    /**
-     * *Optional*. *True*, if the administrator can edit stories posted by other users; channels only
-     */
-    can_edit_stories?: boolean
-    /**
-     * *Optional*. *True*, if the administrator can delete stories posted by other users; channels only
-     */
-    can_delete_stories?: boolean
     /**
      * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
      */
