@@ -12,7 +12,7 @@ function generateMethod(method: IBotApi.IMethod) {
 	if (!method.arguments?.length)
 		return `${method.name}: CallApiWithoutParams<${returnType}>`;
 
-	const tCallType = method.arguments.some((argument) => !argument.required)
+	const tCallType = method.arguments.every((argument) => !argument.required)
 		? "CallApiWithOptionalParams"
 		: "CallApi";
 
