@@ -1,14 +1,14 @@
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotApi } from "../types";
+import { IBotAPI } from "../types";
 import { Properties } from "./properties";
 
 //TODO: unify and refactor
 export class Params {
-	static generateMany(methods: IBotApi.IMethod[]) {
+	static generateMany(methods: IBotAPI.IMethod[]) {
 		return methods.flatMap(Params.generate);
 	}
 
-	static generate(method: IBotApi.IMethod) {
+	static generate(method: IBotAPI.IMethod) {
 		if (!method.arguments?.length) return [];
 
 		const unionTypes = method.arguments

@@ -1,14 +1,14 @@
 import { OBJECTS_PREFIX } from "../config";
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotApi } from "../types";
+import { IBotAPI } from "../types";
 import { Properties, typesRemapper } from "./properties";
 
 export class Objects {
-	static generateMany(objects: IBotApi.IObject[]) {
+	static generateMany(objects: IBotAPI.IObject[]) {
 		return objects.flatMap(Objects.generate);
 	}
 
-	static generate(object: IBotApi.IObject) {
+	static generate(object: IBotAPI.IObject) {
 		if (object.type === "any_of")
 			return [
 				"",
@@ -17,7 +17,7 @@ export class Objects {
 				),
 				`export type ${OBJECTS_PREFIX + object.name} = ${typesRemapper.any_of(
 					//TODO: fix type error. Object any of does't require IProperty
-					object as unknown as IBotApi.IProperty,
+					object as unknown as IBotAPI.IProperty,
 					object,
 					"object",
 				)}`,

@@ -1,12 +1,12 @@
 import { OBJECTS_PREFIX } from "../config";
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotApi, TObjectType } from "../types";
+import { IBotAPI, TObjectType } from "../types";
 
 type TTypeRemapper = Record<
-	IBotApi.IType,
+	IBotAPI.IType,
 	(
-		property: IBotApi.IProperty,
-		object: IBotApi.IObject,
+		property: IBotAPI.IProperty,
+		object: IBotAPI.IObject,
 		objectType: TObjectType,
 	) => string
 >;
@@ -23,7 +23,7 @@ export const typesRemapper: TTypeRemapper = {
 	float: () => "number",
 	integer: () => "number",
 	//[INFO] no need in enumeration because union types generate before that
-	string: (property: IBotApi.IProperty, object, objectType) => {
+	string: (property: IBotAPI.IProperty, object, objectType) => {
 		//TODO: maybe place it to another place?
 		if (property.name === "media")
 			return `${
@@ -92,8 +92,8 @@ export const typesRemapper: TTypeRemapper = {
 
 export class Properties {
 	static convertMany(
-		object: IBotApi.IObject,
-		properties: IBotApi.IProperty[],
+		object: IBotAPI.IObject,
+		properties: IBotAPI.IProperty[],
 		objectType: TObjectType,
 	) {
 		return properties.map((property) =>
@@ -102,8 +102,8 @@ export class Properties {
 	}
 
 	static convert(
-		object: IBotApi.IObject,
-		property: IBotApi.IProperty,
+		object: IBotAPI.IObject,
+		property: IBotAPI.IProperty,
 		objectType: TObjectType,
 	) {
 		const type = typesRemapper[property.type](property, object, objectType);

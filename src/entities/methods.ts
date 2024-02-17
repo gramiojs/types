@@ -1,8 +1,8 @@
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotApi } from "../types";
+import { IBotAPI } from "../types";
 import { typesRemapper } from "./properties";
 
-function generateMethod(method: IBotApi.IMethod) {
+function generateMethod(method: IBotAPI.IMethod) {
 	const returnType = typesRemapper[method.return_type.type](
 		method.return_type,
 		method,
@@ -10,11 +10,11 @@ function generateMethod(method: IBotApi.IMethod) {
 	);
 
 	if (!method.arguments?.length)
-		return `${method.name}: CallApiWithoutParams<${returnType}>`;
+		return `${method.name}: CallAPIWithoutParams<${returnType}>`;
 
 	const tCallType = method.arguments.every((argument) => !argument.required)
-		? "CallApiWithOptionalParams"
-		: "CallApi";
+		? "CallAPIWithOptionalParams"
+		: "CallAPI";
 
 	return `${
 		method.name
@@ -23,16 +23,16 @@ function generateMethod(method: IBotApi.IMethod) {
 	)}Params`}, ${returnType}>`;
 }
 
-export class ApiMethods {
-	static generateMany(methods: IBotApi.IMethod[]) {
+export class APIMethods {
+	static generateMany(methods: IBotAPI.IMethod[]) {
 		return [
-			"export interface ApiMethods {",
-			...methods.flatMap(ApiMethods.generate),
+			"export interface APIMethods {",
+			...methods.flatMap(APIMethods.generate),
 			"}",
 		];
 	}
 
-	static generate(method: IBotApi.IMethod) {
+	static generate(method: IBotAPI.IMethod) {
 		return [
 			...CodeGenerator.generateComment(
 				`${method.description}\n\n{@link ${method.documentation_link} | [Documentation]}`,

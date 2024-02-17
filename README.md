@@ -7,9 +7,9 @@
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
 ```ts
-import type { ApiMethods } from "@gramio/types";
+import type { APIMethods } from "@gramio/types";
 
-type SendMessageReturn = ReturnType<ApiMethods["sendMessage"]>;
+type SendMessageReturn = ReturnType<APIMethods["sendMessage"]>;
 //   ^? type SendMessageReturn = Promise<TelegramMessage>
 ```
 
@@ -17,13 +17,13 @@ Please see [API Types References](https://tsdocs.dev/docs/@gramio/types)
 
 ### Auto-update package
 
-This library is updated automatically to the latest version of the Telegram Bot Api in case of changes thanks to CI CD!
+This library is updated automatically to the latest version of the Telegram Bot API in case of changes thanks to CI CD!
 If the github action failed, there are no changes in the bot api
 
 ## Imports (after `@gramio/`)
 
 -   `index` - exports everything in the section
--   `methods` - exports `ApiMethods` which describes the api functions
+-   `methods` - exports `APIMethods` which describes the api functions
 -   `objects` - exports objects with the `Telegram` prefix (for example [Update](https://core.telegram.org/bots/api/#update))
 -   `params` - exports params that are used in `methods`
 
@@ -31,18 +31,18 @@ If the github action failed, there are no changes in the bot api
 
 ```typescript
 import type {
-    ApiMethods,
-    ApiMethodParams,
+    APIMethods,
+    APIMethodParams,
     TelegramAPIResponse,
 } from "@gramio/types";
 
 const TBA_BASE_URL = "https://api.telegram.org/bot";
 const TOKEN = "";
 
-const api = new Proxy({} as ApiMethods, {
+const api = new Proxy({} as APIMethods, {
     get:
-        <T extends keyof ApiMethods>(_target: ApiMethods, method: T) =>
-        async (params: ApiMethodParams<T>) => {
+        <T extends keyof APIMethods>(_target: APIMethods, method: T) =>
+        async (params: APIMethodParams<T>) => {
             const response = await fetch(`${TBA_BASE_URL}${TOKEN}/${method}`, {
                 method: "POST",
                 headers: {
