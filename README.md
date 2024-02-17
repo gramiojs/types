@@ -2,7 +2,7 @@
 
 ### Versioning
 
-7.0.x types - for 7.0 Telegram Bot API
+7.1.x types is for 7.1 Telegram Bot API
 
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
@@ -30,7 +30,11 @@ If the github action failed, there are no changes in the bot api
 ### Write you own type-safe Telegram Bot API wrapper
 
 ```typescript
-import type { ApiMethods, TelegramAPIResponse } from "@gramio/types";
+import type {
+    ApiMethods,
+    ApiMethodParams,
+    TelegramAPIResponse,
+} from "@gramio/types";
 
 const TBA_BASE_URL = "https://api.telegram.org/bot";
 const TOKEN = "";
@@ -38,7 +42,7 @@ const TOKEN = "";
 const api = new Proxy({} as ApiMethods, {
     get:
         <T extends keyof ApiMethods>(_target: ApiMethods, method: T) =>
-        async (params: Parameters<ApiMethods[T]>[0]) => {
+        async (params: ApiMethodParams<T>) => {
             const response = await fetch(`${TBA_BASE_URL}${TOKEN}/${method}`, {
                 method: "POST",
                 headers: {

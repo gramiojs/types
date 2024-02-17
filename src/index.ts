@@ -139,7 +139,7 @@ const files: IGeneratedFile[] = [
 				"type CallApiWithoutParams<R> = () => Promise<R>",
 				"type CallApiWithOptionalParams<T, R> = (params?: T) => Promise<R>",
 				"",
-				"export type ApiMethodsParams<ApiMethod extends keyof ApiMethods> = Parameters<ApiMethods[ApiMethod]>[0]",
+				"export type ApiMethodParams<ApiMethod extends keyof ApiMethods> = Parameters<ApiMethods[ApiMethod]>[0]",
 				"",
 			],
 			ApiMethods.generateMany(schema.methods),
