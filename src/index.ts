@@ -2,9 +2,9 @@ import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
 import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
-import { ApiMethods, Objects, Params } from "./entities";
+import { APIMethods, Objects, Params } from "./entities";
 import { generateHeader } from "./helpers";
-import { IBotApi } from "./types";
+import { IBotAPI } from "./types";
 
 export interface IGeneratedFile {
 	name: string;
@@ -12,7 +12,7 @@ export interface IGeneratedFile {
 }
 
 const schemaFile = await fs.readFile(SCHEMA_FILE_PATH);
-const schema = JSON.parse(String(schemaFile)) as IBotApi.ISchema;
+const schema = JSON.parse(String(schemaFile)) as IBotAPI.ISchema;
 
 schema.objects.push({
 	name: "APIResponseOk",
@@ -90,7 +90,7 @@ schema.objects.push({
 			reference: "APIResponseError",
 		},
 		// JSON-SCHEMA to ts wrong result?
-	] as IBotApi.IArgument[],
+	] as IBotAPI.IArgument[],
 });
 
 const InputFile = schema.objects.find((x) => x.name === "InputFile");
@@ -109,7 +109,7 @@ if (InputFile) {
 			default: "Promise<File>",
 		},
 		// TODO: improve typings by JSON Schema
-	] as IBotApi.IArgument[];
+	] as IBotAPI.IArgument[];
 }
 
 const header = generateHeader(schema.version, schema.recent_changes);
@@ -135,14 +135,15 @@ const files: IGeneratedFile[] = [
 				`import * as Params from "./params"`,
 				`import * as Objects from "./objects"`,
 				"",
-				"type CallApi<T, R> = (params: T) => Promise<R>",
-				"type CallApiWithoutParams<R> = () => Promise<R>",
-				"type CallApiWithOptionalParams<T, R> = (params?: T) => Promise<R>",
+				"type CallAPI<T, R> = (params: T) => Promise<R>",
+				"type CallAPIWithoutParams<R> = () => Promise<R>",
+				"type CallAPIWithOptionalParams<T, R> = (params?: T) => Promise<R>",
 				"",
-				"export type ApiMethodParams<ApiMethod extends keyof ApiMethods> = Parameters<ApiMethods[ApiMethod]>[0]",
+				"export type APIMethodParams<APIMethod extends keyof APIMethods> = Parameters<APIMethods[APIMethod]>[0]",
+				"export type APIMethodReturn<APIMethod extends keyof APIMethods> = Awaited<ReturnType<APIMethods[APIMethod]>>",
 				"",
 			],
-			ApiMethods.generateMany(schema.methods),
+			APIMethods.generateMany(schema.methods),
 		],
 	},
 	{

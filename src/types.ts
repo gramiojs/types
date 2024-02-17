@@ -1,6 +1,6 @@
 export type TObjectType = "object" | "method";
 
-export namespace IBotApi {
+export namespace IBotAPI {
 	export interface ISchema {
 		methods: IMethod[];
 		objects: IObject[];

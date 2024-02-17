@@ -7,10 +7,13 @@
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
 ```ts
-import type { APIMethods } from "@gramio/types";
+import type { APIMethods, APIMethodReturn } from "@gramio/types";
 
-type SendMessageReturn = ReturnType<APIMethods["sendMessage"]>;
-//   ^? type SendMessageReturn = Promise<TelegramMessage>
+type SendMessageReturn = Awaited<ReturnType<APIMethods["sendMessage"]>>;
+//   ^? type SendMessageReturn = TelegramMessage
+
+type GetMeReturn = APIMethodReturn<"getMe">;
+//   ^? type SendMessageReturn = TelegramUser
 ```
 
 Please see [API Types References](https://tsdocs.dev/docs/@gramio/types)

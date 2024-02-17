@@ -1,4 +1,4 @@
-import { IBotApi } from "types";
+import { IBotAPI } from "types";
 
 export class CodeGenerator {
 	static generateComment(value: string) {
@@ -31,12 +31,12 @@ export class TextEditor {
 }
 
 export function generateHeader(
-	version: IBotApi.IVersion,
-	recentChanges: IBotApi.IRecentChangesObject,
+	version: IBotAPI.IVersion,
+	recentChanges: IBotAPI.IRecentChangesObject,
 ) {
 	return [
 		"/**",
-		`* Based on Bot Api v${version.major}.${version.minor}.${version.patch} (${recentChanges.day}.${recentChanges.month}.${recentChanges.year})`,
+		`* Based on Bot API v${version.major}.${version.minor}.${version.patch} (${recentChanges.day}.${recentChanges.month}.${recentChanges.year})`,
 		`* Generated at ${new Date().toLocaleString()} using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators`,
 		"*/",
 	];
