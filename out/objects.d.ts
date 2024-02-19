@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 2/17/2024, 4:12:56 PM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
+ * Generated at 2/19/2024, 9:14:43 AM using {@link https://github.com/gramiojs/types | [types]} and {@link https://ark0f.github.io/tg-bot-api | [schema]} generators
  */
 
 /**
@@ -1449,13 +1449,13 @@ export interface TelegramPoll {
  */
 export interface TelegramLocation {
     /**
-     * Longitude as defined by sender
-     */
-    longitude: number
-    /**
      * Latitude as defined by sender
      */
     latitude: number
+    /**
+     * Longitude as defined by sender
+     */
+    longitude: number
     /**
      * *Optional*. The radius of uncertainty for the location, measured in meters; 0-1500
      */
