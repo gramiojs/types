@@ -42,6 +42,10 @@ jobs:
               with:
                   message: "release v${{ steps.cicd.outputs.version }}"
 
+            - id: changelog
+              name: Generate changelog
+              run: bun scripts/generate-changelog.ts
+
             - name: Install Node
               uses: actions/setup-node@v4
               with:
@@ -60,7 +64,7 @@ jobs:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   tag: v${{ steps.cicd.outputs.version }}
                   name: v${{ steps.cicd.outputs.version }}
-                  body: "regenerate types"
+                  body: ${{ steps.changelog.outputs.changelog }}
                   draft: false
                   prerelease: false
                   generateReleaseNotes: true

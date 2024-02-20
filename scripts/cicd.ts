@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
+import { EOL } from "node:os";
 import { version } from "../package.json";
 import { SCHEMA_FILE_PATH } from "../src/config";
 import { IBotAPI } from "../src/types";
@@ -31,6 +32,6 @@ if (process.env.GITHUB_OUTPUT) {
 
 	await fs.appendFile(
 		process.env.GITHUB_OUTPUT!,
-		`version=${version.replace(/"/gi, "")}`,
+		`version=${version.replace(/"/gi, "")}${EOL}`,
 	);
 }
