@@ -132,15 +132,9 @@ const files: IGeneratedFile[] = [
 		lines: [
 			header,
 			[
+				`import { CallAPIWithOptionalParams, CallAPI, CallAPIWithoutParams } from "./utils"`,
 				`import * as Params from "./params"`,
 				`import * as Objects from "./objects"`,
-				"",
-				"type CallAPI<T, R> = (params: T) => Promise<R>",
-				"type CallAPIWithoutParams<R> = () => Promise<R>",
-				"type CallAPIWithOptionalParams<T, R> = (params?: T) => Promise<R>",
-				"",
-				"export type APIMethodParams<APIMethod extends keyof APIMethods> = Parameters<APIMethods[APIMethod]>[0]",
-				"export type APIMethodReturn<APIMethod extends keyof APIMethods> = Awaited<ReturnType<APIMethods[APIMethod]>>",
 				"",
 			],
 			APIMethods.generateMany(schema.methods),
@@ -154,6 +148,23 @@ const files: IGeneratedFile[] = [
 			[`export * as TelegramParams from "./params"`],
 			[`export * from "./objects"`],
 			[`export * as TelegramObjects from "./objects"`],
+			[`export { APIMethodParams, APIMethodReturn } from "./utils"`],
+		],
+	},
+	{
+		name: "utils.d.ts",
+		lines: [
+			[
+				`import { APIMethods } from "./methods"`,
+				"",
+				"export type CallAPI<T, R> = (params: T) => Promise<R>",
+				"export type CallAPIWithoutParams<R> = () => Promise<R>",
+				"export type CallAPIWithOptionalParams<T, R> = (params?: T) => Promise<R>",
+				"",
+				"export type APIMethodParams<APIMethod extends keyof APIMethods> = Parameters<APIMethods[APIMethod]>[0]",
+				"export type APIMethodReturn<APIMethod extends keyof APIMethods> = Awaited<ReturnType<APIMethods[APIMethod]>>",
+				"",
+			],
 		],
 	},
 	{
