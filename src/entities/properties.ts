@@ -8,6 +8,7 @@ type TTypeRemapper = Record<
 		property: IBotAPI.IProperty,
 		object: IBotAPI.IObject,
 		objectType: TObjectType,
+		parentProperty?: IBotAPI.IProperty,
 	) => string
 >;
 
@@ -23,7 +24,7 @@ export const typesRemapper: TTypeRemapper = {
 	float: () => "number",
 	integer: () => "number",
 	//[INFO] no need in enumeration because union types generate before that
-	string: (property: IBotAPI.IProperty, object, objectType) => {
+	string: (property, object, objectType, parentProperty) => {
 		//TODO: maybe place it to another place?
 		if (property.name === "media")
 			return `${
@@ -40,6 +41,10 @@ export const typesRemapper: TTypeRemapper = {
 			property.name === "message_text"
 		)
 			return "(string | { toString(): string})";
+
+		// [INFO] "@sda" as string... works harder with for example .env files
+		// if (parentProperty?.description?.includes("format `@"))
+		// 	return "`@${string}`";
 
 		if (property.enumeration)
 			return (
@@ -76,7 +81,9 @@ export const typesRemapper: TTypeRemapper = {
 	},
 	any_of: (property, object, objectType) => {
 		return property
-			.any_of!.map((x) => typesRemapper[x.type](x, object, objectType))
+			.any_of!.map((x) =>
+				typesRemapper[x.type](x, object, objectType, property),
+			)
 			.join(" | ");
 	},
 	array: (property, object, objectType) => {
