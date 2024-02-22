@@ -42,6 +42,11 @@ export const typesRemapper: TTypeRemapper = {
 		)
 			return "(string | { toString(): string})";
 
+		if (property.description?.includes("ISO 4217"))
+			return `${
+				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
+			}Currencies`;
+
 		// [INFO] "@sda" as string... works harder with for example .env files
 		// if (parentProperty?.description?.includes("format `@"))
 		// 	return "`@${string}`";

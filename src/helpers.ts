@@ -41,3 +41,12 @@ export function generateHeader(
 		"*/",
 	];
 }
+
+export async function fetchCurrencies() {
+	const res = await fetch(
+		"https://core.telegram.org/bots/payments/currencies.json",
+	);
+	const data = await res.json();
+
+	return Object.keys(data);
+}

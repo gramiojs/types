@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
-import { generateHeader } from "./helpers";
+import { fetchCurrencies, generateHeader } from "./helpers";
 import { IBotAPI } from "./types";
 
 export interface IGeneratedFile {
@@ -13,6 +13,21 @@ export interface IGeneratedFile {
 
 const schemaFile = await fs.readFile(SCHEMA_FILE_PATH);
 const schema = JSON.parse(String(schemaFile)) as IBotAPI.ISchema;
+
+const currenciesList = await fetchCurrencies();
+
+schema.objects.push({
+	name: "Currencies",
+	type: "any_of",
+	description:
+		"Telegram payments currently support the currencies listed below.",
+	documentation_link:
+		"https://core.telegram.org/bots/payments#supported-currencies",
+	any_of: currenciesList.map((currency) => ({
+		type: "string",
+		default: currency,
+	})) as IBotAPI.IArgument[],
+});
 
 schema.objects.push({
 	name: "APIResponseOk",
