@@ -35,7 +35,7 @@ export class APIMethods {
 	static generate(method: IBotAPI.IMethod) {
 		return [
 			...CodeGenerator.generateComment(
-				`${method.description}\n\n{@link ${method.documentation_link} | [Documentation]}`,
+				`${method.description}\n\n[Documentation](${method.documentation_link})`,
 			),
 			generateMethod(method),
 		];

@@ -13,7 +13,7 @@ export class Objects {
 			return [
 				"",
 				...CodeGenerator.generateComment(
-					`${object.description}\n\n{@link ${object.documentation_link} | [Documentation]}`,
+					`${object.description}\n\n[Documentation](${object.documentation_link})`,
 				),
 				`export type ${OBJECTS_PREFIX + object.name} = ${typesRemapper.any_of(
 					//TODO: fix type error. Object any of does't require IProperty
@@ -27,7 +27,7 @@ export class Objects {
 			return [
 				"",
 				...CodeGenerator.generateComment(
-					`${object.description}\n\n{@link ${object.documentation_link} | [Documentation]}`,
+					`${object.description}\n\n[Documentation](${object.documentation_link})`,
 				),
 				`export interface ${OBJECTS_PREFIX + object.name} {}`,
 				"",
@@ -50,7 +50,7 @@ export class Objects {
 			...unionTypes,
 			"",
 			...CodeGenerator.generateComment(
-				`${object.description}\n\n{@link ${object.documentation_link} | [Documentation]}`,
+				`${object.description}\n\n[Documentation](${object.documentation_link})`,
 			),
 			`export interface ${OBJECTS_PREFIX + object.name} {`,
 			...Properties.convertMany(object, object.properties, "object").flat(),
