@@ -47,6 +47,11 @@ export const typesRemapper: TTypeRemapper = {
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
 			}Currencies`;
 
+		if (parentProperty?.name === "allowed_updates")
+			return `Exclude<keyof ${
+				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
+			}Update, "update_id">`;
+
 		// [INFO] "@sda" as string... works harder with for example .env files
 		// if (parentProperty?.description?.includes("format `@"))
 		// 	return "`@${string}`";
@@ -96,6 +101,7 @@ export const typesRemapper: TTypeRemapper = {
 			property.array!,
 			object,
 			objectType,
+			property,
 		);
 
 		return `(${type})[]`;

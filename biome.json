@@ -6,6 +6,9 @@
     "linter": {
         "enabled": true,
         "rules": {
+            "suspicious": {
+                "noEmptyInterface": "off"
+            },
             "complexity": {
                 "noStaticOnlyClass": "off"
             },
