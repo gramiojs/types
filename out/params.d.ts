@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 2/22/2024, 2:00:23 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 2/24/2024, 2:39:40 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 import * as Objects from "./objects"
 
@@ -22,7 +22,7 @@ export interface GetUpdatesParams {
      *
      * Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
      */
-    allowed_updates?: string[]
+    allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
 }
 
 export interface SetWebhookParams {
@@ -46,7 +46,7 @@ export interface SetWebhookParams {
      * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api/#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      * Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
      */
-    allowed_updates?: string[]
+    allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
     /**
      * Pass *True* to drop all pending updates
      */
@@ -1504,7 +1504,7 @@ export interface CreateForumTopicParams {
     /**
      * Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F)
      */
-    icon_color?: number
+    icon_color?: 0x6fb9f0 | 0xffd67e | 0xcb86db | 0x8eee98 | 0xff93b2 | 0xfb6f5f
     /**
      * Unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api/#getforumtopiciconstickers) to get all allowed custom emoji identifiers.
      */
