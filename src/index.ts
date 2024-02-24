@@ -127,6 +127,25 @@ if (InputFile) {
 	] as IBotAPI.IArgument[];
 }
 
+const createForumTopic = schema.methods.find(
+	(x) => x.name === "createForumTopic",
+);
+
+if (createForumTopic) {
+	const icon_color = createForumTopic.arguments?.find(
+		(x) => x.name === "icon_color",
+	);
+	const RGBs = icon_color?.description.match(/\b0x[0-9a-fA-F]{6}/g);
+	if (icon_color && RGBs) {
+		icon_color.type = "any_of";
+		icon_color.any_of = RGBs.map((x) => ({
+			type: "bool",
+			required: true,
+			default: x.replace(/\b0x/, "0x"),
+		})) as IBotAPI.IArgument[];
+	}
+}
+
 const header = generateHeader(schema.version, schema.recent_changes);
 
 const files: IGeneratedFile[] = [
