@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 2/24/2024, 2:39:40 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 2/26/2024, 1:01:17 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -2085,7 +2085,7 @@ export interface TelegramReplyKeyboardRemove {
     /**
      * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use *one\_time\_keyboard* in [ReplyKeyboardMarkup](https://core.telegram.org/bots/api/#replykeyboardmarkup))
      */
-    remove_keyboard: boolean
+    remove_keyboard: true
     /**
      * *Optional*. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](https://core.telegram.org/bots/api/#message) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.
      *
@@ -2263,7 +2263,7 @@ export interface TelegramForceReply {
     /**
      * Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'
      */
-    force_reply: boolean
+    force_reply: true
     /**
      * *Optional*. The placeholder to be shown in the input field when the reply is active; 1-64 characters
      */
