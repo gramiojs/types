@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 2/26/2024, 1:01:17 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 2/29/2024, 10:13:18 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -2393,19 +2393,19 @@ export interface TelegramChatAdministratorRights {
      */
     can_delete_stories: boolean
     /**
-     * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; channels only
+     * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; for channels only
      */
     can_post_messages?: boolean
     /**
-     * *Optional*. *True*, if the administrator can edit messages of other users and can pin messages; channels only
+     * *Optional*. *True*, if the administrator can edit messages of other users and can pin messages; for channels only
      */
     can_edit_messages?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to pin messages; groups and supergroups only
+     * *Optional*. *True*, if the user is allowed to pin messages; for groups and supergroups only
      */
     can_pin_messages?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+     * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
      */
     can_manage_topics?: boolean
 }
@@ -2553,19 +2553,19 @@ export interface TelegramChatMemberAdministrator {
      */
     can_delete_stories: boolean
     /**
-     * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; channels only
+     * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; for channels only
      */
     can_post_messages?: boolean
     /**
-     * *Optional*. *True*, if the administrator can edit messages of other users and can pin messages; channels only
+     * *Optional*. *True*, if the administrator can edit messages of other users and can pin messages; for channels only
      */
     can_edit_messages?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to pin messages; groups and supergroups only
+     * *Optional*. *True*, if the user is allowed to pin messages; for groups and supergroups only
      */
     can_pin_messages?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+     * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
      */
     can_manage_topics?: boolean
     /**
@@ -5565,35 +5565,35 @@ export interface TelegramEncryptedPassportElement {
      */
     type: TelegramEncryptedPassportElementType
     /**
-     * *Optional*. Base64-encoded encrypted Telegram Passport element data provided by the user, available for “personal\_details”, “passport”, “driver\_license”, “identity\_card”, “internal\_passport” and “address” types. Can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
+     * *Optional*. Base64-encoded encrypted Telegram Passport element data provided by the user; available only for “personal\_details”, “passport”, “driver\_license”, “identity\_card”, “internal\_passport” and “address” types. Can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
      */
     data?: string
     /**
-     * *Optional*. User's verified phone number, available only for “phone\_number” type
+     * *Optional*. User's verified phone number; available only for “phone\_number” type
      */
     phone_number?: string
     /**
-     * *Optional*. User's verified email address, available only for “email” type
+     * *Optional*. User's verified email address; available only for “email” type
      */
     email?: string
     /**
-     * *Optional*. Array of encrypted files with documents provided by the user, available for “utility\_bill”, “bank\_statement”, “rental\_agreement”, “passport\_registration” and “temporary\_registration” types. Files can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
+     * *Optional*. Array of encrypted files with documents provided by the user; available only for “utility\_bill”, “bank\_statement”, “rental\_agreement”, “passport\_registration” and “temporary\_registration” types. Files can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
      */
     files?: TelegramPassportFile[]
     /**
-     * *Optional*. Encrypted file with the front side of the document, provided by the user. Available for “passport”, “driver\_license”, “identity\_card” and “internal\_passport”. The file can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
+     * *Optional*. Encrypted file with the front side of the document, provided by the user; available only for “passport”, “driver\_license”, “identity\_card” and “internal\_passport”. The file can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
      */
     front_side?: TelegramPassportFile
     /**
-     * *Optional*. Encrypted file with the reverse side of the document, provided by the user. Available for “driver\_license” and “identity\_card”. The file can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
+     * *Optional*. Encrypted file with the reverse side of the document, provided by the user; available only for “driver\_license” and “identity\_card”. The file can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
      */
     reverse_side?: TelegramPassportFile
     /**
-     * *Optional*. Encrypted file with the selfie of the user holding a document, provided by the user; available for “passport”, “driver\_license”, “identity\_card” and “internal\_passport”. The file can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
+     * *Optional*. Encrypted file with the selfie of the user holding a document, provided by the user; available if requested for “passport”, “driver\_license”, “identity\_card” and “internal\_passport”. The file can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
      */
     selfie?: TelegramPassportFile
     /**
-     * *Optional*. Array of encrypted files with translated versions of documents provided by the user. Available if requested for “passport”, “driver\_license”, “identity\_card”, “internal\_passport”, “utility\_bill”, “bank\_statement”, “rental\_agreement”, “passport\_registration” and “temporary\_registration” types. Files can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
+     * *Optional*. Array of encrypted files with translated versions of documents provided by the user; available if requested for “passport”, “driver\_license”, “identity\_card”, “internal\_passport”, “utility\_bill”, “bank\_statement”, “rental\_agreement”, “passport\_registration” and “temporary\_registration” types. Files can be decrypted and verified using the accompanying [EncryptedCredentials](https://core.telegram.org/bots/api/#encryptedcredentials).
      */
     translation?: TelegramPassportFile[]
     /**
