@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 2/29/2024, 10:13:18 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 3/9/2024, 12:58:18 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 import * as Objects from "./objects"
 
@@ -1491,6 +1491,14 @@ export interface DeleteChatStickerSetParams {
      */
     chat_id: number | string
 }
+
+export type CreateForumTopicIconColor =
+    | "7322096"
+    | "16766590"
+    | "13338331"
+    | "9367192"
+    | "16749490"
+    | "16478047"
 
 export interface CreateForumTopicParams {
     /**
