@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 2/22/2024, 2:00:23 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 3/9/2024, 12:58:18 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 import * as Objects from "./objects"
 
@@ -22,7 +22,7 @@ export interface GetUpdatesParams {
      *
      * Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
      */
-    allowed_updates?: string[]
+    allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
 }
 
 export interface SetWebhookParams {
@@ -46,7 +46,7 @@ export interface SetWebhookParams {
      * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api/#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      * Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
      */
-    allowed_updates?: string[]
+    allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
     /**
      * Pass *True* to drop all pending updates
      */
@@ -156,7 +156,7 @@ export interface ForwardMessagesParams {
      */
     from_chat_id: number | string
     /**
-     * Identifiers of 1-100 messages in the chat *from\_chat\_id* to forward. The identifiers must be specified in a strictly increasing order.
+     * A JSON-serialized list of 1-100 identifiers of messages in the chat *from\_chat\_id* to forward. The identifiers must be specified in a strictly increasing order.
      */
     message_ids: number[]
     /**
@@ -238,7 +238,7 @@ export interface CopyMessagesParams {
      */
     from_chat_id: number | string
     /**
-     * Identifiers of 1-100 messages in the chat *from\_chat\_id* to copy. The identifiers must be specified in a strictly increasing order.
+     * A JSON-serialized list of 1-100 identifiers of messages in the chat *from\_chat\_id* to copy. The identifiers must be specified in a strictly increasing order.
      */
     message_ids: number[]
     /**
@@ -1042,7 +1042,7 @@ export interface SendChatActionParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread; supergroups only
+     * Unique identifier for the target message thread; for supergroups only
      */
     message_thread_id?: number
     /**
@@ -1061,7 +1061,7 @@ export interface SetMessageReactionParams {
      */
     message_id: number
     /**
-     * New list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+     * A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
      */
     reaction?: Objects.TelegramReactionType[]
     /**
@@ -1203,19 +1203,19 @@ export interface PromoteChatMemberParams {
      */
     can_delete_stories?: boolean
     /**
-     * Pass *True* if the administrator can post messages in the channel, or access channel statistics; channels only
+     * Pass *True* if the administrator can post messages in the channel, or access channel statistics; for channels only
      */
     can_post_messages?: boolean
     /**
-     * Pass *True* if the administrator can edit messages of other users and can pin messages; channels only
+     * Pass *True* if the administrator can edit messages of other users and can pin messages; for channels only
      */
     can_edit_messages?: boolean
     /**
-     * Pass *True* if the administrator can pin messages, supergroups only
+     * Pass *True* if the administrator can pin messages; for supergroups only
      */
     can_pin_messages?: boolean
     /**
-     * Pass *True* if the user is allowed to create, rename, close, and reopen forum topics, supergroups only
+     * Pass *True* if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
      */
     can_manage_topics?: boolean
 }
@@ -1492,6 +1492,14 @@ export interface DeleteChatStickerSetParams {
     chat_id: number | string
 }
 
+export type CreateForumTopicIconColor =
+    | "7322096"
+    | "16766590"
+    | "13338331"
+    | "9367192"
+    | "16749490"
+    | "16478047"
+
 export interface CreateForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1504,7 +1512,7 @@ export interface CreateForumTopicParams {
     /**
      * Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F)
      */
-    icon_color?: number
+    icon_color?: 0x6fb9f0 | 0xffd67e | 0xcb86db | 0x8eee98 | 0xff93b2 | 0xfb6f5f
     /**
      * Unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api/#getforumtopiciconstickers) to get all allowed custom emoji identifiers.
      */
@@ -1995,7 +2003,7 @@ export interface DeleteMessagesParams {
      */
     chat_id: number | string
     /**
-     * Identifiers of 1-100 messages to delete. See [deleteMessage](https://core.telegram.org/bots/api/#deletemessage) for limitations on which messages can be deleted
+     * A JSON-serialized list of 1-100 identifiers of messages to delete. See [deleteMessage](https://core.telegram.org/bots/api/#deletemessage) for limitations on which messages can be deleted
      */
     message_ids: number[]
 }
@@ -2052,7 +2060,7 @@ export interface GetStickerSetParams {
 
 export interface GetCustomEmojiStickersParams {
     /**
-     * List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
+     * A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
      */
     custom_emoji_ids: string[]
 }
