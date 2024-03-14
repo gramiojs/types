@@ -2,7 +2,7 @@
 
 ### Versioning
 
-7.1.x types is for 7.1 Telegram Bot API
+7.1.x types are for 7.1 Telegram Bot API
 
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
