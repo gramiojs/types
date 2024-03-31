@@ -1,6 +1,6 @@
 /**
- * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 3/16/2024, 10:15:27 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Based on Bot API v7.2.0 (31.3.2024)
+ * Generated at 3/31/2024, 6:04:31 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 import * as Objects from "./objects"
 
@@ -66,6 +66,10 @@ export interface DeleteWebhookParams {
 
 export interface SendMessageParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id: number | string
@@ -102,7 +106,7 @@ export interface SendMessageParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -257,6 +261,10 @@ export interface CopyMessagesParams {
 
 export interface SendPhotoParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id: number | string
@@ -297,7 +305,7 @@ export interface SendPhotoParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -311,6 +319,10 @@ export interface SendPhotoParams {
 }
 
 export interface SendAudioParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -364,7 +376,7 @@ export interface SendAudioParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -378,6 +390,10 @@ export interface SendAudioParams {
 }
 
 export interface SendDocumentParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -423,7 +439,7 @@ export interface SendDocumentParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -437,6 +453,10 @@ export interface SendDocumentParams {
 }
 
 export interface SendVideoParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -498,7 +518,7 @@ export interface SendVideoParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -512,6 +532,10 @@ export interface SendVideoParams {
 }
 
 export interface SendAnimationParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -569,7 +593,7 @@ export interface SendAnimationParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -583,6 +607,10 @@ export interface SendAnimationParams {
 }
 
 export interface SendVoiceParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -624,7 +652,7 @@ export interface SendVoiceParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -638,6 +666,10 @@ export interface SendVoiceParams {
 }
 
 export interface SendVideoNoteParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -675,7 +707,7 @@ export interface SendVideoNoteParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -689,6 +721,10 @@ export interface SendVideoNoteParams {
 }
 
 export interface SendMediaGroupParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -721,6 +757,10 @@ export interface SendMediaGroupParams {
 }
 
 export interface SendLocationParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -766,7 +806,7 @@ export interface SendLocationParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -780,6 +820,10 @@ export interface SendLocationParams {
 }
 
 export interface SendVenueParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -833,7 +877,7 @@ export interface SendVenueParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -847,6 +891,10 @@ export interface SendVenueParams {
 }
 
 export interface SendContactParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -884,7 +932,7 @@ export interface SendContactParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -900,6 +948,10 @@ export interface SendContactParams {
 export type SendPollType = "quiz" | "regular"
 
 export interface SendPollParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -969,7 +1021,7 @@ export interface SendPollParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -985,6 +1037,10 @@ export interface SendPollParams {
 export type SendDiceEmoji = "🎲" | "🎯" | "🏀" | "⚽" | "🎳" | "🎰"
 
 export interface SendDiceParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -1010,7 +1066,7 @@ export interface SendDiceParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1037,6 +1093,10 @@ export type SendChatActionAction =
     | "upload_video_note"
 
 export interface SendChatActionParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the action will be sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -1664,6 +1724,13 @@ export interface GetUserChatBoostsParams {
     user_id: number
 }
 
+export interface GetBusinessConnectionParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+}
+
 export interface SetMyCommandsParams {
     /**
      * A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
@@ -2010,6 +2077,10 @@ export interface DeleteMessagesParams {
 
 export interface SendStickerParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id: number | string
@@ -2018,7 +2089,7 @@ export interface SendStickerParams {
      */
     message_thread_id?: number
     /**
-     * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP or .TGS sticker using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Video stickers can only be sent by a file\_id. Animated stickers can't be sent via an HTTP URL.
+     * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Video and animated stickers can't be sent via an HTTP URL.
      */
     sticker: Objects.TelegramInputFile | string
     /**
@@ -2038,7 +2109,7 @@ export interface SendStickerParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -2082,7 +2153,6 @@ export interface UploadStickerFileParams {
     sticker_format: UploadStickerFileStickerFormat
 }
 
-export type CreateNewStickerSetStickerFormat = "static" | "animated" | "video"
 export type CreateNewStickerSetStickerType = "mask" | "custom_emoji"
 
 export interface CreateNewStickerSetParams {
@@ -2102,10 +2172,6 @@ export interface CreateNewStickerSetParams {
      * A JSON-serialized list of 1-50 initial stickers to be added to the sticker set
      */
     stickers: Objects.TelegramInputSticker[]
-    /**
-     * Format of stickers in the set, must be one of “static”, “animated”, “video”
-     */
-    sticker_format: CreateNewStickerSetStickerFormat
     /**
      * Type of stickers in the set, pass “regular”, “mask”, or “custom\_emoji”. By default, a regular sticker set is created.
      */
@@ -2147,6 +2213,25 @@ export interface DeleteStickerFromSetParams {
      * File identifier of the sticker
      */
     sticker: string
+}
+
+export interface ReplaceStickerInSetParams {
+    /**
+     * User identifier of the sticker set owner
+     */
+    user_id: number
+    /**
+     * Sticker set name
+     */
+    name: string
+    /**
+     * File identifier of the replaced sticker
+     */
+    old_sticker: string
+    /**
+     * A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.
+     */
+    sticker: Objects.TelegramInputSticker
 }
 
 export interface SetStickerEmojiListParams {
@@ -2193,6 +2278,8 @@ export interface SetStickerSetTitleParams {
     title: string
 }
 
+export type SetStickerSetThumbnailFormat = "static" | "animated" | "video"
+
 export interface SetStickerSetThumbnailParams {
     /**
      * Sticker set name
@@ -2206,6 +2293,10 @@ export interface SetStickerSetThumbnailParams {
      * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animated-sticker-requirements](https://core.telegram.org/stickers#animated-sticker-requirements) for animated sticker technical requirements), or a **WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-sticker-requirements](https://core.telegram.org/stickers#video-sticker-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
      */
     thumbnail?: Objects.TelegramInputFile | string
+    /**
+     * Format of the thumbnail, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, or “video” for a **WEBM** video
+     */
+    format: SetStickerSetThumbnailFormat
 }
 
 export interface SetCustomEmojiStickerSetThumbnailParams {
@@ -2507,6 +2598,10 @@ export interface SetPassportDataErrorsParams {
 
 export interface SendGameParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat
      */
     chat_id: number
@@ -2531,7 +2626,7 @@ export interface SendGameParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards). If empty, one 'Play game\_title' button will be shown. If not empty, the first button must launch the game.
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards). If empty, one 'Play game\_title' button will be shown. If not empty, the first button must launch the game. Not supported for messages sent on behalf of a business account.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
