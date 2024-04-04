@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.2.0 (31.3.2024)
- * Generated at 3/31/2024, 6:04:31 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 4/4/2024, 11:41:09 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -2919,11 +2919,99 @@ export interface TelegramChatPermissions {
 }
 
 /**
- * Represents a location to which a chat is connected.
+ *
  *
  * [Documentation](https://core.telegram.org/bots/api/#birthdate)
  */
 export interface TelegramBirthdate {
+    /**
+     * Day of the user's birth; 1-31
+     */
+    day: number
+    /**
+     * Month of the user's birth; 1-12
+     */
+    month: number
+    /**
+     * *Optional*. Year of the user's birth
+     */
+    year?: number
+}
+
+/**
+ *
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#businessintro)
+ */
+export interface TelegramBusinessIntro {
+    /**
+     * *Optional*. Title text of the business intro
+     */
+    title?: string
+    /**
+     * *Optional*. Message text of the business intro
+     */
+    message?: string
+    /**
+     * *Optional*. Sticker of the business intro
+     */
+    sticker?: TelegramSticker
+}
+
+/**
+ *
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#businesslocation)
+ */
+export interface TelegramBusinessLocation {
+    /**
+     * Address of the business
+     */
+    address: string
+    /**
+     * *Optional*. Location of the business
+     */
+    location?: TelegramLocation
+}
+
+/**
+ *
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#businessopeninghoursinterval)
+ */
+export interface TelegramBusinessOpeningHoursInterval {
+    /**
+     * The minute's sequence number in a week, starting on Monday, marking the start of the time interval during which the business is open; 0 - 7 \* 24 \* 60
+     */
+    opening_minute: number
+    /**
+     * The minute's sequence number in a week, starting on Monday, marking the end of the time interval during which the business is open; 0 - 8 \* 24 \* 60
+     */
+    closing_minute: number
+}
+
+/**
+ *
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#businessopeninghours)
+ */
+export interface TelegramBusinessOpeningHours {
+    /**
+     * Unique name of the time zone for which the opening hours are defined
+     */
+    time_zone_name: string
+    /**
+     * List of time intervals describing business opening hours
+     */
+    opening_hours: TelegramBusinessOpeningHoursInterval[]
+}
+
+/**
+ * Represents a location to which a chat is connected.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#chatlocation)
+ */
+export interface TelegramChatLocation {
     /**
      * The location to which the supergroup is connected. Can't be a live location.
      */
