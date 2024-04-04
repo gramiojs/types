@@ -1,6 +1,6 @@
 /**
- * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 3/16/2024, 10:15:27 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Based on Bot API v7.2.0 (31.3.2024)
+ * Generated at 3/31/2024, 6:04:31 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 import {
     CallAPIWithOptionalParams,
@@ -502,6 +502,15 @@ export interface APIMethods {
         Objects.TelegramUserChatBoosts
     >
     /**
+     * Use this method to get information about the connection of the bot with a business account. Returns a [BusinessConnection](https://core.telegram.org/bots/api/#businessconnection) object on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getbusinessconnection)
+     */
+    getBusinessConnection: CallAPI<
+        Params.GetBusinessConnectionParams,
+        Objects.TelegramBusinessConnection
+    >
+    /**
      * Use this method to change the list of the bot's commands. See [this manual](https://core.telegram.org/bots/features#commands) for more details about bot commands. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setmycommands)
@@ -718,7 +727,7 @@ export interface APIMethods {
         Objects.TelegramSticker[]
     >
     /**
-     * Use this method to upload a file with a sticker for later use in the [createNewStickerSet](https://core.telegram.org/bots/api/#createnewstickerset) and [addStickerToSet](https://core.telegram.org/bots/api/#addstickertoset) methods (the file can be used multiple times). Returns the uploaded [File](https://core.telegram.org/bots/api/#file) on success.
+     * Use this method to upload a file with a sticker for later use in the [createNewStickerSet](https://core.telegram.org/bots/api/#createnewstickerset), [addStickerToSet](https://core.telegram.org/bots/api/#addstickertoset), or [replaceStickerInSet](https://core.telegram.org/bots/api/#replacestickerinset) methods (the file can be used multiple times). Returns the uploaded [File](https://core.telegram.org/bots/api/#file) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#uploadstickerfile)
      */
@@ -733,7 +742,7 @@ export interface APIMethods {
      */
     createNewStickerSet: CallAPI<Params.CreateNewStickerSetParams, true>
     /**
-     * Use this method to add a new sticker to a set created by the bot. The format of the added sticker must match the format of the other stickers in the set. Emoji sticker sets can have up to 200 stickers. Animated and video sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns *True* on success.
+     * Use this method to add a new sticker to a set created by the bot. Emoji sticker sets can have up to 200 stickers. Other sticker sets can have up to 120 stickers. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#addstickertoset)
      */
@@ -750,6 +759,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#deletestickerfromset)
      */
     deleteStickerFromSet: CallAPI<Params.DeleteStickerFromSetParams, true>
+    /**
+     * Use this method to replace an existing sticker in a sticker set with a new one. The method is equivalent to calling [deleteStickerFromSet](https://core.telegram.org/bots/api/#deletestickerfromset), then [addStickerToSet](https://core.telegram.org/bots/api/#addstickertoset), then [setStickerPositionInSet](https://core.telegram.org/bots/api/#setstickerpositioninset). Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#replacestickerinset)
+     */
+    replaceStickerInSet: CallAPI<Params.ReplaceStickerInSetParams, true>
     /**
      * Use this method to change the list of emoji assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns *True* on success.
      *

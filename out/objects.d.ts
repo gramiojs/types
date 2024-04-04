@@ -1,6 +1,6 @@
 /**
- * Based on Bot API v7.1.0 (16.2.2024)
- * Generated at 3/16/2024, 10:15:27 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Based on Bot API v7.2.0 (31.3.2024)
+ * Generated at 3/31/2024, 6:04:31 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -30,6 +30,22 @@ export interface TelegramUpdate {
      * *Optional*. New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
      */
     edited_channel_post?: TelegramMessage
+    /**
+     * *Optional*. The bot was connected to or disconnected from a business account, or a user edited an existing connection with the bot
+     */
+    business_connection?: TelegramBusinessConnection
+    /**
+     * *Optional*. New non-service message from a connected business account
+     */
+    business_message?: TelegramMessage
+    /**
+     * *Optional*. New version of a message from a connected business account
+     */
+    edited_business_message?: TelegramMessage
+    /**
+     * *Optional*. Messages were deleted from a connected business account
+     */
+    deleted_business_messages?: TelegramBusinessMessagesDeleted
     /**
      * *Optional*. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify `"message_reaction"` in the list of *allowed\_updates* to receive these updates. The update isn't received for reactions set by bots.
      */
@@ -182,6 +198,10 @@ export interface TelegramUser {
      * *Optional*. *True*, if the bot supports inline queries. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
      */
     supports_inline_queries?: boolean
+    /**
+     * *Optional*. *True*, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
+     */
+    can_connect_to_business?: boolean
 }
 
 export type TelegramChatType = "private" | "group" | "supergroup" | "channel"
@@ -228,6 +248,26 @@ export interface TelegramChat {
      * *Optional*. If non-empty, the list of all [active chat usernames](https://telegram.org/blog/topics-in-groups-collectible-usernames#collectible-usernames); for private chats, supergroups and channels. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
      */
     active_usernames?: string[]
+    /**
+     * *Optional*. For private chats, the date of birth of the user. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     */
+    birthdate?: TelegramBirthdate
+    /**
+     * *Optional*. For private chats with business accounts, the intro of the business. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     */
+    business_intro?: TelegramBusinessIntro
+    /**
+     * *Optional*. For private chats with business accounts, the location of the business. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     */
+    business_location?: TelegramBusinessLocation
+    /**
+     * *Optional*. For private chats with business accounts, the opening hours of the business. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     */
+    business_opening_hours?: TelegramBusinessOpeningHours
+    /**
+     * *Optional*. For private chats, the personal channel of the user. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     */
+    personal_chat?: TelegramChat
     /**
      * *Optional*. List of available reactions allowed in the chat. If omitted, then all [emoji reactions](https://core.telegram.org/bots/api/#reactiontypeemoji) are allowed. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
      */
@@ -369,9 +409,17 @@ export interface TelegramMessage {
      */
     sender_boost_count?: number
     /**
+     * *Optional*. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
+     */
+    sender_business_bot?: TelegramUser
+    /**
      * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
      */
     date: number
+    /**
+     * *Optional*. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
+     */
+    business_connection_id?: string
     /**
      * Chat the message belongs to
      */
@@ -416,6 +464,10 @@ export interface TelegramMessage {
      * *Optional*. *True*, if the message can't be forwarded
      */
     has_protected_content?: boolean
+    /**
+     * *Optional*. True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message
+     */
+    is_from_offline?: boolean
     /**
      * *Optional*. The unique identifier of a media message group this message belongs to
      */
@@ -895,11 +947,11 @@ export interface TelegramReplyParameters {
      */
     message_id: number
     /**
-     * *Optional*. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format `@channelusername`)
+     * *Optional*. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format `@channelusername`). Not supported for messages sent on behalf of a business account.
      */
     chat_id?: number | string
     /**
-     * *Optional*. Pass *True* if the message should be sent even if the specified message to be replied to is not found; can be used only for replies in the same chat and forum topic.
+     * *Optional*. Pass *True* if the message should be sent even if the specified message to be replied to is not found. Always *False* for replies in another chat or forum topic. Always *True* for messages sent on behalf of a business account.
      */
     allow_sending_without_reply?: boolean
     /**
@@ -1635,6 +1687,34 @@ export interface TelegramGeneralForumTopicHidden {}
 export interface TelegramGeneralForumTopicUnhidden {}
 
 /**
+ * This object contains information about a user that was shared with the bot using a [KeyboardButtonRequestUser](https://core.telegram.org/bots/api/#keyboardbuttonrequestuser) button.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#shareduser)
+ */
+export interface TelegramSharedUser {
+    /**
+     * Identifier of the shared user. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so 64-bit integers or double-precision float types are safe for storing these identifiers. The bot may not have access to the user and could be unable to use this identifier, unless the user is already known to the bot by some other means.
+     */
+    user_id: number
+    /**
+     * *Optional*. First name of the user, if the name was requested by the bot
+     */
+    first_name?: string
+    /**
+     * *Optional*. Last name of the user, if the name was requested by the bot
+     */
+    last_name?: string
+    /**
+     * *Optional*. Username of the user, if the username was requested by the bot
+     */
+    username?: string
+    /**
+     * *Optional*. Available sizes of the chat photo, if the photo was requested by the bot
+     */
+    photo?: TelegramPhotoSize[]
+}
+
+/**
  * This object contains information about the users whose identifiers were shared with the bot using a [KeyboardButtonRequestUsers](https://core.telegram.org/bots/api/#keyboardbuttonrequestusers) button.
  *
  * [Documentation](https://core.telegram.org/bots/api/#usersshared)
@@ -1645,13 +1725,13 @@ export interface TelegramUsersShared {
      */
     request_id: number
     /**
-     * Identifiers of the shared users. These numbers may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting them. But they have at most 52 significant bits, so 64-bit integers or double-precision float types are safe for storing these identifiers. The bot may not have access to the users and could be unable to use these identifiers, unless the users are already known to the bot by some other means.
+     * Information about users shared with the bot.
      */
-    user_ids: number[]
+    users: TelegramSharedUser[]
 }
 
 /**
- * This object contains information about the chat whose identifier was shared with the bot using a [KeyboardButtonRequestChat](https://core.telegram.org/bots/api/#keyboardbuttonrequestchat) button.
+ * This object contains information about a chat that was shared with the bot using a [KeyboardButtonRequestChat](https://core.telegram.org/bots/api/#keyboardbuttonrequestchat) button.
  *
  * [Documentation](https://core.telegram.org/bots/api/#chatshared)
  */
@@ -1664,6 +1744,18 @@ export interface TelegramChatShared {
      * Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means.
      */
     chat_id: number
+    /**
+     * *Optional*. Title of the chat, if the title was requested by the bot.
+     */
+    title?: string
+    /**
+     * *Optional*. Username of the chat, if the username was requested by the bot and available.
+     */
+    username?: string
+    /**
+     * *Optional*. Available sizes of the chat photo, if the photo was requested by the bot
+     */
+    photo?: TelegramPhotoSize[]
 }
 
 /**
@@ -2001,7 +2093,7 @@ export interface TelegramKeyboardButton {
 }
 
 /**
- * This object defines the criteria used to request suitable users. The identifiers of the selected users will be shared with the bot when the corresponding button is pressed. [More about requesting users »](https://core.telegram.org/bots/features#chat-and-user-selection)
+ * This object defines the criteria used to request suitable users. Information about the selected users will be shared with the bot when the corresponding button is pressed. [More about requesting users »](https://core.telegram.org/bots/features#chat-and-user-selection)
  *
  * [Documentation](https://core.telegram.org/bots/api/#keyboardbuttonrequestusers)
  */
@@ -2022,10 +2114,22 @@ export interface TelegramKeyboardButtonRequestUsers {
      * *Optional*. The maximum number of users to be selected; 1-10. Defaults to 1.
      */
     max_quantity?: number
+    /**
+     * *Optional*. Pass *True* to request the users' first and last name
+     */
+    request_name?: boolean
+    /**
+     * *Optional*. Pass *True* to request the users' username
+     */
+    request_username?: boolean
+    /**
+     * *Optional*. Pass *True* to request the users' photo
+     */
+    request_photo?: boolean
 }
 
 /**
- * This object defines the criteria used to request a suitable chat. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed. [More about requesting chats »](https://core.telegram.org/bots/features#chat-and-user-selection)
+ * This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the сhat if appropriate [More about requesting chats »](https://core.telegram.org/bots/features#chat-and-user-selection)
  *
  * [Documentation](https://core.telegram.org/bots/api/#keyboardbuttonrequestchat)
  */
@@ -2062,6 +2166,18 @@ export interface TelegramKeyboardButtonRequestChat {
      * *Optional*. Pass *True* to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
      */
     bot_is_member?: boolean
+    /**
+     * *Optional*. Pass *True* to request the chat's title
+     */
+    request_title?: boolean
+    /**
+     * *Optional*. Pass *True* to request the chat's username
+     */
+    request_username?: boolean
+    /**
+     * *Optional*. Pass *True* to request the chat's photo
+     */
+    request_photo?: boolean
 }
 
 /**
@@ -2805,9 +2921,9 @@ export interface TelegramChatPermissions {
 /**
  * Represents a location to which a chat is connected.
  *
- * [Documentation](https://core.telegram.org/bots/api/#chatlocation)
+ * [Documentation](https://core.telegram.org/bots/api/#birthdate)
  */
-export interface TelegramChatLocation {
+export interface TelegramBirthdate {
     /**
      * The location to which the supergroup is connected. Can't be a live location.
      */
@@ -3416,6 +3532,58 @@ export interface TelegramUserChatBoosts {
 }
 
 /**
+ * Describes the connection of the bot with a business account.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#businessconnection)
+ */
+export interface TelegramBusinessConnection {
+    /**
+     * Unique identifier of the business connection
+     */
+    id: string
+    /**
+     * Business account user that created the business connection
+     */
+    user: TelegramUser
+    /**
+     * Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
+     */
+    user_chat_id: number
+    /**
+     * Date the connection was established in Unix time
+     */
+    date: number
+    /**
+     * True, if the bot can act on behalf of the business account in chats that were active in the last 24 hours
+     */
+    can_reply: boolean
+    /**
+     * True, if the connection is active
+     */
+    is_enabled: boolean
+}
+
+/**
+ * This object is received when messages are deleted from a connected business account.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#businessmessagesdeleted)
+ */
+export interface TelegramBusinessMessagesDeleted {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Information about a chat in the business account. The bot may not have access to the chat or the corresponding user.
+     */
+    chat: TelegramChat
+    /**
+     * A JSON-serialized list of identifiers of deleted messages in the chat of the business account
+     */
+    message_ids: number[]
+}
+
+/**
  * Describes why a request was unsuccessful.
  *
  * [Documentation](https://core.telegram.org/bots/api/#responseparameters)
@@ -3759,14 +3927,6 @@ export interface TelegramStickerSet {
      */
     sticker_type: TelegramStickerSetStickerType
     /**
-     * *True*, if the sticker set contains [animated stickers](https://telegram.org/blog/animated-stickers)
-     */
-    is_animated: boolean
-    /**
-     * *True*, if the sticker set contains [video stickers](https://telegram.org/blog/video-stickers-better-reactions)
-     */
-    is_video: boolean
-    /**
      * List of all set stickers
      */
     stickers: TelegramSticker[]
@@ -3802,6 +3962,8 @@ export interface TelegramMaskPosition {
     scale: number
 }
 
+export type TelegramInputStickerFormat = "static" | "animated" | "video"
+
 /**
  * This object describes a sticker to be added to a sticker set.
  *
@@ -3812,6 +3974,10 @@ export interface TelegramInputSticker {
      * The added sticker. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, upload a new one using multipart/form-data, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. Animated and video stickers can't be uploaded via HTTP URL. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
     sticker: TelegramInputFile | string
+    /**
+     * Format of the added sticker, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, “video” for a **WEBM** video
+     */
+    format: TelegramInputStickerFormat
     /**
      * List of 1-20 emoji associated with the sticker
      */
