@@ -31,6 +31,7 @@
         }
     },
     "scripts": {
+        "dirty-fix": "bun scripts/dirty-fix.ts",
         "cicd": "bun scripts/cicd.ts",
         "generate": "bun src/index.ts",
         "lint": "bunx @biomejs/biome check ./src",

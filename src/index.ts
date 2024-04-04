@@ -4,7 +4,7 @@ import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
 import { fetchCurrencies, generateHeader } from "./helpers";
-import { IBotAPI } from "./types";
+import type { IBotAPI } from "./types";
 
 export interface IGeneratedFile {
 	name: string;

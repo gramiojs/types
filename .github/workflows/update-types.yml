@@ -26,6 +26,9 @@ jobs:
             - name: Clone TBA Schema parser repo
               run: git clone https://github.com/ark0f/tg-bot-api.git
 
+            - name: Temporal dirty fix for https://github.com/ark0f/tg-bot-api/issues/20
+              run: bun dirty-fix
+
             - name: Install Rust
               uses: actions-rs/toolchain@v1
               with:
