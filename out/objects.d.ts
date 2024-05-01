@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.2.0 (31.3.2024)
- * Generated at 4/4/2024, 11:41:09 AM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 5/1/2024, 4:18:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -1687,7 +1687,7 @@ export interface TelegramGeneralForumTopicHidden {}
 export interface TelegramGeneralForumTopicUnhidden {}
 
 /**
- * This object contains information about a user that was shared with the bot using a [KeyboardButtonRequestUser](https://core.telegram.org/bots/api/#keyboardbuttonrequestuser) button.
+ * This object contains information about a user that was shared with the bot using a [KeyboardButtonRequestUsers](https://core.telegram.org/bots/api/#keyboardbuttonrequestusers) button.
  *
  * [Documentation](https://core.telegram.org/bots/api/#shareduser)
  */
@@ -2115,21 +2115,21 @@ export interface TelegramKeyboardButtonRequestUsers {
      */
     max_quantity?: number
     /**
-     * *Optional*. Pass *True* to request the users' first and last name
+     * *Optional*. Pass *True* to request the users' first and last names
      */
     request_name?: boolean
     /**
-     * *Optional*. Pass *True* to request the users' username
+     * *Optional*. Pass *True* to request the users' usernames
      */
     request_username?: boolean
     /**
-     * *Optional*. Pass *True* to request the users' photo
+     * *Optional*. Pass *True* to request the users' photos
      */
     request_photo?: boolean
 }
 
 /**
- * This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the сhat if appropriate [More about requesting chats »](https://core.telegram.org/bots/features#chat-and-user-selection)
+ * This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. [More about requesting chats »](https://core.telegram.org/bots/features#chat-and-user-selection).
  *
  * [Documentation](https://core.telegram.org/bots/api/#keyboardbuttonrequestchat)
  */
@@ -3666,7 +3666,7 @@ export interface TelegramBusinessMessagesDeleted {
      */
     chat: TelegramChat
     /**
-     * A JSON-serialized list of identifiers of deleted messages in the chat of the business account
+     * The list of identifiers of deleted messages in the chat of the business account
      */
     message_ids: number[]
 }
