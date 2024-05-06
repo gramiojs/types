@@ -1,4 +1,4 @@
-import { APIMethods } from "./methods"
+import type { APIMethods } from "./methods"
 
 export type CallAPI<T, R> = (params: T) => Promise<R>
 export type CallAPIWithoutParams<R> = () => Promise<R>
