@@ -157,7 +157,7 @@ const files: IGeneratedFile[] = [
 		name: "params.d.ts",
 		lines: [
 			header,
-			[`import * as Objects from "./objects"`, ""],
+			[`import type * as Objects from "./objects"`, ""],
 			Params.generateMany(schema.methods),
 		],
 	},
@@ -166,9 +166,9 @@ const files: IGeneratedFile[] = [
 		lines: [
 			header,
 			[
-				`import { CallAPIWithOptionalParams, CallAPI, CallAPIWithoutParams } from "./utils"`,
-				`import * as Params from "./params"`,
-				`import * as Objects from "./objects"`,
+				`import type { CallAPIWithOptionalParams, CallAPI, CallAPIWithoutParams } from "./utils"`,
+				`import type * as Params from "./params"`,
+				`import type * as Objects from "./objects"`,
 				"",
 			],
 			APIMethods.generateMany(schema.methods),
@@ -177,19 +177,19 @@ const files: IGeneratedFile[] = [
 	{
 		name: "index.d.ts",
 		lines: [
-			[`export * from "./methods"`],
-			[`export * from "./params"`],
-			[`export * as TelegramParams from "./params"`],
-			[`export * from "./objects"`],
-			[`export * as TelegramObjects from "./objects"`],
-			[`export { APIMethodParams, APIMethodReturn } from "./utils"`],
+			[`export type * from "./methods"`],
+			[`export type * from "./params"`],
+			[`export type * as TelegramParams from "./params"`],
+			[`export type * from "./objects"`],
+			[`export type * as TelegramObjects from "./objects"`],
+			[`export type { APIMethodParams, APIMethodReturn } from "./utils"`],
 		],
 	},
 	{
 		name: "utils.d.ts",
 		lines: [
 			[
-				`import { APIMethods } from "./methods"`,
+				`import type { APIMethods } from "./methods"`,
 				"",
 				"export type CallAPI<T, R> = (params: T) => Promise<R>",
 				"export type CallAPIWithoutParams<R> = () => Promise<R>",
