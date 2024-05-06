@@ -1,6 +1,6 @@
 /**
- * Based on Bot API v7.2.0 (31.3.2024)
- * Generated at 5/1/2024, 4:18:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Based on Bot API v7.3.0 (6.5.2024)
+ * Generated at 5/6/2024, 2:44:50 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -217,7 +217,7 @@ export interface TelegramChat {
      */
     id: number
     /**
-     * Type of chat, can be either “private”, “group”, “supergroup” or “channel”
+     * Type of the chat, can be either “private”, “group”, “supergroup” or “channel”
      */
     type: TelegramChatType
     /**
@@ -240,144 +240,190 @@ export interface TelegramChat {
      * *Optional*. *True*, if the supergroup chat is a forum (has [topics](https://telegram.org/blog/topics-in-groups-collectible-usernames#topics-in-groups) enabled)
      */
     is_forum?: boolean
+}
+
+export type TelegramChatFullInfoType =
+    | "private"
+    | "group"
+    | "supergroup"
+    | "channel"
+
+/**
+ * This object contains full information about a chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#chatfullinfo)
+ */
+export interface TelegramChatFullInfo {
     /**
-     * *Optional*. Chat photo. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
+     */
+    id: number
+    /**
+     * Type of the chat, can be either “private”, “group”, “supergroup” or “channel”
+     */
+    type: TelegramChatFullInfoType
+    /**
+     * *Optional*. Title, for supergroups, channels and group chats
+     */
+    title?: string
+    /**
+     * *Optional*. Username, for private chats, supergroups and channels if available
+     */
+    username?: string
+    /**
+     * *Optional*. First name of the other party in a private chat
+     */
+    first_name?: string
+    /**
+     * *Optional*. Last name of the other party in a private chat
+     */
+    last_name?: string
+    /**
+     * *Optional*. *True*, if the supergroup chat is a forum (has [topics](https://telegram.org/blog/topics-in-groups-collectible-usernames#topics-in-groups) enabled)
+     */
+    is_forum?: boolean
+    /**
+     * Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See [accent colors](https://core.telegram.org/bots/api/#accent-colors) for more details.
+     */
+    accent_color_id: number
+    /**
+     * The maximum number of reactions that can be set on a message in the chat
+     */
+    max_reaction_count: number
+    /**
+     * *Optional*. Chat photo
      */
     photo?: TelegramChatPhoto
     /**
-     * *Optional*. If non-empty, the list of all [active chat usernames](https://telegram.org/blog/topics-in-groups-collectible-usernames#collectible-usernames); for private chats, supergroups and channels. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. If non-empty, the list of all [active chat usernames](https://telegram.org/blog/topics-in-groups-collectible-usernames#collectible-usernames); for private chats, supergroups and channels
      */
     active_usernames?: string[]
     /**
-     * *Optional*. For private chats, the date of birth of the user. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For private chats, the date of birth of the user
      */
     birthdate?: TelegramBirthdate
     /**
-     * *Optional*. For private chats with business accounts, the intro of the business. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For private chats with business accounts, the intro of the business
      */
     business_intro?: TelegramBusinessIntro
     /**
-     * *Optional*. For private chats with business accounts, the location of the business. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For private chats with business accounts, the location of the business
      */
     business_location?: TelegramBusinessLocation
     /**
-     * *Optional*. For private chats with business accounts, the opening hours of the business. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For private chats with business accounts, the opening hours of the business
      */
     business_opening_hours?: TelegramBusinessOpeningHours
     /**
-     * *Optional*. For private chats, the personal channel of the user. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For private chats, the personal channel of the user
      */
     personal_chat?: TelegramChat
     /**
-     * *Optional*. List of available reactions allowed in the chat. If omitted, then all [emoji reactions](https://core.telegram.org/bots/api/#reactiontypeemoji) are allowed. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. List of available reactions allowed in the chat. If omitted, then all [emoji reactions](https://core.telegram.org/bots/api/#reactiontypeemoji) are allowed.
      */
     available_reactions?: TelegramReactionType[]
     /**
-     * *Optional*. Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See [accent colors](https://core.telegram.org/bots/api/#accent-colors) for more details. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat). Always returned in [getChat](https://core.telegram.org/bots/api/#getchat).
-     */
-    accent_color_id?: number
-    /**
-     * *Optional*. Custom emoji identifier of emoji chosen by the chat for the reply header and link preview background. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Custom emoji identifier of the emoji chosen by the chat for the reply header and link preview background
      */
     background_custom_emoji_id?: string
     /**
-     * *Optional*. Identifier of the accent color for the chat's profile background. See [profile accent colors](https://core.telegram.org/bots/api/#profile-accent-colors) for more details. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Identifier of the accent color for the chat's profile background. See [profile accent colors](https://core.telegram.org/bots/api/#profile-accent-colors) for more details.
      */
     profile_accent_color_id?: number
     /**
-     * *Optional*. Custom emoji identifier of the emoji chosen by the chat for its profile background. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Custom emoji identifier of the emoji chosen by the chat for its profile background
      */
     profile_background_custom_emoji_id?: string
     /**
-     * *Optional*. Custom emoji identifier of the emoji status of the chat or the other party in a private chat. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Custom emoji identifier of the emoji status of the chat or the other party in a private chat
      */
     emoji_status_custom_emoji_id?: string
     /**
-     * *Optional*. Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any
      */
     emoji_status_expiration_date?: number
     /**
-     * *Optional*. Bio of the other party in a private chat. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Bio of the other party in a private chat
      */
     bio?: string
     /**
-     * *Optional*. *True*, if privacy settings of the other party in the private chat allows to use `tg://user?id=<user_id>` links only in chats with the user. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if privacy settings of the other party in the private chat allows to use `tg://user?id=<user_id>` links only in chats with the user
      */
     has_private_forwards?: boolean
     /**
-     * *Optional*. *True*, if the privacy settings of the other party restrict sending voice and video note messages in the private chat. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if the privacy settings of the other party restrict sending voice and video note messages in the private chat
      */
     has_restricted_voice_and_video_messages?: boolean
     /**
-     * *Optional*. *True*, if users need to join the supergroup before they can send messages. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if users need to join the supergroup before they can send messages
      */
     join_to_send_messages?: boolean
     /**
-     * *Optional*. *True*, if all users directly joining the supergroup need to be approved by supergroup administrators. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if all users directly joining the supergroup need to be approved by supergroup administrators
      */
     join_by_request?: boolean
     /**
-     * *Optional*. Description, for groups, supergroups and channel chats. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Description, for groups, supergroups and channel chats
      */
     description?: string
     /**
-     * *Optional*. Primary invite link, for groups, supergroups and channel chats. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Primary invite link, for groups, supergroups and channel chats
      */
     invite_link?: string
     /**
-     * *Optional*. The most recent pinned message (by sending date). Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. The most recent pinned message (by sending date)
      */
     pinned_message?: TelegramMessage
     /**
-     * *Optional*. Default chat member permissions, for groups and supergroups. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Default chat member permissions, for groups and supergroups
      */
     permissions?: TelegramChatPermissions
     /**
-     * *Optional*. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds
      */
     slow_mode_delay?: number
     /**
-     * *Optional*. For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions
      */
     unrestrict_boost_count?: number
     /**
-     * *Optional*. The time after which all messages sent to the chat will be automatically deleted; in seconds. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. The time after which all messages sent to the chat will be automatically deleted; in seconds
      */
     message_auto_delete_time?: number
     /**
-     * *Optional*. *True*, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat administrators. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat administrators.
      */
     has_aggressive_anti_spam_enabled?: boolean
     /**
-     * *Optional*. *True*, if non-administrators can only get the list of bots and administrators in the chat. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if non-administrators can only get the list of bots and administrators in the chat
      */
     has_hidden_members?: boolean
     /**
-     * *Optional*. *True*, if messages from the chat can't be forwarded to other chats. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if messages from the chat can't be forwarded to other chats
      */
     has_protected_content?: boolean
     /**
-     * *Optional*. *True*, if new chat members will have access to old messages; available only to chat administrators. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if new chat members will have access to old messages; available only to chat administrators
      */
     has_visible_history?: boolean
     /**
-     * *Optional*. For supergroups, name of group sticker set. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For supergroups, name of the group sticker set
      */
     sticker_set_name?: string
     /**
-     * *Optional*. *True*, if the bot can change the group sticker set. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. *True*, if the bot can change the group sticker set
      */
     can_set_sticker_set?: boolean
     /**
-     * *Optional*. For supergroups, the name of the group's custom emoji sticker set. Custom emoji from this set can be used by all users and bots in the group. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For supergroups, the name of the group's custom emoji sticker set. Custom emoji from this set can be used by all users and bots in the group.
      */
     custom_emoji_sticker_set_name?: string
     /**
-     * *Optional*. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.
      */
     linked_chat_id?: number
     /**
-     * *Optional*. For supergroups, the location to which the supergroup is connected. Returned only in [getChat](https://core.telegram.org/bots/api/#getchat).
+     * *Optional*. For supergroups, the location to which the supergroup is connected
      */
     location?: TelegramChatLocation
 }
@@ -644,6 +690,10 @@ export interface TelegramMessage {
      * *Optional*. Service message: user boosted the chat
      */
     boost_added?: TelegramChatBoostAdded
+    /**
+     * *Optional*. Service message: chat background set
+     */
+    chat_background_set?: TelegramChatBackground
     /**
      * *Optional*. Service message: forum topic created
      */
@@ -1403,9 +1453,33 @@ export interface TelegramPollOption {
      */
     text: string
     /**
+     * *Optional*. Special entities that appear in the option *text*. Currently, only custom emoji entities are allowed in poll option texts
+     */
+    text_entities?: TelegramMessageEntity[]
+    /**
      * Number of users that voted for this option
      */
     voter_count: number
+}
+
+/**
+ * This object contains information about one answer option in a poll to send.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputpolloption)
+ */
+export interface TelegramInputPollOption {
+    /**
+     * Option text, 1-100 characters
+     */
+    text: string
+    /**
+     * *Optional*. Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Currently, only custom emoji entities are allowed
+     */
+    text_parse_mode?: string
+    /**
+     * *Optional*. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of *text\_parse\_mode*
+     */
+    text_entities?: TelegramMessageEntity[]
 }
 
 /**
@@ -1448,6 +1522,10 @@ export interface TelegramPoll {
      * Poll question, 1-300 characters
      */
     question: string
+    /**
+     * *Optional*. Special entities that appear in the *question*. Currently, only custom emoji entities are allowed in poll questions
+     */
+    question_entities?: TelegramMessageEntity[]
     /**
      * List of poll options
      */
@@ -1620,6 +1698,200 @@ export interface TelegramChatBoostAdded {
      * Number of boosts added by the user
      */
     boost_count: number
+}
+
+/**
+ * This object describes the way a background is filled based on the selected colors. Currently, it can be one of
+ *
+ * * [BackgroundFillSolid](https://core.telegram.org/bots/api/#backgroundfillsolid)
+ * * [BackgroundFillGradient](https://core.telegram.org/bots/api/#backgroundfillgradient)
+ * * [BackgroundFillFreeformGradient](https://core.telegram.org/bots/api/#backgroundfillfreeformgradient)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundfill)
+ */
+export type TelegramBackgroundFill =
+    | TelegramBackgroundFillSolid
+    | TelegramBackgroundFillGradient
+    | TelegramBackgroundFillFreeformGradient
+
+/**
+ * The background is filled using the selected color.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundfillsolid)
+ */
+export interface TelegramBackgroundFillSolid {
+    /**
+     * Type of the background fill, always “solid”
+     */
+    type: "solid"
+    /**
+     * The color of the background fill in the RGB24 format
+     */
+    color: number
+}
+
+/**
+ * The background is a gradient fill.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundfillgradient)
+ */
+export interface TelegramBackgroundFillGradient {
+    /**
+     * Type of the background fill, always “gradient”
+     */
+    type: "gradient"
+    /**
+     * Top color of the gradient in the RGB24 format
+     */
+    top_color: number
+    /**
+     * Bottom color of the gradient in the RGB24 format
+     */
+    bottom_color: number
+    /**
+     * Clockwise rotation angle of the background fill in degrees; 0-359
+     */
+    rotation_angle: number
+}
+
+/**
+ * The background is a freeform gradient that rotates after every message in the chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundfillfreeformgradient)
+ */
+export interface TelegramBackgroundFillFreeformGradient {
+    /**
+     * Type of the background fill, always “freeform\_gradient”
+     */
+    type: "freeform_gradient"
+    /**
+     * A list of the 3 or 4 base colors that are used to generate the freeform gradient in the RGB24 format
+     */
+    colors: number[]
+}
+
+/**
+ * This object describes the type of a background. Currently, it can be one of
+ *
+ * * [BackgroundTypeFill](https://core.telegram.org/bots/api/#backgroundtypefill)
+ * * [BackgroundTypeWallpaper](https://core.telegram.org/bots/api/#backgroundtypewallpaper)
+ * * [BackgroundTypePattern](https://core.telegram.org/bots/api/#backgroundtypepattern)
+ * * [BackgroundTypeChatTheme](https://core.telegram.org/bots/api/#backgroundtypechattheme)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundtype)
+ */
+export type TelegramBackgroundType =
+    | TelegramBackgroundTypeFill
+    | TelegramBackgroundTypeWallpaper
+    | TelegramBackgroundTypePattern
+    | TelegramBackgroundTypeChatTheme
+
+/**
+ * The background is automatically filled based on the selected colors.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundtypefill)
+ */
+export interface TelegramBackgroundTypeFill {
+    /**
+     * Type of the background, always “fill”
+     */
+    type: "fill"
+    /**
+     * The background fill
+     */
+    fill: TelegramBackgroundFill
+    /**
+     * Dimming of the background in dark themes, as a percentage; 0-100
+     */
+    dark_theme_dimming: number
+}
+
+/**
+ * The background is a wallpaper in the JPEG format.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundtypewallpaper)
+ */
+export interface TelegramBackgroundTypeWallpaper {
+    /**
+     * Type of the background, always “wallpaper”
+     */
+    type: "wallpaper"
+    /**
+     * Document with the wallpaper
+     */
+    document: TelegramDocument
+    /**
+     * Dimming of the background in dark themes, as a percentage; 0-100
+     */
+    dark_theme_dimming: number
+    /**
+     * *Optional*. *True*, if the wallpaper is downscaled to fit in a 450x450 square and then box-blurred with radius 12
+     */
+    is_blurred?: boolean
+    /**
+     * *Optional*. *True*, if the background moves slightly when the device is tilted
+     */
+    is_moving?: boolean
+}
+
+/**
+ * The background is a PNG or TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundtypepattern)
+ */
+export interface TelegramBackgroundTypePattern {
+    /**
+     * Type of the background, always “pattern”
+     */
+    type: "pattern"
+    /**
+     * Document with the pattern
+     */
+    document: TelegramDocument
+    /**
+     * The background fill that is combined with the pattern
+     */
+    fill: TelegramBackgroundFill
+    /**
+     * Intensity of the pattern when it is shown above the filled background; 0-100
+     */
+    intensity: number
+    /**
+     * *Optional*. *True*, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only
+     */
+    is_inverted?: boolean
+    /**
+     * *Optional*. *True*, if the background moves slightly when the device is tilted
+     */
+    is_moving?: boolean
+}
+
+/**
+ * The background is taken directly from a built-in chat theme.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#backgroundtypechattheme)
+ */
+export interface TelegramBackgroundTypeChatTheme {
+    /**
+     * Type of the background, always “chat\_theme”
+     */
+    type: "chat_theme"
+    /**
+     * Name of the chat theme, which is usually an emoji
+     */
+    theme_name: string
+}
+
+/**
+ * This object represents a chat background.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#chatbackground)
+ */
+export interface TelegramChatBackground {
+    /**
+     * Type of the background
+     */
+    type: TelegramBackgroundType
 }
 
 /**
@@ -2023,7 +2295,7 @@ export interface TelegramWebAppInfo {
 }
 
 /**
- * This object represents a [custom keyboard](https://core.telegram.org/bots/features#keyboards) with reply options (see [Introduction to bots](https://core.telegram.org/bots/features#keyboards) for details and examples).
+ * This object represents a [custom keyboard](https://core.telegram.org/bots/features#keyboards) with reply options (see [Introduction to bots](https://core.telegram.org/bots/features#keyboards) for details and examples). Not supported in channels and for messages sent on behalf of a Telegram Business account.
  *
  * [Documentation](https://core.telegram.org/bots/api/#replykeyboardmarkup)
  */
@@ -2193,7 +2465,7 @@ export interface TelegramKeyboardButtonPollType {
 }
 
 /**
- * Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user presses a button (see [ReplyKeyboardMarkup](https://core.telegram.org/bots/api/#replykeyboardmarkup)).
+ * Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user presses a button (see [ReplyKeyboardMarkup](https://core.telegram.org/bots/api/#replykeyboardmarkup)). Not supported in channels and for messages sent on behalf of a Telegram Business account.
  *
  * [Documentation](https://core.telegram.org/bots/api/#replykeyboardremove)
  */
@@ -2237,11 +2509,11 @@ export interface TelegramInlineKeyboardButton {
      */
     url?: string
     /**
-     * *Optional*. Data to be sent in a [callback query](https://core.telegram.org/bots/api/#callbackquery) to the bot when button is pressed, 1-64 bytes
+     * *Optional*. Data to be sent in a [callback query](https://core.telegram.org/bots/api/#callbackquery) to the bot when button is pressed, 1-64 bytes. Not supported for messages sent on behalf of a Telegram Business account.
      */
     callback_data?: string
     /**
-     * *Optional*. Description of the [Web App](https://core.telegram.org/bots/webapps) that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method [answerWebAppQuery](https://core.telegram.org/bots/api/#answerwebappquery). Available only in private chats between a user and the bot.
+     * *Optional*. Description of the [Web App](https://core.telegram.org/bots/webapps) that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method [answerWebAppQuery](https://core.telegram.org/bots/api/#answerwebappquery). Available only in private chats between a user and the bot. Not supported for messages sent on behalf of a Telegram Business account.
      */
     web_app?: TelegramWebAppInfo
     /**
@@ -2249,17 +2521,17 @@ export interface TelegramInlineKeyboardButton {
      */
     login_url?: TelegramLoginUrl
     /**
-     * *Optional*. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted.
+     * *Optional*. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent on behalf of a Telegram Business account.
      */
     switch_inline_query?: string
     /**
      * *Optional*. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
      *
-     * This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options.
+     * This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent on behalf of a Telegram Business account.
      */
     switch_inline_query_current_chat?: string
     /**
-     * *Optional*. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field
+     * *Optional*. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent on behalf of a Telegram Business account.
      */
     switch_inline_query_chosen_chat?: TelegramSwitchInlineQueryChosenChat
     /**
@@ -2371,7 +2643,7 @@ export interface TelegramCallbackQuery {
 }
 
 /**
- * Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice [privacy mode](https://core.telegram.org/bots/features#privacy-mode).
+ * Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice [privacy mode](https://core.telegram.org/bots/features#privacy-mode). Not supported in channels and for messages sent on behalf of a Telegram Business account.
  *
  * [Documentation](https://core.telegram.org/bots/api/#forcereply)
  */
@@ -2501,7 +2773,7 @@ export interface TelegramChatAdministratorRights {
      */
     can_post_stories: boolean
     /**
-     * *True*, if the administrator can edit stories posted by other users
+     * *True*, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
      */
     can_edit_stories: boolean
     /**
@@ -2556,6 +2828,10 @@ export interface TelegramChatMemberUpdated {
      * *Optional*. Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
      */
     invite_link?: TelegramChatInviteLink
+    /**
+     * *Optional*. True, if the user joined the chat after sending a direct join request and being approved by an administrator
+     */
+    via_join_request?: boolean
     /**
      * *Optional*. True, if the user joined the chat via a chat folder invite link
      */
@@ -2661,7 +2937,7 @@ export interface TelegramChatMemberAdministrator {
      */
     can_post_stories: boolean
     /**
-     * *True*, if the administrator can edit stories posted by other users
+     * *True*, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
      */
     can_edit_stories: boolean
     /**
@@ -2919,7 +3195,7 @@ export interface TelegramChatPermissions {
 }
 
 /**
- *
+ * Describes the birthdate of a user.
  *
  * [Documentation](https://core.telegram.org/bots/api/#birthdate)
  */
@@ -2939,7 +3215,7 @@ export interface TelegramBirthdate {
 }
 
 /**
- *
+ * Contains information about the start page settings of a Telegram Business account.
  *
  * [Documentation](https://core.telegram.org/bots/api/#businessintro)
  */
@@ -2959,7 +3235,7 @@ export interface TelegramBusinessIntro {
 }
 
 /**
- *
+ * Contains information about the location of a Telegram Business account.
  *
  * [Documentation](https://core.telegram.org/bots/api/#businesslocation)
  */
@@ -2975,7 +3251,7 @@ export interface TelegramBusinessLocation {
 }
 
 /**
- *
+ * Describes an interval of time during which a business is open.
  *
  * [Documentation](https://core.telegram.org/bots/api/#businessopeninghoursinterval)
  */
@@ -2991,7 +3267,7 @@ export interface TelegramBusinessOpeningHoursInterval {
 }
 
 /**
- *
+ * Describes the opening hours of a business.
  *
  * [Documentation](https://core.telegram.org/bots/api/#businessopeninghours)
  */
@@ -4726,7 +5002,7 @@ export interface TelegramInlineQueryResultLocation {
      */
     horizontal_accuracy?: number
     /**
-     * *Optional*. Period in seconds for which the location can be updated, should be between 60 and 86400.
+     * *Optional*. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
      */
     live_period?: number
     /**
@@ -5332,7 +5608,7 @@ export interface TelegramInputLocationMessageContent {
      */
     horizontal_accuracy?: number
     /**
-     * *Optional*. Period in seconds for which the location can be updated, should be between 60 and 86400.
+     * *Optional*. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
      */
     live_period?: number
     /**

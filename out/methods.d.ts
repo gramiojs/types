@@ -1,6 +1,6 @@
 /**
- * Based on Bot API v7.2.0 (31.3.2024)
- * Generated at 5/1/2024, 4:18:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Based on Bot API v7.3.0 (6.5.2024)
+ * Generated at 5/6/2024, 2:44:50 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 import {
     CallAPIWithOptionalParams,
@@ -130,7 +130,7 @@ export interface APIMethods {
      */
     sendAnimation: CallAPI<Params.SendAnimationParams, Objects.TelegramMessage>
     /**
-     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as [Audio](https://core.telegram.org/bots/api/#audio) or [Document](https://core.telegram.org/bots/api/#document)). On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as [Audio](https://core.telegram.org/bots/api/#audio) or [Document](https://core.telegram.org/bots/api/#document)). On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendvoice)
      */
@@ -356,11 +356,11 @@ export interface APIMethods {
      */
     leaveChat: CallAPI<Params.LeaveChatParams, true>
     /**
-     * Use this method to get up to date information about the chat. Returns a [Chat](https://core.telegram.org/bots/api/#chat) object on success.
+     * Use this method to get up-to-date information about the chat. Returns a [ChatFullInfo](https://core.telegram.org/bots/api/#chatfullinfo) object on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchat)
      */
-    getChat: CallAPI<Params.GetChatParams, Objects.TelegramChat>
+    getChat: CallAPI<Params.GetChatParams, Objects.TelegramChatFullInfo>
     /**
      * Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of [ChatMember](https://core.telegram.org/bots/api/#chatmember) objects.
      *

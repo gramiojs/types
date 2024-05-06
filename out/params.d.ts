@@ -1,6 +1,6 @@
 /**
- * Based on Bot API v7.2.0 (31.3.2024)
- * Generated at 5/1/2024, 4:18:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Based on Bot API v7.3.0 (6.5.2024)
+ * Generated at 5/6/2024, 2:44:50 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 import * as Objects from "./objects"
 
@@ -106,7 +106,7 @@ export interface SendMessageParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -215,7 +215,7 @@ export interface CopyMessageParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -305,7 +305,7 @@ export interface SendPhotoParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -376,7 +376,7 @@ export interface SendAudioParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -439,7 +439,7 @@ export interface SendDocumentParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -518,7 +518,7 @@ export interface SendVideoParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -593,7 +593,7 @@ export interface SendAnimationParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -652,7 +652,7 @@ export interface SendVoiceParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -707,7 +707,7 @@ export interface SendVideoNoteParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -782,7 +782,7 @@ export interface SendLocationParams {
      */
     horizontal_accuracy?: number
     /**
-     * Period in seconds for which the location will be updated (see [Live Locations](https://telegram.org/blog/live-locations), should be between 60 and 86400.
+     * Period in seconds during which the location will be updated (see [Live Locations](https://telegram.org/blog/live-locations), should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
      */
     live_period?: number
     /**
@@ -806,7 +806,7 @@ export interface SendLocationParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -877,7 +877,7 @@ export interface SendVenueParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -932,7 +932,7 @@ export interface SendContactParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -965,9 +965,17 @@ export interface SendPollParams {
      */
     question: string
     /**
-     * A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+     * Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Currently, only custom emoji entities are allowed
      */
-    options: string[]
+    question_parse_mode?: string
+    /**
+     * A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of *question\_parse\_mode*
+     */
+    question_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * A JSON-serialized list of 2-10 answer options
+     */
+    options: Objects.TelegramInputPollOption[]
     /**
      * *True*, if the poll needs to be anonymous, defaults to *True*
      */
@@ -993,7 +1001,7 @@ export interface SendPollParams {
      */
     explanation_parse_mode?: string
     /**
-     * A JSON-serialized list of special entities that appear in the poll explanation, which can be specified instead of *parse\_mode*
+     * A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of *explanation\_parse\_mode*
      */
     explanation_entities?: Objects.TelegramMessageEntity[]
     /**
@@ -1021,7 +1029,7 @@ export interface SendPollParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1066,7 +1074,7 @@ export interface SendDiceParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1255,7 +1263,7 @@ export interface PromoteChatMemberParams {
      */
     can_post_stories?: boolean
     /**
-     * Pass *True* if the administrator can edit stories posted by other users
+     * Pass *True* if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
      */
     can_edit_stories?: boolean
     /**
@@ -1975,6 +1983,10 @@ export interface EditMessageLiveLocationParams {
      */
     longitude: number
     /**
+     * New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current *live\_period* by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then *live\_period* remains unchanged
+     */
+    live_period?: number
+    /**
      * The radius of uncertainty for the location, measured in meters; 0-1500
      */
     horizontal_accuracy?: number
@@ -2109,7 +2121,7 @@ export interface SendStickerParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account.
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -2626,7 +2638,7 @@ export interface SendGameParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards). If empty, one 'Play game\_title' button will be shown. If not empty, the first button must launch the game. Not supported for messages sent on behalf of a business account.
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards). If empty, one 'Play game\_title' button will be shown. If not empty, the first button must launch the game.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
