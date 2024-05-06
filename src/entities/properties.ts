@@ -39,10 +39,11 @@ export const typesRemapper: TTypeRemapper = {
 		if (
 			property.description?.includes("after entities parsing") ||
 			property.name === "message_text" ||
-			(object?.name === "InputPollOption" && property.name === "text")
+			(object?.name === "InputPollOption" && property.name === "text") ||
+			(object.name === "sendPoll" && property.name === "question")
 		)
 			return "(string | { toString(): string})";
-		console.log(object.name, property.name);
+
 		if (property.description?.includes("ISO 4217"))
 			return `${
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
