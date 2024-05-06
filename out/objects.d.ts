@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.3.0 (6.5.2024)
- * Generated at 5/6/2024, 2:44:50 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 5/6/2024, 3:59:20 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -1471,7 +1471,7 @@ export interface TelegramInputPollOption {
     /**
      * Option text, 1-100 characters
      */
-    text: string
+    text: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Currently, only custom emoji entities are allowed
      */
