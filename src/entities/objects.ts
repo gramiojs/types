@@ -1,6 +1,6 @@
 import { OBJECTS_PREFIX } from "../config";
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotAPI } from "../types";
+import type { IBotAPI } from "../types";
 import { Properties, typesRemapper } from "./properties";
 
 export class Objects {

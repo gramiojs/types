@@ -1,6 +1,6 @@
 import { OBJECTS_PREFIX } from "../config";
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotAPI, TObjectType } from "../types";
+import type { IBotAPI, TObjectType } from "../types";
 
 type TTypeRemapper = Record<
 	IBotAPI.IType,
@@ -38,10 +38,11 @@ export const typesRemapper: TTypeRemapper = {
 		// ![INFO] for better UX with FormattableString and toString'able classes :#
 		if (
 			property.description?.includes("after entities parsing") ||
-			property.name === "message_text"
+			property.name === "message_text" ||
+			(object?.name === "InputPollOption" && property.name === "text")
 		)
 			return "(string | { toString(): string})";
-
+		console.log(object.name, property.name);
 		if (property.description?.includes("ISO 4217"))
 			return `${
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
