@@ -1,6 +1,6 @@
 /**
  * Based on Bot API v7.3.0 (6.5.2024)
- * Generated at 5/6/2024, 4:10:11 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 5/7/2024, 6:19:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -35,7 +35,7 @@ export interface TelegramUpdate {
      */
     business_connection?: TelegramBusinessConnection
     /**
-     * *Optional*. New non-service message from a connected business account
+     * *Optional*. New message from a connected business account
      */
     business_message?: TelegramMessage
     /**
@@ -359,7 +359,7 @@ export interface TelegramChatFullInfo {
      */
     join_to_send_messages?: boolean
     /**
-     * *Optional*. *True*, if all users directly joining the supergroup need to be approved by supergroup administrators
+     * *Optional*. *True*, if all users directly joining the supergroup without using an invite link need to be approved by supergroup administrators
      */
     join_by_request?: boolean
     /**
@@ -2829,7 +2829,7 @@ export interface TelegramChatMemberUpdated {
      */
     invite_link?: TelegramChatInviteLink
     /**
-     * *Optional*. True, if the user joined the chat after sending a direct join request and being approved by an administrator
+     * *Optional*. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
      */
     via_join_request?: boolean
     /**
