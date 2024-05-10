@@ -1,7 +1,21 @@
 /**
- * Based on Bot API v7.3.0 (6.5.2024)
- * Generated at 5/7/2024, 6:19:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * @module
+ *
+ * This module contains [API methods](https://core.telegram.org/bots/api#available-methods) types (functions map with input/output)
+ *
+ * @example import API methods map
+ * ```typescript
+ * import { APIMethods } from "@gramio/types/methods";
+ *
+ * type SendMessageReturn = Awaited<ReturnType<APIMethods["sendMessage"]>>;
+ * //   ^? type SendMessageReturn = TelegramMessage"
+ * ```
+ *
+ * Based on Bot API v7.3.0 (06.05.2024)
+ *
+ * Generated at 10.05.2024, 19:21:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
+
 import type {
     CallAPIWithOptionalParams,
     CallAPI,
@@ -10,6 +24,9 @@ import type {
 import type * as Params from "./params"
 import type * as Objects from "./objects"
 
+/**
+ * This object is a map of [API methods](https://core.telegram.org/bots/api#available-methods) types (functions map with input/output)
+ */
 export interface APIMethods {
     /**
      * Use this method to receive incoming updates using long polling ([wiki](https://en.wikipedia.org/wiki/Push_technology#Long_polling)). Returns an Array of [Update](https://core.telegram.org/bots/api/#update) objects.

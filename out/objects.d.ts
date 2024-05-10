@@ -1,6 +1,16 @@
 /**
- * Based on Bot API v7.3.0 (6.5.2024)
- * Generated at 5/7/2024, 6:19:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * @module
+ *
+ * This module contains [Objects](https://core.telegram.org/bots/api#available-types) with the `Telegram` prefix
+ *
+ * @example import object
+ * ```typescript
+ * import { TelegramUser } from "@gramio/types/objects";
+ * ```
+ *
+ * Based on Bot API v7.3.0 (06.05.2024)
+ *
+ * Generated at 10.05.2024, 19:21:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**

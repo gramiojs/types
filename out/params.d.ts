@@ -1,9 +1,24 @@
 /**
- * Based on Bot API v7.3.0 (6.5.2024)
- * Generated at 5/7/2024, 6:19:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * @module
+ *
+ * This module contains params for [methods](https://core.telegram.org/bots/api#available-methods) with the `Params` postfix
+ *
+ * @example import params
+ * ```typescript
+ * import { SendMessageParams } from "@gramio/types/params";
+ * ```
+ *
+ * Based on Bot API v7.3.0 (06.05.2024)
+ *
+ * Generated at 10.05.2024, 19:21:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
+
+import type { APIMethods } from "./methods"
 import type * as Objects from "./objects"
 
+/**
+ * Params object for {@link APIMethods.getUpdates | getUpdates} method
+ */
 export interface GetUpdatesParams {
     /**
      * Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as [getUpdates](https://core.telegram.org/bots/api/#getupdates) is called with an *offset* higher than its *update\_id*. The negative offset can be specified to retrieve updates starting from *-offset* update from the end of the updates queue. All previous updates will be forgotten.
@@ -25,6 +40,9 @@ export interface GetUpdatesParams {
     allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
 }
 
+/**
+ * Params object for {@link APIMethods.setWebhook | setWebhook} method
+ */
 export interface SetWebhookParams {
     /**
      * HTTPS URL to send updates to. Use an empty string to remove webhook integration
@@ -57,6 +75,9 @@ export interface SetWebhookParams {
     secret_token?: string
 }
 
+/**
+ * Params object for {@link APIMethods.deleteWebhook | deleteWebhook} method
+ */
 export interface DeleteWebhookParams {
     /**
      * Pass *True* to drop all pending updates
@@ -64,6 +85,9 @@ export interface DeleteWebhookParams {
     drop_pending_updates?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.sendMessage | sendMessage} method
+ */
 export interface SendMessageParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -119,6 +143,9 @@ export interface SendMessageParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.forwardMessage | forwardMessage} method
+ */
 export interface ForwardMessageParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -146,6 +173,9 @@ export interface ForwardMessageParams {
     message_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.forwardMessages | forwardMessages} method
+ */
 export interface ForwardMessagesParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -173,6 +203,9 @@ export interface ForwardMessagesParams {
     protect_content?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.copyMessage | copyMessage} method
+ */
 export interface CopyMessageParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -228,6 +261,9 @@ export interface CopyMessageParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.copyMessages | copyMessages} method
+ */
 export interface CopyMessagesParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -259,6 +295,9 @@ export interface CopyMessagesParams {
     remove_caption?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.sendPhoto | sendPhoto} method
+ */
 export interface SendPhotoParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -318,6 +357,9 @@ export interface SendPhotoParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendAudio | sendAudio} method
+ */
 export interface SendAudioParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -389,6 +431,9 @@ export interface SendAudioParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendDocument | sendDocument} method
+ */
 export interface SendDocumentParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -452,6 +497,9 @@ export interface SendDocumentParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendVideo | sendVideo} method
+ */
 export interface SendVideoParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -531,6 +579,9 @@ export interface SendVideoParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendAnimation | sendAnimation} method
+ */
 export interface SendAnimationParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -606,6 +657,9 @@ export interface SendAnimationParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendVoice | sendVoice} method
+ */
 export interface SendVoiceParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -665,6 +719,9 @@ export interface SendVoiceParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendVideoNote | sendVideoNote} method
+ */
 export interface SendVideoNoteParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -720,6 +777,9 @@ export interface SendVideoNoteParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendMediaGroup | sendMediaGroup} method
+ */
 export interface SendMediaGroupParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -756,6 +816,9 @@ export interface SendMediaGroupParams {
     reply_parameters?: Objects.TelegramReplyParameters
 }
 
+/**
+ * Params object for {@link APIMethods.sendLocation | sendLocation} method
+ */
 export interface SendLocationParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -819,6 +882,9 @@ export interface SendLocationParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendVenue | sendVenue} method
+ */
 export interface SendVenueParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -890,6 +956,9 @@ export interface SendVenueParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendContact | sendContact} method
+ */
 export interface SendContactParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -947,6 +1016,9 @@ export interface SendContactParams {
 
 export type SendPollType = "quiz" | "regular"
 
+/**
+ * Params object for {@link APIMethods.sendPoll | sendPoll} method
+ */
 export interface SendPollParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -1044,6 +1116,9 @@ export interface SendPollParams {
 
 export type SendDiceEmoji = "🎲" | "🎯" | "🏀" | "⚽" | "🎳" | "🎰"
 
+/**
+ * Params object for {@link APIMethods.sendDice | sendDice} method
+ */
 export interface SendDiceParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -1100,6 +1175,9 @@ export type SendChatActionAction =
     | "record_video_note"
     | "upload_video_note"
 
+/**
+ * Params object for {@link APIMethods.sendChatAction | sendChatAction} method
+ */
 export interface SendChatActionParams {
     /**
      * Unique identifier of the business connection on behalf of which the action will be sent
@@ -1119,6 +1197,9 @@ export interface SendChatActionParams {
     action: SendChatActionAction
 }
 
+/**
+ * Params object for {@link APIMethods.setMessageReaction | setMessageReaction} method
+ */
 export interface SetMessageReactionParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1138,6 +1219,9 @@ export interface SetMessageReactionParams {
     is_big?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.getUserProfilePhotos | getUserProfilePhotos} method
+ */
 export interface GetUserProfilePhotosParams {
     /**
      * Unique identifier of the target user
@@ -1153,6 +1237,9 @@ export interface GetUserProfilePhotosParams {
     limit?: number
 }
 
+/**
+ * Params object for {@link APIMethods.getFile | getFile} method
+ */
 export interface GetFileParams {
     /**
      * File identifier to get information about
@@ -1160,6 +1247,9 @@ export interface GetFileParams {
     file_id: string
 }
 
+/**
+ * Params object for {@link APIMethods.banChatMember | banChatMember} method
+ */
 export interface BanChatMemberParams {
     /**
      * Unique identifier for the target group or username of the target supergroup or channel (in the format `@channelusername`)
@@ -1179,6 +1269,9 @@ export interface BanChatMemberParams {
     revoke_messages?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.unbanChatMember | unbanChatMember} method
+ */
 export interface UnbanChatMemberParams {
     /**
      * Unique identifier for the target group or username of the target supergroup or channel (in the format `@channelusername`)
@@ -1194,6 +1287,9 @@ export interface UnbanChatMemberParams {
     only_if_banned?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.restrictChatMember | restrictChatMember} method
+ */
 export interface RestrictChatMemberParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1217,6 +1313,9 @@ export interface RestrictChatMemberParams {
     until_date?: number
 }
 
+/**
+ * Params object for {@link APIMethods.promoteChatMember | promoteChatMember} method
+ */
 export interface PromoteChatMemberParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1288,6 +1387,9 @@ export interface PromoteChatMemberParams {
     can_manage_topics?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.setChatAdministratorCustomTitle | setChatAdministratorCustomTitle} method
+ */
 export interface SetChatAdministratorCustomTitleParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1303,6 +1405,9 @@ export interface SetChatAdministratorCustomTitleParams {
     custom_title: string
 }
 
+/**
+ * Params object for {@link APIMethods.banChatSenderChat | banChatSenderChat} method
+ */
 export interface BanChatSenderChatParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1314,6 +1419,9 @@ export interface BanChatSenderChatParams {
     sender_chat_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.unbanChatSenderChat | unbanChatSenderChat} method
+ */
 export interface UnbanChatSenderChatParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1325,6 +1433,9 @@ export interface UnbanChatSenderChatParams {
     sender_chat_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.setChatPermissions | setChatPermissions} method
+ */
 export interface SetChatPermissionsParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1340,6 +1451,9 @@ export interface SetChatPermissionsParams {
     use_independent_chat_permissions?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.exportChatInviteLink | exportChatInviteLink} method
+ */
 export interface ExportChatInviteLinkParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1347,6 +1461,9 @@ export interface ExportChatInviteLinkParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.createChatInviteLink | createChatInviteLink} method
+ */
 export interface CreateChatInviteLinkParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1370,6 +1487,9 @@ export interface CreateChatInviteLinkParams {
     creates_join_request?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.editChatInviteLink | editChatInviteLink} method
+ */
 export interface EditChatInviteLinkParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1397,6 +1517,9 @@ export interface EditChatInviteLinkParams {
     creates_join_request?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.revokeChatInviteLink | revokeChatInviteLink} method
+ */
 export interface RevokeChatInviteLinkParams {
     /**
      * Unique identifier of the target chat or username of the target channel (in the format `@channelusername`)
@@ -1408,6 +1531,9 @@ export interface RevokeChatInviteLinkParams {
     invite_link: string
 }
 
+/**
+ * Params object for {@link APIMethods.approveChatJoinRequest | approveChatJoinRequest} method
+ */
 export interface ApproveChatJoinRequestParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1419,6 +1545,9 @@ export interface ApproveChatJoinRequestParams {
     user_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.declineChatJoinRequest | declineChatJoinRequest} method
+ */
 export interface DeclineChatJoinRequestParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1430,6 +1559,9 @@ export interface DeclineChatJoinRequestParams {
     user_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.setChatPhoto | setChatPhoto} method
+ */
 export interface SetChatPhotoParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1441,6 +1573,9 @@ export interface SetChatPhotoParams {
     photo: Objects.TelegramInputFile
 }
 
+/**
+ * Params object for {@link APIMethods.deleteChatPhoto | deleteChatPhoto} method
+ */
 export interface DeleteChatPhotoParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1448,6 +1583,9 @@ export interface DeleteChatPhotoParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.setChatTitle | setChatTitle} method
+ */
 export interface SetChatTitleParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1459,6 +1597,9 @@ export interface SetChatTitleParams {
     title: string
 }
 
+/**
+ * Params object for {@link APIMethods.setChatDescription | setChatDescription} method
+ */
 export interface SetChatDescriptionParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1470,6 +1611,9 @@ export interface SetChatDescriptionParams {
     description?: string
 }
 
+/**
+ * Params object for {@link APIMethods.pinChatMessage | pinChatMessage} method
+ */
 export interface PinChatMessageParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1485,6 +1629,9 @@ export interface PinChatMessageParams {
     disable_notification?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.unpinChatMessage | unpinChatMessage} method
+ */
 export interface UnpinChatMessageParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1496,6 +1643,9 @@ export interface UnpinChatMessageParams {
     message_id?: number
 }
 
+/**
+ * Params object for {@link APIMethods.unpinAllChatMessages | unpinAllChatMessages} method
+ */
 export interface UnpinAllChatMessagesParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1503,6 +1653,9 @@ export interface UnpinAllChatMessagesParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.leaveChat | leaveChat} method
+ */
 export interface LeaveChatParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
@@ -1510,6 +1663,9 @@ export interface LeaveChatParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.getChat | getChat} method
+ */
 export interface GetChatParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
@@ -1517,6 +1673,9 @@ export interface GetChatParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.getChatAdministrators | getChatAdministrators} method
+ */
 export interface GetChatAdministratorsParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
@@ -1524,6 +1683,9 @@ export interface GetChatAdministratorsParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.getChatMemberCount | getChatMemberCount} method
+ */
 export interface GetChatMemberCountParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
@@ -1531,6 +1693,9 @@ export interface GetChatMemberCountParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.getChatMember | getChatMember} method
+ */
 export interface GetChatMemberParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
@@ -1542,6 +1707,9 @@ export interface GetChatMemberParams {
     user_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.setChatStickerSet | setChatStickerSet} method
+ */
 export interface SetChatStickerSetParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1553,6 +1721,9 @@ export interface SetChatStickerSetParams {
     sticker_set_name: string
 }
 
+/**
+ * Params object for {@link APIMethods.deleteChatStickerSet | deleteChatStickerSet} method
+ */
 export interface DeleteChatStickerSetParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1568,6 +1739,9 @@ export type CreateForumTopicIconColor =
     | "16749490"
     | "16478047"
 
+/**
+ * Params object for {@link APIMethods.createForumTopic | createForumTopic} method
+ */
 export interface CreateForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1587,6 +1761,9 @@ export interface CreateForumTopicParams {
     icon_custom_emoji_id?: string
 }
 
+/**
+ * Params object for {@link APIMethods.editForumTopic | editForumTopic} method
+ */
 export interface EditForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1606,6 +1783,9 @@ export interface EditForumTopicParams {
     icon_custom_emoji_id?: string
 }
 
+/**
+ * Params object for {@link APIMethods.closeForumTopic | closeForumTopic} method
+ */
 export interface CloseForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1617,6 +1797,9 @@ export interface CloseForumTopicParams {
     message_thread_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.reopenForumTopic | reopenForumTopic} method
+ */
 export interface ReopenForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1628,6 +1811,9 @@ export interface ReopenForumTopicParams {
     message_thread_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.deleteForumTopic | deleteForumTopic} method
+ */
 export interface DeleteForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1639,6 +1825,9 @@ export interface DeleteForumTopicParams {
     message_thread_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.unpinAllForumTopicMessages | unpinAllForumTopicMessages} method
+ */
 export interface UnpinAllForumTopicMessagesParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1650,6 +1839,9 @@ export interface UnpinAllForumTopicMessagesParams {
     message_thread_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.editGeneralForumTopic | editGeneralForumTopic} method
+ */
 export interface EditGeneralForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1661,6 +1853,9 @@ export interface EditGeneralForumTopicParams {
     name: string
 }
 
+/**
+ * Params object for {@link APIMethods.closeGeneralForumTopic | closeGeneralForumTopic} method
+ */
 export interface CloseGeneralForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1668,6 +1863,9 @@ export interface CloseGeneralForumTopicParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.reopenGeneralForumTopic | reopenGeneralForumTopic} method
+ */
 export interface ReopenGeneralForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1675,6 +1873,9 @@ export interface ReopenGeneralForumTopicParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.hideGeneralForumTopic | hideGeneralForumTopic} method
+ */
 export interface HideGeneralForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1682,6 +1883,9 @@ export interface HideGeneralForumTopicParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.unhideGeneralForumTopic | unhideGeneralForumTopic} method
+ */
 export interface UnhideGeneralForumTopicParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1689,6 +1893,9 @@ export interface UnhideGeneralForumTopicParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.unpinAllGeneralForumTopicMessages | unpinAllGeneralForumTopicMessages} method
+ */
 export interface UnpinAllGeneralForumTopicMessagesParams {
     /**
      * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
@@ -1696,6 +1903,9 @@ export interface UnpinAllGeneralForumTopicMessagesParams {
     chat_id: number | string
 }
 
+/**
+ * Params object for {@link APIMethods.answerCallbackQuery | answerCallbackQuery} method
+ */
 export interface AnswerCallbackQueryParams {
     /**
      * Unique identifier for the query to be answered
@@ -1721,6 +1931,9 @@ export interface AnswerCallbackQueryParams {
     cache_time?: number
 }
 
+/**
+ * Params object for {@link APIMethods.getUserChatBoosts | getUserChatBoosts} method
+ */
 export interface GetUserChatBoostsParams {
     /**
      * Unique identifier for the chat or username of the channel (in the format `@channelusername`)
@@ -1732,6 +1945,9 @@ export interface GetUserChatBoostsParams {
     user_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.getBusinessConnection | getBusinessConnection} method
+ */
 export interface GetBusinessConnectionParams {
     /**
      * Unique identifier of the business connection
@@ -1739,6 +1955,9 @@ export interface GetBusinessConnectionParams {
     business_connection_id: string
 }
 
+/**
+ * Params object for {@link APIMethods.setMyCommands | setMyCommands} method
+ */
 export interface SetMyCommandsParams {
     /**
      * A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
@@ -1754,6 +1973,9 @@ export interface SetMyCommandsParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.deleteMyCommands | deleteMyCommands} method
+ */
 export interface DeleteMyCommandsParams {
     /**
      * A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api/#botcommandscopedefault).
@@ -1765,6 +1987,9 @@ export interface DeleteMyCommandsParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.getMyCommands | getMyCommands} method
+ */
 export interface GetMyCommandsParams {
     /**
      * A JSON-serialized object, describing scope of users. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api/#botcommandscopedefault).
@@ -1776,6 +2001,9 @@ export interface GetMyCommandsParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.setMyName | setMyName} method
+ */
 export interface SetMyNameParams {
     /**
      * New bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
@@ -1787,6 +2015,9 @@ export interface SetMyNameParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.getMyName | getMyName} method
+ */
 export interface GetMyNameParams {
     /**
      * A two-letter ISO 639-1 language code or an empty string
@@ -1794,6 +2025,9 @@ export interface GetMyNameParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.setMyDescription | setMyDescription} method
+ */
 export interface SetMyDescriptionParams {
     /**
      * New bot description; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
@@ -1805,6 +2039,9 @@ export interface SetMyDescriptionParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.getMyDescription | getMyDescription} method
+ */
 export interface GetMyDescriptionParams {
     /**
      * A two-letter ISO 639-1 language code or an empty string
@@ -1812,6 +2049,9 @@ export interface GetMyDescriptionParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.setMyShortDescription | setMyShortDescription} method
+ */
 export interface SetMyShortDescriptionParams {
     /**
      * New short description for the bot; 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.
@@ -1823,6 +2063,9 @@ export interface SetMyShortDescriptionParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.getMyShortDescription | getMyShortDescription} method
+ */
 export interface GetMyShortDescriptionParams {
     /**
      * A two-letter ISO 639-1 language code or an empty string
@@ -1830,6 +2073,9 @@ export interface GetMyShortDescriptionParams {
     language_code?: string
 }
 
+/**
+ * Params object for {@link APIMethods.setChatMenuButton | setChatMenuButton} method
+ */
 export interface SetChatMenuButtonParams {
     /**
      * Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
@@ -1841,6 +2087,9 @@ export interface SetChatMenuButtonParams {
     menu_button?: Objects.TelegramMenuButton
 }
 
+/**
+ * Params object for {@link APIMethods.getChatMenuButton | getChatMenuButton} method
+ */
 export interface GetChatMenuButtonParams {
     /**
      * Unique identifier for the target private chat. If not specified, default bot's menu button will be returned
@@ -1848,6 +2097,9 @@ export interface GetChatMenuButtonParams {
     chat_id?: number
 }
 
+/**
+ * Params object for {@link APIMethods.setMyDefaultAdministratorRights | setMyDefaultAdministratorRights} method
+ */
 export interface SetMyDefaultAdministratorRightsParams {
     /**
      * A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared.
@@ -1859,6 +2111,9 @@ export interface SetMyDefaultAdministratorRightsParams {
     for_channels?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.getMyDefaultAdministratorRights | getMyDefaultAdministratorRights} method
+ */
 export interface GetMyDefaultAdministratorRightsParams {
     /**
      * Pass *True* to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned.
@@ -1866,6 +2121,9 @@ export interface GetMyDefaultAdministratorRightsParams {
     for_channels?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.editMessageText | editMessageText} method
+ */
 export interface EditMessageTextParams {
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1903,6 +2161,9 @@ export interface EditMessageTextParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.editMessageCaption | editMessageCaption} method
+ */
 export interface EditMessageCaptionParams {
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1936,6 +2197,9 @@ export interface EditMessageCaptionParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.editMessageMedia | editMessageMedia} method
+ */
 export interface EditMessageMediaParams {
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -1961,6 +2225,9 @@ export interface EditMessageMediaParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.editMessageLiveLocation | editMessageLiveLocation} method
+ */
 export interface EditMessageLiveLocationParams {
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -2006,6 +2273,9 @@ export interface EditMessageLiveLocationParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.stopMessageLiveLocation | stopMessageLiveLocation} method
+ */
 export interface StopMessageLiveLocationParams {
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -2027,6 +2297,9 @@ export interface StopMessageLiveLocationParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.editMessageReplyMarkup | editMessageReplyMarkup} method
+ */
 export interface EditMessageReplyMarkupParams {
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -2048,6 +2321,9 @@ export interface EditMessageReplyMarkupParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.stopPoll | stopPoll} method
+ */
 export interface StopPollParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -2065,6 +2341,9 @@ export interface StopPollParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.deleteMessage | deleteMessage} method
+ */
 export interface DeleteMessageParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -2076,6 +2355,9 @@ export interface DeleteMessageParams {
     message_id: number
 }
 
+/**
+ * Params object for {@link APIMethods.deleteMessages | deleteMessages} method
+ */
 export interface DeleteMessagesParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -2087,6 +2369,9 @@ export interface DeleteMessagesParams {
     message_ids: number[]
 }
 
+/**
+ * Params object for {@link APIMethods.sendSticker | sendSticker} method
+ */
 export interface SendStickerParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -2134,6 +2419,9 @@ export interface SendStickerParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.getStickerSet | getStickerSet} method
+ */
 export interface GetStickerSetParams {
     /**
      * Name of the sticker set
@@ -2141,6 +2429,9 @@ export interface GetStickerSetParams {
     name: string
 }
 
+/**
+ * Params object for {@link APIMethods.getCustomEmojiStickers | getCustomEmojiStickers} method
+ */
 export interface GetCustomEmojiStickersParams {
     /**
      * A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
@@ -2150,6 +2441,9 @@ export interface GetCustomEmojiStickersParams {
 
 export type UploadStickerFileStickerFormat = "static" | "animated" | "video"
 
+/**
+ * Params object for {@link APIMethods.uploadStickerFile | uploadStickerFile} method
+ */
 export interface UploadStickerFileParams {
     /**
      * User identifier of sticker file owner
@@ -2167,6 +2461,9 @@ export interface UploadStickerFileParams {
 
 export type CreateNewStickerSetStickerType = "mask" | "custom_emoji"
 
+/**
+ * Params object for {@link APIMethods.createNewStickerSet | createNewStickerSet} method
+ */
 export interface CreateNewStickerSetParams {
     /**
      * User identifier of created sticker set owner
@@ -2194,6 +2491,9 @@ export interface CreateNewStickerSetParams {
     needs_repainting?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.addStickerToSet | addStickerToSet} method
+ */
 export interface AddStickerToSetParams {
     /**
      * User identifier of sticker set owner
@@ -2209,6 +2509,9 @@ export interface AddStickerToSetParams {
     sticker: Objects.TelegramInputSticker
 }
 
+/**
+ * Params object for {@link APIMethods.setStickerPositionInSet | setStickerPositionInSet} method
+ */
 export interface SetStickerPositionInSetParams {
     /**
      * File identifier of the sticker
@@ -2220,6 +2523,9 @@ export interface SetStickerPositionInSetParams {
     position: number
 }
 
+/**
+ * Params object for {@link APIMethods.deleteStickerFromSet | deleteStickerFromSet} method
+ */
 export interface DeleteStickerFromSetParams {
     /**
      * File identifier of the sticker
@@ -2227,6 +2533,9 @@ export interface DeleteStickerFromSetParams {
     sticker: string
 }
 
+/**
+ * Params object for {@link APIMethods.replaceStickerInSet | replaceStickerInSet} method
+ */
 export interface ReplaceStickerInSetParams {
     /**
      * User identifier of the sticker set owner
@@ -2246,6 +2555,9 @@ export interface ReplaceStickerInSetParams {
     sticker: Objects.TelegramInputSticker
 }
 
+/**
+ * Params object for {@link APIMethods.setStickerEmojiList | setStickerEmojiList} method
+ */
 export interface SetStickerEmojiListParams {
     /**
      * File identifier of the sticker
@@ -2257,6 +2569,9 @@ export interface SetStickerEmojiListParams {
     emoji_list: string[]
 }
 
+/**
+ * Params object for {@link APIMethods.setStickerKeywords | setStickerKeywords} method
+ */
 export interface SetStickerKeywordsParams {
     /**
      * File identifier of the sticker
@@ -2268,6 +2583,9 @@ export interface SetStickerKeywordsParams {
     keywords?: string[]
 }
 
+/**
+ * Params object for {@link APIMethods.setStickerMaskPosition | setStickerMaskPosition} method
+ */
 export interface SetStickerMaskPositionParams {
     /**
      * File identifier of the sticker
@@ -2279,6 +2597,9 @@ export interface SetStickerMaskPositionParams {
     mask_position?: Objects.TelegramMaskPosition
 }
 
+/**
+ * Params object for {@link APIMethods.setStickerSetTitle | setStickerSetTitle} method
+ */
 export interface SetStickerSetTitleParams {
     /**
      * Sticker set name
@@ -2292,6 +2613,9 @@ export interface SetStickerSetTitleParams {
 
 export type SetStickerSetThumbnailFormat = "static" | "animated" | "video"
 
+/**
+ * Params object for {@link APIMethods.setStickerSetThumbnail | setStickerSetThumbnail} method
+ */
 export interface SetStickerSetThumbnailParams {
     /**
      * Sticker set name
@@ -2311,6 +2635,9 @@ export interface SetStickerSetThumbnailParams {
     format: SetStickerSetThumbnailFormat
 }
 
+/**
+ * Params object for {@link APIMethods.setCustomEmojiStickerSetThumbnail | setCustomEmojiStickerSetThumbnail} method
+ */
 export interface SetCustomEmojiStickerSetThumbnailParams {
     /**
      * Sticker set name
@@ -2322,6 +2649,9 @@ export interface SetCustomEmojiStickerSetThumbnailParams {
     custom_emoji_id?: string
 }
 
+/**
+ * Params object for {@link APIMethods.deleteStickerSet | deleteStickerSet} method
+ */
 export interface DeleteStickerSetParams {
     /**
      * Sticker set name
@@ -2329,6 +2659,9 @@ export interface DeleteStickerSetParams {
     name: string
 }
 
+/**
+ * Params object for {@link APIMethods.answerInlineQuery | answerInlineQuery} method
+ */
 export interface AnswerInlineQueryParams {
     /**
      * Unique identifier for the answered query
@@ -2356,6 +2689,9 @@ export interface AnswerInlineQueryParams {
     button?: Objects.TelegramInlineQueryResultsButton
 }
 
+/**
+ * Params object for {@link APIMethods.answerWebAppQuery | answerWebAppQuery} method
+ */
 export interface AnswerWebAppQueryParams {
     /**
      * Unique identifier for the query to be answered
@@ -2367,6 +2703,9 @@ export interface AnswerWebAppQueryParams {
     result: Objects.TelegramInlineQueryResult
 }
 
+/**
+ * Params object for {@link APIMethods.sendInvoice | sendInvoice} method
+ */
 export interface SendInvoiceParams {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
@@ -2480,6 +2819,9 @@ export interface SendInvoiceParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.createInvoiceLink | createInvoiceLink} method
+ */
 export interface CreateInvoiceLinkParams {
     /**
      * Product name, 1-32 characters
@@ -2563,6 +2905,9 @@ export interface CreateInvoiceLinkParams {
     is_flexible?: boolean
 }
 
+/**
+ * Params object for {@link APIMethods.answerShippingQuery | answerShippingQuery} method
+ */
 export interface AnswerShippingQueryParams {
     /**
      * Unique identifier for the query to be answered
@@ -2582,6 +2927,9 @@ export interface AnswerShippingQueryParams {
     error_message?: string
 }
 
+/**
+ * Params object for {@link APIMethods.answerPreCheckoutQuery | answerPreCheckoutQuery} method
+ */
 export interface AnswerPreCheckoutQueryParams {
     /**
      * Unique identifier for the query to be answered
@@ -2597,6 +2945,9 @@ export interface AnswerPreCheckoutQueryParams {
     error_message?: string
 }
 
+/**
+ * Params object for {@link APIMethods.setPassportDataErrors | setPassportDataErrors} method
+ */
 export interface SetPassportDataErrorsParams {
     /**
      * User identifier
@@ -2608,6 +2959,9 @@ export interface SetPassportDataErrorsParams {
     errors: Objects.TelegramPassportElementError[]
 }
 
+/**
+ * Params object for {@link APIMethods.sendGame | sendGame} method
+ */
 export interface SendGameParams {
     /**
      * Unique identifier of the business connection on behalf of which the message will be sent
@@ -2645,6 +2999,9 @@ export interface SendGameParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
+/**
+ * Params object for {@link APIMethods.setGameScore | setGameScore} method
+ */
 export interface SetGameScoreParams {
     /**
      * User identifier
@@ -2676,6 +3033,9 @@ export interface SetGameScoreParams {
     inline_message_id?: string
 }
 
+/**
+ * Params object for {@link APIMethods.getGameHighScores | getGameHighScores} method
+ */
 export interface GetGameHighScoresParams {
     /**
      * Target user id
