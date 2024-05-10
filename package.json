@@ -33,6 +33,7 @@
     "scripts": {
         "dirty-fix": "bun scripts/dirty-fix.ts",
         "cicd": "bun scripts/cicd.ts",
+        "jsr": "bun scripts/release-jsr.ts",
         "generate": "bun src/index.ts",
         "lint": "bunx @biomejs/biome check ./src",
         "lint:fix": "bun lint --apply"

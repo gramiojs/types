@@ -1,8 +1,17 @@
 # Code-generated and Auto-published Telegram Bot API types
 
+<div align="center">
+
+[![Bot API](https://img.shields.io/badge/Bot%20API-7.3-blue?logo=telegram&style=flat&labelColor=000&color=3b82f6)](https://core.telegram.org/bots/api)
+[![npm](https://img.shields.io/npm/v/@gramio/types?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/@gramio/types)
+[![JSR](https://jsr.io/badges/@gramio/types)](https://jsr.io/@gramio/types)
+[![JSR Score](https://jsr.io/badges/@gramio/types/score)](https://jsr.io/@gramio/types)
+
+</div>
+
 ### Versioning
 
-7.1.x types are for 7.1 Telegram Bot API
+7.3.x types are for 7.3 Telegram Bot API
 
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
@@ -21,14 +30,14 @@ Please see [API Types References](https://tsdocs.dev/docs/@gramio/types)
 ### Auto-update package
 
 This library is updated automatically to the latest version of the Telegram Bot API in case of changes thanks to CI CD!
-If the github action failed, there are no changes in the bot api
+If the github action failed, there are no changes in the Bot API
 
 ## Imports (after `@gramio/`)
 
 -   `index` - exports everything in the section
 -   `methods` - exports `APIMethods` which describes the api functions
 -   `objects` - exports objects with the `Telegram` prefix (for example [Update](https://core.telegram.org/bots/api/#update))
--   `params` - exports params that are used in `methods`
+-   `params` - exports params that are used in `methods` with `Params` postfix
 
 ### Write you own type-safe Telegram Bot API wrapper
 
