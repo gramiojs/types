@@ -1,8 +1,8 @@
 /**
  * Based on Bot API v7.3.0 (6.5.2024)
- * Generated at 5/6/2024, 3:59:20 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 5/7/2024, 6:19:33 PM using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
-import * as Objects from "./objects"
+import type * as Objects from "./objects"
 
 export interface GetUpdatesParams {
     /**
@@ -963,7 +963,7 @@ export interface SendPollParams {
     /**
      * Poll question, 1-300 characters
      */
-    question: string
+    question: string | { toString(): string }
     /**
      * Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Currently, only custom emoji entities are allowed
      */
