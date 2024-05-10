@@ -1,5 +1,5 @@
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotAPI } from "../types";
+import type { IBotAPI } from "../types";
 import { Properties } from "./properties";
 
 //TODO: unify and refactor
@@ -26,6 +26,9 @@ export class Params {
 		return [
 			...unionTypes,
 			"",
+			...CodeGenerator.generateComment(
+				`Params object for {@link APIMethods.${method.name} | ${method.name}} method`,
+			),
 			`export interface ${`${TextEditor.uppercaseFirstLetter(
 				method.name,
 			)}Params`} {`,

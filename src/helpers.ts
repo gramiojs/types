@@ -42,7 +42,12 @@ export function generateHeader(
 		"* ",
 		...additional.map((x) => `* ${x}`),
 		"* ",
-		`* Based on Bot API v${version.major}.${version.minor}.${version.patch} (${recentChanges.day}.${recentChanges.month}.${recentChanges.year})`,
+		`* Based on Bot API v${version.major}.${version.minor}.${
+			version.patch
+		} (${String(recentChanges.day).padStart(2, "0")}.${String(
+			recentChanges.month,
+		).padStart(2, "0")}.${recentChanges.year})`,
+		"* ",
 		`* Generated at ${new Date().toLocaleString()} using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators`,
 		"*/",
 		"",

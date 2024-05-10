@@ -176,7 +176,11 @@ const files: IGeneratedFile[] = [
 					"```",
 				],
 			),
-			[`import type * as Objects from "./objects"`, ""],
+			[
+				`import type { APIMethods } from "./methods";`,
+				`import type * as Objects from "./objects"`,
+				"",
+			],
 			Params.generateMany(schema.methods),
 		],
 	},

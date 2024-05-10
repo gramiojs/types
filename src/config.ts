@@ -1,4 +1,4 @@
-import { Options } from "prettier";
+import type { Options } from "prettier";
 
 export const OUTPUT_PATH = "./out";
 
