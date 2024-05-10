@@ -48,7 +48,9 @@ export function generateHeader(
 			recentChanges.month,
 		).padStart(2, "0")}.${recentChanges.year})`,
 		"* ",
-		`* Generated at ${new Date().toLocaleString()} using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators`,
+		`* Generated at ${new Date().toLocaleString(
+			"ru",
+		)} using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators`,
 		"*/",
 		"",
 		"",
