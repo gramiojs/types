@@ -1,5 +1,5 @@
 import { CodeGenerator, TextEditor } from "../helpers";
-import { IBotAPI } from "../types";
+import type { IBotAPI } from "../types";
 import { typesRemapper } from "./properties";
 
 function generateMethod(method: IBotAPI.IMethod) {
@@ -26,6 +26,9 @@ function generateMethod(method: IBotAPI.IMethod) {
 export class APIMethods {
 	static generateMany(methods: IBotAPI.IMethod[]) {
 		return [
+			...CodeGenerator.generateComment(
+				"This object is a map of [API methods](https://core.telegram.org/bots/api#available-methods) types (functions map with input/output)",
+			),
 			"export interface APIMethods {",
 			...methods.flatMap(APIMethods.generate),
 			"}",

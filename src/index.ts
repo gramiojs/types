@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
-import { fetchCurrencies, generateHeader } from "./helpers";
+import { CodeGenerator, fetchCurrencies, generateHeader } from "./helpers";
 import type { IBotAPI } from "./types";
 
 export interface IGeneratedFile {
@@ -151,12 +151,31 @@ const header = generateHeader(schema.version, schema.recent_changes);
 const files: IGeneratedFile[] = [
 	{
 		name: "objects.d.ts",
-		lines: [header, Objects.generateMany(schema.objects)],
+		lines: [
+			header(
+				"This module contains [Objects](https://core.telegram.org/bots/api#available-types) with the `Telegram` prefix",
+				[
+					"@example import object",
+					"```typescript",
+					`import { TelegramUser } from "@gramio/types/objects";`,
+					"```",
+				],
+			),
+			Objects.generateMany(schema.objects),
+		],
 	},
 	{
 		name: "params.d.ts",
 		lines: [
-			header,
+			header(
+				"This module contains params for [methods](https://core.telegram.org/bots/api#available-methods) with the `Params` postfix",
+				[
+					"@example import params",
+					"```typescript",
+					`import { SendMessageParams } from "@gramio/types/params";`,
+					"```",
+				],
+			),
 			[`import type * as Objects from "./objects"`, ""],
 			Params.generateMany(schema.methods),
 		],
@@ -164,7 +183,18 @@ const files: IGeneratedFile[] = [
 	{
 		name: "methods.d.ts",
 		lines: [
-			header,
+			header(
+				"This module contains [API methods](https://core.telegram.org/bots/api#available-methods) types (functions map with input/output)",
+				[
+					"@example import API methods map",
+					"```typescript",
+					`import { APIMethods } from "@gramio/types/methods";`,
+					"",
+					`type SendMessageReturn = Awaited<ReturnType<APIMethods["sendMessage"]>>;`,
+					`//   ^? type SendMessageReturn = TelegramMessage"`,
+					"```",
+				],
+			),
 			[
 				`import type { CallAPIWithOptionalParams, CallAPI, CallAPIWithoutParams } from "./utils"`,
 				`import type * as Params from "./params"`,
@@ -177,6 +207,15 @@ const files: IGeneratedFile[] = [
 	{
 		name: "index.d.ts",
 		lines: [
+			header(
+				"This module re-export another modules (+ export params as TelegramParams/objects as TelegramObjects)",
+				[
+					"@example import",
+					"```typescript",
+					`import { TelegramUser, SendMessageParams, APIMethods, APIMethodReturn } from "@gramio/types";`,
+					"```",
+				],
+			),
 			[`export type * from "./methods"`],
 			[`export type * from "./params"`],
 			[`export type * as TelegramParams from "./params"`],
@@ -188,6 +227,17 @@ const files: IGeneratedFile[] = [
 	{
 		name: "utils.d.ts",
 		lines: [
+			header("This module contains type-utils for convenient work", [
+				"@example import utils",
+				"```typescript",
+				`import { APIMethodParams, APIMethodReturn } from "@gramio/types/utils";`,
+				"",
+				`type SendMessageReturn = APIMethodReturn<"sendMessage">;`,
+				`//   ^? type SendMessageReturn = TelegramMessage"`,
+				`type SendMessageParams = APIMethodParams<"sendMessage">;`,
+				`//   ^? type SendMessageParams = SendMessageParams"`,
+				"```",
+			]),
 			[
 				`import type { APIMethods } from "./methods"`,
 				"",
@@ -195,7 +245,21 @@ const files: IGeneratedFile[] = [
 				"export type CallAPIWithoutParams<R> = () => Promise<R>",
 				"export type CallAPIWithOptionalParams<T, R> = (params?: T) => Promise<R>",
 				"",
+				...CodeGenerator.generateComment([
+					"@example",
+					"```typescript",
+					`type SendMessageParams = APIMethodParams<"sendMessage">;`,
+					`//   ^? type SendMessageParams = SendMessageParams"`,
+					"```",
+				]),
 				"export type APIMethodParams<APIMethod extends keyof APIMethods> = Parameters<APIMethods[APIMethod]>[0]",
+				...CodeGenerator.generateComment([
+					"@example",
+					"```typescript",
+					`type SendMessageReturn = APIMethodReturn<"sendMessage">;`,
+					`//   ^? type SendMessageReturn = TelegramMessage"`,
+					"```",
+				]),
 				"export type APIMethodReturn<APIMethod extends keyof APIMethods> = Awaited<ReturnType<APIMethods[APIMethod]>>",
 				"",
 			],

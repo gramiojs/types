@@ -1,8 +1,8 @@
-import { IBotAPI } from "types";
+import type { IBotAPI } from "types";
 
 export class CodeGenerator {
-	static generateComment(value: string) {
-		const valueLines = value.split("\n");
+	static generateComment(value: string | string[]) {
+		const valueLines = typeof value === "string" ? value.split("\n") : value;
 
 		return ["/**", valueLines.map((line) => `* ${line}`).join("\n"), "*/"];
 	}
@@ -34,11 +34,19 @@ export function generateHeader(
 	version: IBotAPI.IVersion,
 	recentChanges: IBotAPI.IRecentChangesObject,
 ) {
-	return [
+	return (description: string, additional: string[] = []) => [
 		"/**",
+		"* @module",
+		"* ",
+		`* ${description}`,
+		"* ",
+		...additional.map((x) => `* ${x}`),
+		"* ",
 		`* Based on Bot API v${version.major}.${version.minor}.${version.patch} (${recentChanges.day}.${recentChanges.month}.${recentChanges.year})`,
 		`* Generated at ${new Date().toLocaleString()} using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators`,
 		"*/",
+		"",
+		"",
 	];
 }
 
