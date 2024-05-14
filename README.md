@@ -92,7 +92,7 @@ api.sendMessage({
 
 #### With File uploading support
 
-[Documentation](https://gramio.netlify.app/files/usage-without-gramio.html#write-you-own-type-safe-tba-api-wrapper-with-file-uploading-support)
+[Documentation](https://gramio.dev/files/usage-without-gramio.html#write-you-own-type-safe-tba-api-wrapper-with-file-uploading-support)
 
 ## Generate types manually
 
