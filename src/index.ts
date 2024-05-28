@@ -16,6 +16,8 @@ const schema = JSON.parse(String(schemaFile)) as IBotAPI.ISchema;
 
 const currenciesList = await fetchCurrencies();
 
+currenciesList.push("XTR");
+
 schema.objects.push({
 	name: "Currencies",
 	type: "any_of",
