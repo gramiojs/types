@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.4.0 (28.05.2024)
  *
- * Generated at 28.05.2024, 12:05:09 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 28.05.2024, 12:29:24 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -126,7 +126,7 @@ export interface SendMessageParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -348,7 +348,7 @@ export interface SendPhotoParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -426,7 +426,7 @@ export interface SendAudioParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -496,7 +496,7 @@ export interface SendDocumentParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -586,7 +586,7 @@ export interface SendVideoParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -672,7 +672,7 @@ export interface SendAnimationParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -738,7 +738,7 @@ export interface SendVoiceParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -800,7 +800,7 @@ export interface SendVideoNoteParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -855,7 +855,7 @@ export interface SendMediaGroupParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -913,7 +913,7 @@ export interface SendLocationParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -991,7 +991,7 @@ export interface SendVenueParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -1053,7 +1053,7 @@ export interface SendContactParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -1157,7 +1157,7 @@ export interface SendPollParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -1209,7 +1209,7 @@ export interface SendDiceParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -2474,7 +2474,7 @@ export interface SendStickerParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -2884,7 +2884,7 @@ export interface SendInvoiceParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**
@@ -3082,7 +3082,7 @@ export interface SendGameParams {
      */
     protect_content?: boolean
     /**
-     * Unique identifier of the message effect to be added to the message
+     * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
     /**

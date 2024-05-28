@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.4.0 (28.05.2024)
  *
- * Generated at 28.05.2024, 12:05:09 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 28.05.2024, 12:29:24 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 export type * from "./methods"
