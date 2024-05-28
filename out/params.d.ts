@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.4.0 (28.05.2024)
  *
- * Generated at 28.05.2024, 12:29:24 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 28.05.2024, 13:17:41 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -239,6 +239,10 @@ export interface CopyMessageParams {
      * A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Pass *True*, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
+     */
+    show_caption_above_media?: boolean
     /**
      * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
      */
