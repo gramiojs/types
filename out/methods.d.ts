@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v7.3.0 (06.05.2024)
+ * Based on Bot API v7.4.0 (28.05.2024)
  *
- * Generated at 10.05.2024, 19:21:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 28.05.2024, 11:45:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -867,6 +867,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#answerprecheckoutquery)
      */
     answerPreCheckoutQuery: CallAPI<Params.AnswerPreCheckoutQueryParams, true>
+    /**
+     * Refunds a successful payment in [Telegram Stars](https://t.me/BotNews/90). Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#refundstarpayment)
+     */
+    refundStarPayment: CallAPI<Params.RefundStarPaymentParams, true>
     /**
      * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns *True* on success.
      *

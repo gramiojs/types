@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.3.0 (06.05.2024)
+ * Based on Bot API v7.4.0 (28.05.2024)
  *
- * Generated at 10.05.2024, 19:21:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 28.05.2024, 11:45:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -125,6 +125,10 @@ export interface SendMessageParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -328,6 +332,10 @@ export interface SendPhotoParams {
      */
     caption_entities?: Objects.TelegramMessageEntity[]
     /**
+     * Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * Pass *True* if the photo needs to be covered with a spoiler animation
      */
     has_spoiler?: boolean
@@ -339,6 +347,10 @@ export interface SendPhotoParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -414,6 +426,10 @@ export interface SendAudioParams {
      */
     protect_content?: boolean
     /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -479,6 +495,10 @@ export interface SendDocumentParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -546,6 +566,10 @@ export interface SendVideoParams {
      */
     caption_entities?: Objects.TelegramMessageEntity[]
     /**
+     * Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * Pass *True* if the video needs to be covered with a spoiler animation
      */
     has_spoiler?: boolean
@@ -561,6 +585,10 @@ export interface SendVideoParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -628,6 +656,10 @@ export interface SendAnimationParams {
      */
     caption_entities?: Objects.TelegramMessageEntity[]
     /**
+     * Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * Pass *True* if the animation needs to be covered with a spoiler animation
      */
     has_spoiler?: boolean
@@ -639,6 +671,10 @@ export interface SendAnimationParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -702,6 +738,10 @@ export interface SendVoiceParams {
      */
     protect_content?: boolean
     /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -760,6 +800,10 @@ export interface SendVideoNoteParams {
      */
     protect_content?: boolean
     /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -810,6 +854,10 @@ export interface SendMediaGroupParams {
      * Protects the contents of the sent messages from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -864,6 +912,10 @@ export interface SendLocationParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -939,6 +991,10 @@ export interface SendVenueParams {
      */
     protect_content?: boolean
     /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -996,6 +1052,10 @@ export interface SendContactParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -1097,6 +1157,10 @@ export interface SendPollParams {
      */
     protect_content?: boolean
     /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -1144,6 +1208,10 @@ export interface SendDiceParams {
      * Protects the contents of the sent message from forwarding
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -2190,6 +2258,10 @@ export interface EditMessageCaptionParams {
      */
     caption_entities?: Objects.TelegramMessageEntity[]
     /**
+     * Pass *True*, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+     */
+    show_caption_above_media?: boolean
+    /**
      * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
      */
     reply_markup?:
@@ -2401,6 +2473,10 @@ export interface SendStickerParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -2728,19 +2804,19 @@ export interface SendInvoiceParams {
      */
     payload: string
     /**
-     * Payment provider token, obtained via [@BotFather](https://t.me/botfather)
+     * Payment provider token, obtained via [@BotFather](https://t.me/botfather). Pass an empty string for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
-    provider_token: string
+    provider_token?: string
     /**
-     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies)
+     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies). Pass “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     currency: Objects.TelegramCurrencies
     /**
-     * Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+     * Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+     * The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     max_tip_amount?: number
     /**
@@ -2772,31 +2848,31 @@ export interface SendInvoiceParams {
      */
     photo_height?: number
     /**
-     * Pass *True* if you require the user's full name to complete the order
+     * Pass *True* if you require the user's full name to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_name?: boolean
     /**
-     * Pass *True* if you require the user's phone number to complete the order
+     * Pass *True* if you require the user's phone number to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_phone_number?: boolean
     /**
-     * Pass *True* if you require the user's email address to complete the order
+     * Pass *True* if you require the user's email address to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_email?: boolean
     /**
-     * Pass *True* if you require the user's shipping address to complete the order
+     * Pass *True* if you require the user's shipping address to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_shipping_address?: boolean
     /**
-     * Pass *True* if the user's phone number should be sent to provider
+     * Pass *True* if the user's phone number should be sent to the provider. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     send_phone_number_to_provider?: boolean
     /**
-     * Pass *True* if the user's email address should be sent to provider
+     * Pass *True* if the user's email address should be sent to the provider. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     send_email_to_provider?: boolean
     /**
-     * Pass *True* if the final price depends on the shipping method
+     * Pass *True* if the final price depends on the shipping method. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     is_flexible?: boolean
     /**
@@ -2807,6 +2883,10 @@ export interface SendInvoiceParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
@@ -2836,19 +2916,19 @@ export interface CreateInvoiceLinkParams {
      */
     payload: string
     /**
-     * Payment provider token, obtained via [BotFather](https://t.me/botfather)
+     * Payment provider token, obtained via [@BotFather](https://t.me/botfather). Pass an empty string for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
-    provider_token: string
+    provider_token?: string
     /**
-     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies)
+     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies). Pass “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     currency: Objects.TelegramCurrencies
     /**
-     * Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+     * Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+     * The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     max_tip_amount?: number
     /**
@@ -2876,31 +2956,31 @@ export interface CreateInvoiceLinkParams {
      */
     photo_height?: number
     /**
-     * Pass *True* if you require the user's full name to complete the order
+     * Pass *True* if you require the user's full name to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_name?: boolean
     /**
-     * Pass *True* if you require the user's phone number to complete the order
+     * Pass *True* if you require the user's phone number to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_phone_number?: boolean
     /**
-     * Pass *True* if you require the user's email address to complete the order
+     * Pass *True* if you require the user's email address to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_email?: boolean
     /**
-     * Pass *True* if you require the user's shipping address to complete the order
+     * Pass *True* if you require the user's shipping address to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_shipping_address?: boolean
     /**
-     * Pass *True* if the user's phone number should be sent to the provider
+     * Pass *True* if the user's phone number should be sent to the provider. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     send_phone_number_to_provider?: boolean
     /**
-     * Pass *True* if the user's email address should be sent to the provider
+     * Pass *True* if the user's email address should be sent to the provider. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     send_email_to_provider?: boolean
     /**
-     * Pass *True* if the final price depends on the shipping method
+     * Pass *True* if the final price depends on the shipping method. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     is_flexible?: boolean
 }
@@ -2946,6 +3026,20 @@ export interface AnswerPreCheckoutQueryParams {
 }
 
 /**
+ * Params object for {@link APIMethods.refundStarPayment | refundStarPayment} method
+ */
+export interface RefundStarPaymentParams {
+    /**
+     * Identifier of the user whose payment will be refunded
+     */
+    user_id: number
+    /**
+     * Telegram payment identifier
+     */
+    telegram_payment_charge_id: string
+}
+
+/**
  * Params object for {@link APIMethods.setPassportDataErrors | setPassportDataErrors} method
  */
 export interface SetPassportDataErrorsParams {
@@ -2987,6 +3081,10 @@ export interface SendGameParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
     /**
      * Description of the message to reply to
      */
