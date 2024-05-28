@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.3.0 (06.05.2024)
+ * Based on Bot API v7.4.0 (28.05.2024)
  *
- * Generated at 10.05.2024, 19:21:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 28.05.2024, 11:45:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -545,6 +545,10 @@ export interface TelegramMessage {
      */
     link_preview_options?: TelegramLinkPreviewOptions
     /**
+     * *Optional*. Unique identifier of the message effect added to the message
+     */
+    effect_id?: string
+    /**
      * *Optional*. Message is an animation, information about the animation. For backward compatibility, when this field is set, the *document* field will also be set
      */
     animation?: TelegramAnimation
@@ -588,6 +592,10 @@ export interface TelegramMessage {
      * *Optional*. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
      */
     caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. True, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
     /**
      * *Optional*. *True*, if the message media is covered by a spoiler animation
      */
@@ -830,6 +838,7 @@ export type TelegramMessageEntityType =
     | "strikethrough"
     | "spoiler"
     | "blockquote"
+    | "expandable_blockquote"
     | "code"
     | "pre"
     | "text_link"
@@ -843,7 +852,7 @@ export type TelegramMessageEntityType =
  */
 export interface TelegramMessageEntity {
     /**
-     * Type of the entity. Currently, can be “mention” (`@username`), “hashtag” (`#hashtag`), “cashtag” (`$USD`), “bot\_command” (`/start@jobs_bot`), “url” (`https://telegram.org`), “email” (`do-not-reply@telegram.org`), “phone\_number” (`+1-212-555-0123`), “bold” (**bold text**), “italic” (*italic text*), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “code” (monowidth string), “pre” (monowidth block), “text\_link” (for clickable text URLs), “text\_mention” (for users [without usernames](https://telegram.org/blog/edit#new-mentions)), “custom\_emoji” (for inline custom emoji stickers)
+     * Type of the entity. Currently, can be “mention” (`@username`), “hashtag” (`#hashtag`), “cashtag” (`$USD`), “bot\_command” (`/start@jobs_bot`), “url” (`https://telegram.org`), “email” (`do-not-reply@telegram.org`), “phone\_number” (`+1-212-555-0123`), “bold” (**bold text**), “italic” (*italic text*), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable\_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text\_link” (for clickable text URLs), “text\_mention” (for users [without usernames](https://telegram.org/blog/edit#new-mentions)), “custom\_emoji” (for inline custom emoji stickers)
      */
     type: TelegramMessageEntityType
     /**
@@ -2339,7 +2348,7 @@ export interface TelegramReplyKeyboardMarkup {
 }
 
 /**
- * This object represents one button of the reply keyboard. For simple text buttons, *String* can be used instead of this object to specify the button text. The optional fields *web\_app*, *request\_users*, *request\_chat*, *request\_contact*, *request\_location*, and *request\_poll* are mutually exclusive.
+ * This object represents one button of the reply keyboard. At most one of the optional fields must be used to specify type of the button. For simple text buttons, *String* can be used instead of this object to specify the button text.
  *
  * [Documentation](https://core.telegram.org/bots/api/#keyboardbutton)
  */
@@ -2505,7 +2514,7 @@ export interface TelegramInlineKeyboardMarkup {
 }
 
 /**
- * This object represents one button of an inline keyboard. You **must** use exactly one of the optional fields.
+ * This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
  *
  * [Documentation](https://core.telegram.org/bots/api/#inlinekeyboardbutton)
  */
@@ -2551,7 +2560,7 @@ export interface TelegramInlineKeyboardButton {
      */
     callback_game?: TelegramCallbackGame
     /**
-     * *Optional*. Specify *True*, to send a [Pay button](https://core.telegram.org/bots/api/#payments).
+     * *Optional*. Specify *True*, to send a [Pay button](https://core.telegram.org/bots/api/#payments). Substrings “⭐” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.
      *
      * **NOTE:** This type of button **must** always be the first button in the first row and can only be used in invoice messages.
      */
@@ -4018,6 +4027,10 @@ export interface TelegramInputMediaPhoto {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * *Optional*. Pass *True* if the photo needs to be covered with a spoiler animation
      */
     has_spoiler?: boolean
@@ -4053,6 +4066,10 @@ export interface TelegramInputMediaVideo {
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
     /**
      * *Optional*. Video width
      */
@@ -4105,6 +4122,10 @@ export interface TelegramInputMediaAnimation {
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
     /**
      * *Optional*. Animation width
      */
@@ -4580,6 +4601,10 @@ export interface TelegramInlineQueryResultPhoto {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
     reply_markup?:
@@ -4650,6 +4675,10 @@ export interface TelegramInlineQueryResultGif {
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
     /**
      * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
@@ -4722,6 +4751,10 @@ export interface TelegramInlineQueryResultMpeg4Gif {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
     reply_markup?:
@@ -4779,6 +4812,10 @@ export interface TelegramInlineQueryResultVideo {
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
     /**
      * *Optional*. Video width
      */
@@ -5236,6 +5273,10 @@ export interface TelegramInlineQueryResultCachedPhoto {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
     reply_markup?:
@@ -5282,6 +5323,10 @@ export interface TelegramInlineQueryResultCachedGif {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
      * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
     reply_markup?:
@@ -5327,6 +5372,10 @@ export interface TelegramInlineQueryResultCachedMpeg4Gif {
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
     /**
      * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
@@ -5457,6 +5506,10 @@ export interface TelegramInlineQueryResultCachedVideo {
      * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
     /**
      * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
@@ -5714,19 +5767,19 @@ export interface TelegramInputInvoiceMessageContent {
      */
     payload: string
     /**
-     * Payment provider token, obtained via [@BotFather](https://t.me/botfather)
+     * *Optional*. Payment provider token, obtained via [@BotFather](https://t.me/botfather). Pass an empty string for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
-    provider_token: string
+    provider_token?: string
     /**
-     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies)
+     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies). Pass “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     currency: TelegramCurrencies
     /**
-     * Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+     * Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     prices: TelegramLabeledPrice[]
     /**
-     * *Optional*. The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+     * *Optional*. The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     max_tip_amount?: number
     /**
@@ -5754,31 +5807,31 @@ export interface TelegramInputInvoiceMessageContent {
      */
     photo_height?: number
     /**
-     * *Optional*. Pass *True* if you require the user's full name to complete the order
+     * *Optional*. Pass *True* if you require the user's full name to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_name?: boolean
     /**
-     * *Optional*. Pass *True* if you require the user's phone number to complete the order
+     * *Optional*. Pass *True* if you require the user's phone number to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_phone_number?: boolean
     /**
-     * *Optional*. Pass *True* if you require the user's email address to complete the order
+     * *Optional*. Pass *True* if you require the user's email address to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_email?: boolean
     /**
-     * *Optional*. Pass *True* if you require the user's shipping address to complete the order
+     * *Optional*. Pass *True* if you require the user's shipping address to complete the order. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     need_shipping_address?: boolean
     /**
-     * *Optional*. Pass *True* if the user's phone number should be sent to provider
+     * *Optional*. Pass *True* if the user's phone number should be sent to the provider. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     send_phone_number_to_provider?: boolean
     /**
-     * *Optional*. Pass *True* if the user's email address should be sent to provider
+     * *Optional*. Pass *True* if the user's email address should be sent to the provider. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     send_email_to_provider?: boolean
     /**
-     * *Optional*. Pass *True* if the final price depends on the shipping method
+     * *Optional*. Pass *True* if the final price depends on the shipping method. Ignored for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     is_flexible?: boolean
 }
@@ -5858,7 +5911,7 @@ export interface TelegramInvoice {
      */
     start_parameter: string
     /**
-     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code
+     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code, or “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90)
      */
     currency: TelegramCurrencies
     /**
@@ -5950,7 +6003,7 @@ export interface TelegramShippingOption {
  */
 export interface TelegramSuccessfulPayment {
     /**
-     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code
+     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code, or “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90)
      */
     currency: TelegramCurrencies
     /**
@@ -6018,7 +6071,7 @@ export interface TelegramPreCheckoutQuery {
      */
     from: TelegramUser
     /**
-     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code
+     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code, or “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90)
      */
     currency: TelegramCurrencies
     /**
