@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.4.0 (28.05.2024)
  *
- * Generated at 28.05.2024, 11:45:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 28.05.2024, 13:17:41 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -6672,6 +6672,7 @@ export type TelegramCurrencies =
     | "VND"
     | "YER"
     | "ZAR"
+    | "XTR"
 
 /**
  * If 'ok' equals True, the request was successful and the result of the query can be found in the 'result' field.
