@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.4.0 (28.05.2024)
+ * Based on Bot API v7.5.0 (18.06.2024)
  *
- * Generated at 28.05.2024, 13:17:41 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 18.06.2024, 10:37:20 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2198,6 +2198,10 @@ export interface GetMyDefaultAdministratorRightsParams {
  */
 export interface EditMessageTextParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id?: number | string
@@ -2237,6 +2241,10 @@ export interface EditMessageTextParams {
  * Params object for {@link APIMethods.editMessageCaption | editMessageCaption} method
  */
 export interface EditMessageCaptionParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -2278,6 +2286,10 @@ export interface EditMessageCaptionParams {
  */
 export interface EditMessageMediaParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id?: number | string
@@ -2305,6 +2317,10 @@ export interface EditMessageMediaParams {
  * Params object for {@link APIMethods.editMessageLiveLocation | editMessageLiveLocation} method
  */
 export interface EditMessageLiveLocationParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
     /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -2354,6 +2370,10 @@ export interface EditMessageLiveLocationParams {
  */
 export interface StopMessageLiveLocationParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id?: number | string
@@ -2378,6 +2398,10 @@ export interface StopMessageLiveLocationParams {
  */
 export interface EditMessageReplyMarkupParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
      * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id?: number | string
@@ -2401,6 +2425,10 @@ export interface EditMessageReplyMarkupParams {
  * Params object for {@link APIMethods.stopPoll | stopPoll} method
  */
 export interface StopPollParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
     /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
@@ -3027,6 +3055,20 @@ export interface AnswerPreCheckoutQueryParams {
      * Required if *ok* is *False*. Error message in human readable form that explains the reason for failure to proceed with the checkout (e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"). Telegram will display this message to the user.
      */
     error_message?: string
+}
+
+/**
+ * Params object for {@link APIMethods.getStarTransactions | getStarTransactions} method
+ */
+export interface GetStarTransactionsParams {
+    /**
+     * Number of transactions to skip in the response
+     */
+    offset?: number
+    /**
+     * The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+     */
+    limit?: number
 }
 
 /**

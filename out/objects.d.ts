@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.4.0 (28.05.2024)
+ * Based on Bot API v7.5.0 (18.06.2024)
  *
- * Generated at 28.05.2024, 13:17:41 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 18.06.2024, 10:37:20 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -2528,7 +2528,7 @@ export interface TelegramInlineKeyboardButton {
      */
     url?: string
     /**
-     * *Optional*. Data to be sent in a [callback query](https://core.telegram.org/bots/api/#callbackquery) to the bot when button is pressed, 1-64 bytes. Not supported for messages sent on behalf of a Telegram Business account.
+     * *Optional*. Data to be sent in a [callback query](https://core.telegram.org/bots/api/#callbackquery) to the bot when the button is pressed, 1-64 bytes
      */
     callback_data?: string
     /**
@@ -6093,6 +6093,162 @@ export interface TelegramPreCheckoutQuery {
 }
 
 /**
+ * This object describes the state of a revenue withdrawal operation. Currently, it can be one of
+ *
+ * * [RevenueWithdrawalStatePending](https://core.telegram.org/bots/api/#revenuewithdrawalstatepending)
+ * * [RevenueWithdrawalStateSucceeded](https://core.telegram.org/bots/api/#revenuewithdrawalstatesucceeded)
+ * * [RevenueWithdrawalStateFailed](https://core.telegram.org/bots/api/#revenuewithdrawalstatefailed)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#revenuewithdrawalstate)
+ */
+export type TelegramRevenueWithdrawalState =
+    | TelegramRevenueWithdrawalStatePending
+    | TelegramRevenueWithdrawalStateSucceeded
+    | TelegramRevenueWithdrawalStateFailed
+
+/**
+ * The withdrawal is in progress.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#revenuewithdrawalstatepending)
+ */
+export interface TelegramRevenueWithdrawalStatePending {
+    /**
+     * Type of the state, always “pending”
+     */
+    type: "pending"
+}
+
+/**
+ * The withdrawal succeeded.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#revenuewithdrawalstatesucceeded)
+ */
+export interface TelegramRevenueWithdrawalStateSucceeded {
+    /**
+     * Type of the state, always “succeeded”
+     */
+    type: "succeeded"
+    /**
+     * Date the withdrawal was completed in Unix time
+     */
+    date: number
+    /**
+     * An HTTPS URL that can be used to see transaction details
+     */
+    url: string
+}
+
+/**
+ * The withdrawal failed and the transaction was refunded.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#revenuewithdrawalstatefailed)
+ */
+export interface TelegramRevenueWithdrawalStateFailed {
+    /**
+     * Type of the state, always “failed”
+     */
+    type: "failed"
+}
+
+/**
+ * This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of
+ *
+ * * [TransactionPartnerFragment](https://core.telegram.org/bots/api/#transactionpartnerfragment)
+ * * [TransactionPartnerUser](https://core.telegram.org/bots/api/#transactionpartneruser)
+ * * [TransactionPartnerOther](https://core.telegram.org/bots/api/#transactionpartnerother)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartner)
+ */
+export type TelegramTransactionPartner =
+    | TelegramTransactionPartnerFragment
+    | TelegramTransactionPartnerUser
+    | TelegramTransactionPartnerOther
+
+/**
+ * Describes a withdrawal transaction with Fragment.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartnerfragment)
+ */
+export interface TelegramTransactionPartnerFragment {
+    /**
+     * Type of the transaction partner, always “fragment”
+     */
+    type: "fragment"
+    /**
+     * *Optional*. State of the transaction if the transaction is outgoing
+     */
+    withdrawal_state?: TelegramRevenueWithdrawalState
+}
+
+/**
+ * Describes a transaction with a user.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartneruser)
+ */
+export interface TelegramTransactionPartnerUser {
+    /**
+     * Type of the transaction partner, always “user”
+     */
+    type: "user"
+    /**
+     * Information about the user
+     */
+    user: TelegramUser
+}
+
+/**
+ * Describes a transaction with an unknown source or recipient.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartnerother)
+ */
+export interface TelegramTransactionPartnerOther {
+    /**
+     * Type of the transaction partner, always “other”
+     */
+    type: "other"
+}
+
+/**
+ * Describes a Telegram Star transaction.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#startransaction)
+ */
+export interface TelegramStarTransaction {
+    /**
+     * Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with *SuccessfulPayment.telegram\_payment\_charge\_id* for successful incoming payments from users.
+     */
+    id: string
+    /**
+     * Number of Telegram Stars transferred by the transaction
+     */
+    amount: number
+    /**
+     * Date the transaction was created in Unix time
+     */
+    date: number
+    /**
+     * *Optional*. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions
+     */
+    source?: TelegramTransactionPartner
+    /**
+     * *Optional*. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions
+     */
+    receiver?: TelegramTransactionPartner
+}
+
+/**
+ * Contains a list of Telegram Star transactions.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#startransactions)
+ */
+export interface TelegramStarTransactions {
+    /**
+     * The list of transactions
+     */
+    transactions: TelegramStarTransaction[]
+}
+
+/**
  * Describes Telegram Passport data shared with the bot by the user.
  *
  * [Documentation](https://core.telegram.org/bots/api/#passportdata)
@@ -6634,7 +6790,9 @@ export type TelegramCurrencies =
     | "LKR"
     | "MAD"
     | "MDL"
+    | "MMK"
     | "MNT"
+    | "MOP"
     | "MUR"
     | "MVR"
     | "MXN"
