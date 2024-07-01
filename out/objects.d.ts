@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.5.0 (18.06.2024)
+ * Based on Bot API v7.6.0 (01.07.2024)
  *
- * Generated at 18.06.2024, 10:37:20 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 01.07.2024, 17:14:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -389,6 +389,10 @@ export interface TelegramChatFullInfo {
      */
     permissions?: TelegramChatPermissions
     /**
+     * *Optional*. *True*, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
+     */
+    can_send_paid_media?: boolean
+    /**
      * *Optional*. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds
      */
     slow_mode_delay?: number
@@ -561,6 +565,10 @@ export interface TelegramMessage {
      */
     document?: TelegramDocument
     /**
+     * *Optional*. Message contains paid media; information about the paid media
+     */
+    paid_media?: TelegramPaidMediaInfo
+    /**
      * *Optional*. Message is a photo, available sizes of the photo
      */
     photo?: TelegramPhotoSize[]
@@ -585,7 +593,7 @@ export interface TelegramMessage {
      */
     voice?: TelegramVoice
     /**
-     * *Optional*. Caption for the animation, audio, document, photo, video or voice
+     * *Optional*. Caption for the animation, audio, document, paid media, photo, video or voice
      */
     caption?: string
     /**
@@ -940,6 +948,10 @@ export interface TelegramExternalReplyInfo {
      */
     document?: TelegramDocument
     /**
+     * *Optional*. Message contains paid media; information about the paid media
+     */
+    paid_media?: TelegramPaidMediaInfo
+    /**
      * *Optional*. Message is a photo, available sizes of the photo
      */
     photo?: TelegramPhotoSize[]
@@ -1192,27 +1204,27 @@ export interface TelegramAnimation {
      */
     file_unique_id: string
     /**
-     * Video width as defined by sender
+     * Video width as defined by the sender
      */
     width: number
     /**
-     * Video height as defined by sender
+     * Video height as defined by the sender
      */
     height: number
     /**
-     * Duration of the video in seconds as defined by sender
+     * Duration of the video in seconds as defined by the sender
      */
     duration: number
     /**
-     * *Optional*. Animation thumbnail as defined by sender
+     * *Optional*. Animation thumbnail as defined by the sender
      */
     thumbnail?: TelegramPhotoSize
     /**
-     * *Optional*. Original animation filename as defined by sender
+     * *Optional*. Original animation filename as defined by the sender
      */
     file_name?: string
     /**
-     * *Optional*. MIME type of the file as defined by sender
+     * *Optional*. MIME type of the file as defined by the sender
      */
     mime_type?: string
     /**
@@ -1236,23 +1248,23 @@ export interface TelegramAudio {
      */
     file_unique_id: string
     /**
-     * Duration of the audio in seconds as defined by sender
+     * Duration of the audio in seconds as defined by the sender
      */
     duration: number
     /**
-     * *Optional*. Performer of the audio as defined by sender or by audio tags
+     * *Optional*. Performer of the audio as defined by the sender or by audio tags
      */
     performer?: string
     /**
-     * *Optional*. Title of the audio as defined by sender or by audio tags
+     * *Optional*. Title of the audio as defined by the sender or by audio tags
      */
     title?: string
     /**
-     * *Optional*. Original filename as defined by sender
+     * *Optional*. Original filename as defined by the sender
      */
     file_name?: string
     /**
-     * *Optional*. MIME type of the file as defined by sender
+     * *Optional*. MIME type of the file as defined by the sender
      */
     mime_type?: string
     /**
@@ -1280,15 +1292,15 @@ export interface TelegramDocument {
      */
     file_unique_id: string
     /**
-     * *Optional*. Document thumbnail as defined by sender
+     * *Optional*. Document thumbnail as defined by the sender
      */
     thumbnail?: TelegramPhotoSize
     /**
-     * *Optional*. Original filename as defined by sender
+     * *Optional*. Original filename as defined by the sender
      */
     file_name?: string
     /**
-     * *Optional*. MIME type of the file as defined by sender
+     * *Optional*. MIME type of the file as defined by the sender
      */
     mime_type?: string
     /**
@@ -1328,15 +1340,15 @@ export interface TelegramVideo {
      */
     file_unique_id: string
     /**
-     * Video width as defined by sender
+     * Video width as defined by the sender
      */
     width: number
     /**
-     * Video height as defined by sender
+     * Video height as defined by the sender
      */
     height: number
     /**
-     * Duration of the video in seconds as defined by sender
+     * Duration of the video in seconds as defined by the sender
      */
     duration: number
     /**
@@ -1344,11 +1356,11 @@ export interface TelegramVideo {
      */
     thumbnail?: TelegramPhotoSize
     /**
-     * *Optional*. Original filename as defined by sender
+     * *Optional*. Original filename as defined by the sender
      */
     file_name?: string
     /**
-     * *Optional*. MIME type of the file as defined by sender
+     * *Optional*. MIME type of the file as defined by the sender
      */
     mime_type?: string
     /**
@@ -1372,11 +1384,11 @@ export interface TelegramVideoNote {
      */
     file_unique_id: string
     /**
-     * Video width and height (diameter of the video message) as defined by sender
+     * Video width and height (diameter of the video message) as defined by the sender
      */
     length: number
     /**
-     * Duration of the video in seconds as defined by sender
+     * Duration of the video in seconds as defined by the sender
      */
     duration: number
     /**
@@ -1404,17 +1416,103 @@ export interface TelegramVoice {
      */
     file_unique_id: string
     /**
-     * Duration of the audio in seconds as defined by sender
+     * Duration of the audio in seconds as defined by the sender
      */
     duration: number
     /**
-     * *Optional*. MIME type of the file as defined by sender
+     * *Optional*. MIME type of the file as defined by the sender
      */
     mime_type?: string
     /**
      * *Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
      */
     file_size?: number
+}
+
+/**
+ * Describes the paid media added to a message.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#paidmediainfo)
+ */
+export interface TelegramPaidMediaInfo {
+    /**
+     * The number of Telegram Stars that must be paid to buy access to the media
+     */
+    star_count: number
+    /**
+     * Information about the paid media
+     */
+    paid_media: TelegramPaidMedia[]
+}
+
+/**
+ * This object describes paid media. Currently, it can be one of
+ *
+ * * [PaidMediaPreview](https://core.telegram.org/bots/api/#paidmediapreview)
+ * * [PaidMediaPhoto](https://core.telegram.org/bots/api/#paidmediaphoto)
+ * * [PaidMediaVideo](https://core.telegram.org/bots/api/#paidmediavideo)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#paidmedia)
+ */
+export type TelegramPaidMedia =
+    | TelegramPaidMediaPreview
+    | TelegramPaidMediaPhoto
+    | TelegramPaidMediaVideo
+
+/**
+ * The paid media isn't available before the payment.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#paidmediapreview)
+ */
+export interface TelegramPaidMediaPreview {
+    /**
+     * Type of the paid media, always “preview”
+     */
+    type: "preview"
+    /**
+     * *Optional*. Media width as defined by the sender
+     */
+    width?: number
+    /**
+     * *Optional*. Media height as defined by the sender
+     */
+    height?: number
+    /**
+     * *Optional*. Duration of the media in seconds as defined by the sender
+     */
+    duration?: number
+}
+
+/**
+ * The paid media is a photo.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#paidmediaphoto)
+ */
+export interface TelegramPaidMediaPhoto {
+    /**
+     * Type of the paid media, always “photo”
+     */
+    type: "photo"
+    /**
+     * The photo
+     */
+    photo: TelegramPhotoSize[]
+}
+
+/**
+ * The paid media is a video.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#paidmediavideo)
+ */
+export interface TelegramPaidMediaVideo {
+    /**
+     * Type of the paid media, always “video”
+     */
+    type: "video"
+    /**
+     * The video
+     */
+    video: TelegramVideo
 }
 
 /**
@@ -1482,7 +1580,7 @@ export interface TelegramPollOption {
 }
 
 /**
- * This object contains information about one answer option in a poll to send.
+ * This object contains information about one answer option in a poll to be sent.
  *
  * [Documentation](https://core.telegram.org/bots/api/#inputpolloption)
  */
@@ -1598,11 +1696,11 @@ export interface TelegramPoll {
  */
 export interface TelegramLocation {
     /**
-     * Latitude as defined by sender
+     * Latitude as defined by the sender
      */
     latitude: number
     /**
-     * Longitude as defined by sender
+     * Longitude as defined by the sender
      */
     longitude: number
     /**
@@ -3751,7 +3849,7 @@ export interface TelegramMenuButtonWebApp {
      */
     text: string
     /**
-     * Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method [answerWebAppQuery](https://core.telegram.org/bots/api/#answerwebappquery).
+     * Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method [answerWebAppQuery](https://core.telegram.org/bots/api/#answerwebappquery). Alternatively, a `t.me` link to a Web App of the bot can be specified in the object instead of the Web App's URL, in which case the Web App will be opened as if the user pressed the link.
      */
     web_app: TelegramWebAppInfo
 }
@@ -4230,6 +4328,70 @@ export interface TelegramInputMediaDocument {
  * [Documentation](https://core.telegram.org/bots/api/#inputfile)
  */
 export type TelegramInputFile = File | Promise<File>
+
+/**
+ * This object describes the paid media to be sent. Currently, it can be one of
+ *
+ * * [InputPaidMediaPhoto](https://core.telegram.org/bots/api/#inputpaidmediaphoto)
+ * * [InputPaidMediaVideo](https://core.telegram.org/bots/api/#inputpaidmediavideo)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputpaidmedia)
+ */
+export type TelegramInputPaidMedia =
+    | TelegramInputPaidMediaPhoto
+    | TelegramInputPaidMediaVideo
+
+/**
+ * The paid media to send is a photo.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputpaidmediaphoto)
+ */
+export interface TelegramInputPaidMediaPhoto {
+    /**
+     * Type of the media, must be *photo*
+     */
+    type: "photo"
+    /**
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    media: TelegramInputFile | string
+}
+
+/**
+ * The paid media to send is a video.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputpaidmediavideo)
+ */
+export interface TelegramInputPaidMediaVideo {
+    /**
+     * Type of the media, must be *video*
+     */
+    type: "video"
+    /**
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    media: TelegramInputFile | string
+    /**
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    thumbnail?: TelegramInputFile | string
+    /**
+     * *Optional*. Video width
+     */
+    width?: number
+    /**
+     * *Optional*. Video height
+     */
+    height?: number
+    /**
+     * *Optional*. Video duration in seconds
+     */
+    duration?: number
+    /**
+     * *Optional*. Pass *True* if the uploaded video is suitable for streaming
+     */
+    supports_streaming?: boolean
+}
 
 export type TelegramStickerType = "regular" | "mask" | "custom_emoji"
 
@@ -6011,7 +6173,7 @@ export interface TelegramSuccessfulPayment {
      */
     total_amount: number
     /**
-     * Bot specified invoice payload
+     * Bot-specified invoice payload
      */
     invoice_payload: string
     /**
@@ -6047,7 +6209,7 @@ export interface TelegramShippingQuery {
      */
     from: TelegramUser
     /**
-     * Bot specified invoice payload
+     * Bot-specified invoice payload
      */
     invoice_payload: string
     /**
@@ -6079,7 +6241,7 @@ export interface TelegramPreCheckoutQuery {
      */
     total_amount: number
     /**
-     * Bot specified invoice payload
+     * Bot-specified invoice payload
      */
     invoice_payload: string
     /**
@@ -6153,16 +6315,38 @@ export interface TelegramRevenueWithdrawalStateFailed {
 /**
  * This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of
  *
- * * [TransactionPartnerFragment](https://core.telegram.org/bots/api/#transactionpartnerfragment)
  * * [TransactionPartnerUser](https://core.telegram.org/bots/api/#transactionpartneruser)
+ * * [TransactionPartnerFragment](https://core.telegram.org/bots/api/#transactionpartnerfragment)
+ * * [TransactionPartnerTelegramAds](https://core.telegram.org/bots/api/#transactionpartnertelegramads)
  * * [TransactionPartnerOther](https://core.telegram.org/bots/api/#transactionpartnerother)
  *
  * [Documentation](https://core.telegram.org/bots/api/#transactionpartner)
  */
 export type TelegramTransactionPartner =
-    | TelegramTransactionPartnerFragment
     | TelegramTransactionPartnerUser
+    | TelegramTransactionPartnerFragment
+    | TelegramTransactionPartnerTelegramAds
     | TelegramTransactionPartnerOther
+
+/**
+ * Describes a transaction with a user.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartneruser)
+ */
+export interface TelegramTransactionPartnerUser {
+    /**
+     * Type of the transaction partner, always “user”
+     */
+    type: "user"
+    /**
+     * Information about the user
+     */
+    user: TelegramUser
+    /**
+     * *Optional*. Bot-specified invoice payload
+     */
+    invoice_payload?: string
+}
 
 /**
  * Describes a withdrawal transaction with Fragment.
@@ -6181,19 +6365,15 @@ export interface TelegramTransactionPartnerFragment {
 }
 
 /**
- * Describes a transaction with a user.
+ * Describes a withdrawal transaction to the Telegram Ads platform.
  *
- * [Documentation](https://core.telegram.org/bots/api/#transactionpartneruser)
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartnertelegramads)
  */
-export interface TelegramTransactionPartnerUser {
+export interface TelegramTransactionPartnerTelegramAds {
     /**
-     * Type of the transaction partner, always “user”
+     * Type of the transaction partner, always “telegram\_ads”
      */
-    type: "user"
-    /**
-     * Information about the user
-     */
-    user: TelegramUser
+    type: "telegram_ads"
 }
 
 /**

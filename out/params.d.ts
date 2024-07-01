@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.5.0 (18.06.2024)
+ * Based on Bot API v7.6.0 (01.07.2024)
  *
- * Generated at 18.06.2024, 10:37:20 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 01.07.2024, 17:14:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -807,6 +807,64 @@ export interface SendVideoNoteParams {
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
+    /**
+     * Description of the message to reply to
+     */
+    reply_parameters?: Objects.TelegramReplyParameters
+    /**
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+        | Objects.TelegramReplyKeyboardMarkup
+        | { toJSON(): Objects.TelegramReplyKeyboardMarkup }
+        | Objects.TelegramReplyKeyboardRemove
+        | { toJSON(): Objects.TelegramReplyKeyboardRemove }
+        | Objects.TelegramForceReply
+        | { toJSON(): Objects.TelegramForceReply }
+}
+
+/**
+ * Params object for {@link APIMethods.sendPaidMedia | sendPaidMedia} method
+ */
+export interface SendPaidMediaParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * The number of Telegram Stars that must be paid to buy access to the media
+     */
+    star_count: number
+    /**
+     * A JSON-serialized array describing the media to be sent; up to 10 items
+     */
+    media: Objects.TelegramInputPaidMedia[]
+    /**
+     * Media caption, 0-1024 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the media caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
+     * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
+     */
+    disable_notification?: boolean
+    /**
+     * Protects the contents of the sent message from forwarding and saving
+     */
+    protect_content?: boolean
     /**
      * Description of the message to reply to
      */
