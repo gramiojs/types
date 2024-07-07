@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.6.0 (01.07.2024)
+ * Based on Bot API v7.7.0 (07.07.2024)
  *
- * Generated at 01.07.2024, 17:14:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 07.07.2024, 11:53:27 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -688,6 +688,10 @@ export interface TelegramMessage {
      * *Optional*. Message is a service message about a successful payment, information about the payment. [More about payments »](https://core.telegram.org/bots/api/#payments)
      */
     successful_payment?: TelegramSuccessfulPayment
+    /**
+     * *Optional*. Message is a service message about a refunded payment, information about the payment. [More about payments »](https://core.telegram.org/bots/api/#payments)
+     */
+    refunded_payment?: TelegramRefundedPayment
     /**
      * *Optional*. Service message: users were shared with the bot
      */
@@ -6192,6 +6196,34 @@ export interface TelegramSuccessfulPayment {
      * Provider payment identifier
      */
     provider_payment_charge_id: string
+}
+
+/**
+ * This object contains basic information about a refunded payment.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#refundedpayment)
+ */
+export interface TelegramRefundedPayment {
+    /**
+     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code, or “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90). Currently, always “XTR”
+     */
+    currency: TelegramCurrencies
+    /**
+     * Total refunded price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45`, `total_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+     */
+    total_amount: number
+    /**
+     * Bot-specified invoice payload
+     */
+    invoice_payload: string
+    /**
+     * Telegram payment identifier
+     */
+    telegram_payment_charge_id: string
+    /**
+     * *Optional*. Provider payment identifier
+     */
+    provider_payment_charge_id?: string
 }
 
 /**
