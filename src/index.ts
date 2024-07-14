@@ -283,10 +283,6 @@ const files: IGeneratedFile[] = [
 			],
 		],
 	},
-	{
-		name: "index.js",
-		lines: [["module.exports = {}"]],
-	},
 ];
 
 if (!existsSync(OUTPUT_PATH)) await fs.mkdir(OUTPUT_PATH);

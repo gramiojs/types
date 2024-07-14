@@ -6,7 +6,6 @@
     "description": "Code-generated and Auto-published Telegram Bot API types",
     "author": "kravets",
     "license": "ISC",
-    "type": "commonjs",
     "keywords": [
         "telegram",
         "bot",
@@ -18,16 +17,14 @@
         "cicd",
         "api"
     ],
-    "main": "./out/index.js",
     "types": "./out/index.d.ts",
+    "typings": "./out/index.d.ts",
     "exports": {
         ".": {
-            "types": "./out/index.d.ts",
-            "default": "./out/index.js"
+            "types": "./out/index.d.ts"
         },
         "./*": {
-            "types": "./out/*.d.ts",
-            "default": "./out/index.js"
+            "types": "./out/*.d.ts"
         }
     },
     "scripts": {
