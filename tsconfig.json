@@ -2,8 +2,7 @@
     "compilerOptions": {
         "target": "es2022",
         "module": "ES2022",
-        "rootDir": "./src",
-        "outDir": "./dist",
+        "noEmit": true,
         "declaration": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
@@ -11,8 +10,6 @@
         "skipLibCheck": true,
         "strict": true,
         "moduleResolution": "node",
-        "baseUrl": "./src",
         "strictNullChecks": true,
     },
-    "include": ["src"]
 }

@@ -1,4 +1,4 @@
-import type { IBotAPI } from "types";
+import type { IBotAPI } from "./types";
 
 export class CodeGenerator {
 	static generateComment(value: string | string[]) {

@@ -148,6 +148,18 @@ if (createForumTopic) {
 	}
 }
 
+const getStarTransactions = schema.methods.find(
+	(x) => x.name === "getStarTransactions",
+);
+
+if (getStarTransactions) {
+	// @ts-expect-error
+	getStarTransactions.return_type = {
+		type: "reference",
+		reference: "StarTransactions",
+	};
+}
+
 const header = generateHeader(schema.version, schema.recent_changes);
 
 const files: IGeneratedFile[] = [
