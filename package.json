@@ -4,6 +4,7 @@
     "homepage": "https://github.com/gramiojs/types",
     "readme": "https://github.com/gramiojs/types",
     "description": "Code-generated and Auto-published Telegram Bot API types",
+    "type": "commonjs",
     "author": "kravets",
     "license": "ISC",
     "keywords": [
