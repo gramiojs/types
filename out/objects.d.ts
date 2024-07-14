@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.7.0 (07.07.2024)
  *
- * Generated at 07.07.2024, 11:53:27 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 14.07.2024, 09:20:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 /**
@@ -4331,7 +4331,7 @@ export interface TelegramInputMediaDocument {
  *
  * [Documentation](https://core.telegram.org/bots/api/#inputfile)
  */
-export type TelegramInputFile = File | Promise<File>
+export type TelegramInputFile = Blob | Promise<Blob>
 
 /**
  * This object describes the paid media to be sent. Currently, it can be one of
