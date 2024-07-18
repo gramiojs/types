@@ -33,7 +33,7 @@ schema.objects.push({
 
 schema.objects.push({
 	name: "APIResponseOk",
-	generic: "<Methods extends keyof APIMethods>",
+	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
 	description:
 		"If 'ok' equals True, the request was successful and the result of the query can be found in the 'result' field.",
 	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
@@ -96,7 +96,7 @@ schema.objects.push({
 schema.objects.push({
 	name: "APIResponse",
 	description: "Union type of Response",
-	generic: "<Methods extends keyof APIMethods>",
+	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
 	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
 	type: "any_of",
 	any_of: [
