@@ -10,8 +10,11 @@
  *
  * Based on Bot API v7.7.0 (07.07.2024)
  *
- * Generated at 14.07.2024, 09:20:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 18.07.2024, 10:11:42 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
+
+import type { APIMethods } from "./methods"
+import type { APIMethodReturn } from "./utils"
 
 /**
  * This [object](https://core.telegram.org/bots/api/#available-types) represents an incoming update.
@@ -7049,7 +7052,9 @@ export type TelegramCurrencies =
  *
  * [Documentation](https://core.telegram.org/bots/api/#making-requests)
  */
-export interface TelegramAPIResponseOk {
+export interface TelegramAPIResponseOk<
+    Methods extends keyof APIMethods = keyof APIMethods,
+> {
     /**
      * If 'ok' equals True, the request was successful
      */
@@ -7057,7 +7062,7 @@ export interface TelegramAPIResponseOk {
     /**
      * The result of the query can be found in the 'result' field
      */
-    result: Record<string, unknown>
+    result: APIMethodReturn<Methods>
 }
 
 /**
@@ -7089,6 +7094,6 @@ export interface TelegramAPIResponseError {
  *
  * [Documentation](https://core.telegram.org/bots/api/#making-requests)
  */
-export type TelegramAPIResponse =
-    | TelegramAPIResponseOk
-    | TelegramAPIResponseError
+export type TelegramAPIResponse<
+    Methods extends keyof APIMethods = keyof APIMethods,
+> = TelegramAPIResponseOk<Methods> | TelegramAPIResponseError
