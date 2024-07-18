@@ -24,6 +24,7 @@ export namespace IBotAPI {
 		default?: boolean | number | null | string;
 		max?: number | null;
 		min?: number | null;
+		generic?: string;
 		type: IType;
 		enumeration?: string[] | null;
 		max_len?: number | null;
@@ -44,6 +45,7 @@ export namespace IBotAPI {
 
 	export interface IObject {
 		description: string;
+		generic?: string;
 		documentation_link: string;
 		name: string;
 		properties?: IProperty[];

@@ -33,6 +33,7 @@ schema.objects.push({
 
 schema.objects.push({
 	name: "APIResponseOk",
+	generic: "<Methods extends keyof APIMethods>",
 	description:
 		"If 'ok' equals True, the request was successful and the result of the query can be found in the 'result' field.",
 	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
@@ -48,8 +49,8 @@ schema.objects.push({
 			name: "result",
 			description: "The result of the query can be found in the 'result' field",
 			type: "bool",
-			//![INFO] some hack for make result: Record<string, unknown>
-			default: "Record<string, unknown>",
+			//![INFO] some hack for make result: APIMethodReturns<Methods>
+			default: "APIMethodReturn<Methods>",
 			required: true,
 		},
 	],
@@ -95,12 +96,13 @@ schema.objects.push({
 schema.objects.push({
 	name: "APIResponse",
 	description: "Union type of Response",
+	generic: "<Methods extends keyof APIMethods>",
 	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
 	type: "any_of",
 	any_of: [
 		{
 			type: "reference",
-			reference: "APIResponseOk",
+			reference: "APIResponseOk<Methods>",
 		},
 		{
 			type: "reference",
@@ -175,6 +177,11 @@ const files: IGeneratedFile[] = [
 					"```",
 				],
 			),
+			[
+				`import type { APIMethods } from "./methods";`,
+				`import type { APIMethodReturn } from "./utils"`,
+				"",
+			],
 			Objects.generateMany(schema.objects),
 		],
 	},

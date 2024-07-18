@@ -15,7 +15,7 @@ export class Objects {
 				...CodeGenerator.generateComment(
 					`${object.description}\n\n[Documentation](${object.documentation_link})`,
 				),
-				`export type ${OBJECTS_PREFIX + object.name} = ${typesRemapper.any_of(
+				`export type ${OBJECTS_PREFIX + object.name + (object.generic ?? "")} = ${typesRemapper.any_of(
 					//TODO: fix type error. Object any of does't require IProperty
 					object as unknown as IBotAPI.IProperty,
 					object,
@@ -29,7 +29,7 @@ export class Objects {
 				...CodeGenerator.generateComment(
 					`${object.description}\n\n[Documentation](${object.documentation_link})`,
 				),
-				`export interface ${OBJECTS_PREFIX + object.name} {}`,
+				`export interface ${OBJECTS_PREFIX + object.name + (object.generic ?? "")} {}`,
 				"",
 			];
 
@@ -52,7 +52,7 @@ export class Objects {
 			...CodeGenerator.generateComment(
 				`${object.description}\n\n[Documentation](${object.documentation_link})`,
 			),
-			`export interface ${OBJECTS_PREFIX + object.name} {`,
+			`export interface ${OBJECTS_PREFIX + object.name + (object.generic ?? "")} {`,
 			...Properties.convertMany(object, object.properties, "object").flat(),
 			"}",
 			"",
