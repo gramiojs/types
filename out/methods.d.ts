@@ -13,7 +13,7 @@
  *
  * Based on Bot API v7.7.0 (07.07.2024)
  *
- * Generated at 18.07.2024, 10:11:42 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 20.07.2024, 19:11:47 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
