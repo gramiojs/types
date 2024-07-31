@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.7.0 (07.07.2024)
+ * Based on Bot API v7.8.0 (31.07.2024)
  *
- * Generated at 20.07.2024, 19:11:47 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 31.07.2024, 16:33:17 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1746,6 +1746,10 @@ export interface SetChatDescriptionParams {
  */
 export interface PinChatMessageParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be pinned
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id: number | string
@@ -1764,11 +1768,15 @@ export interface PinChatMessageParams {
  */
 export interface UnpinChatMessageParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be unpinned
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id: number | string
     /**
-     * Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.
+     * Identifier of the message to unpin. Required if *business\_connection\_id* is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.
      */
     message_id?: number
 }

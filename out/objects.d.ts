@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.7.0 (07.07.2024)
+ * Based on Bot API v7.8.0 (31.07.2024)
  *
- * Generated at 20.07.2024, 19:11:47 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 31.07.2024, 16:33:17 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -215,6 +215,10 @@ export interface TelegramUser {
      * *Optional*. *True*, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
      */
     can_connect_to_business?: boolean
+    /**
+     * *Optional*. *True*, if the bot has a main Web App. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
+     */
+    has_main_web_app?: boolean
 }
 
 export type TelegramChatType = "private" | "group" | "supergroup" | "channel"
