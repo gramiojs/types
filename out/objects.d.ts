@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.8.0 (31.07.2024)
+ * Based on Bot API v7.9.0 (14.08.2024)
  *
- * Generated at 31.07.2024, 16:33:17 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 14.08.2024, 12:14:04 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -464,11 +464,11 @@ export interface TelegramMessage {
      */
     message_thread_id?: number
     /**
-     * *Optional*. Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
+     * *Optional*. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats
      */
     from?: TelegramUser
     /**
-     * *Optional*. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field *from* contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
+     * *Optional*. Sender of the message when sent on behalf of a chat. For example, the supergroup itself for messages sent by its anonymous administrators or a linked channel for messages automatically forwarded to the channel's discussion group. For backward compatibility, if the message was sent on behalf of a chat, the field *from* contains a fake sender user in non-channel chats.
      */
     sender_chat?: TelegramChat
     /**
@@ -3108,6 +3108,10 @@ export interface TelegramChatMemberMember {
      * Information about the user
      */
     user: TelegramUser
+    /**
+     * *Optional*. Date when the user's subscription will expire; Unix time
+     */
+    until_date?: number
 }
 
 /**
@@ -3431,12 +3435,14 @@ export interface TelegramChatLocation {
  *
  * * [ReactionTypeEmoji](https://core.telegram.org/bots/api/#reactiontypeemoji)
  * * [ReactionTypeCustomEmoji](https://core.telegram.org/bots/api/#reactiontypecustomemoji)
+ * * [ReactionTypePaid](https://core.telegram.org/bots/api/#reactiontypepaid)
  *
  * [Documentation](https://core.telegram.org/bots/api/#reactiontype)
  */
 export type TelegramReactionType =
     | TelegramReactionTypeEmoji
     | TelegramReactionTypeCustomEmoji
+    | TelegramReactionTypePaid
 
 export type TelegramReactionTypeEmojiEmoji =
     | "👍"
@@ -3543,6 +3549,18 @@ export interface TelegramReactionTypeCustomEmoji {
      * Custom emoji identifier
      */
     custom_emoji_id: string
+}
+
+/**
+ * The reaction is paid.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#reactiontypepaid)
+ */
+export interface TelegramReactionTypePaid {
+    /**
+     * Type of the reaction, always “paid”
+     */
+    type: "paid"
 }
 
 /**
@@ -6385,6 +6403,10 @@ export interface TelegramTransactionPartnerUser {
      * *Optional*. Bot-specified invoice payload
      */
     invoice_payload?: string
+    /**
+     * *Optional*. Information about the paid media bought by the user
+     */
+    paid_media?: TelegramPaidMedia[]
 }
 
 /**
@@ -6971,6 +6993,7 @@ export type TelegramCurrencies =
     | "BAM"
     | "BDT"
     | "BGN"
+    | "BHD"
     | "BND"
     | "BOB"
     | "BRL"
@@ -6990,6 +7013,7 @@ export type TelegramCurrencies =
     | "EUR"
     | "GBP"
     | "GEL"
+    | "GHS"
     | "GTQ"
     | "HKD"
     | "HNL"
@@ -6998,8 +7022,11 @@ export type TelegramCurrencies =
     | "IDR"
     | "ILS"
     | "INR"
+    | "IQD"
+    | "IRR"
     | "ISK"
     | "JMD"
+    | "JOD"
     | "JPY"
     | "KES"
     | "KGS"
@@ -7035,6 +7062,7 @@ export type TelegramCurrencies =
     | "SAR"
     | "SEK"
     | "SGD"
+    | "SYP"
     | "THB"
     | "TJS"
     | "TRY"
@@ -7046,6 +7074,7 @@ export type TelegramCurrencies =
     | "USD"
     | "UYU"
     | "UZS"
+    | "VEF"
     | "VND"
     | "YER"
     | "ZAR"

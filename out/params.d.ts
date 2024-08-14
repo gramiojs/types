@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.8.0 (31.07.2024)
+ * Based on Bot API v7.9.0 (14.08.2024)
  *
- * Generated at 31.07.2024, 16:33:17 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 14.08.2024, 12:14:04 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -830,7 +830,11 @@ export interface SendVideoNoteParams {
  */
 export interface SendPaidMediaParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
      */
     chat_id: number | string
     /**
@@ -1340,7 +1344,7 @@ export interface SetMessageReactionParams {
      */
     message_id: number
     /**
-     * A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+     * A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
      */
     reaction?: Objects.TelegramReactionType[]
     /**
@@ -1645,6 +1649,46 @@ export interface EditChatInviteLinkParams {
      * *True*, if users joining the chat via the link need to be approved by chat administrators. If *True*, *member\_limit* can't be specified
      */
     creates_join_request?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.createChatSubscriptionInviteLink | createChatSubscriptionInviteLink} method
+ */
+export interface CreateChatSubscriptionInviteLinkParams {
+    /**
+     * Unique identifier for the target channel chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Invite link name; 0-32 characters
+     */
+    name?: string
+    /**
+     * The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
+     */
+    subscription_period: number
+    /**
+     * The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500
+     */
+    subscription_price: number
+}
+
+/**
+ * Params object for {@link APIMethods.editChatSubscriptionInviteLink | editChatSubscriptionInviteLink} method
+ */
+export interface EditChatSubscriptionInviteLinkParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * The invite link to edit
+     */
+    invite_link: string
+    /**
+     * Invite link name; 0-32 characters
+     */
+    name?: string
 }
 
 /**
