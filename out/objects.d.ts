@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.9.0 (14.08.2024)
  *
- * Generated at 14.08.2024, 12:14:04 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 19.08.2024, 20:17:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2856,6 +2856,14 @@ export interface TelegramChatInviteLink {
      * *Optional*. Number of pending join requests created using this link
      */
     pending_join_request_count?: number
+    /**
+     * *Optional*. The number of seconds the subscription will be active for before the next payment
+     */
+    subscription_period?: number
+    /**
+     * *Optional*. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link
+     */
+    subscription_price?: number
 }
 
 /**
