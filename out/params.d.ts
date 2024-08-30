@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.9.0 (14.08.2024)
  *
- * Generated at 19.08.2024, 20:17:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 30.08.2024, 09:18:57 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2942,7 +2942,7 @@ export interface SendInvoiceParams {
      */
     description: string
     /**
-     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
      */
     payload: string
     /**
@@ -3054,7 +3054,7 @@ export interface CreateInvoiceLinkParams {
      */
     description: string
     /**
-     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
      */
     payload: string
     /**
