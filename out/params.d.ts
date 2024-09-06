@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.7.0 (07.07.2024)
+ * Based on Bot API v7.10.0 (06.09.2024)
  *
- * Generated at 14.07.2024, 09:20:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 06.09.2024, 13:33:13 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -830,17 +830,25 @@ export interface SendVideoNoteParams {
  */
 export interface SendPaidMediaParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
      */
     chat_id: number | string
     /**
-     * The number of Telegram Stars that must be paid to buy access to the media
+     * The number of Telegram Stars that must be paid to buy access to the media; 1-2500
      */
     star_count: number
     /**
      * A JSON-serialized array describing the media to be sent; up to 10 items
      */
     media: Objects.TelegramInputPaidMedia[]
+    /**
+     * Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.
+     */
+    payload?: string
     /**
      * Media caption, 0-1024 characters after entities parsing
      */
@@ -1340,7 +1348,7 @@ export interface SetMessageReactionParams {
      */
     message_id: number
     /**
-     * A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+     * A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
      */
     reaction?: Objects.TelegramReactionType[]
     /**
@@ -1648,6 +1656,46 @@ export interface EditChatInviteLinkParams {
 }
 
 /**
+ * Params object for {@link APIMethods.createChatSubscriptionInviteLink | createChatSubscriptionInviteLink} method
+ */
+export interface CreateChatSubscriptionInviteLinkParams {
+    /**
+     * Unique identifier for the target channel chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Invite link name; 0-32 characters
+     */
+    name?: string
+    /**
+     * The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
+     */
+    subscription_period: number
+    /**
+     * The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500
+     */
+    subscription_price: number
+}
+
+/**
+ * Params object for {@link APIMethods.editChatSubscriptionInviteLink | editChatSubscriptionInviteLink} method
+ */
+export interface EditChatSubscriptionInviteLinkParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * The invite link to edit
+     */
+    invite_link: string
+    /**
+     * Invite link name; 0-32 characters
+     */
+    name?: string
+}
+
+/**
  * Params object for {@link APIMethods.revokeChatInviteLink | revokeChatInviteLink} method
  */
 export interface RevokeChatInviteLinkParams {
@@ -1746,6 +1794,10 @@ export interface SetChatDescriptionParams {
  */
 export interface PinChatMessageParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be pinned
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id: number | string
@@ -1764,11 +1816,15 @@ export interface PinChatMessageParams {
  */
 export interface UnpinChatMessageParams {
     /**
+     * Unique identifier of the business connection on behalf of which the message will be unpinned
+     */
+    business_connection_id?: string
+    /**
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
      */
     chat_id: number | string
     /**
-     * Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.
+     * Identifier of the message to unpin. Required if *business\_connection\_id* is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.
      */
     message_id?: number
 }
@@ -2792,7 +2848,7 @@ export interface SetStickerSetThumbnailParams {
      */
     user_id: number
     /**
-     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animated-sticker-requirements](https://core.telegram.org/stickers#animated-sticker-requirements) for animated sticker technical requirements), or a **WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-sticker-requirements](https://core.telegram.org/stickers#video-sticker-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -2890,7 +2946,7 @@ export interface SendInvoiceParams {
      */
     description: string
     /**
-     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
      */
     payload: string
     /**
@@ -3002,7 +3058,7 @@ export interface CreateInvoiceLinkParams {
      */
     description: string
     /**
-     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
      */
     payload: string
     /**

@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v7.7.0 (07.07.2024)
+ * Based on Bot API v7.10.0 (06.09.2024)
  *
- * Generated at 14.07.2024, 09:20:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 06.09.2024, 13:33:13 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -159,7 +159,7 @@ export interface APIMethods {
      */
     sendVideoNote: CallAPI<Params.SendVideoNoteParams, Objects.TelegramMessage>
     /**
-     * Use this method to send paid media to channel chats. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send paid media. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendpaidmedia)
      */
@@ -214,7 +214,7 @@ export interface APIMethods {
      */
     sendChatAction: CallAPI<Params.SendChatActionParams, true>
     /**
-     * Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Returns *True* on success.
+     * Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setmessagereaction)
      */
@@ -307,6 +307,24 @@ export interface APIMethods {
      */
     editChatInviteLink: CallAPI<
         Params.EditChatInviteLinkParams,
+        Objects.TelegramChatInviteLink
+    >
+    /**
+     * Use this method to create a [subscription invite link](https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions) for a channel chat. The bot must have the *can\_invite\_users* administrator rights. The link can be edited using the method [editChatSubscriptionInviteLink](https://core.telegram.org/bots/api/#editchatsubscriptioninvitelink) or revoked using the method [revokeChatInviteLink](https://core.telegram.org/bots/api/#revokechatinvitelink). Returns the new invite link as a [ChatInviteLink](https://core.telegram.org/bots/api/#chatinvitelink) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#createchatsubscriptioninvitelink)
+     */
+    createChatSubscriptionInviteLink: CallAPI<
+        Params.CreateChatSubscriptionInviteLinkParams,
+        Objects.TelegramChatInviteLink
+    >
+    /**
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the *can\_invite\_users* administrator rights. Returns the edited invite link as a [ChatInviteLink](https://core.telegram.org/bots/api/#chatinvitelink) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editchatsubscriptioninvitelink)
+     */
+    editChatSubscriptionInviteLink: CallAPI<
+        Params.EditChatSubscriptionInviteLinkParams,
         Objects.TelegramChatInviteLink
     >
     /**
@@ -436,7 +454,7 @@ export interface APIMethods {
         Objects.TelegramForumTopic
     >
     /**
-     * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have *can\_manage\_topics* administrator rights, unless it is the creator of the topic. Returns *True* on success.
+     * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator rights, unless it is the creator of the topic. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editforumtopic)
      */
@@ -469,7 +487,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have *can\_manage\_topics* administrator rights. Returns *True* on success.
+     * Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator rights. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editgeneralforumtopic)
      */
