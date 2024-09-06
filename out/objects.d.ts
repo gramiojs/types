@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.9.0 (14.08.2024)
+ * Based on Bot API v7.10.0 (06.09.2024)
  *
- * Generated at 30.08.2024, 09:18:57 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 06.09.2024, 13:33:13 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -87,6 +87,10 @@ export interface TelegramUpdate {
      * *Optional*. New incoming pre-checkout query. Contains full information about checkout
      */
     pre_checkout_query?: TelegramPreCheckoutQuery
+    /**
+     * *Optional*. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat
+     */
+    purchased_paid_media?: TelegramPaidMediaPurchased
     /**
      * *Optional*. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot
      */
@@ -2222,11 +2226,16 @@ export interface TelegramVideoChatParticipantsInvited {
 }
 
 /**
- * This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.
+ * This object represents a service message about the creation of a scheduled giveaway.
  *
  * [Documentation](https://core.telegram.org/bots/api/#giveawaycreated)
  */
-export interface TelegramGiveawayCreated {}
+export interface TelegramGiveawayCreated {
+    /**
+     * *Optional*. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
+     */
+    prize_star_count?: number
+}
 
 /**
  * This object represents a message about a scheduled giveaway.
@@ -2263,7 +2272,11 @@ export interface TelegramGiveaway {
      */
     country_codes?: string[]
     /**
-     * *Optional*. The number of months the Telegram Premium subscription won from the giveaway will be active for
+     * *Optional*. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
+     */
+    prize_star_count?: number
+    /**
+     * *Optional*. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only
      */
     premium_subscription_month_count?: number
 }
@@ -2299,7 +2312,11 @@ export interface TelegramGiveawayWinners {
      */
     additional_chat_count?: number
     /**
-     * *Optional*. The number of months the Telegram Premium subscription won from the giveaway will be active for
+     * *Optional*. The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only
+     */
+    prize_star_count?: number
+    /**
+     * *Optional*. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only
      */
     premium_subscription_month_count?: number
     /**
@@ -2338,6 +2355,10 @@ export interface TelegramGiveawayCompleted {
      * *Optional*. Message with the giveaway that was completed, if it wasn't deleted
      */
     giveaway_message?: TelegramMessage
+    /**
+     * *Optional*. *True*, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway.
+     */
+    is_star_giveaway?: boolean
 }
 
 /**
@@ -3950,7 +3971,7 @@ export interface TelegramChatBoostSourceGiftCode {
 }
 
 /**
- * The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+ * The boost was obtained by the creation of a Telegram Premium or a Telegram Star giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription for Telegram Premium giveaways and ??? times for one year for Telegram Star giveaways.
  *
  * [Documentation](https://core.telegram.org/bots/api/#chatboostsourcegiveaway)
  */
@@ -3964,9 +3985,13 @@ export interface TelegramChatBoostSourceGiveaway {
      */
     giveaway_message_id: number
     /**
-     * *Optional*. User that won the prize in the giveaway if any
+     * *Optional*. User that won the prize in the giveaway if any; for Telegram Premium giveaways only
      */
     user?: TelegramUser
+    /**
+     * *Optional*. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
+     */
+    prize_star_count?: number
     /**
      * *Optional*. True, if the giveaway was completed, but there was no user to win the prize
      */
@@ -6320,6 +6345,22 @@ export interface TelegramPreCheckoutQuery {
 }
 
 /**
+ * This object contains information about a paid media purchase.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#paidmediapurchased)
+ */
+export interface TelegramPaidMediaPurchased {
+    /**
+     * User who purchased the media
+     */
+    from: TelegramUser
+    /**
+     * Bot-specified paid media payload
+     */
+    paid_media_payload: string
+}
+
+/**
  * This object describes the state of a revenue withdrawal operation. Currently, it can be one of
  *
  * * [RevenueWithdrawalStatePending](https://core.telegram.org/bots/api/#revenuewithdrawalstatepending)
@@ -6415,6 +6456,10 @@ export interface TelegramTransactionPartnerUser {
      * *Optional*. Information about the paid media bought by the user
      */
     paid_media?: TelegramPaidMedia[]
+    /**
+     * *Optional*. Bot-specified paid media payload
+     */
+    paid_media_payload?: string
 }
 
 /**

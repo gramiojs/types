@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.9.0 (14.08.2024)
+ * Based on Bot API v7.10.0 (06.09.2024)
  *
- * Generated at 30.08.2024, 09:18:57 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 06.09.2024, 13:33:13 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -838,13 +838,17 @@ export interface SendPaidMediaParams {
      */
     chat_id: number | string
     /**
-     * The number of Telegram Stars that must be paid to buy access to the media
+     * The number of Telegram Stars that must be paid to buy access to the media; 1-2500
      */
     star_count: number
     /**
      * A JSON-serialized array describing the media to be sent; up to 10 items
      */
     media: Objects.TelegramInputPaidMedia[]
+    /**
+     * Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.
+     */
+    payload?: string
     /**
      * Media caption, 0-1024 characters after entities parsing
      */
