@@ -1,20 +1,15 @@
 {
-  "$schema": "https://jsr.io/schema/config-file.v1.json",
-  "name": "@gramio/types",
-  "version": "7.7.1",
-  "exports": {
-    ".": "./source/index.ts",
-    "./methods": "./source/methods.ts",
-    "./objects": "./source/objects.ts",
-    "./params": "./source/params.ts",
-    "./utils": "./source/utils.ts"
-  },
-  "publish": {
-    "include": [
-      "jsr.json",
-      "source",
-      "README.md",
-      "tsconfig.json"
-    ]
-  }
+	"$schema": "https://jsr.io/schema/config-file.v1.json",
+	"name": "@gramio/types",
+	"version": "7.7.1",
+	"exports": {
+		".": "./source/index.ts",
+		"./methods": "./source/methods.ts",
+		"./objects": "./source/objects.ts",
+		"./params": "./source/params.ts",
+		"./utils": "./source/utils.ts"
+	},
+	"publish": {
+		"include": ["jsr.json", "source", "README.md", "tsconfig.json", "LICENSE"]
+	}
 }

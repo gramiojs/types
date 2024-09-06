@@ -1,47 +1,45 @@
 {
-    "name": "@gramio/types",
-    "version": "7.7.1",
-    "homepage": "https://github.com/gramiojs/types",
-    "readme": "https://github.com/gramiojs/types",
-    "description": "Code-generated and Auto-published Telegram Bot API types",
-    "type": "commonjs",
-    "author": "kravets",
-    "license": "ISC",
-    "keywords": [
-        "telegram",
-        "bot",
-        "tba",
-        "types",
-        "telegram-bot-api",
-        "code-generated",
-        "auto-published",
-        "cicd",
-        "api"
-    ],
-    "types": "./out/index.d.ts",
-    "typings": "./out/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./out/index.d.ts"
-        },
-        "./*": {
-            "types": "./out/*.d.ts"
-        }
-    },
-    "scripts": {
-        "dirty-fix": "bun scripts/dirty-fix.ts",
-        "cicd": "bun scripts/cicd.ts",
-        "jsr": "bun scripts/release-jsr.ts",
-        "generate": "bun src/index.ts",
-        "lint": "bunx @biomejs/biome check ./src",
-        "lint:fix": "bun lint --apply"
-    },
-    "devDependencies": {
-        "@biomejs/biome": "1.5.3",
-        "@types/node": "^20.11.10",
-        "prettier": "^3.2.4"
-    },
-    "files": [
-        "out"
-    ]
+	"name": "@gramio/types",
+	"version": "7.7.1",
+	"homepage": "https://github.com/gramiojs/types",
+	"readme": "https://github.com/gramiojs/types",
+	"description": "Code-generated and Auto-published Telegram Bot API types",
+	"type": "commonjs",
+	"author": "kravets",
+	"license": "MIT",
+	"keywords": [
+		"telegram",
+		"bot",
+		"tba",
+		"types",
+		"telegram-bot-api",
+		"code-generated",
+		"auto-published",
+		"cicd",
+		"api"
+	],
+	"types": "./out/index.d.ts",
+	"typings": "./out/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./out/index.d.ts"
+		},
+		"./*": {
+			"types": "./out/*.d.ts"
+		}
+	},
+	"scripts": {
+		"dirty-fix": "bun scripts/dirty-fix.ts",
+		"cicd": "bun scripts/cicd.ts",
+		"jsr": "bun scripts/release-jsr.ts",
+		"generate": "bun src/index.ts",
+		"lint": "bunx @biomejs/biome check ./src",
+		"lint:fix": "bun lint --apply"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.5.3",
+		"@types/node": "^20.11.10",
+		"prettier": "^3.2.4"
+	},
+	"files": ["out"]
 }
