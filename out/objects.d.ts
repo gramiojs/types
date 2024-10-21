@@ -10,7 +10,7 @@
  *
  * Based on Bot API v7.10.0 (06.09.2024)
  *
- * Generated at 06.09.2024, 14:16:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 21.10.2024, 12:36:07 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -6509,7 +6509,7 @@ export interface TelegramTransactionPartnerOther {
  */
 export interface TelegramStarTransaction {
     /**
-     * Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with *SuccessfulPayment.telegram\_payment\_charge\_id* for successful incoming payments from users.
+     * Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with *SuccessfulPayment.telegram\_payment\_charge\_id* for successful incoming payments from users.
      */
     id: string
     /**
