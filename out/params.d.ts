@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.10.0 (06.09.2024)
+ * Based on Bot API v7.11.0 (31.10.2024)
  *
- * Generated at 21.10.2024, 12:36:07 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 31.10.2024, 15:25:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -125,6 +125,10 @@ export interface SendMessageParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
@@ -252,6 +256,10 @@ export interface CopyMessageParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -352,6 +360,10 @@ export interface SendPhotoParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -430,6 +442,10 @@ export interface SendAudioParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -499,6 +515,10 @@ export interface SendDocumentParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
@@ -590,6 +610,10 @@ export interface SendVideoParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -676,6 +700,10 @@ export interface SendAnimationParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -742,6 +770,10 @@ export interface SendVoiceParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -803,6 +835,10 @@ export interface SendVideoNoteParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
@@ -874,6 +910,10 @@ export interface SendPaidMediaParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -924,6 +964,10 @@ export interface SendMediaGroupParams {
      * Protects the contents of the sent messages from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
@@ -982,6 +1026,10 @@ export interface SendLocationParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
@@ -1061,6 +1109,10 @@ export interface SendVenueParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -1122,6 +1174,10 @@ export interface SendContactParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
@@ -1227,6 +1283,10 @@ export interface SendPollParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -1278,6 +1338,10 @@ export interface SendDiceParams {
      * Protects the contents of the sent message from forwarding
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
@@ -2620,6 +2684,10 @@ export interface SendStickerParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -3030,6 +3098,10 @@ export interface SendInvoiceParams {
      */
     protect_content?: boolean
     /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
+    /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
@@ -3241,6 +3313,10 @@ export interface SendGameParams {
      * Protects the contents of the sent message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     */
+    allow_paid_broadcast?: boolean
     /**
      * Unique identifier of the message effect to be added to the message; for private chats only
      */

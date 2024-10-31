@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.10.0 (06.09.2024)
+ * Based on Bot API v7.11.0 (31.10.2024)
  *
- * Generated at 21.10.2024, 12:36:07 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 31.10.2024, 15:25:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -460,7 +460,7 @@ export interface TelegramChatFullInfo {
  */
 export interface TelegramMessage {
     /**
-     * Unique message identifier inside this chat
+     * Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent
      */
     message_id: number
     /**
@@ -810,7 +810,7 @@ export interface TelegramMessage {
  */
 export interface TelegramMessageId {
     /**
-     * Unique message identifier
+     * Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent
      */
     message_id: number
 }
@@ -875,7 +875,7 @@ export type TelegramMessageEntityType =
  */
 export interface TelegramMessageEntity {
     /**
-     * Type of the entity. Currently, can be “mention” (`@username`), “hashtag” (`#hashtag`), “cashtag” (`$USD`), “bot\_command” (`/start@jobs_bot`), “url” (`https://telegram.org`), “email” (`do-not-reply@telegram.org`), “phone\_number” (`+1-212-555-0123`), “bold” (**bold text**), “italic” (*italic text*), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable\_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text\_link” (for clickable text URLs), “text\_mention” (for users [without usernames](https://telegram.org/blog/edit#new-mentions)), “custom\_emoji” (for inline custom emoji stickers)
+     * Type of the entity. Currently, can be “mention” (`@username`), “hashtag” (`#hashtag` or `#hashtag@chatusername`), “cashtag” (`$USD` or `$USD@chatusername`), “bot\_command” (`/start@jobs_bot`), “url” (`https://telegram.org`), “email” (`do-not-reply@telegram.org`), “phone\_number” (`+1-212-555-0123`), “bold” (**bold text**), “italic” (*italic text*), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable\_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text\_link” (for clickable text URLs), “text\_mention” (for users [without usernames](https://telegram.org/blog/edit#new-mentions)), “custom\_emoji” (for inline custom emoji stickers)
      */
     type: TelegramMessageEntityType
     /**
@@ -2684,6 +2684,10 @@ export interface TelegramInlineKeyboardButton {
      */
     switch_inline_query_chosen_chat?: TelegramSwitchInlineQueryChosenChat
     /**
+     * *Optional*. Description of the button that copies the specified text to the clipboard.
+     */
+    copy_text?: TelegramCopyTextButton
+    /**
      * *Optional*. Description of the game that will be launched when the user presses the button.
      *
      * **NOTE:** This type of button **must** always be the first button in the first row.
@@ -2753,6 +2757,18 @@ export interface TelegramSwitchInlineQueryChosenChat {
      * *Optional*. True, if channel chats can be chosen
      */
     allow_channel_chats?: boolean
+}
+
+/**
+ * This object represents an inline keyboard button that copies specified text to the clipboard.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#copytextbutton)
+ */
+export interface TelegramCopyTextButton {
+    /**
+     * The text to be copied to the clipboard; 1-256 characters
+     */
+    text: string
 }
 
 /**
@@ -6424,6 +6440,7 @@ export interface TelegramRevenueWithdrawalStateFailed {
  * * [TransactionPartnerUser](https://core.telegram.org/bots/api/#transactionpartneruser)
  * * [TransactionPartnerFragment](https://core.telegram.org/bots/api/#transactionpartnerfragment)
  * * [TransactionPartnerTelegramAds](https://core.telegram.org/bots/api/#transactionpartnertelegramads)
+ * * [TransactionPartnerTelegramApi](https://core.telegram.org/bots/api/#transactionpartnertelegramapi)
  * * [TransactionPartnerOther](https://core.telegram.org/bots/api/#transactionpartnerother)
  *
  * [Documentation](https://core.telegram.org/bots/api/#transactionpartner)
@@ -6432,6 +6449,7 @@ export type TelegramTransactionPartner =
     | TelegramTransactionPartnerUser
     | TelegramTransactionPartnerFragment
     | TelegramTransactionPartnerTelegramAds
+    | TelegramTransactionPartnerTelegramApi
     | TelegramTransactionPartnerOther
 
 /**
@@ -6488,6 +6506,22 @@ export interface TelegramTransactionPartnerTelegramAds {
      * Type of the transaction partner, always “telegram\_ads”
      */
     type: "telegram_ads"
+}
+
+/**
+ * Describes a transaction with payment for [paid broadcasting](https://core.telegram.org/bots/api/#paid-broadcasts).
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartnertelegramapi)
+ */
+export interface TelegramTransactionPartnerTelegramApi {
+    /**
+     * Type of the transaction partner, always “telegram\_api”
+     */
+    type: "telegram_api"
+    /**
+     * The number of successful requests that exceeded regular limits and were therefore billed
+     */
+    request_count: number
 }
 
 /**
