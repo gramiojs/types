@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v7.11.0 (31.10.2024)
+ * Based on Bot API v8.0.0 (17.11.2024)
  *
- * Generated at 31.10.2024, 15:25:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 17.11.2024, 16:48:07 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1437,6 +1437,24 @@ export interface GetUserProfilePhotosParams {
      * Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100.
      */
     limit?: number
+}
+
+/**
+ * Params object for {@link APIMethods.setUserEmojiStatus | setUserEmojiStatus} method
+ */
+export interface SetUserEmojiStatusParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+    /**
+     * Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.
+     */
+    emoji_status_custom_emoji_id?: string
+    /**
+     * Expiration date of the emoji status, if any
+     */
+    emoji_status_expiration_date?: number
 }
 
 /**
@@ -2950,6 +2968,32 @@ export interface DeleteStickerSetParams {
 }
 
 /**
+ * Params object for {@link APIMethods.sendGift | sendGift} method
+ */
+export interface SendGiftParams {
+    /**
+     * Unique identifier of the target user that will receive the gift
+     */
+    user_id: number
+    /**
+     * Identifier of the gift
+     */
+    gift_id: string
+    /**
+     * Text that will be shown along with the gift; 0-255 characters
+     */
+    text?: string
+    /**
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_parse_mode?: string
+    /**
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_entities?: Objects.TelegramMessageEntity[]
+}
+
+/**
  * Params object for {@link APIMethods.answerInlineQuery | answerInlineQuery} method
  */
 export interface AnswerInlineQueryParams {
@@ -2991,6 +3035,36 @@ export interface AnswerWebAppQueryParams {
      * A JSON-serialized object describing the message to be sent
      */
     result: Objects.TelegramInlineQueryResult
+}
+
+/**
+ * Params object for {@link APIMethods.savePreparedInlineMessage | savePreparedInlineMessage} method
+ */
+export interface SavePreparedInlineMessageParams {
+    /**
+     * Unique identifier of the target user that can use the prepared message
+     */
+    user_id: number
+    /**
+     * A JSON-serialized object describing the message to be sent
+     */
+    result: Objects.TelegramInlineQueryResult
+    /**
+     * Pass *True* if the message can be sent to private chats with users
+     */
+    allow_user_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to private chats with bots
+     */
+    allow_bot_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to group and supergroup chats
+     */
+    allow_group_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to channel chats
+     */
+    allow_channel_chats?: boolean
 }
 
 /**
@@ -3122,6 +3196,10 @@ export interface SendInvoiceParams {
  */
 export interface CreateInvoiceLinkParams {
     /**
+     * Unique identifier of the business connection on behalf of which the link will be created
+     */
+    business_connection_id?: string
+    /**
      * Product name, 1-32 characters
      */
     title: string
@@ -3145,6 +3223,10 @@ export interface CreateInvoiceLinkParams {
      * Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     prices: Objects.TelegramLabeledPrice[]
+    /**
+     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified.
+     */
+    subscription_period?: number
     /**
      * The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
@@ -3269,6 +3351,24 @@ export interface RefundStarPaymentParams {
      * Telegram payment identifier
      */
     telegram_payment_charge_id: string
+}
+
+/**
+ * Params object for {@link APIMethods.editUserStarSubscription | editUserStarSubscription} method
+ */
+export interface EditUserStarSubscriptionParams {
+    /**
+     * Identifier of the user whose subscription will be edited
+     */
+    user_id: number
+    /**
+     * Telegram payment identifier for the subscription
+     */
+    telegram_payment_charge_id: string
+    /**
+     * Pass *True* to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass *False* to allow the user to re-enable a subscription that was previously canceled by the bot.
+     */
+    is_canceled: boolean
 }
 
 /**

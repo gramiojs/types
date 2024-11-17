@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v7.11.0 (31.10.2024)
+ * Based on Bot API v8.0.0 (17.11.2024)
  *
- * Generated at 31.10.2024, 15:25:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 17.11.2024, 16:48:07 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -228,6 +228,12 @@ export interface APIMethods {
         Params.GetUserProfilePhotosParams,
         Objects.TelegramUserProfilePhotos
     >
+    /**
+     * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method [requestEmojiStatusAccess](https://core.telegram.org/bots/webapps#initializing-mini-apps). Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setuseremojistatus)
+     */
+    setUserEmojiStatus: CallAPI<Params.SetUserEmojiStatusParams, true>
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a [File](https://core.telegram.org/bots/api/#file) object is returned. The file can then be downloaded via the link `https://api.telegram.org/file/bot<token>/<file_path>`, where `<file_path>` is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling [getFile](https://core.telegram.org/bots/api/#getfile) again.
      *
@@ -852,6 +858,18 @@ export interface APIMethods {
      */
     deleteStickerSet: CallAPI<Params.DeleteStickerSetParams, true>
     /**
+     * Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getavailablegifts)
+     */
+    getAvailableGifts: CallAPIWithoutParams<Objects.TelegramGifts>
+    /**
+     * Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendgift)
+     */
+    sendGift: CallAPI<Params.SendGiftParams, true>
+    /**
      * Use this method to send answers to an inline query. On success, *True* is returned.
      * No more than **50** results per query are allowed.
      *
@@ -866,6 +884,15 @@ export interface APIMethods {
     answerWebAppQuery: CallAPI<
         Params.AnswerWebAppQueryParams,
         Objects.TelegramSentWebAppMessage
+    >
+    /**
+     * Stores a message that can be sent by a user of a Mini App. Returns a [PreparedInlineMessage](https://core.telegram.org/bots/api/#preparedinlinemessage) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#savepreparedinlinemessage)
+     */
+    savePreparedInlineMessage: CallAPI<
+        Params.SavePreparedInlineMessageParams,
+        Objects.TelegramPreparedInlineMessage
     >
     /**
      * Use this method to send invoices. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
@@ -906,6 +933,15 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#refundstarpayment)
      */
     refundStarPayment: CallAPI<Params.RefundStarPaymentParams, true>
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#edituserstarsubscription)
+     */
+    editUserStarSubscription: CallAPI<
+        Params.EditUserStarSubscriptionParams,
+        true
+    >
     /**
      * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns *True* on success.
      *
