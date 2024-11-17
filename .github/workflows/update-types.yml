@@ -27,8 +27,8 @@ jobs:
             - name: Clone TBA Schema parser repo
               run: git clone https://github.com/ENCRYPTEDFOREVER/tg-bot-api.git
 
-            - name: Temporal dirty fix for https://github.com/ark0f/tg-bot-api/issues/20
-              run: bun dirty-fix
+            # - name: Temporal dirty fix for https://github.com/ark0f/tg-bot-api/issues/20
+            #   run: bun dirty-fix
 
             - name: Install Rust
               uses: actions-rs/toolchain@v1
@@ -36,7 +36,7 @@ jobs:
                   toolchain: stable
 
             - name: Use cargo cache
-              uses: actions/cache@v2
+              uses: actions/cache@v4
               with:
                   path: |
                       ~/.cargo/bin/
@@ -74,17 +74,10 @@ jobs:
             - name: Publish package to JSR
               run: bunx jsr publish
 
-            - name: Install Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: "20.x"
-                  registry-url: "https://registry.npmjs.org"
-                  scope: "@gramio"
-
             - name: Publish package to NPM
-              run: npm publish
+              run: bun publish --access public
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: GitHub Release
               uses: ncipollo/release-action@v1
