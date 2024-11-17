@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v7.11.0 (31.10.2024)
+ * Based on Bot API v8.0.0 (17.11.2024)
  *
- * Generated at 31.10.2024, 15:25:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 17.11.2024, 16:48:07 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -4627,6 +4627,46 @@ export interface TelegramInputSticker {
     keywords?: string[]
 }
 
+/**
+ * This object represents a gift that can be sent by the bot.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#gift)
+ */
+export interface TelegramGift {
+    /**
+     * Unique identifier of the gift
+     */
+    id: string
+    /**
+     * The sticker that represents the gift
+     */
+    sticker: TelegramSticker
+    /**
+     * The number of Telegram Stars that must be paid to send the sticker
+     */
+    star_count: number
+    /**
+     * *Optional*. The total number of the gifts of this type that can be sent; for limited gifts only
+     */
+    total_count?: number
+    /**
+     * *Optional*. The number of remaining gifts of this type that can be sent; for limited gifts only
+     */
+    remaining_count?: number
+}
+
+/**
+ * This object represent a list of gifts.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#gifts)
+ */
+export interface TelegramGifts {
+    /**
+     * The list of gifts
+     */
+    gifts: TelegramGift[]
+}
+
 export type TelegramInlineQueryChatType =
     | "sender"
     | "private"
@@ -6117,6 +6157,22 @@ export interface TelegramSentWebAppMessage {
 }
 
 /**
+ * Describes an inline message to be sent by a user of a Mini App.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#preparedinlinemessage)
+ */
+export interface TelegramPreparedInlineMessage {
+    /**
+     * Unique identifier of the prepared message
+     */
+    id: string
+    /**
+     * Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used
+     */
+    expiration_date: number
+}
+
+/**
  * This object represents a portion of the price for goods or services.
  *
  * [Documentation](https://core.telegram.org/bots/api/#labeledprice)
@@ -6254,6 +6310,18 @@ export interface TelegramSuccessfulPayment {
      * Bot-specified invoice payload
      */
     invoice_payload: string
+    /**
+     * *Optional*. Expiration date of the subscription, in Unix time; for recurring payments only
+     */
+    subscription_expiration_date?: number
+    /**
+     * *Optional*. True, if the payment is a recurring payment for a subscription
+     */
+    is_recurring?: boolean
+    /**
+     * *Optional*. True, if the payment is the first payment for a subscription
+     */
+    is_first_recurring?: boolean
     /**
      * *Optional*. Identifier of the shipping option chosen by the user
      */
@@ -6471,6 +6539,10 @@ export interface TelegramTransactionPartnerUser {
      */
     invoice_payload?: string
     /**
+     * *Optional*. The duration of the paid subscription
+     */
+    subscription_period?: number
+    /**
      * *Optional*. Information about the paid media bought by the user
      */
     paid_media?: TelegramPaidMedia[]
@@ -6478,6 +6550,10 @@ export interface TelegramTransactionPartnerUser {
      * *Optional*. Bot-specified paid media payload
      */
     paid_media_payload?: string
+    /**
+     * *Optional*. The gift sent to the user by the bot
+     */
+    gift?: string
 }
 
 /**
@@ -7161,7 +7237,6 @@ export type TelegramCurrencies =
     | "USD"
     | "UYU"
     | "UZS"
-    | "VEF"
     | "VND"
     | "YER"
     | "ZAR"
