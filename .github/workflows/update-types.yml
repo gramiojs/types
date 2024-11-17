@@ -25,7 +25,7 @@ jobs:
                   bun-version: 1.0.30
 
             - name: Clone TBA Schema parser repo
-              run: git clone https://github.com/ark0f/tg-bot-api.git
+              run: git clone https://github.com/ENCRYPTEDFOREVER/tg-bot-api.git
 
             - name: Temporal dirty fix for https://github.com/ark0f/tg-bot-api/issues/20
               run: bun dirty-fix
