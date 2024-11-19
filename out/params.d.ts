@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.0.0 (17.11.2024)
  *
- * Generated at 18.11.2024, 18:25:09 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 19.11.2024, 01:23:49 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -3224,7 +3224,7 @@ export interface CreateInvoiceLinkParams {
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified.
+     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user.
      */
     subscription_period?: number
     /**
