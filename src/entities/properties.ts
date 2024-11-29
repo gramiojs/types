@@ -32,7 +32,7 @@ export const typesRemapper: TTypeRemapper = {
 			}InputFile | string`;
 
 		// ![INFO] better typings for https://core.telegram.org/bots/api#formatting-options
-		if (property.name === "parse_mode")
+		if (property.name.includes("parse_mode"))
 			return `"HTML" | "MarkdownV2" | "Markdown"`;
 
 		// ![INFO] for better UX with FormattableString and toString'able classes :#
@@ -40,7 +40,8 @@ export const typesRemapper: TTypeRemapper = {
 			property.description?.includes("after entities parsing") ||
 			property.name === "message_text" ||
 			(object?.name === "InputPollOption" && property.name === "text") ||
-			(object.name === "sendPoll" && property.name === "question")
+			(object.name === "sendPoll" && property.name === "question") ||
+			(object?.name === "SendGift" && property.name === "text")
 		)
 			return "(string | { toString(): string})";
 
