@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.0.0 (17.11.2024)
  *
- * Generated at 22.11.2024, 07:17:32 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 29.11.2024, 15:00:15 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1225,7 +1225,7 @@ export interface SendPollParams {
     /**
      * Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Currently, only custom emoji entities are allowed
      */
-    question_parse_mode?: string
+    question_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of *question\_parse\_mode*
      */
@@ -1257,7 +1257,7 @@ export interface SendPollParams {
     /**
      * Mode for parsing entities in the explanation. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
-    explanation_parse_mode?: string
+    explanation_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of *explanation\_parse\_mode*
      */
@@ -2986,7 +2986,7 @@ export interface SendGiftParams {
     /**
      * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
      */
-    text_parse_mode?: string
+    text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
      * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
      */
