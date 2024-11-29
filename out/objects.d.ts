@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.0.0 (17.11.2024)
  *
- * Generated at 17.11.2024, 16:53:49 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 22.11.2024, 07:17:32 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -6553,7 +6553,7 @@ export interface TelegramTransactionPartnerUser {
     /**
      * *Optional*. The gift sent to the user by the bot
      */
-    gift?: string
+    gift?: TelegramGift
 }
 
 /**
