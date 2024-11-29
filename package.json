@@ -1,6 +1,6 @@
 {
 	"name": "@gramio/types",
-	"version": "8.0.5",
+	"version": "8.0.6",
 	"homepage": "https://github.com/gramiojs/types",
 	"readme": "https://github.com/gramiojs/types",
 	"description": "Code-generated and Auto-published Telegram Bot API types",

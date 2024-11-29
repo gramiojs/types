@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.0.0 (17.11.2024)
  *
- * Generated at 29.11.2024, 15:00:15 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 29.11.2024, 15:06:34 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2982,7 +2982,7 @@ export interface SendGiftParams {
     /**
      * Text that will be shown along with the gift; 0-255 characters
      */
-    text?: string
+    text?: string | { toString(): string }
     /**
      * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
      */
