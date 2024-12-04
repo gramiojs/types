@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v8.0.0 (17.11.2024)
+ * Based on Bot API v8.1.0 (04.12.2024)
  *
- * Generated at 29.11.2024, 15:06:34 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 04.12.2024, 09:58:43 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -6503,9 +6503,38 @@ export interface TelegramRevenueWithdrawalStateFailed {
 }
 
 /**
+ * Contains information about the affiliate that received a commission via this transaction.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#affiliateinfo)
+ */
+export interface TelegramAffiliateInfo {
+    /**
+     * *Optional*. The bot or the user that received an affiliate commission if it was received by a bot or a user
+     */
+    affiliate_user?: TelegramUser
+    /**
+     * *Optional*. The chat that received an affiliate commission if it was received by a chat
+     */
+    affiliate_chat?: TelegramChat
+    /**
+     * The number of Telegram Stars received by the affiliate for each 1000 Telegram Stars received by the bot from referred users
+     */
+    commission_per_mille: number
+    /**
+     * Integer amount of Telegram Stars received by the affiliate from the transaction, rounded to 0; can be negative for refunds
+     */
+    amount: number
+    /**
+     * *Optional*. The number of 1/1000000000 shares of Telegram Stars received by the affiliate; from -999999999 to 999999999; can be negative for refunds
+     */
+    nanostar_amount?: number
+}
+
+/**
  * This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of
  *
  * * [TransactionPartnerUser](https://core.telegram.org/bots/api/#transactionpartneruser)
+ * * [TransactionPartnerAffiliateProgram](https://core.telegram.org/bots/api/#transactionpartneraffiliateprogram)
  * * [TransactionPartnerFragment](https://core.telegram.org/bots/api/#transactionpartnerfragment)
  * * [TransactionPartnerTelegramAds](https://core.telegram.org/bots/api/#transactionpartnertelegramads)
  * * [TransactionPartnerTelegramApi](https://core.telegram.org/bots/api/#transactionpartnertelegramapi)
@@ -6515,6 +6544,7 @@ export interface TelegramRevenueWithdrawalStateFailed {
  */
 export type TelegramTransactionPartner =
     | TelegramTransactionPartnerUser
+    | TelegramTransactionPartnerAffiliateProgram
     | TelegramTransactionPartnerFragment
     | TelegramTransactionPartnerTelegramAds
     | TelegramTransactionPartnerTelegramApi
@@ -6535,6 +6565,10 @@ export interface TelegramTransactionPartnerUser {
      */
     user: TelegramUser
     /**
+     * *Optional*. Information about the affiliate that received a commission via this transaction
+     */
+    affiliate?: TelegramAffiliateInfo
+    /**
      * *Optional*. Bot-specified invoice payload
      */
     invoice_payload?: string
@@ -6554,6 +6588,26 @@ export interface TelegramTransactionPartnerUser {
      * *Optional*. The gift sent to the user by the bot
      */
     gift?: TelegramGift
+}
+
+/**
+ * Describes the affiliate program that issued the affiliate commission received via this transaction.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartneraffiliateprogram)
+ */
+export interface TelegramTransactionPartnerAffiliateProgram {
+    /**
+     * Type of the transaction partner, always “affiliate\_program”
+     */
+    type: "affiliate_program"
+    /**
+     * *Optional*. Information about the bot that sponsored the affiliate program
+     */
+    sponsor_user?: TelegramUser
+    /**
+     * The number of Telegram Stars received by the bot for each 1000 Telegram Stars received by the affiliate program sponsor from referred users
+     */
+    commission_per_mille: number
 }
 
 /**
@@ -6623,9 +6677,13 @@ export interface TelegramStarTransaction {
      */
     id: string
     /**
-     * Number of Telegram Stars transferred by the transaction
+     * Integer amount of Telegram Stars transferred by the transaction
      */
     amount: number
+    /**
+     * *Optional*. The number of 1/1000000000 shares of Telegram Stars transferred by the transaction; from 0 to 999999999
+     */
+    nanostar_amount?: number
     /**
      * Date the transaction was created in Unix time
      */

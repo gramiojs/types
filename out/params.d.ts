@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v8.0.0 (17.11.2024)
+ * Based on Bot API v8.1.0 (04.12.2024)
  *
- * Generated at 29.11.2024, 15:06:34 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 04.12.2024, 09:58:43 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -3224,7 +3224,7 @@ export interface CreateInvoiceLinkParams {
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user.
+     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.
      */
     subscription_period?: number
     /**
