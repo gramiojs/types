@@ -2,8 +2,9 @@
 
 <div align="center">
 
-[![Bot API](https://img.shields.io/badge/Bot%20API-8.0-blue?logo=telegram&style=flat&labelColor=000&color=3b82f6)](https://core.telegram.org/bots/api)
+[![Bot API](https://img.shields.io/badge/Bot%20API-8.1+-blue?logo=telegram&style=flat&labelColor=000&color=3b82f6)](https://core.telegram.org/bots/api)
 [![npm](https://img.shields.io/npm/v/@gramio/types?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/@gramio/types)
+[![npm downloads](https://img.shields.io/npm/dw/@gramio/types?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/@gramio/types)
 [![JSR](https://jsr.io/badges/@gramio/types)](https://jsr.io/@gramio/types)
 [![JSR Score](https://jsr.io/badges/@gramio/types/score)](https://jsr.io/@gramio/types)
 
@@ -11,7 +12,7 @@
 
 ### Versioning
 
-8.0.x types are for 8.0 Telegram Bot API
+8.1.x types are for 8.1 Telegram Bot API
 
 ## Usage as an [NPM package](https://www.npmjs.com/package/@gramio/types)
 
