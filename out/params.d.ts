@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.1.0 (04.12.2024)
  *
- * Generated at 04.12.2024, 09:58:43 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 30.12.2024, 02:52:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -35,7 +35,7 @@ export interface GetUpdatesParams {
     /**
      * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api/#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      *
-     * Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
+     * Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.
      */
     allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
 }
