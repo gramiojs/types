@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v8.1.0 (04.12.2024)
+ * Based on Bot API v8.2.0 (01.01.2025)
  *
- * Generated at 30.12.2024, 02:52:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 01.01.2025, 20:37:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2934,11 +2934,11 @@ export interface SetStickerSetThumbnailParams {
      */
     user_id: number
     /**
-     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **.WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
-     * Format of the thumbnail, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, or “video” for a **WEBM** video
+     * Format of the thumbnail, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, or “video” for a **.WEBM** video
      */
     format: SetStickerSetThumbnailFormat
 }
@@ -2980,6 +2980,10 @@ export interface SendGiftParams {
      */
     gift_id: string
     /**
+     * Pass *True* to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
+     */
+    pay_for_upgrade?: boolean
+    /**
      * Text that will be shown along with the gift; 0-255 characters
      */
     text?: string | { toString(): string }
@@ -2991,6 +2995,54 @@ export interface SendGiftParams {
      * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
      */
     text_entities?: Objects.TelegramMessageEntity[]
+}
+
+/**
+ * Params object for {@link APIMethods.verifyUser | verifyUser} method
+ */
+export interface VerifyUserParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.verifyChat | verifyChat} method
+ */
+export interface VerifyChatParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.removeUserVerification | removeUserVerification} method
+ */
+export interface RemoveUserVerificationParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.removeChatVerification | removeChatVerification} method
+ */
+export interface RemoveChatVerificationParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
 }
 
 /**

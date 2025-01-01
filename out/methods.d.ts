@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v8.1.0 (04.12.2024)
+ * Based on Bot API v8.2.0 (01.01.2025)
  *
- * Generated at 30.12.2024, 02:52:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 01.01.2025, 20:37:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -38,7 +38,7 @@ export interface APIMethods {
         Objects.TelegramUpdate[]
     >
     /**
-     * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](https://core.telegram.org/bots/api/#update). In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns *True* on success.
+     * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](https://core.telegram.org/bots/api/#update). In case of an unsuccessful request (a request with response [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) different from `2XY`), we will repeat the request and give up after a reasonable amount of attempts. Returns *True* on success.
      *
      * If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter *secret\_token*. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
      *
@@ -869,6 +869,30 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#sendgift)
      */
     sendGift: CallAPI<Params.SendGiftParams, true>
+    /**
+     * Verifies a user on behalf of the organization which is represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#verifyuser)
+     */
+    verifyUser: CallAPI<Params.VerifyUserParams, true>
+    /**
+     * Verifies a chat on behalf of the organization which is represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#verifychat)
+     */
+    verifyChat: CallAPI<Params.VerifyChatParams, true>
+    /**
+     * Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removeuserverification)
+     */
+    removeUserVerification: CallAPI<Params.RemoveUserVerificationParams, true>
+    /**
+     * Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removechatverification)
+     */
+    removeChatVerification: CallAPI<Params.RemoveChatVerificationParams, true>
     /**
      * Use this method to send answers to an inline query. On success, *True* is returned.
      * No more than **50** results per query are allowed.

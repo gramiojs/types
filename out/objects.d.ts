@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v8.1.0 (04.12.2024)
+ * Based on Bot API v8.2.0 (01.01.2025)
  *
- * Generated at 30.12.2024, 02:52:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 01.01.2025, 20:37:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1967,7 +1967,7 @@ export interface TelegramBackgroundTypeWallpaper {
 }
 
 /**
- * The background is a PNG or TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
+ * The background is a .PNG or .TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
  *
  * [Documentation](https://core.telegram.org/bots/api/#backgroundtypepattern)
  */
@@ -4610,7 +4610,7 @@ export interface TelegramInputSticker {
      */
     sticker: TelegramInputFile | string
     /**
-     * Format of the added sticker, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, “video” for a **WEBM** video
+     * Format of the added sticker, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, “video” for a **.WEBM** video
      */
     format: TelegramInputStickerFormat
     /**
@@ -4645,6 +4645,10 @@ export interface TelegramGift {
      * The number of Telegram Stars that must be paid to send the sticker
      */
     star_count: number
+    /**
+     * *Optional*. The number of Telegram Stars that must be paid to upgrade the gift to a unique one
+     */
+    upgrade_star_count?: number
     /**
      * *Optional*. The total number of the gifts of this type that can be sent; for limited gifts only
      */
@@ -4809,10 +4813,6 @@ export interface TelegramInlineQueryResultArticle {
      */
     url?: string
     /**
-     * *Optional*. Pass *True* if you don't want the URL to be shown in the message
-     */
-    hide_url?: boolean
-    /**
      * *Optional*. Short description of the result
      */
     description?: string
@@ -4916,7 +4916,7 @@ export interface TelegramInlineQueryResultGif {
      */
     id: string
     /**
-     * A valid URL for the GIF file. File size must not exceed 1MB
+     * A valid URL for the GIF file
      */
     gif_url: string
     /**
@@ -4991,7 +4991,7 @@ export interface TelegramInlineQueryResultMpeg4Gif {
      */
     id: string
     /**
-     * A valid URL for the MPEG4 file. File size must not exceed 1MB
+     * A valid URL for the MPEG4 file
      */
     mpeg4_url: string
     /**
