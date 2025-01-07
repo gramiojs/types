@@ -13,7 +13,7 @@
  *
  * Based on Bot API v8.2.0 (01.01.2025)
  *
- * Generated at 01.01.2025, 20:37:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 07.01.2025, 12:35:45 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -870,25 +870,25 @@ export interface APIMethods {
      */
     sendGift: CallAPI<Params.SendGiftParams, true>
     /**
-     * Verifies a user on behalf of the organization which is represented by the bot. Returns *True* on success.
+     * Verifies a user [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#verifyuser)
      */
     verifyUser: CallAPI<Params.VerifyUserParams, true>
     /**
-     * Verifies a chat on behalf of the organization which is represented by the bot. Returns *True* on success.
+     * Verifies a chat [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#verifychat)
      */
     verifyChat: CallAPI<Params.VerifyChatParams, true>
     /**
-     * Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns *True* on success.
+     * Removes verification from a user who is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#removeuserverification)
      */
     removeUserVerification: CallAPI<Params.RemoveUserVerificationParams, true>
     /**
-     * Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns *True* on success.
+     * Removes verification from a chat that is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#removechatverification)
      */
