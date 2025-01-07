@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.2.0 (01.01.2025)
  *
- * Generated at 07.01.2025, 12:35:45 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 07.01.2025, 15:24:54 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -6293,7 +6293,7 @@ export interface TelegramShippingOption {
 }
 
 /**
- * This object contains basic information about a successful payment.
+ * This object contains basic information about a successful payment. Note that if the buyer initiates a chargeback with the relevant payment provider following this transaction, the funds may be debited from your balance. This is outside of Telegram's control.
  *
  * [Documentation](https://core.telegram.org/bots/api/#successfulpayment)
  */
@@ -6667,7 +6667,7 @@ export interface TelegramTransactionPartnerOther {
 }
 
 /**
- * Describes a Telegram Star transaction.
+ * Describes a Telegram Star transaction. Note that if the buyer initiates a chargeback with the payment provider from whom they acquired Stars (e.g., Apple, Google) following this transaction, the refunded Stars will be deducted from the bot's balance. This is outside of Telegram's control.
  *
  * [Documentation](https://core.telegram.org/bots/api/#startransaction)
  */
