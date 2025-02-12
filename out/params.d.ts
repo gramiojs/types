@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v8.2.0 (01.01.2025)
+ * Based on Bot API v8.3.0 (12.02.2025)
  *
- * Generated at 07.01.2025, 15:24:54 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 12.02.2025, 13:36:24 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -168,6 +168,10 @@ export interface ForwardMessageParams {
      */
     from_chat_id: number | string
     /**
+     * New start timestamp for the forwarded video in the message
+     */
+    video_start_timestamp?: number
+    /**
      * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
      */
     disable_notification?: boolean
@@ -231,6 +235,10 @@ export interface CopyMessageParams {
      * Message identifier in the chat specified in *from\_chat\_id*
      */
     message_id: number
+    /**
+     * New start timestamp for the copied video in the message
+     */
+    video_start_timestamp?: number
     /**
      * New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
      */
@@ -577,6 +585,14 @@ export interface SendVideoParams {
      * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
+    /**
+     * Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    cover?: Objects.TelegramInputFile | string
+    /**
+     * Start timestamp for the video in the message
+     */
+    start_timestamp?: number
     /**
      * Video caption (may also be used when resending videos by *file\_id*), 0-1024 characters after entities parsing
      */
@@ -2972,9 +2988,13 @@ export interface DeleteStickerSetParams {
  */
 export interface SendGiftParams {
     /**
-     * Unique identifier of the target user that will receive the gift
+     * Required if *chat\_id* is not specified. Unique identifier of the target user who will receive the gift.
      */
-    user_id: number
+    user_id?: number
+    /**
+     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@channelusername`) that will receive the gift.
+     */
+    chat_id?: number | string
     /**
      * Identifier of the gift
      */

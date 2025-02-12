@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v8.2.0 (01.01.2025)
+ * Based on Bot API v8.3.0 (12.02.2025)
  *
- * Generated at 07.01.2025, 15:24:54 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 12.02.2025, 13:36:24 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -214,7 +214,7 @@ export interface APIMethods {
      */
     sendChatAction: CallAPI<Params.SendChatActionParams, true>
     /**
-     * Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns *True* on success.
+     * Use this method to change the chosen reactions on a message. Service messages of some types can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setmessagereaction)
      */
@@ -858,13 +858,13 @@ export interface APIMethods {
      */
     deleteStickerSet: CallAPI<Params.DeleteStickerSetParams, true>
     /**
-     * Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getavailablegifts)
      */
     getAvailableGifts: CallAPIWithoutParams<Objects.TelegramGifts>
     /**
-     * Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns *True* on success.
+     * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendgift)
      */
