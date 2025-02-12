@@ -26,7 +26,10 @@ export const typesRemapper: TTypeRemapper = {
 	//[INFO] no need in enumeration because union types generate before that
 	string: (property, object, objectType, parentProperty) => {
 		//TODO: maybe place it to another place?
-		if (property.name === "media")
+		if (
+			property.name === "media" ||
+			(object.name.includes("InputMedia") && property.name === "thumbnail")
+		)
 			return `${
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
 			}InputFile | string`;
