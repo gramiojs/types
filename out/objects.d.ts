@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.3.0 (12.02.2025)
  *
- * Generated at 12.02.2025, 13:45:55 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 12.02.2025, 17:15:02 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -399,6 +399,10 @@ export interface TelegramChatFullInfo {
      * *Optional*. Default chat member permissions, for groups and supergroups
      */
     permissions?: TelegramChatPermissions
+    /**
+     * *Optional*. *True*, if gifts can be sent to the chat
+     */
+    can_send_gift?: boolean
     /**
      * *Optional*. *True*, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
      */
