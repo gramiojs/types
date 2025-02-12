@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v8.0.0 (17.11.2024)
+ * Based on Bot API v8.3.0 (12.02.2025)
  *
- * Generated at 29.11.2024, 15:00:15 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 12.02.2025, 13:36:24 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -38,7 +38,7 @@ export interface APIMethods {
         Objects.TelegramUpdate[]
     >
     /**
-     * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](https://core.telegram.org/bots/api/#update). In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns *True* on success.
+     * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](https://core.telegram.org/bots/api/#update). In case of an unsuccessful request (a request with response [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) different from `2XY`), we will repeat the request and give up after a reasonable amount of attempts. Returns *True* on success.
      *
      * If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter *secret\_token*. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
      *
@@ -214,7 +214,7 @@ export interface APIMethods {
      */
     sendChatAction: CallAPI<Params.SendChatActionParams, true>
     /**
-     * Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns *True* on success.
+     * Use this method to change the chosen reactions on a message. Service messages of some types can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setmessagereaction)
      */
@@ -858,17 +858,41 @@ export interface APIMethods {
      */
     deleteStickerSet: CallAPI<Params.DeleteStickerSetParams, true>
     /**
-     * Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getavailablegifts)
      */
     getAvailableGifts: CallAPIWithoutParams<Objects.TelegramGifts>
     /**
-     * Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns *True* on success.
+     * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendgift)
      */
     sendGift: CallAPI<Params.SendGiftParams, true>
+    /**
+     * Verifies a user [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#verifyuser)
+     */
+    verifyUser: CallAPI<Params.VerifyUserParams, true>
+    /**
+     * Verifies a chat [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#verifychat)
+     */
+    verifyChat: CallAPI<Params.VerifyChatParams, true>
+    /**
+     * Removes verification from a user who is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removeuserverification)
+     */
+    removeUserVerification: CallAPI<Params.RemoveUserVerificationParams, true>
+    /**
+     * Removes verification from a chat that is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removechatverification)
+     */
+    removeChatVerification: CallAPI<Params.RemoveChatVerificationParams, true>
     /**
      * Use this method to send answers to an inline query. On success, *True* is returned.
      * No more than **50** results per query are allowed.

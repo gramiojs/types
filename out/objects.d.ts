@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v8.0.0 (17.11.2024)
+ * Based on Bot API v8.3.0 (12.02.2025)
  *
- * Generated at 29.11.2024, 15:00:15 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 12.02.2025, 13:36:23 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1371,6 +1371,14 @@ export interface TelegramVideo {
      */
     thumbnail?: TelegramPhotoSize
     /**
+     * *Optional*. Available sizes of the cover of the video in the message
+     */
+    cover?: TelegramPhotoSize[]
+    /**
+     * *Optional*. Timestamp in seconds from which the video will play in the message
+     */
+    start_timestamp?: number
+    /**
      * *Optional*. Original filename as defined by the sender
      */
     file_name?: string
@@ -1967,7 +1975,7 @@ export interface TelegramBackgroundTypeWallpaper {
 }
 
 /**
- * The background is a PNG or TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
+ * The background is a .PNG or .TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
  *
  * [Documentation](https://core.telegram.org/bots/api/#backgroundtypepattern)
  */
@@ -4229,7 +4237,15 @@ export interface TelegramInputMediaVideo {
     /**
      * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    thumbnail?: TelegramInputFile | string
+    thumbnail?: string
+    /**
+     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    cover?: string
+    /**
+     * *Optional*. Start timestamp for the video in the message
+     */
+    start_timestamp?: number
     /**
      * *Optional*. Caption of the video to be sent, 0-1024 characters after entities parsing
      */
@@ -4285,7 +4301,7 @@ export interface TelegramInputMediaAnimation {
     /**
      * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    thumbnail?: TelegramInputFile | string
+    thumbnail?: string
     /**
      * *Optional*. Caption of the animation to be sent, 0-1024 characters after entities parsing
      */
@@ -4337,7 +4353,7 @@ export interface TelegramInputMediaAudio {
     /**
      * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    thumbnail?: TelegramInputFile | string
+    thumbnail?: string
     /**
      * *Optional*. Caption of the audio to be sent, 0-1024 characters after entities parsing
      */
@@ -4381,7 +4397,7 @@ export interface TelegramInputMediaDocument {
     /**
      * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    thumbnail?: TelegramInputFile | string
+    thumbnail?: string
     /**
      * *Optional*. Caption of the document to be sent, 0-1024 characters after entities parsing
      */
@@ -4452,7 +4468,15 @@ export interface TelegramInputPaidMediaVideo {
     /**
      * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    thumbnail?: TelegramInputFile | string
+    thumbnail?: string
+    /**
+     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    cover?: string
+    /**
+     * *Optional*. Start timestamp for the video in the message
+     */
+    start_timestamp?: number
     /**
      * *Optional*. Video width
      */
@@ -4610,7 +4634,7 @@ export interface TelegramInputSticker {
      */
     sticker: TelegramInputFile | string
     /**
-     * Format of the added sticker, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, “video” for a **WEBM** video
+     * Format of the added sticker, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, “video” for a **.WEBM** video
      */
     format: TelegramInputStickerFormat
     /**
@@ -4645,6 +4669,10 @@ export interface TelegramGift {
      * The number of Telegram Stars that must be paid to send the sticker
      */
     star_count: number
+    /**
+     * *Optional*. The number of Telegram Stars that must be paid to upgrade the gift to a unique one
+     */
+    upgrade_star_count?: number
     /**
      * *Optional*. The total number of the gifts of this type that can be sent; for limited gifts only
      */
@@ -4809,10 +4837,6 @@ export interface TelegramInlineQueryResultArticle {
      */
     url?: string
     /**
-     * *Optional*. Pass *True* if you don't want the URL to be shown in the message
-     */
-    hide_url?: boolean
-    /**
      * *Optional*. Short description of the result
      */
     description?: string
@@ -4916,7 +4940,7 @@ export interface TelegramInlineQueryResultGif {
      */
     id: string
     /**
-     * A valid URL for the GIF file. File size must not exceed 1MB
+     * A valid URL for the GIF file
      */
     gif_url: string
     /**
@@ -4991,7 +5015,7 @@ export interface TelegramInlineQueryResultMpeg4Gif {
      */
     id: string
     /**
-     * A valid URL for the MPEG4 file. File size must not exceed 1MB
+     * A valid URL for the MPEG4 file
      */
     mpeg4_url: string
     /**
@@ -6293,7 +6317,7 @@ export interface TelegramShippingOption {
 }
 
 /**
- * This object contains basic information about a successful payment.
+ * This object contains basic information about a successful payment. Note that if the buyer initiates a chargeback with the relevant payment provider following this transaction, the funds may be debited from your balance. This is outside of Telegram's control.
  *
  * [Documentation](https://core.telegram.org/bots/api/#successfulpayment)
  */
@@ -6503,9 +6527,39 @@ export interface TelegramRevenueWithdrawalStateFailed {
 }
 
 /**
+ * Contains information about the affiliate that received a commission via this transaction.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#affiliateinfo)
+ */
+export interface TelegramAffiliateInfo {
+    /**
+     * *Optional*. The bot or the user that received an affiliate commission if it was received by a bot or a user
+     */
+    affiliate_user?: TelegramUser
+    /**
+     * *Optional*. The chat that received an affiliate commission if it was received by a chat
+     */
+    affiliate_chat?: TelegramChat
+    /**
+     * The number of Telegram Stars received by the affiliate for each 1000 Telegram Stars received by the bot from referred users
+     */
+    commission_per_mille: number
+    /**
+     * Integer amount of Telegram Stars received by the affiliate from the transaction, rounded to 0; can be negative for refunds
+     */
+    amount: number
+    /**
+     * *Optional*. The number of 1/1000000000 shares of Telegram Stars received by the affiliate; from -999999999 to 999999999; can be negative for refunds
+     */
+    nanostar_amount?: number
+}
+
+/**
  * This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of
  *
  * * [TransactionPartnerUser](https://core.telegram.org/bots/api/#transactionpartneruser)
+ * * [TransactionPartnerChat](https://core.telegram.org/bots/api/#transactionpartnerchat)
+ * * [TransactionPartnerAffiliateProgram](https://core.telegram.org/bots/api/#transactionpartneraffiliateprogram)
  * * [TransactionPartnerFragment](https://core.telegram.org/bots/api/#transactionpartnerfragment)
  * * [TransactionPartnerTelegramAds](https://core.telegram.org/bots/api/#transactionpartnertelegramads)
  * * [TransactionPartnerTelegramApi](https://core.telegram.org/bots/api/#transactionpartnertelegramapi)
@@ -6515,6 +6569,8 @@ export interface TelegramRevenueWithdrawalStateFailed {
  */
 export type TelegramTransactionPartner =
     | TelegramTransactionPartnerUser
+    | TelegramTransactionPartnerChat
+    | TelegramTransactionPartnerAffiliateProgram
     | TelegramTransactionPartnerFragment
     | TelegramTransactionPartnerTelegramAds
     | TelegramTransactionPartnerTelegramApi
@@ -6535,6 +6591,10 @@ export interface TelegramTransactionPartnerUser {
      */
     user: TelegramUser
     /**
+     * *Optional*. Information about the affiliate that received a commission via this transaction
+     */
+    affiliate?: TelegramAffiliateInfo
+    /**
      * *Optional*. Bot-specified invoice payload
      */
     invoice_payload?: string
@@ -6554,6 +6614,46 @@ export interface TelegramTransactionPartnerUser {
      * *Optional*. The gift sent to the user by the bot
      */
     gift?: TelegramGift
+}
+
+/**
+ * Describes a transaction with a chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartnerchat)
+ */
+export interface TelegramTransactionPartnerChat {
+    /**
+     * Type of the transaction partner, always “chat”
+     */
+    type: "chat"
+    /**
+     * Information about the chat
+     */
+    chat: TelegramChat
+    /**
+     * *Optional*. The gift sent to the chat by the bot
+     */
+    gift?: TelegramGift
+}
+
+/**
+ * Describes the affiliate program that issued the affiliate commission received via this transaction.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#transactionpartneraffiliateprogram)
+ */
+export interface TelegramTransactionPartnerAffiliateProgram {
+    /**
+     * Type of the transaction partner, always “affiliate\_program”
+     */
+    type: "affiliate_program"
+    /**
+     * *Optional*. Information about the bot that sponsored the affiliate program
+     */
+    sponsor_user?: TelegramUser
+    /**
+     * The number of Telegram Stars received by the bot for each 1000 Telegram Stars received by the affiliate program sponsor from referred users
+     */
+    commission_per_mille: number
 }
 
 /**
@@ -6613,7 +6713,7 @@ export interface TelegramTransactionPartnerOther {
 }
 
 /**
- * Describes a Telegram Star transaction.
+ * Describes a Telegram Star transaction. Note that if the buyer initiates a chargeback with the payment provider from whom they acquired Stars (e.g., Apple, Google) following this transaction, the refunded Stars will be deducted from the bot's balance. This is outside of Telegram's control.
  *
  * [Documentation](https://core.telegram.org/bots/api/#startransaction)
  */
@@ -6623,9 +6723,13 @@ export interface TelegramStarTransaction {
      */
     id: string
     /**
-     * Number of Telegram Stars transferred by the transaction
+     * Integer amount of Telegram Stars transferred by the transaction
      */
     amount: number
+    /**
+     * *Optional*. The number of 1/1000000000 shares of Telegram Stars transferred by the transaction; from 0 to 999999999
+     */
+    nanostar_amount?: number
     /**
      * Date the transaction was created in Unix time
      */

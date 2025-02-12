@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v8.0.0 (17.11.2024)
+ * Based on Bot API v8.3.0 (12.02.2025)
  *
- * Generated at 29.11.2024, 15:00:15 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 12.02.2025, 13:36:24 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -35,7 +35,7 @@ export interface GetUpdatesParams {
     /**
      * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api/#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      *
-     * Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
+     * Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.
      */
     allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
 }
@@ -168,6 +168,10 @@ export interface ForwardMessageParams {
      */
     from_chat_id: number | string
     /**
+     * New start timestamp for the forwarded video in the message
+     */
+    video_start_timestamp?: number
+    /**
      * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
      */
     disable_notification?: boolean
@@ -231,6 +235,10 @@ export interface CopyMessageParams {
      * Message identifier in the chat specified in *from\_chat\_id*
      */
     message_id: number
+    /**
+     * New start timestamp for the copied video in the message
+     */
+    video_start_timestamp?: number
     /**
      * New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
      */
@@ -577,6 +585,14 @@ export interface SendVideoParams {
      * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
+    /**
+     * Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    cover?: Objects.TelegramInputFile | string
+    /**
+     * Start timestamp for the video in the message
+     */
+    start_timestamp?: number
     /**
      * Video caption (may also be used when resending videos by *file\_id*), 0-1024 characters after entities parsing
      */
@@ -2934,11 +2950,11 @@ export interface SetStickerSetThumbnailParams {
      */
     user_id: number
     /**
-     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **.WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
-     * Format of the thumbnail, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, or “video” for a **WEBM** video
+     * Format of the thumbnail, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, or “video” for a **.WEBM** video
      */
     format: SetStickerSetThumbnailFormat
 }
@@ -2972,17 +2988,25 @@ export interface DeleteStickerSetParams {
  */
 export interface SendGiftParams {
     /**
-     * Unique identifier of the target user that will receive the gift
+     * Required if *chat\_id* is not specified. Unique identifier of the target user who will receive the gift.
      */
-    user_id: number
+    user_id?: number
+    /**
+     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@channelusername`) that will receive the gift.
+     */
+    chat_id?: number | string
     /**
      * Identifier of the gift
      */
     gift_id: string
     /**
+     * Pass *True* to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
+     */
+    pay_for_upgrade?: boolean
+    /**
      * Text that will be shown along with the gift; 0-255 characters
      */
-    text?: string
+    text?: string | { toString(): string }
     /**
      * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
      */
@@ -2991,6 +3015,54 @@ export interface SendGiftParams {
      * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
      */
     text_entities?: Objects.TelegramMessageEntity[]
+}
+
+/**
+ * Params object for {@link APIMethods.verifyUser | verifyUser} method
+ */
+export interface VerifyUserParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.verifyChat | verifyChat} method
+ */
+export interface VerifyChatParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.removeUserVerification | removeUserVerification} method
+ */
+export interface RemoveUserVerificationParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.removeChatVerification | removeChatVerification} method
+ */
+export interface RemoveChatVerificationParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
 }
 
 /**
@@ -3224,7 +3296,7 @@ export interface CreateInvoiceLinkParams {
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user.
+     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.
      */
     subscription_period?: number
     /**
@@ -3302,7 +3374,7 @@ export interface AnswerShippingQueryParams {
      */
     shipping_options?: Objects.TelegramShippingOption[]
     /**
-     * Required if *ok* is *False*. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.
+     * Required if *ok* is *False*. Error message in human readable form that explains why it is impossible to complete the order (e.g. “Sorry, delivery to your desired address is unavailable”). Telegram will display this message to the user.
      */
     error_message?: string
 }
