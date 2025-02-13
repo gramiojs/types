@@ -10,7 +10,7 @@
  *
  * Based on Bot API v8.3.0 (12.02.2025)
  *
- * Generated at 12.02.2025, 17:15:02 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 13.02.2025, 12:35:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -3004,7 +3004,7 @@ export interface SendGiftParams {
      */
     pay_for_upgrade?: boolean
     /**
-     * Text that will be shown along with the gift; 0-255 characters
+     * Text that will be shown along with the gift; 0-128 characters
      */
     text?: string | { toString(): string }
     /**
