@@ -66,7 +66,7 @@ export async function fetchCurrencies() {
 }
 
 export function getDocumentationLink(anchor: string, text = "Documentation") {
-	return `[${text}](https://core.telegram.org/bots/api#${anchor})`;
+	return `[${text}](https://core.telegram.org/bots/api${anchor})`;
 }
 
 declare module "@gramio/schema-parser" {

@@ -308,12 +308,13 @@ const files: IGeneratedFile[] = [
 
 if (!existsSync(OUTPUT_PATH)) await fs.mkdir(OUTPUT_PATH);
 
+const usePrettier = true;
+
 for await (const file of files) {
 	await fs.writeFile(
 		`${OUTPUT_PATH}/${file.name}`,
-		file.lines
-			.flat()
-			.join("\n"),
-		// await prettier.format(file.lines.flat().join("\n"), PRETTIER_OPTIONS),
+		usePrettier
+			? await prettier.format(file.lines.flat().join("\n"), PRETTIER_OPTIONS)
+			: file.lines.flat().join("\n"),
 	);
 }

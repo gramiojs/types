@@ -91,13 +91,12 @@ export const typesRemapper: TTypeRemapper = {
 				)
 			);
 
-		if ("default" in property && property.default)
-			return `"${property.default}"`;
+		if ("const" in property && property.const) return `"${property.const}"`;
 
 		return "string";
 	},
 	boolean: (property) => {
-		if ("default" in property && property.default) return `${property.default}`;
+		if ("const" in property && property.const) return `${property.const}`;
 
 		return "boolean";
 	},
