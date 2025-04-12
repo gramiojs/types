@@ -1,48 +1,55 @@
+import { FieldString, Object as IObject } from "@gramio/schema-parser";
 import { OBJECTS_PREFIX } from "../config";
-import { CodeGenerator, TextEditor } from "../helpers";
-import type { IBotAPI } from "../types";
+import { CodeGenerator, TextEditor, getDocumentationLink } from "../helpers";
 import { Properties, typesRemapper } from "./properties";
 
 export class Objects {
-	static generateMany(objects: IBotAPI.IObject[]) {
+	static generateMany(objects: IObject[]) {
 		return objects.flatMap(Objects.generate);
 	}
 
-	static generate(object: IBotAPI.IObject) {
-		if (object.type === "any_of")
+	static generate(object: IObject) {
+		if (object.type === "oneOf")
 			return [
 				"",
 				...CodeGenerator.generateComment(
-					`${object.description}\n\n[Documentation](${object.documentation_link})`,
+					`${object.description}\n\n${getDocumentationLink(object.anchor)}`,
 				),
-				`export type ${OBJECTS_PREFIX + object.name + (object.generic ?? "")} = ${typesRemapper.any_of(
+				`export type ${
+					OBJECTS_PREFIX + object.name + (object.generic ?? "")
+				} = ${typesRemapper.any_of(
 					//TODO: fix type error. Object any of does't require IProperty
-					object as unknown as IBotAPI.IProperty,
+					object,
 					object,
 					"object",
 				)}`,
 				"",
 			];
-		if (!object.properties?.length)
+		if (!object.fields?.length)
 			return [
 				"",
 				...CodeGenerator.generateComment(
-					`${object.description}\n\n[Documentation](${object.documentation_link})`,
+					`${object.description}\n\n${getDocumentationLink(object.anchor)}`,
 				),
-				`export interface ${OBJECTS_PREFIX + object.name + (object.generic ?? "")} {}`,
+				`export interface ${
+					OBJECTS_PREFIX + object.name + (object.generic ?? "")
+				} {}`,
 				"",
 			];
 
-		const unionTypes = object.properties
-			.filter((property) => property.enumeration)
+		const unionTypes = object.fields
+			.filter(
+				(property): property is FieldString =>
+					property.type === "string" && property.enum !== undefined,
+			)
 			.map((property) =>
 				CodeGenerator.generateUnionType(
 					OBJECTS_PREFIX +
 						object.name +
 						TextEditor.uppercaseFirstLetter(
-							TextEditor.fromSnakeToCamelCase(property.name),
+							TextEditor.fromSnakeToCamelCase(property.key),
 						),
-					property.enumeration as string[],
+					property.enum as string[],
 				),
 			);
 
@@ -50,10 +57,12 @@ export class Objects {
 			...unionTypes,
 			"",
 			...CodeGenerator.generateComment(
-				`${object.description}\n\n[Documentation](${object.documentation_link})`,
+				`${object.description}\n\n${getDocumentationLink(object.anchor)}`,
 			),
-			`export interface ${OBJECTS_PREFIX + object.name + (object.generic ?? "")} {`,
-			...Properties.convertMany(object, object.properties, "object").flat(),
+			`export interface ${
+				OBJECTS_PREFIX + object.name + (object.generic ?? "")
+			} {`,
+			...Properties.convertMany(object, object.fields, "object").flat(),
 			"}",
 			"",
 		];

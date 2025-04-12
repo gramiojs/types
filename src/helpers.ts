@@ -1,3 +1,4 @@
+import { Version } from "@gramio/schema-parser";
 import type { IBotAPI } from "./types";
 
 export class CodeGenerator {
@@ -30,10 +31,7 @@ export class TextEditor {
 	}
 }
 
-export function generateHeader(
-	version: IBotAPI.IVersion,
-	recentChanges: IBotAPI.IRecentChangesObject,
-) {
+export function generateHeader(version: Version) {
 	return (description: string, additional: string[] = []) => [
 		"/**",
 		"* @module",
@@ -42,15 +40,16 @@ export function generateHeader(
 		"* ",
 		...additional.map((x) => `* ${x}`),
 		"* ",
-		`* Based on Bot API v${version.major}.${version.minor}.${
-			version.patch
-		} (${String(recentChanges.day).padStart(2, "0")}.${String(
-			recentChanges.month,
-		).padStart(2, "0")}.${recentChanges.year})`,
+		`* Based on Bot API v${version.major}.${version.minor} (${String(
+			version.release_date.day,
+		).padStart(2, "0")}.${String(version.release_date.month).padStart(
+			2,
+			"0",
+		)}.${version.release_date.year})`,
 		"* ",
 		`* Generated at ${new Date().toLocaleString(
 			"ru",
-		)} using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators`,
+		)} using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators`,
 		"*/",
 		"",
 		"",
@@ -64,4 +63,15 @@ export async function fetchCurrencies() {
 	const data = await res.json();
 
 	return Object.keys(data);
+}
+
+export function getDocumentationLink(anchor: string, text = "Documentation") {
+	return `[${text}](https://core.telegram.org/bots/api#${anchor})`;
+}
+
+declare module "@gramio/schema-parser" {
+	interface ObjectBasic {
+		//t Just hack
+		generic?: string;
+	}
 }

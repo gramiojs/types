@@ -1,5 +1,11 @@
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
+import {
+	Field,
+	FieldOneOf,
+	ObjectWithOneOf,
+	getCustomSchema,
+} from "@gramio/schema-parser";
 import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
@@ -11,8 +17,7 @@ export interface IGeneratedFile {
 	lines: string[][];
 }
 
-const schemaFile = await fs.readFile(SCHEMA_FILE_PATH);
-const schema = JSON.parse(String(schemaFile)) as IBotAPI.ISchema;
+const schema = await getCustomSchema();
 
 const currenciesList = await fetchCurrencies();
 
@@ -20,15 +25,15 @@ currenciesList.push("XTR");
 
 schema.objects.push({
 	name: "Currencies",
-	type: "any_of",
+	type: "oneOf",
 	description:
 		"Telegram payments currently support the currencies listed below.",
-	documentation_link:
-		"https://core.telegram.org/bots/payments#supported-currencies",
-	any_of: currenciesList.map((currency) => ({
+	anchor: "#supported-currencies",
+	oneOf: currenciesList.map((currency) => ({
+		key: currency,
 		type: "string",
-		default: currency,
-	})) as IBotAPI.IArgument[],
+		const: currency,
+	})),
 });
 
 schema.objects.push({
@@ -36,21 +41,22 @@ schema.objects.push({
 	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
 	description:
 		"If 'ok' equals True, the request was successful and the result of the query can be found in the 'result' field.",
-	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
-	properties: [
+	anchor: "#making-requests",
+	oneOf: [
 		{
-			name: "ok",
+			key: "ok",
 			description: "If 'ok' equals True, the request was successful",
-			type: "bool",
+			type: "boolean",
 			required: true,
-			default: true,
+			const: true,
 		},
 		{
 			name: "result",
 			description: "The result of the query can be found in the 'result' field",
-			type: "bool",
+			type: "boolean",
+			// @ts-expect-error
 			//![INFO] some hack for make result: APIMethodReturns<Methods>
-			default: "APIMethodReturn<Methods>",
+			const: "APIMethodReturn<Methods>",
 			required: true,
 		},
 	],
@@ -60,30 +66,30 @@ schema.objects.push({
 	name: "APIResponseError",
 	description:
 		"In case of an unsuccessful request, 'ok' equals false and the error is explained in the 'description'. An Integer 'error_code' field is also returned, but its contents are subject to change in the future. Some errors may also have an optional field 'parameters' of the type ResponseParameters, which can help to automatically handle the error.",
-	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
-	properties: [
+	anchor: "#making-requests",
+	oneOf: [
 		{
-			name: "ok",
+			key: "ok",
 			description: "In case of an unsuccessful request, 'ok' equals false",
-			type: "bool",
+			type: "boolean",
 			required: true,
-			default: false,
+			const: false,
 		},
 		{
-			name: "description",
+			key: "description",
 			description: "The error is explained in the 'description'",
 			type: "string",
 			required: true,
 		},
 		{
-			name: "error_code",
+			key: "error_code",
 			description:
 				"An Integer 'error_code' field is also returned, but its contents are subject to change in the future",
 			type: "integer",
 			required: true,
 		},
 		{
-			name: "parameters",
+			key: "parameters",
 			description:
 				"Some errors may also have an optional field 'parameters' of the type [ResponseParameters](https://core.telegram.org/bots/api/#responseparameters), which can help to automatically handle the error.",
 			type: "reference",
@@ -97,38 +103,45 @@ schema.objects.push({
 	name: "APIResponse",
 	description: "Union type of Response",
 	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
-	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
-	type: "any_of",
-	any_of: [
+	anchor: "#making-requests",
+	type: "oneOf",
+	oneOf: [
 		{
-			type: "reference",
-			reference: "APIResponseOk<Methods>",
+			type: "boolean",
+			// @ts-expect-error hack for make result: APIResponseOk<Methods>
+			const: "APIResponseOk<Methods>",
 		},
 		{
-			type: "reference",
-			reference: "APIResponseError",
+			type: "boolean",
+			// @ts-expect-error hack for make result: APIResponseError
+			const: "APIResponseError",
 		},
 		// JSON-SCHEMA to ts wrong result?
-	] as IBotAPI.IArgument[],
+	],
 });
 
-const InputFile = schema.objects.find((x) => x.name === "InputFile");
+const InputFile = schema.objects.find(
+	(x) => x.name === "InputFile",
+) as ObjectWithOneOf;
 
 if (InputFile) {
-	InputFile.type = "any_of";
-	InputFile.any_of = [
+	InputFile.type = "oneOf";
+	// @ts-expect-error
+	InputFile.oneOf = [
 		{
 			required: true,
-			type: "bool",
-			default: "Blob",
+			type: "boolean",
+			// @ts-expect-error hack for make result: Blob
+			const: "Blob",
 		},
 		{
 			required: true,
-			type: "bool",
-			default: "Promise<Blob>",
+			type: "boolean",
+			// @ts-ignore hack for make result: Promise<Blob>
+			const: "Promise<Blob>",
 		},
 		// TODO: improve typings by JSON Schema
-	] as IBotAPI.IArgument[];
+	] as Omit<Field, "key">[];
 }
 
 const createForumTopic = schema.methods.find(
@@ -136,17 +149,18 @@ const createForumTopic = schema.methods.find(
 );
 
 if (createForumTopic) {
-	const icon_color = createForumTopic.arguments?.find(
-		(x) => x.name === "icon_color",
-	);
-	const RGBs = icon_color?.description.match(/\b0x[0-9a-fA-F]{6}/g);
+	const icon_color = createForumTopic.parameters?.find(
+		(x) => x.key === "icon_color",
+	) as FieldOneOf;
+	const RGBs = icon_color?.description?.match(/\b0x[0-9a-fA-F]{6}/g);
 	if (icon_color && RGBs) {
-		icon_color.type = "any_of";
-		icon_color.any_of = RGBs.map((x) => ({
-			type: "bool",
+		icon_color.type = "one_of";
+		// @ts-expect-error
+		icon_color.variants = RGBs.map((x) => ({
+			type: "boolean",
 			required: true,
-			default: x.replace(/\b0x/, "0x"),
-		})) as IBotAPI.IArgument[];
+			const: x.replace(/\b0x/, "0x"),
+		})) as Omit<Field, "key">[];
 	}
 }
 
@@ -162,49 +176,49 @@ if (getStarTransactions) {
 	};
 }
 
-const header = generateHeader(schema.version, schema.recent_changes);
+const header = generateHeader(schema.version);
 
 const files: IGeneratedFile[] = [
-	{
-		name: "objects.d.ts",
-		lines: [
-			header(
-				"This module contains [Objects](https://core.telegram.org/bots/api#available-types) with the `Telegram` prefix",
-				[
-					"@example import object",
-					"```typescript",
-					`import { TelegramUser } from "@gramio/types/objects";`,
-					"```",
-				],
-			),
-			[
-				`import type { APIMethods } from "./methods";`,
-				`import type { APIMethodReturn } from "./utils"`,
-				"",
-			],
-			Objects.generateMany(schema.objects),
-		],
-	},
-	{
-		name: "params.d.ts",
-		lines: [
-			header(
-				"This module contains params for [methods](https://core.telegram.org/bots/api#available-methods) with the `Params` postfix",
-				[
-					"@example import params",
-					"```typescript",
-					`import { SendMessageParams } from "@gramio/types/params";`,
-					"```",
-				],
-			),
-			[
-				`import type { APIMethods } from "./methods";`,
-				`import type * as Objects from "./objects"`,
-				"",
-			],
-			Params.generateMany(schema.methods),
-		],
-	},
+	// {
+	// 	name: "objects.d.ts",
+	// 	lines: [
+	// 		header(
+	// 			"This module contains [Objects](https://core.telegram.org/bots/api#available-types) with the `Telegram` prefix",
+	// 			[
+	// 				"@example import object",
+	// 				"```typescript",
+	// 				`import { TelegramUser } from "@gramio/types/objects";`,
+	// 				"```",
+	// 			],
+	// 		),
+	// 		[
+	// 			`import type { APIMethods } from "./methods";`,
+	// 			`import type { APIMethodReturn } from "./utils"`,
+	// 			"",
+	// 		],
+	// 		Objects.generateMany(schema.objects),
+	// 	],
+	// },
+	// {
+	// 	name: "params.d.ts",
+	// 	lines: [
+	// 		header(
+	// 			"This module contains params for [methods](https://core.telegram.org/bots/api#available-methods) with the `Params` postfix",
+	// 			[
+	// 				"@example import params",
+	// 				"```typescript",
+	// 				`import { SendMessageParams } from "@gramio/types/params";`,
+	// 				"```",
+	// 			],
+	// 		),
+	// 		[
+	// 			`import type { APIMethods } from "./methods";`,
+	// 			`import type * as Objects from "./objects"`,
+	// 			"",
+	// 		],
+	// 		Params.generateMany(schema.methods),
+	// 	],
+	// },
 	{
 		name: "methods.d.ts",
 		lines: [
@@ -297,6 +311,9 @@ if (!existsSync(OUTPUT_PATH)) await fs.mkdir(OUTPUT_PATH);
 for await (const file of files) {
 	await fs.writeFile(
 		`${OUTPUT_PATH}/${file.name}`,
-		await prettier.format(file.lines.flat().join("\n"), PRETTIER_OPTIONS),
+		file.lines
+			.flat()
+			.join("\n"),
+		// await prettier.format(file.lines.flat().join("\n"), PRETTIER_OPTIONS),
 	);
 }

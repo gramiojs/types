@@ -1,16 +1,36 @@
+import {
+	Field,
+	FieldArray,
+	FieldBoolean,
+	FieldFloat,
+	FieldInteger,
+	FieldOneOf,
+	FieldReference,
+	FieldString,
+	Object as IObject,
+} from "@gramio/schema-parser";
 import { OBJECTS_PREFIX } from "../config";
 import { CodeGenerator, TextEditor } from "../helpers";
 import type { IBotAPI, TObjectType } from "../types";
 
-type TTypeRemapper = Record<
-	IBotAPI.IType,
-	(
-		property: IBotAPI.IProperty,
-		object: IBotAPI.IObject,
+interface TypeToObjectType {
+	integer: FieldInteger;
+	string: FieldString;
+	boolean: FieldBoolean;
+	float: FieldFloat;
+	one_of: FieldOneOf;
+	reference: FieldReference;
+	array: FieldArray;
+}
+
+type TTypeRemapper = {
+	[K in keyof TypeToObjectType]: (
+		property: TypeToObjectType[K],
+		object: IObject,
 		objectType: TObjectType,
-		parentProperty?: IBotAPI.IProperty,
-	) => string
->;
+		parentProperty?: Field,
+	) => string;
+};
 
 const markups = [
 	"ReplyKeyboardMarkup",
@@ -27,24 +47,24 @@ export const typesRemapper: TTypeRemapper = {
 	string: (property, object, objectType, parentProperty) => {
 		//TODO: maybe place it to another place?
 		if (
-			property.name === "media" ||
-			(object.name.includes("InputMedia") && property.name === "thumbnail")
+			property.key === "media" ||
+			(object.name.includes("InputMedia") && property.key === "thumbnail")
 		)
 			return `${
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
 			}InputFile | string`;
 
 		// ![INFO] better typings for https://core.telegram.org/bots/api#formatting-options
-		if (property.name?.includes("parse_mode"))
+		if (property.key?.includes("parse_mode"))
 			return `"HTML" | "MarkdownV2" | "Markdown"`;
 
 		// ![INFO] for better UX with FormattableString and toString'able classes :#
 		if (
 			property.description?.includes("after entities parsing") ||
-			property.name === "message_text" ||
-			(object?.name === "InputPollOption" && property.name === "text") ||
-			(object.name === "sendPoll" && property.name === "question") ||
-			(object?.name === "sendGift" && property.name === "text")
+			property.key === "message_text" ||
+			(object?.name === "InputPollOption" && property.key === "text") ||
+			(object.name === "sendPoll" && property.key === "question") ||
+			(object?.name === "sendGift" && property.key === "text")
 		)
 			return "(string | { toString(): string})";
 
@@ -53,7 +73,7 @@ export const typesRemapper: TTypeRemapper = {
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
 			}Currencies`;
 
-		if (parentProperty?.name === "allowed_updates")
+		if (parentProperty?.key === "allowed_updates")
 			return `Exclude<keyof ${
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX
 			}Update, "update_id">`;
@@ -62,22 +82,22 @@ export const typesRemapper: TTypeRemapper = {
 		// if (parentProperty?.description?.includes("format `@"))
 		// 	return "`@${string}`";
 
-		if (property.enumeration)
+		if ("enum" in property && property.enum)
 			return (
 				(objectType === "object" ? OBJECTS_PREFIX : "") +
 				TextEditor.uppercaseFirstLetter(object.name) +
 				TextEditor.uppercaseFirstLetter(
-					TextEditor.fromSnakeToCamelCase(property.name),
+					TextEditor.fromSnakeToCamelCase(property.key),
 				)
 			);
 
-		if (property.default) return `"${property.default}"`;
+		if ("default" in property && property.default)
+			return `"${property.default}"`;
 
 		return "string";
 	},
-	bool: (property) => {
-		if ("default" in property && property.required !== false)
-			return `${property.default}`;
+	boolean: (property) => {
+		if ("default" in property && property.default) return `${property.default}`;
 
 		return "boolean";
 	},
@@ -87,24 +107,26 @@ export const typesRemapper: TTypeRemapper = {
 			(objectType === "object" ? "" : "Objects.") +
 			OBJECTS_PREFIX +
 			// TODO: maybe this uppercase useless?
-			TextEditor.uppercaseFirstLetter(property.reference!);
+			TextEditor.uppercaseFirstLetter(property.reference.name!);
 
 		// ![INFO] Some hack for better DX with @gramio/keyboards
-		if (markups.includes(property.reference!))
+		if (markups.includes(property.reference.name!))
 			return `${reference} | { toJSON(): ${reference} }`;
 
 		return reference;
 	},
-	any_of: (property, object, objectType) => {
+	one_of: (property, object, objectType) => {
 		return property
-			.any_of!.map((x) =>
+			.variants!.map((x) =>
+				// @ts-expect-error
 				typesRemapper[x.type](x, object, objectType, property),
 			)
 			.join(" | ");
 	},
 	array: (property, object, objectType) => {
-		const type = typesRemapper[property.array!.type](
-			property.array!,
+		const type = typesRemapper[property.arrayOf!.type](
+			// @ts-expect-error
+			property.arrayOf!,
 			object,
 			objectType,
 			property,
@@ -116,8 +138,8 @@ export const typesRemapper: TTypeRemapper = {
 
 export class Properties {
 	static convertMany(
-		object: IBotAPI.IObject,
-		properties: IBotAPI.IProperty[],
+		object: IObject,
+		properties: Field[],
 		objectType: TObjectType,
 	) {
 		return properties.map((property) =>
@@ -125,16 +147,13 @@ export class Properties {
 		);
 	}
 
-	static convert(
-		object: IBotAPI.IObject,
-		property: IBotAPI.IProperty,
-		objectType: TObjectType,
-	) {
+	static convert(object: IObject, property: Field, objectType: TObjectType) {
+		// @ts-expect-error
 		const type = typesRemapper[property.type](property, object, objectType);
 
 		return [
-			...CodeGenerator.generateComment(property.description),
-			`${property.name + (!property.required ? "?" : "")}: ${type}`,
+			...CodeGenerator.generateComment(property.description ?? ""),
+			`${property.key + (!property.required ? "?" : "")}: ${type}`,
 		];
 	}
 }

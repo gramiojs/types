@@ -38,6 +38,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.5.3",
+		"@gramio/schema-parser": "^0.0.2",
 		"@types/node": "^20.11.10",
 		"prettier": "^3.2.4"
 	},

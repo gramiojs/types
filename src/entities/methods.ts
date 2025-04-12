@@ -1,18 +1,19 @@
-import { CodeGenerator, TextEditor } from "../helpers";
-import type { IBotAPI } from "../types";
+import { Method } from "@gramio/schema-parser";
+import { CodeGenerator, TextEditor, getDocumentationLink } from "../helpers";
 import { typesRemapper } from "./properties";
 
-function generateMethod(method: IBotAPI.IMethod) {
-	const returnType = typesRemapper[method.return_type.type](
-		method.return_type,
+function generateMethod(method: Method) {
+	const returnType = typesRemapper[method.returns.type](
+		// @ts-expect-error
+		method.returns,
 		method,
 		"method",
 	);
 
-	if (!method.arguments?.length)
+	if (!method.parameters?.length)
 		return `${method.name}: CallAPIWithoutParams<${returnType}>`;
 
-	const tCallType = method.arguments.every((argument) => !argument.required)
+	const tCallType = method.parameters.every((argument) => !argument.required)
 		? "CallAPIWithOptionalParams"
 		: "CallAPI";
 
@@ -24,10 +25,13 @@ function generateMethod(method: IBotAPI.IMethod) {
 }
 
 export class APIMethods {
-	static generateMany(methods: IBotAPI.IMethod[]) {
+	static generateMany(methods: Method[]) {
 		return [
 			...CodeGenerator.generateComment(
-				"This object is a map of [API methods](https://core.telegram.org/bots/api#available-methods) types (functions map with input/output)",
+				`This object is a map of ${getDocumentationLink(
+					"#available-methods",
+					"API methods",
+				)} types (functions map with input/output)`,
 			),
 			"export interface APIMethods {",
 			...methods.flatMap(APIMethods.generate),
@@ -35,10 +39,10 @@ export class APIMethods {
 		];
 	}
 
-	static generate(method: IBotAPI.IMethod) {
+	static generate(method: Method) {
 		return [
 			...CodeGenerator.generateComment(
-				`${method.description}\n\n[Documentation](${method.documentation_link})`,
+				`${method.description}\n\n${getDocumentationLink(method.anchor)}`,
 			),
 			generateMethod(method),
 		];
