@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.0.0 (11.04.2025)
  *
- * Generated at 13.04.2025, 12:27:00 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 13.04.2025, 15:19:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2740,7 +2740,7 @@ export interface GiftPremiumSubscriptionParams {
     /**
      * Text that will be shown along with the service message about the subscription; 0-128 characters
      */
-    text?: string
+    text?: string | { toString(): string }
     /**
      * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
      */
