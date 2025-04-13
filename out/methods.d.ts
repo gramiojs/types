@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v8.3.0 (12.02.2025)
+ * Based on Bot API v9.0.0 (11.04.2025)
  *
- * Generated at 13.02.2025, 12:35:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 13.04.2025, 12:27:00 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -750,6 +750,171 @@ export interface APIMethods {
      */
     deleteMessages: CallAPI<Params.DeleteMessagesParams, true>
     /**
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getavailablegifts)
+     */
+    getAvailableGifts: CallAPIWithoutParams<Objects.TelegramGifts>
+    /**
+     * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendgift)
+     */
+    sendGift: CallAPI<Params.SendGiftParams, true>
+    /**
+     * Gifts a Telegram Premium subscription to the given user. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#giftpremiumsubscription)
+     */
+    giftPremiumSubscription: CallAPI<Params.GiftPremiumSubscriptionParams, true>
+    /**
+     * Verifies a user [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#verifyuser)
+     */
+    verifyUser: CallAPI<Params.VerifyUserParams, true>
+    /**
+     * Verifies a chat [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#verifychat)
+     */
+    verifyChat: CallAPI<Params.VerifyChatParams, true>
+    /**
+     * Removes verification from a user who is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removeuserverification)
+     */
+    removeUserVerification: CallAPI<Params.RemoveUserVerificationParams, true>
+    /**
+     * Removes verification from a chat that is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removechatverification)
+     */
+    removeChatVerification: CallAPI<Params.RemoveChatVerificationParams, true>
+    /**
+     * Marks incoming message as read on behalf of a business account. Requires the *can\_read\_messages* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#readbusinessmessage)
+     */
+    readBusinessMessage: CallAPI<Params.ReadBusinessMessageParams, true>
+    /**
+     * Delete messages on behalf of a business account. Requires the *can\_delete\_outgoing\_messages* business bot right to delete messages sent by the bot itself, or the *can\_delete\_all\_messages* business bot right to delete any message. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deletebusinessmessages)
+     */
+    deleteBusinessMessages: CallAPI<Params.DeleteBusinessMessagesParams, true>
+    /**
+     * Changes the first and last name of a managed business account. Requires the *can\_change\_name* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setbusinessaccountname)
+     */
+    setBusinessAccountName: CallAPI<Params.SetBusinessAccountNameParams, true>
+    /**
+     * Changes the username of a managed business account. Requires the *can\_change\_username* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setbusinessaccountusername)
+     */
+    setBusinessAccountUsername: CallAPI<
+        Params.SetBusinessAccountUsernameParams,
+        true
+    >
+    /**
+     * Changes the bio of a managed business account. Requires the *can\_change\_bio* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setbusinessaccountbio)
+     */
+    setBusinessAccountBio: CallAPI<Params.SetBusinessAccountBioParams, true>
+    /**
+     * Changes the profile photo of a managed business account. Requires the *can\_edit\_profile\_photo* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setbusinessaccountprofilephoto)
+     */
+    setBusinessAccountProfilePhoto: CallAPI<
+        Params.SetBusinessAccountProfilePhotoParams,
+        true
+    >
+    /**
+     * Removes the current profile photo of a managed business account. Requires the *can\_edit\_profile\_photo* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removebusinessaccountprofilephoto)
+     */
+    removeBusinessAccountProfilePhoto: CallAPI<
+        Params.RemoveBusinessAccountProfilePhotoParams,
+        true
+    >
+    /**
+     * Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the *can\_change\_gift\_settings* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setbusinessaccountgiftsettings)
+     */
+    setBusinessAccountGiftSettings: CallAPI<
+        Params.SetBusinessAccountGiftSettingsParams,
+        true
+    >
+    /**
+     * Returns the amount of Telegram Stars owned by a managed business account. Requires the *can\_view\_gifts\_and\_stars* business bot right. Returns [StarAmount](https://core.telegram.org/bots/api/#staramount) on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getbusinessaccountstarbalance)
+     */
+    getBusinessAccountStarBalance: CallAPI<
+        Params.GetBusinessAccountStarBalanceParams,
+        Objects.TelegramStarAmount
+    >
+    /**
+     * Transfers Telegram Stars from the business account balance to the bot's balance. Requires the *can\_transfer\_stars* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#transferbusinessaccountstars)
+     */
+    transferBusinessAccountStars: CallAPI<
+        Params.TransferBusinessAccountStarsParams,
+        true
+    >
+    /**
+     * Returns the gifts received and owned by a managed business account. Requires the *can\_view\_gifts\_and\_stars* business bot right. Returns [OwnedGifts](https://core.telegram.org/bots/api/#ownedgifts) on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getbusinessaccountgifts)
+     */
+    getBusinessAccountGifts: CallAPI<
+        Params.GetBusinessAccountGiftsParams,
+        Objects.TelegramOwnedGifts
+    >
+    /**
+     * Converts a given regular gift to Telegram Stars. Requires the *can\_convert\_gifts\_to\_stars* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#convertgifttostars)
+     */
+    convertGiftToStars: CallAPI<Params.ConvertGiftToStarsParams, true>
+    /**
+     * Upgrades a given regular gift to a unique gift. Requires the *can\_transfer\_and\_upgrade\_gifts* business bot right. Additionally requires the *can\_transfer\_stars* business bot right if the upgrade is paid. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#upgradegift)
+     */
+    upgradeGift: CallAPI<Params.UpgradeGiftParams, true>
+    /**
+     * Transfers an owned unique gift to another user. Requires the *can\_transfer\_and\_upgrade\_gifts* business bot right. Requires *can\_transfer\_stars* business bot right if the transfer is paid. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#transfergift)
+     */
+    transferGift: CallAPI<Params.TransferGiftParams, true>
+    /**
+     * Posts a story on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api/#story) on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#poststory)
+     */
+    postStory: CallAPI<Params.PostStoryParams, Objects.TelegramStory>
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api/#story) on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editstory)
+     */
+    editStory: CallAPI<Params.EditStoryParams, Objects.TelegramStory>
+    /**
+     * Deletes a story previously posted by the bot on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deletestory)
+     */
+    deleteStory: CallAPI<Params.DeleteStoryParams, true>
+    /**
      * Use this method to send static .WEBP, [animated](https://telegram.org/blog/animated-stickers) .TGS, or [video](https://telegram.org/blog/video-stickers-better-reactions) .WEBM stickers. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendsticker)
@@ -857,42 +1022,6 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#deletestickerset)
      */
     deleteStickerSet: CallAPI<Params.DeleteStickerSetParams, true>
-    /**
-     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#getavailablegifts)
-     */
-    getAvailableGifts: CallAPIWithoutParams<Objects.TelegramGifts>
-    /**
-     * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns *True* on success.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#sendgift)
-     */
-    sendGift: CallAPI<Params.SendGiftParams, true>
-    /**
-     * Verifies a user [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#verifyuser)
-     */
-    verifyUser: CallAPI<Params.VerifyUserParams, true>
-    /**
-     * Verifies a chat [on behalf of the organization](https://telegram.org/verify#third-party-verification) which is represented by the bot. Returns *True* on success.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#verifychat)
-     */
-    verifyChat: CallAPI<Params.VerifyChatParams, true>
-    /**
-     * Removes verification from a user who is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#removeuserverification)
-     */
-    removeUserVerification: CallAPI<Params.RemoveUserVerificationParams, true>
-    /**
-     * Removes verification from a chat that is currently verified [on behalf of the organization](https://telegram.org/verify#third-party-verification) represented by the bot. Returns *True* on success.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#removechatverification)
-     */
-    removeChatVerification: CallAPI<Params.RemoveChatVerificationParams, true>
     /**
      * Use this method to send answers to an inline query. On success, *True* is returned.
      * No more than **50** results per query are allowed.

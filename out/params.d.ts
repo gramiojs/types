@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v8.3.0 (12.02.2025)
+ * Based on Bot API v9.0.0 (11.04.2025)
  *
- * Generated at 13.02.2025, 12:35:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 13.04.2025, 12:27:00 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -890,7 +890,7 @@ export interface SendPaidMediaParams {
      */
     chat_id: number | string
     /**
-     * The number of Telegram Stars that must be paid to buy access to the media; 1-2500
+     * The number of Telegram Stars that must be paid to buy access to the media; 1-10000
      */
     star_count: number
     /**
@@ -1770,7 +1770,7 @@ export interface CreateChatSubscriptionInviteLinkParams {
      */
     subscription_period: number
     /**
-     * The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500
+     * The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-10000
      */
     subscription_price: number
 }
@@ -2686,6 +2686,464 @@ export interface DeleteMessagesParams {
 }
 
 /**
+ * Params object for {@link APIMethods.sendGift | sendGift} method
+ */
+export interface SendGiftParams {
+    /**
+     * Required if *chat\_id* is not specified. Unique identifier of the target user who will receive the gift.
+     */
+    user_id?: number
+    /**
+     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@channelusername`) that will receive the gift.
+     */
+    chat_id?: number | string
+    /**
+     * Identifier of the gift
+     */
+    gift_id: string
+    /**
+     * Pass *True* to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
+     */
+    pay_for_upgrade?: boolean
+    /**
+     * Text that will be shown along with the gift; 0-128 characters
+     */
+    text?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_entities?: Objects.TelegramMessageEntity[]
+}
+
+export type GiftPremiumSubscriptionMonthCount = 3 | 6 | 12
+
+/**
+ * Params object for {@link APIMethods.giftPremiumSubscription | giftPremiumSubscription} method
+ */
+export interface GiftPremiumSubscriptionParams {
+    /**
+     * Unique identifier of the target user who will receive a Telegram Premium subscription
+     */
+    user_id: number
+    /**
+     * Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12
+     */
+    month_count: GiftPremiumSubscriptionMonthCount
+    /**
+     * Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months
+     */
+    star_count: number
+    /**
+     * Text that will be shown along with the service message about the subscription; 0-128 characters
+     */
+    text?: string
+    /**
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_entities?: Objects.TelegramMessageEntity[]
+}
+
+/**
+ * Params object for {@link APIMethods.verifyUser | verifyUser} method
+ */
+export interface VerifyUserParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.verifyChat | verifyChat} method
+ */
+export interface VerifyChatParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.removeUserVerification | removeUserVerification} method
+ */
+export interface RemoveUserVerificationParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.removeChatVerification | removeChatVerification} method
+ */
+export interface RemoveChatVerificationParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+}
+
+/**
+ * Params object for {@link APIMethods.readBusinessMessage | readBusinessMessage} method
+ */
+export interface ReadBusinessMessageParams {
+    /**
+     * Unique identifier of the business connection on behalf of which to read the message
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.
+     */
+    chat_id: number
+    /**
+     * Unique identifier of the message to mark as read
+     */
+    message_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.deleteBusinessMessages | deleteBusinessMessages} method
+ */
+export interface DeleteBusinessMessagesParams {
+    /**
+     * Unique identifier of the business connection on behalf of which to delete the messages
+     */
+    business_connection_id: string
+    /**
+     * A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See [deleteMessage](https://core.telegram.org/bots/api/#deletemessage) for limitations on which messages can be deleted
+     */
+    message_ids: number[]
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountName | setBusinessAccountName} method
+ */
+export interface SetBusinessAccountNameParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new value of the first name for the business account; 1-64 characters
+     */
+    first_name: string
+    /**
+     * The new value of the last name for the business account; 0-64 characters
+     */
+    last_name?: string
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountUsername | setBusinessAccountUsername} method
+ */
+export interface SetBusinessAccountUsernameParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new value of the username for the business account; 0-32 characters
+     */
+    username?: string
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountBio | setBusinessAccountBio} method
+ */
+export interface SetBusinessAccountBioParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new value of the bio for the business account; 0-140 characters
+     */
+    bio?: string
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountProfilePhoto | setBusinessAccountProfilePhoto} method
+ */
+export interface SetBusinessAccountProfilePhotoParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new profile photo to set
+     */
+    photo: Objects.TelegramInputProfilePhoto
+    /**
+     * Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo.
+     */
+    is_public?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.removeBusinessAccountProfilePhoto | removeBusinessAccountProfilePhoto} method
+ */
+export interface RemoveBusinessAccountProfilePhotoParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo (if present) becomes the main photo.
+     */
+    is_public?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountGiftSettings | setBusinessAccountGiftSettings} method
+ */
+export interface SetBusinessAccountGiftSettingsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
+     */
+    show_gift_button: boolean
+    /**
+     * Types of gifts accepted by the business account
+     */
+    accepted_gift_types: Objects.TelegramAcceptedGiftTypes
+}
+
+/**
+ * Params object for {@link APIMethods.getBusinessAccountStarBalance | getBusinessAccountStarBalance} method
+ */
+export interface GetBusinessAccountStarBalanceParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+}
+
+/**
+ * Params object for {@link APIMethods.transferBusinessAccountStars | transferBusinessAccountStars} method
+ */
+export interface TransferBusinessAccountStarsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Number of Telegram Stars to transfer; 1-10000
+     */
+    star_count: number
+}
+
+/**
+ * Params object for {@link APIMethods.getBusinessAccountGifts | getBusinessAccountGifts} method
+ */
+export interface GetBusinessAccountGiftsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Pass True to exclude gifts that aren't saved to the account's profile page
+     */
+    exclude_unsaved?: boolean
+    /**
+     * Pass True to exclude gifts that are saved to the account's profile page
+     */
+    exclude_saved?: boolean
+    /**
+     * Pass True to exclude gifts that can be purchased an unlimited number of times
+     */
+    exclude_unlimited?: boolean
+    /**
+     * Pass True to exclude gifts that can be purchased a limited number of times
+     */
+    exclude_limited?: boolean
+    /**
+     * Pass True to exclude unique gifts
+     */
+    exclude_unique?: boolean
+    /**
+     * Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.
+     */
+    sort_by_price?: boolean
+    /**
+     * Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results
+     */
+    offset?: string
+    /**
+     * The maximum number of gifts to be returned; 1-100. Defaults to 100
+     */
+    limit?: number
+}
+
+/**
+ * Params object for {@link APIMethods.convertGiftToStars | convertGiftToStars} method
+ */
+export interface ConvertGiftToStarsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the regular gift that should be converted to Telegram Stars
+     */
+    owned_gift_id: string
+}
+
+/**
+ * Params object for {@link APIMethods.upgradeGift | upgradeGift} method
+ */
+export interface UpgradeGiftParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the regular gift that should be upgraded to a unique one
+     */
+    owned_gift_id: string
+    /**
+     * Pass True to keep the original gift text, sender and receiver in the upgraded gift
+     */
+    keep_original_details?: boolean
+    /**
+     * The amount of Telegram Stars that will be paid for the upgrade from the business account balance. If `gift.prepaid_upgrade_star_count > 0`, then pass 0, otherwise, the *can\_transfer\_stars* business bot right is required and `gift.upgrade_star_count` must be passed.
+     */
+    star_count?: number
+}
+
+/**
+ * Params object for {@link APIMethods.transferGift | transferGift} method
+ */
+export interface TransferGiftParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the regular gift that should be transferred
+     */
+    owned_gift_id: string
+    /**
+     * Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.
+     */
+    new_owner_chat_id: number
+    /**
+     * The amount of Telegram Stars that will be paid for the transfer from the business account balance. If positive, then the *can\_transfer\_stars* business bot right is required.
+     */
+    star_count?: number
+}
+
+export type PostStoryActivePeriod = 21600 | 43200 | 86400 | 172800
+
+/**
+ * Params object for {@link APIMethods.postStory | postStory} method
+ */
+export interface PostStoryParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Content of the story
+     */
+    content: Objects.TelegramInputStoryContent
+    /**
+     * Period after which the story is moved to the archive, in seconds; must be one of `6 * 3600`, `12 * 3600`, `86400`, or `2 * 86400`
+     */
+    active_period: PostStoryActivePeriod
+    /**
+     * Caption of the story, 0-2048 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the story caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * A JSON-serialized list of clickable areas to be shown on the story
+     */
+    areas?: Objects.TelegramStoryArea[]
+    /**
+     * Pass *True* to keep the story accessible after it expires
+     */
+    post_to_chat_page?: boolean
+    /**
+     * Pass *True* if the content of the story must be protected from forwarding and screenshotting
+     */
+    protect_content?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.editStory | editStory} method
+ */
+export interface EditStoryParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the story to edit
+     */
+    story_id: number
+    /**
+     * Content of the story
+     */
+    content: Objects.TelegramInputStoryContent
+    /**
+     * Caption of the story, 0-2048 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the story caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * A JSON-serialized list of clickable areas to be shown on the story
+     */
+    areas?: Objects.TelegramStoryArea[]
+}
+
+/**
+ * Params object for {@link APIMethods.deleteStory | deleteStory} method
+ */
+export interface DeleteStoryParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the story to delete
+     */
+    story_id: number
+}
+
+/**
  * Params object for {@link APIMethods.sendSticker | sendSticker} method
  */
 export interface SendStickerParams {
@@ -2984,88 +3442,6 @@ export interface DeleteStickerSetParams {
 }
 
 /**
- * Params object for {@link APIMethods.sendGift | sendGift} method
- */
-export interface SendGiftParams {
-    /**
-     * Required if *chat\_id* is not specified. Unique identifier of the target user who will receive the gift.
-     */
-    user_id?: number
-    /**
-     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@channelusername`) that will receive the gift.
-     */
-    chat_id?: number | string
-    /**
-     * Identifier of the gift
-     */
-    gift_id: string
-    /**
-     * Pass *True* to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
-     */
-    pay_for_upgrade?: boolean
-    /**
-     * Text that will be shown along with the gift; 0-128 characters
-     */
-    text?: string | { toString(): string }
-    /**
-     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
-     */
-    text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
-    /**
-     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
-     */
-    text_entities?: Objects.TelegramMessageEntity[]
-}
-
-/**
- * Params object for {@link APIMethods.verifyUser | verifyUser} method
- */
-export interface VerifyUserParams {
-    /**
-     * Unique identifier of the target user
-     */
-    user_id: number
-    /**
-     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
-     */
-    custom_description?: string
-}
-
-/**
- * Params object for {@link APIMethods.verifyChat | verifyChat} method
- */
-export interface VerifyChatParams {
-    /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id: number | string
-    /**
-     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
-     */
-    custom_description?: string
-}
-
-/**
- * Params object for {@link APIMethods.removeUserVerification | removeUserVerification} method
- */
-export interface RemoveUserVerificationParams {
-    /**
-     * Unique identifier of the target user
-     */
-    user_id: number
-}
-
-/**
- * Params object for {@link APIMethods.removeChatVerification | removeChatVerification} method
- */
-export interface RemoveChatVerificationParams {
-    /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id: number | string
-}
-
-/**
  * Params object for {@link APIMethods.answerInlineQuery | answerInlineQuery} method
  */
 export interface AnswerInlineQueryParams {
@@ -3296,7 +3672,7 @@ export interface CreateInvoiceLinkParams {
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.
+     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 10000 Telegram Stars.
      */
     subscription_period?: number
     /**

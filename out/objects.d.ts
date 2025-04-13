@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v8.3.0 (12.02.2025)
+ * Based on Bot API v9.0.0 (11.04.2025)
  *
- * Generated at 13.02.2025, 12:35:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 13.04.2025, 12:27:00 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -400,9 +400,9 @@ export interface TelegramChatFullInfo {
      */
     permissions?: TelegramChatPermissions
     /**
-     * *Optional*. *True*, if gifts can be sent to the chat
+     * Information about types of gifts that are accepted by the chat or by the corresponding user for private chats
      */
-    can_send_gift?: boolean
+    accepted_gift_types: TelegramAcceptedGiftTypes
     /**
      * *Optional*. *True*, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
      */
@@ -551,6 +551,10 @@ export interface TelegramMessage {
      * *Optional*. Signature of the post author for messages in channels, or the custom title of an anonymous group administrator
      */
     author_signature?: string
+    /**
+     * *Optional*. The number of Telegram Stars that were paid by the sender of the message to send it
+     */
+    paid_star_count?: number
     /**
      * *Optional*. For text messages, the actual UTF-8 text of the message
      */
@@ -716,6 +720,14 @@ export interface TelegramMessage {
      */
     chat_shared?: TelegramChatShared
     /**
+     * *Optional*. Service message: a regular gift was sent or received
+     */
+    gift?: TelegramGiftInfo
+    /**
+     * *Optional*. Service message: a unique gift was sent or received
+     */
+    unique_gift?: TelegramUniqueGiftInfo
+    /**
      * *Optional*. The domain name of the website on which the user has logged in. [More about Telegram Login »](https://core.telegram.org/widgets/login)
      */
     connected_website?: string
@@ -779,6 +791,10 @@ export interface TelegramMessage {
      * *Optional*. Service message: a giveaway without public winners was completed
      */
     giveaway_completed?: TelegramGiveawayCompleted
+    /**
+     * *Optional*. Service message: the price for paid messages has changed in the chat
+     */
+    paid_message_price_changed?: TelegramPaidMessagePriceChanged
     /**
      * *Optional*. Service message: video chat scheduled
      */
@@ -2238,6 +2254,18 @@ export interface TelegramVideoChatParticipantsInvited {
 }
 
 /**
+ * Describes a service message about a change in the price of paid messages within a chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#paidmessagepricechanged)
+ */
+export interface TelegramPaidMessagePriceChanged {
+    /**
+     * The new number of Telegram Stars that must be paid by non-administrator users of the supergroup chat for each sent message
+     */
+    paid_message_star_count: number
+}
+
+/**
  * This object represents a service message about the creation of a scheduled giveaway.
  *
  * [Documentation](https://core.telegram.org/bots/api/#giveawaycreated)
@@ -3472,6 +3500,200 @@ export interface TelegramBusinessOpeningHours {
 }
 
 /**
+ * Describes the position of a clickable area within a story.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyareaposition)
+ */
+export interface TelegramStoryAreaPosition {
+    /**
+     * The abscissa of the area's center, as a percentage of the media width
+     */
+    x_percentage: number
+    /**
+     * The ordinate of the area's center, as a percentage of the media height
+     */
+    y_percentage: number
+    /**
+     * The width of the area's rectangle, as a percentage of the media width
+     */
+    width_percentage: number
+    /**
+     * The height of the area's rectangle, as a percentage of the media height
+     */
+    height_percentage: number
+    /**
+     * The clockwise rotation angle of the rectangle, in degrees; 0-360
+     */
+    rotation_angle: number
+    /**
+     * The radius of the rectangle corner rounding, as a percentage of the media width
+     */
+    corner_radius_percentage: number
+}
+
+/**
+ * Describes the physical address of a location.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#locationaddress)
+ */
+export interface TelegramLocationAddress {
+    /**
+     * The two-letter ISO 3166-1 alpha-2 country code of the country where the location is located
+     */
+    country_code: string
+    /**
+     * *Optional*. State of the location
+     */
+    state?: string
+    /**
+     * *Optional*. City of the location
+     */
+    city?: string
+    /**
+     * *Optional*. Street address of the location
+     */
+    street?: string
+}
+
+/**
+ * Describes the type of a clickable area on a story. Currently, it can be one of
+ *
+ * * [StoryAreaTypeLocation](https://core.telegram.org/bots/api/#storyareatypelocation)
+ * * [StoryAreaTypeSuggestedReaction](https://core.telegram.org/bots/api/#storyareatypesuggestedreaction)
+ * * [StoryAreaTypeLink](https://core.telegram.org/bots/api/#storyareatypelink)
+ * * [StoryAreaTypeWeather](https://core.telegram.org/bots/api/#storyareatypeweather)
+ * * [StoryAreaTypeUniqueGift](https://core.telegram.org/bots/api/#storyareatypeuniquegift)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyareatype)
+ */
+export type TelegramStoryAreaType =
+    | TelegramStoryAreaTypeLocation
+    | TelegramStoryAreaTypeSuggestedReaction
+    | TelegramStoryAreaTypeLink
+    | TelegramStoryAreaTypeWeather
+    | TelegramStoryAreaTypeUniqueGift
+
+/**
+ * Describes a story area pointing to a location. Currently, a story can have up to 10 location areas.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyareatypelocation)
+ */
+export interface TelegramStoryAreaTypeLocation {
+    /**
+     * Type of the area, always “location”
+     */
+    type: "location"
+    /**
+     * Location latitude in degrees
+     */
+    latitude: number
+    /**
+     * Location longitude in degrees
+     */
+    longitude: number
+    /**
+     * *Optional*. Address of the location
+     */
+    address?: TelegramLocationAddress
+}
+
+/**
+ * Describes a story area pointing to a suggested reaction. Currently, a story can have up to 5 suggested reaction areas.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyareatypesuggestedreaction)
+ */
+export interface TelegramStoryAreaTypeSuggestedReaction {
+    /**
+     * Type of the area, always “suggested\_reaction”
+     */
+    type: "suggested_reaction"
+    /**
+     * Type of the reaction
+     */
+    reaction_type: TelegramReactionType
+    /**
+     * *Optional*. Pass *True* if the reaction area has a dark background
+     */
+    is_dark?: boolean
+    /**
+     * *Optional*. Pass *True* if reaction area corner is flipped
+     */
+    is_flipped?: boolean
+}
+
+/**
+ * Describes a story area pointing to an HTTP or tg:// link. Currently, a story can have up to 3 link areas.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyareatypelink)
+ */
+export interface TelegramStoryAreaTypeLink {
+    /**
+     * Type of the area, always “link”
+     */
+    type: "link"
+    /**
+     * HTTP or tg:// URL to be opened when the area is clicked
+     */
+    url: string
+}
+
+/**
+ * Describes a story area containing weather information. Currently, a story can have up to 3 weather areas.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyareatypeweather)
+ */
+export interface TelegramStoryAreaTypeWeather {
+    /**
+     * Type of the area, always “weather”
+     */
+    type: "weather"
+    /**
+     * Temperature, in degree Celsius
+     */
+    temperature: number
+    /**
+     * Emoji representing the weather
+     */
+    emoji: string
+    /**
+     * A color of the area background in the ARGB format
+     */
+    background_color: number
+}
+
+/**
+ * Describes a story area pointing to a unique gift. Currently, a story can have at most 1 unique gift area.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyareatypeuniquegift)
+ */
+export interface TelegramStoryAreaTypeUniqueGift {
+    /**
+     * Type of the area, always “unique\_gift”
+     */
+    type: "unique_gift"
+    /**
+     * Unique name of the gift
+     */
+    name: string
+}
+
+/**
+ * Describes a clickable area on a story media.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#storyarea)
+ */
+export interface TelegramStoryArea {
+    /**
+     * Position of the area
+     */
+    position: TelegramStoryAreaPosition
+    /**
+     * Type of the area
+     */
+    type: TelegramStoryAreaType
+}
+
+/**
  * Represents a location to which a chat is connected.
  *
  * [Documentation](https://core.telegram.org/bots/api/#chatlocation)
@@ -3718,6 +3940,404 @@ export interface TelegramForumTopic {
      * *Optional*. Unique identifier of the custom emoji shown as the topic icon
      */
     icon_custom_emoji_id?: string
+}
+
+/**
+ * This object represents a gift that can be sent by the bot.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#gift)
+ */
+export interface TelegramGift {
+    /**
+     * Unique identifier of the gift
+     */
+    id: string
+    /**
+     * The sticker that represents the gift
+     */
+    sticker: TelegramSticker
+    /**
+     * The number of Telegram Stars that must be paid to send the sticker
+     */
+    star_count: number
+    /**
+     * *Optional*. The number of Telegram Stars that must be paid to upgrade the gift to a unique one
+     */
+    upgrade_star_count?: number
+    /**
+     * *Optional*. The total number of the gifts of this type that can be sent; for limited gifts only
+     */
+    total_count?: number
+    /**
+     * *Optional*. The number of remaining gifts of this type that can be sent; for limited gifts only
+     */
+    remaining_count?: number
+}
+
+/**
+ * This object represent a list of gifts.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#gifts)
+ */
+export interface TelegramGifts {
+    /**
+     * The list of gifts
+     */
+    gifts: TelegramGift[]
+}
+
+/**
+ * This object describes the model of a unique gift.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#uniquegiftmodel)
+ */
+export interface TelegramUniqueGiftModel {
+    /**
+     * Name of the model
+     */
+    name: string
+    /**
+     * The sticker that represents the unique gift
+     */
+    sticker: TelegramSticker
+    /**
+     * The number of unique gifts that receive this model for every 1000 gifts upgraded
+     */
+    rarity_per_mille: number
+}
+
+/**
+ * This object describes the symbol shown on the pattern of a unique gift.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#uniquegiftsymbol)
+ */
+export interface TelegramUniqueGiftSymbol {
+    /**
+     * Name of the symbol
+     */
+    name: string
+    /**
+     * The sticker that represents the unique gift
+     */
+    sticker: TelegramSticker
+    /**
+     * The number of unique gifts that receive this model for every 1000 gifts upgraded
+     */
+    rarity_per_mille: number
+}
+
+/**
+ * This object describes the colors of the backdrop of a unique gift.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#uniquegiftbackdropcolors)
+ */
+export interface TelegramUniqueGiftBackdropColors {
+    /**
+     * The color in the center of the backdrop in RGB format
+     */
+    center_color: number
+    /**
+     * The color on the edges of the backdrop in RGB format
+     */
+    edge_color: number
+    /**
+     * The color to be applied to the symbol in RGB format
+     */
+    symbol_color: number
+    /**
+     * The color for the text on the backdrop in RGB format
+     */
+    text_color: number
+}
+
+/**
+ * This object describes the backdrop of a unique gift.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#uniquegiftbackdrop)
+ */
+export interface TelegramUniqueGiftBackdrop {
+    /**
+     * Name of the backdrop
+     */
+    name: string
+    /**
+     * Colors of the backdrop
+     */
+    colors: TelegramUniqueGiftBackdropColors
+    /**
+     * The number of unique gifts that receive this backdrop for every 1000 gifts upgraded
+     */
+    rarity_per_mille: number
+}
+
+/**
+ * This object describes a unique gift that was upgraded from a regular gift.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#uniquegift)
+ */
+export interface TelegramUniqueGift {
+    /**
+     * Human-readable name of the regular gift from which this unique gift was upgraded
+     */
+    base_name: string
+    /**
+     * Unique name of the gift. This name can be used in `https://t.me/nft/...` links and story areas
+     */
+    name: string
+    /**
+     * Unique number of the upgraded gift among gifts upgraded from the same regular gift
+     */
+    number: number
+    /**
+     * Model of the gift
+     */
+    model: TelegramUniqueGiftModel
+    /**
+     * Symbol of the gift
+     */
+    symbol: TelegramUniqueGiftSymbol
+    /**
+     * Backdrop of the gift
+     */
+    backdrop: TelegramUniqueGiftBackdrop
+}
+
+/**
+ * Describes a service message about a regular gift that was sent or received.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#giftinfo)
+ */
+export interface TelegramGiftInfo {
+    /**
+     * Information about the gift
+     */
+    gift: TelegramGift
+    /**
+     * *Optional*. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
+     */
+    owned_gift_id?: string
+    /**
+     * *Optional*. Number of Telegram Stars that can be claimed by the receiver by converting the gift; omitted if conversion to Telegram Stars is impossible
+     */
+    convert_star_count?: number
+    /**
+     * *Optional*. Number of Telegram Stars that were prepaid by the sender for the ability to upgrade the gift
+     */
+    prepaid_upgrade_star_count?: number
+    /**
+     * *Optional*. True, if the gift can be upgraded to a unique gift
+     */
+    can_be_upgraded?: boolean
+    /**
+     * *Optional*. Text of the message that was added to the gift
+     */
+    text?: string
+    /**
+     * *Optional*. Special entities that appear in the text
+     */
+    entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
+     */
+    is_private?: boolean
+}
+
+export type TelegramUniqueGiftInfoOrigin = "upgrade" | "transfer"
+
+/**
+ * Describes a service message about a unique gift that was sent or received.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#uniquegiftinfo)
+ */
+export interface TelegramUniqueGiftInfo {
+    /**
+     * Information about the gift
+     */
+    gift: TelegramUniqueGift
+    /**
+     * Origin of the gift. Currently, either “upgrade” or “transfer”
+     */
+    origin: TelegramUniqueGiftInfoOrigin
+    /**
+     * *Optional*. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
+     */
+    owned_gift_id?: string
+    /**
+     * *Optional*. Number of Telegram Stars that must be paid to transfer the gift; omitted if the bot cannot transfer the gift
+     */
+    transfer_star_count?: number
+}
+
+/**
+ * This object describes a gift received and owned by a user or a chat. Currently, it can be one of
+ *
+ * * [OwnedGiftRegular](https://core.telegram.org/bots/api/#ownedgiftregular)
+ * * [OwnedGiftUnique](https://core.telegram.org/bots/api/#ownedgiftunique)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#ownedgift)
+ */
+export type TelegramOwnedGift =
+    | TelegramOwnedGiftRegular
+    | TelegramOwnedGiftUnique
+
+/**
+ * Describes a regular gift owned by a user or a chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#ownedgiftregular)
+ */
+export interface TelegramOwnedGiftRegular {
+    /**
+     * Type of the gift, always “regular”
+     */
+    type: "regular"
+    /**
+     * Information about the regular gift
+     */
+    gift: TelegramGift
+    /**
+     * *Optional*. Unique identifier of the gift for the bot; for gifts received on behalf of business accounts only
+     */
+    owned_gift_id?: string
+    /**
+     * *Optional*. Sender of the gift if it is a known user
+     */
+    sender_user?: TelegramUser
+    /**
+     * Date the gift was sent in Unix time
+     */
+    send_date: number
+    /**
+     * *Optional*. Text of the message that was added to the gift
+     */
+    text?: string
+    /**
+     * *Optional*. Special entities that appear in the text
+     */
+    entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
+     */
+    is_private?: boolean
+    /**
+     * *Optional*. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
+     */
+    is_saved?: boolean
+    /**
+     * *Optional*. True, if the gift can be upgraded to a unique gift; for gifts received on behalf of business accounts only
+     */
+    can_be_upgraded?: boolean
+    /**
+     * *Optional*. True, if the gift was refunded and isn't available anymore
+     */
+    was_refunded?: boolean
+    /**
+     * *Optional*. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars
+     */
+    convert_star_count?: number
+    /**
+     * *Optional*. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift
+     */
+    prepaid_upgrade_star_count?: number
+}
+
+/**
+ * Describes a unique gift received and owned by a user or a chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#ownedgiftunique)
+ */
+export interface TelegramOwnedGiftUnique {
+    /**
+     * Type of the gift, always “unique”
+     */
+    type: "unique"
+    /**
+     * Information about the unique gift
+     */
+    gift: TelegramUniqueGift
+    /**
+     * *Optional*. Unique identifier of the received gift for the bot; for gifts received on behalf of business accounts only
+     */
+    owned_gift_id?: string
+    /**
+     * *Optional*. Sender of the gift if it is a known user
+     */
+    sender_user?: TelegramUser
+    /**
+     * Date the gift was sent in Unix time
+     */
+    send_date: number
+    /**
+     * *Optional*. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
+     */
+    is_saved?: boolean
+    /**
+     * *Optional*. True, if the gift can be transferred to another owner; for gifts received on behalf of business accounts only
+     */
+    can_be_transferred?: boolean
+    /**
+     * *Optional*. Number of Telegram Stars that must be paid to transfer the gift; omitted if the bot cannot transfer the gift
+     */
+    transfer_star_count?: number
+}
+
+/**
+ * Contains the list of gifts received and owned by a user or a chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#ownedgifts)
+ */
+export interface TelegramOwnedGifts {
+    /**
+     * The total number of gifts owned by the user or the chat
+     */
+    total_count: number
+    /**
+     * The list of gifts
+     */
+    gifts: TelegramOwnedGift[]
+    /**
+     * *Optional*. Offset for the next request. If empty, then there are no more results
+     */
+    next_offset?: string
+}
+
+/**
+ * This object describes the types of gifts that can be gifted to a user or a chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#acceptedgifttypes)
+ */
+export interface TelegramAcceptedGiftTypes {
+    /**
+     * True, if unlimited regular gifts are accepted
+     */
+    unlimited_gifts: boolean
+    /**
+     * True, if limited regular gifts are accepted
+     */
+    limited_gifts: boolean
+    /**
+     * True, if unique gifts or gifts that can be upgraded to unique for free are accepted
+     */
+    unique_gifts: boolean
+    /**
+     * True, if a Telegram Premium subscription is accepted
+     */
+    premium_subscription: boolean
+}
+
+/**
+ * Describes an amount of Telegram Stars.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#staramount)
+ */
+export interface TelegramStarAmount {
+    /**
+     * Integer amount of Telegram Stars, rounded to 0; can be negative
+     */
+    amount: number
+    /**
+     * *Optional*. The number of 1/1000000000 shares of Telegram Stars; from -999999999 to 999999999; can be negative if and only if *amount* is non-positive
+     */
+    nanostar_amount?: number
 }
 
 /**
@@ -4103,6 +4723,70 @@ export interface TelegramUserChatBoosts {
 }
 
 /**
+ * Represents the rights of a business bot.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#businessbotrights)
+ */
+export interface TelegramBusinessBotRights {
+    /**
+     * *Optional*. True, if the bot can send and edit messages in the private chats that had incoming messages in the last 24 hours
+     */
+    can_reply?: boolean
+    /**
+     * *Optional*. True, if the bot can mark incoming private messages as read
+     */
+    can_read_messages?: boolean
+    /**
+     * *Optional*. True, if the bot can delete messages sent by the bot
+     */
+    can_delete_outgoing_messages?: boolean
+    /**
+     * *Optional*. True, if the bot can delete all private messages in managed chats
+     */
+    can_delete_all_messages?: boolean
+    /**
+     * *Optional*. True, if the bot can edit the first and last name of the business account
+     */
+    can_edit_name?: boolean
+    /**
+     * *Optional*. True, if the bot can edit the bio of the business account
+     */
+    can_edit_bio?: boolean
+    /**
+     * *Optional*. True, if the bot can edit the profile photo of the business account
+     */
+    can_edit_profile_photo?: boolean
+    /**
+     * *Optional*. True, if the bot can edit the username of the business account
+     */
+    can_edit_username?: boolean
+    /**
+     * *Optional*. True, if the bot can change the privacy settings pertaining to gifts for the business account
+     */
+    can_change_gift_settings?: boolean
+    /**
+     * *Optional*. True, if the bot can view gifts and the amount of Telegram Stars owned by the business account
+     */
+    can_view_gifts_and_stars?: boolean
+    /**
+     * *Optional*. True, if the bot can convert regular gifts owned by the business account to Telegram Stars
+     */
+    can_convert_gifts_to_stars?: boolean
+    /**
+     * *Optional*. True, if the bot can transfer and upgrade gifts owned by the business account
+     */
+    can_transfer_and_upgrade_gifts?: boolean
+    /**
+     * *Optional*. True, if the bot can transfer Telegram Stars received by the business account to its own account, or use them to upgrade and transfer gifts
+     */
+    can_transfer_stars?: boolean
+    /**
+     * *Optional*. True, if the bot can post, edit and delete stories on behalf of the business account
+     */
+    can_manage_stories?: boolean
+}
+
+/**
  * Describes the connection of the bot with a business account.
  *
  * [Documentation](https://core.telegram.org/bots/api/#businessconnection)
@@ -4125,9 +4809,9 @@ export interface TelegramBusinessConnection {
      */
     date: number
     /**
-     * True, if the bot can act on behalf of the business account in chats that were active in the last 24 hours
+     * *Optional*. Rights of the business bot
      */
-    can_reply: boolean
+    rights?: TelegramBusinessBotRights
     /**
      * True, if the connection is active
      */
@@ -4245,7 +4929,7 @@ export interface TelegramInputMediaVideo {
     /**
      * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    cover?: string
+    cover?: TelegramInputFile | string
     /**
      * *Optional*. Start timestamp for the video in the message
      */
@@ -4425,7 +5109,7 @@ export interface TelegramInputMediaDocument {
  *
  * [Documentation](https://core.telegram.org/bots/api/#inputfile)
  */
-export type TelegramInputFile = Blob | Promise<Blob>
+export type TelegramInputFile = Blob
 
 /**
  * This object describes the paid media to be sent. Currently, it can be one of
@@ -4472,11 +5156,11 @@ export interface TelegramInputPaidMediaVideo {
     /**
      * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    thumbnail?: string
+    thumbnail?: TelegramInputFile | string
     /**
      * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
-    cover?: string
+    cover?: TelegramInputFile | string
     /**
      * *Optional*. Start timestamp for the video in the message
      */
@@ -4497,6 +5181,110 @@ export interface TelegramInputPaidMediaVideo {
      * *Optional*. Pass *True* if the uploaded video is suitable for streaming
      */
     supports_streaming?: boolean
+}
+
+/**
+ * This object describes a profile photo to set. Currently, it can be one of
+ *
+ * * [InputProfilePhotoStatic](https://core.telegram.org/bots/api/#inputprofilephotostatic)
+ * * [InputProfilePhotoAnimated](https://core.telegram.org/bots/api/#inputprofilephotoanimated)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputprofilephoto)
+ */
+export type TelegramInputProfilePhoto =
+    | TelegramInputProfilePhotoStatic
+    | TelegramInputProfilePhotoAnimated
+
+/**
+ * A static profile photo in the .JPG format.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputprofilephotostatic)
+ */
+export interface TelegramInputProfilePhotoStatic {
+    /**
+     * Type of the profile photo, must be *static*
+     */
+    type: "static"
+    /**
+     * The static profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the photo was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    photo: TelegramInputFile | string
+}
+
+/**
+ * An animated profile photo in the MPEG4 format.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputprofilephotoanimated)
+ */
+export interface TelegramInputProfilePhotoAnimated {
+    /**
+     * Type of the profile photo, must be *animated*
+     */
+    type: "animated"
+    /**
+     * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the photo was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    animation: TelegramInputFile | string
+    /**
+     * *Optional*. Timestamp in seconds of the frame that will be used as the static profile photo. Defaults to 0.0.
+     */
+    main_frame_timestamp?: number
+}
+
+/**
+ * This object describes the content of a story to post. Currently, it can be one of
+ *
+ * * [InputStoryContentPhoto](https://core.telegram.org/bots/api/#inputstorycontentphoto)
+ * * [InputStoryContentVideo](https://core.telegram.org/bots/api/#inputstorycontentvideo)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputstorycontent)
+ */
+export type TelegramInputStoryContent =
+    | TelegramInputStoryContentPhoto
+    | TelegramInputStoryContentVideo
+
+/**
+ * Describes a photo to post as a story.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputstorycontentphoto)
+ */
+export interface TelegramInputStoryContentPhoto {
+    /**
+     * Type of the content, must be *photo*
+     */
+    type: "photo"
+    /**
+     * The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the photo was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    photo: TelegramInputFile | string
+}
+
+/**
+ * Describes a video to post as a story.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputstorycontentvideo)
+ */
+export interface TelegramInputStoryContentVideo {
+    /**
+     * Type of the content, must be *video*
+     */
+    type: "video"
+    /**
+     * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the video was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     */
+    video: TelegramInputFile | string
+    /**
+     * *Optional*. Precise duration of the video in seconds; 0-60
+     */
+    duration?: number
+    /**
+     * *Optional*. Timestamp in seconds of the frame that will be used as the static cover for the story. Defaults to 0.0.
+     */
+    cover_frame_timestamp?: number
+    /**
+     * *Optional*. Pass *True* if the video has no sound
+     */
+    is_animation?: boolean
 }
 
 export type TelegramStickerType = "regular" | "mask" | "custom_emoji"
@@ -4634,7 +5422,7 @@ export type TelegramInputStickerFormat = "static" | "animated" | "video"
  */
 export interface TelegramInputSticker {
     /**
-     * The added sticker. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, upload a new one using multipart/form-data, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. Animated and video stickers can't be uploaded via HTTP URL. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * The added sticker. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new file using multipart/form-data under \<file\_attach\_name\> name. Animated and video stickers can't be uploaded via HTTP URL. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
     sticker: TelegramInputFile | string
     /**
@@ -4653,50 +5441,6 @@ export interface TelegramInputSticker {
      * *Optional*. List of 0-20 search keywords for the sticker with total length of up to 64 characters. For “regular” and “custom\_emoji” stickers only.
      */
     keywords?: string[]
-}
-
-/**
- * This object represents a gift that can be sent by the bot.
- *
- * [Documentation](https://core.telegram.org/bots/api/#gift)
- */
-export interface TelegramGift {
-    /**
-     * Unique identifier of the gift
-     */
-    id: string
-    /**
-     * The sticker that represents the gift
-     */
-    sticker: TelegramSticker
-    /**
-     * The number of Telegram Stars that must be paid to send the sticker
-     */
-    star_count: number
-    /**
-     * *Optional*. The number of Telegram Stars that must be paid to upgrade the gift to a unique one
-     */
-    upgrade_star_count?: number
-    /**
-     * *Optional*. The total number of the gifts of this type that can be sent; for limited gifts only
-     */
-    total_count?: number
-    /**
-     * *Optional*. The number of remaining gifts of this type that can be sent; for limited gifts only
-     */
-    remaining_count?: number
-}
-
-/**
- * This object represent a list of gifts.
- *
- * [Documentation](https://core.telegram.org/bots/api/#gifts)
- */
-export interface TelegramGifts {
-    /**
-     * The list of gifts
-     */
-    gifts: TelegramGift[]
 }
 
 export type TelegramInlineQueryChatType =
@@ -6580,6 +7324,13 @@ export type TelegramTransactionPartner =
     | TelegramTransactionPartnerTelegramApi
     | TelegramTransactionPartnerOther
 
+export type TelegramTransactionPartnerUserTransactionType =
+    | "invoice_payment"
+    | "paid_media_payment"
+    | "gift_purchase"
+    | "premium_purchase"
+    | "business_account_transfer"
+
 /**
  * Describes a transaction with a user.
  *
@@ -6591,33 +7342,41 @@ export interface TelegramTransactionPartnerUser {
      */
     type: "user"
     /**
+     * Type of the transaction, currently one of “invoice\_payment” for payments via invoices, “paid\_media\_payment” for payments for paid media, “gift\_purchase” for gifts sent by the bot, “premium\_purchase” for Telegram Premium subscriptions gifted by the bot, “business\_account\_transfer” for direct transfers from managed business accounts
+     */
+    transaction_type: TelegramTransactionPartnerUserTransactionType
+    /**
      * Information about the user
      */
     user: TelegramUser
     /**
-     * *Optional*. Information about the affiliate that received a commission via this transaction
+     * *Optional*. Information about the affiliate that received a commission via this transaction. Can be available only for “invoice\_payment” and “paid\_media\_payment” transactions.
      */
     affiliate?: TelegramAffiliateInfo
     /**
-     * *Optional*. Bot-specified invoice payload
+     * *Optional*. Bot-specified invoice payload. Can be available only for “invoice\_payment” transactions.
      */
     invoice_payload?: string
     /**
-     * *Optional*. The duration of the paid subscription
+     * *Optional*. The duration of the paid subscription. Can be available only for “invoice\_payment” transactions.
      */
     subscription_period?: number
     /**
-     * *Optional*. Information about the paid media bought by the user
+     * *Optional*. Information about the paid media bought by the user; for “paid\_media\_payment” transactions only
      */
     paid_media?: TelegramPaidMedia[]
     /**
-     * *Optional*. Bot-specified paid media payload
+     * *Optional*. Bot-specified paid media payload. Can be available only for “paid\_media\_payment” transactions.
      */
     paid_media_payload?: string
     /**
-     * *Optional*. The gift sent to the user by the bot
+     * *Optional*. The gift sent to the user by the bot; for “gift\_purchase” transactions only
      */
     gift?: TelegramGift
+    /**
+     * *Optional*. Number of months the gifted Telegram Premium subscription will be active for; for “premium\_purchase” transactions only
+     */
+    premium_subscription_duration?: number
 }
 
 /**
