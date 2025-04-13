@@ -13,7 +13,7 @@
  *
  * Based on Bot API v9.0 (11.04.2025)
  *
- * Generated at 12.04.2025, 20:40:32 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 12.04.2025, 20:48:57 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {

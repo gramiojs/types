@@ -199,26 +199,26 @@ const files: IGeneratedFile[] = [
 	// 		Objects.generateMany(schema.objects),
 	// 	],
 	// },
-	// {
-	// 	name: "params.d.ts",
-	// 	lines: [
-	// 		header(
-	// 			"This module contains params for [methods](https://core.telegram.org/bots/api#available-methods) with the `Params` postfix",
-	// 			[
-	// 				"@example import params",
-	// 				"```typescript",
-	// 				`import { SendMessageParams } from "@gramio/types/params";`,
-	// 				"```",
-	// 			],
-	// 		),
-	// 		[
-	// 			`import type { APIMethods } from "./methods";`,
-	// 			`import type * as Objects from "./objects"`,
-	// 			"",
-	// 		],
-	// 		Params.generateMany(schema.methods),
-	// 	],
-	// },
+	{
+		name: "params.d.ts",
+		lines: [
+			header(
+				"This module contains params for [methods](https://core.telegram.org/bots/api#available-methods) with the `Params` postfix",
+				[
+					"@example import params",
+					"```typescript",
+					`import { SendMessageParams } from "@gramio/types/params";`,
+					"```",
+				],
+			),
+			[
+				`import type { APIMethods } from "./methods";`,
+				`import type * as Objects from "./objects"`,
+				"",
+			],
+			Params.generateMany(schema.methods),
+		],
+	},
 	{
 		name: "methods.d.ts",
 		lines: [

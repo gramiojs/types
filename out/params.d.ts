@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v8.3.0 (12.02.2025)
+ * Based on Bot API v9.0 (11.04.2025)
  *
- * Generated at 12.02.2025, 13:45:55 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 12.04.2025, 20:48:57 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -21,7 +21,7 @@ import type * as Objects from "./objects"
  */
 export interface GetUpdatesParams {
     /**
-     * Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as [getUpdates](https://core.telegram.org/bots/api/#getupdates) is called with an *offset* higher than its *update\_id*. The negative offset can be specified to retrieve updates starting from *-offset* update from the end of the updates queue. All previous updates will be forgotten.
+     * Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as [getUpdates](https://core.telegram.org/bots/api#getupdates) is called with an *offset* higher than its *update\_id*. The negative offset can be specified to retrieve updates starting from *\-offset* update from the end of the updates queue. All previous updates will be forgotten.
      */
     offset?: number
     /**
@@ -33,7 +33,7 @@ export interface GetUpdatesParams {
      */
     timeout?: number
     /**
-     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api/#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
+     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      *
      * Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.
      */
@@ -61,7 +61,7 @@ export interface SetWebhookParams {
      */
     max_connections?: number
     /**
-     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api/#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
+     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      * Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
      */
     allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
@@ -106,7 +106,7 @@ export interface SendMessageParams {
      */
     text: string | { toString(): string }
     /**
-     * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -244,7 +244,7 @@ export interface CopyMessageParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the new caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the new caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -336,7 +336,7 @@ export interface SendPhotoParams {
      */
     message_thread_id?: number
     /**
-     * Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     photo: Objects.TelegramInputFile | string
     /**
@@ -344,7 +344,7 @@ export interface SendPhotoParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -410,7 +410,7 @@ export interface SendAudioParams {
      */
     message_thread_id?: number
     /**
-     * Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     audio: Objects.TelegramInputFile | string
     /**
@@ -418,7 +418,7 @@ export interface SendAudioParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the audio caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -438,7 +438,7 @@ export interface SendAudioParams {
      */
     title?: string
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -492,11 +492,11 @@ export interface SendDocumentParams {
      */
     message_thread_id?: number
     /**
-     * File to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * File to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     document: Objects.TelegramInputFile | string
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -504,7 +504,7 @@ export interface SendDocumentParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the document caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -566,7 +566,7 @@ export interface SendVideoParams {
      */
     message_thread_id?: number
     /**
-     * Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     video: Objects.TelegramInputFile | string
     /**
@@ -582,11 +582,11 @@ export interface SendVideoParams {
      */
     height?: number
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
-     * Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://\<file\_attach\_name\>” to upload a new one using multipart/form-data under \<file\_attach\_name\> name. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     cover?: Objects.TelegramInputFile | string
     /**
@@ -598,7 +598,7 @@ export interface SendVideoParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -668,7 +668,7 @@ export interface SendAnimationParams {
      */
     message_thread_id?: number
     /**
-     * Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     animation: Objects.TelegramInputFile | string
     /**
@@ -684,7 +684,7 @@ export interface SendAnimationParams {
      */
     height?: number
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -692,7 +692,7 @@ export interface SendAnimationParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the animation caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the animation caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -758,7 +758,7 @@ export interface SendVoiceParams {
      */
     message_thread_id?: number
     /**
-     * Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     voice: Objects.TelegramInputFile | string
     /**
@@ -766,7 +766,7 @@ export interface SendVoiceParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -828,7 +828,7 @@ export interface SendVideoNoteParams {
      */
     message_thread_id?: number
     /**
-     * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Sending video notes by a URL is currently unsupported
+     * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending video notes by a URL is currently unsupported
      */
     video_note: Objects.TelegramInputFile | string
     /**
@@ -840,7 +840,7 @@ export interface SendVideoNoteParams {
      */
     length?: number
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://\<file\_attach\_name\>” if the thumbnail was uploaded using multipart/form-data under \<file\_attach\_name\>. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -890,7 +890,7 @@ export interface SendPaidMediaParams {
      */
     chat_id: number | string
     /**
-     * The number of Telegram Stars that must be paid to buy access to the media; 1-2500
+     * The number of Telegram Stars that must be paid to buy access to the media; 1-10000
      */
     star_count: number
     /**
@@ -906,7 +906,7 @@ export interface SendPaidMediaParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the media caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the media caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -966,12 +966,7 @@ export interface SendMediaGroupParams {
     /**
      * A JSON-serialized array describing messages to be sent, must include 2-10 items
      */
-    media: (
-        | Objects.TelegramInputMediaAudio
-        | Objects.TelegramInputMediaDocument
-        | Objects.TelegramInputMediaPhoto
-        | Objects.TelegramInputMediaVideo
-    )[]
+    media: Objects.TelegramInputMediaAudio[]
     /**
      * Sends messages [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
      */
@@ -1216,8 +1211,6 @@ export interface SendContactParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
-export type SendPollType = "quiz" | "regular"
-
 /**
  * Params object for {@link APIMethods.sendPoll | sendPoll} method
  */
@@ -1239,7 +1232,7 @@ export interface SendPollParams {
      */
     question: string | { toString(): string }
     /**
-     * Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Currently, only custom emoji entities are allowed
+     * Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Currently, only custom emoji entities are allowed
      */
     question_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -1257,7 +1250,7 @@ export interface SendPollParams {
     /**
      * Poll type, “quiz” or “regular”, defaults to “regular”
      */
-    type?: SendPollType
+    type?: string
     /**
      * *True*, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to *False*
      */
@@ -1271,7 +1264,7 @@ export interface SendPollParams {
      */
     explanation?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the explanation. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the explanation. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     explanation_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -1324,7 +1317,20 @@ export interface SendPollParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
-export type SendDiceEmoji = "🎲" | "🎯" | "🏀" | "⚽" | "🎳" | "🎰"
+export type SendDiceEmoji =
+    | "🎲"
+    | "🎯"
+    | "🏀"
+    | "⚽"
+    | "🎳"
+    | "🎰"
+    | "🎲"
+    | "🎯"
+    | "🎳"
+    | "🏀"
+    | "⚽"
+    | "🎰"
+    | "🎲"
 
 /**
  * Params object for {@link APIMethods.sendDice | sendDice} method
@@ -1343,7 +1349,7 @@ export interface SendDiceParams {
      */
     message_thread_id?: number
     /**
-     * Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
+     * Emoji on which the dice throw animation is based. Currently, must be one of “![🎲](//telegram.org/img/emoji/40/F09F8EB2.png)”, “![🎯](//telegram.org/img/emoji/40/F09F8EAF.png)”, “![🏀](//telegram.org/img/emoji/40/F09F8F80.png)”, “![⚽](//telegram.org/img/emoji/40/E29ABD.png)”, “![🎳](//telegram.org/img/emoji/40/F09F8EB3.png)”, or “![🎰](//telegram.org/img/emoji/40/F09F8EB0.png)”. Dice can have values 1-6 for “![🎲](//telegram.org/img/emoji/40/F09F8EB2.png)”, “![🎯](//telegram.org/img/emoji/40/F09F8EAF.png)” and “![🎳](//telegram.org/img/emoji/40/F09F8EB3.png)”, values 1-5 for “![🏀](//telegram.org/img/emoji/40/F09F8F80.png)” and “![⚽](//telegram.org/img/emoji/40/E29ABD.png)”, and values 1-64 for “![🎰](//telegram.org/img/emoji/40/F09F8EB0.png)”. Defaults to “![🎲](//telegram.org/img/emoji/40/F09F8EB2.png)”
      */
     emoji?: SendDiceEmoji
     /**
@@ -1380,19 +1386,6 @@ export interface SendDiceParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
-export type SendChatActionAction =
-    | "typing"
-    | "upload_photo"
-    | "record_video"
-    | "upload_video"
-    | "record_voice"
-    | "upload_voice"
-    | "upload_document"
-    | "choose_sticker"
-    | "find_location"
-    | "record_video_note"
-    | "upload_video_note"
-
 /**
  * Params object for {@link APIMethods.sendChatAction | sendChatAction} method
  */
@@ -1410,9 +1403,9 @@ export interface SendChatActionParams {
      */
     message_thread_id?: number
     /**
-     * Type of action to broadcast. Choose one, depending on what the user is about to receive: *typing* for [text messages](https://core.telegram.org/bots/api/#sendmessage), *upload\_photo* for [photos](https://core.telegram.org/bots/api/#sendphoto), *record\_video* or *upload\_video* for [videos](https://core.telegram.org/bots/api/#sendvideo), *record\_voice* or *upload\_voice* for [voice notes](https://core.telegram.org/bots/api/#sendvoice), *upload\_document* for [general files](https://core.telegram.org/bots/api/#senddocument), *choose\_sticker* for [stickers](https://core.telegram.org/bots/api/#sendsticker), *find\_location* for [location data](https://core.telegram.org/bots/api/#sendlocation), *record\_video\_note* or *upload\_video\_note* for [video notes](https://core.telegram.org/bots/api/#sendvideonote).
+     * Type of action to broadcast. Choose one, depending on what the user is about to receive: *typing* for [text messages](https://core.telegram.org/bots/api#sendmessage), *upload\_photo* for [photos](https://core.telegram.org/bots/api#sendphoto), *record\_video* or *upload\_video* for [videos](https://core.telegram.org/bots/api#sendvideo), *record\_voice* or *upload\_voice* for [voice notes](https://core.telegram.org/bots/api#sendvoice), *upload\_document* for [general files](https://core.telegram.org/bots/api#senddocument), *choose\_sticker* for [stickers](https://core.telegram.org/bots/api#sendsticker), *find\_location* for [location data](https://core.telegram.org/bots/api#sendlocation), *record\_video\_note* or *upload\_video\_note* for [video notes](https://core.telegram.org/bots/api#sendvideonote).
      */
-    action: SendChatActionAction
+    action: string
 }
 
 /**
@@ -1770,7 +1763,7 @@ export interface CreateChatSubscriptionInviteLinkParams {
      */
     subscription_period: number
     /**
-     * The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500
+     * The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-10000
      */
     subscription_price: number
 }
@@ -2015,14 +2008,6 @@ export interface DeleteChatStickerSetParams {
     chat_id: number | string
 }
 
-export type CreateForumTopicIconColor =
-    | "7322096"
-    | "16766590"
-    | "13338331"
-    | "9367192"
-    | "16749490"
-    | "16478047"
-
 /**
  * Params object for {@link APIMethods.createForumTopic | createForumTopic} method
  */
@@ -2040,7 +2025,7 @@ export interface CreateForumTopicParams {
      */
     icon_color?: 0x6fb9f0 | 0xffd67e | 0xcb86db | 0x8eee98 | 0xff93b2 | 0xfb6f5f
     /**
-     * Unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api/#getforumtopiciconstickers) to get all allowed custom emoji identifiers.
+     * Unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api#getforumtopiciconstickers) to get all allowed custom emoji identifiers.
      */
     icon_custom_emoji_id?: string
 }
@@ -2062,7 +2047,7 @@ export interface EditForumTopicParams {
      */
     name?: string
     /**
-     * New unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api/#getforumtopiciconstickers) to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+     * New unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api#getforumtopiciconstickers) to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
      */
     icon_custom_emoji_id?: string
 }
@@ -2204,7 +2189,7 @@ export interface AnswerCallbackQueryParams {
      */
     show_alert?: boolean
     /**
-     * URL that will be opened by the user's client. If you have created a [Game](https://core.telegram.org/bots/api/#game) and accepted the conditions via [@BotFather](https://t.me/botfather), specify the URL that opens your game - note that this will only work if the query comes from a [*callback\_game*](https://core.telegram.org/bots/api/#inlinekeyboardbutton) button.
+     * URL that will be opened by the user's client. If you have created a [Game](https://core.telegram.org/bots/api#game) and accepted the conditions via [@BotFather](https://t.me/botfather), specify the URL that opens your game - note that this will only work if the query comes from a [callback_game](https://core.telegram.org/bots/api#inlinekeyboardbutton) button.
      *
      * Otherwise, you may use links like `t.me/your_bot?start=XXXX` that open your bot with a parameter.
      */
@@ -2248,7 +2233,7 @@ export interface SetMyCommandsParams {
      */
     commands: Objects.TelegramBotCommand[]
     /**
-     * A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api/#botcommandscopedefault).
+     * A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api#botcommandscopedefault).
      */
     scope?: Objects.TelegramBotCommandScope
     /**
@@ -2262,7 +2247,7 @@ export interface SetMyCommandsParams {
  */
 export interface DeleteMyCommandsParams {
     /**
-     * A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api/#botcommandscopedefault).
+     * A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api#botcommandscopedefault).
      */
     scope?: Objects.TelegramBotCommandScope
     /**
@@ -2276,7 +2261,7 @@ export interface DeleteMyCommandsParams {
  */
 export interface GetMyCommandsParams {
     /**
-     * A JSON-serialized object, describing scope of users. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api/#botcommandscopedefault).
+     * A JSON-serialized object, describing scope of users. Defaults to [BotCommandScopeDefault](https://core.telegram.org/bots/api#botcommandscopedefault).
      */
     scope?: Objects.TelegramBotCommandScope
     /**
@@ -2366,7 +2351,7 @@ export interface SetChatMenuButtonParams {
      */
     chat_id?: number
     /**
-     * A JSON-serialized object for the bot's new menu button. Defaults to [MenuButtonDefault](https://core.telegram.org/bots/api/#menubuttondefault)
+     * A JSON-serialized object for the bot's new menu button. Defaults to [MenuButtonDefault](https://core.telegram.org/bots/api#menubuttondefault)
      */
     menu_button?: Objects.TelegramMenuButton
 }
@@ -2430,7 +2415,7 @@ export interface EditMessageTextParams {
      */
     text: string | { toString(): string }
     /**
-     * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -2474,7 +2459,7 @@ export interface EditMessageCaptionParams {
      */
     caption?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * Mode for parsing entities in the message caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -2680,9 +2665,463 @@ export interface DeleteMessagesParams {
      */
     chat_id: number | string
     /**
-     * A JSON-serialized list of 1-100 identifiers of messages to delete. See [deleteMessage](https://core.telegram.org/bots/api/#deletemessage) for limitations on which messages can be deleted
+     * A JSON-serialized list of 1-100 identifiers of messages to delete. See [deleteMessage](https://core.telegram.org/bots/api#deletemessage) for limitations on which messages can be deleted
      */
     message_ids: number[]
+}
+
+/**
+ * Params object for {@link APIMethods.sendGift | sendGift} method
+ */
+export interface SendGiftParams {
+    /**
+     * Required if *chat\_id* is not specified. Unique identifier of the target user who will receive the gift.
+     */
+    user_id?: number
+    /**
+     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@channelusername`) that will receive the gift.
+     */
+    chat_id?: number | string
+    /**
+     * Identifier of the gift
+     */
+    gift_id: string
+    /**
+     * Pass *True* to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
+     */
+    pay_for_upgrade?: boolean
+    /**
+     * Text that will be shown along with the gift; 0-128 characters
+     */
+    text?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_entities?: Objects.TelegramMessageEntity[]
+}
+
+/**
+ * Params object for {@link APIMethods.giftPremiumSubscription | giftPremiumSubscription} method
+ */
+export interface GiftPremiumSubscriptionParams {
+    /**
+     * Unique identifier of the target user who will receive a Telegram Premium subscription
+     */
+    user_id: number
+    /**
+     * Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12
+     */
+    month_count: number
+    /**
+     * Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months
+     */
+    star_count: number
+    /**
+     * Text that will be shown along with the service message about the subscription; 0-128 characters
+     */
+    text?: string
+    /**
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     */
+    text_entities?: Objects.TelegramMessageEntity[]
+}
+
+/**
+ * Params object for {@link APIMethods.verifyUser | verifyUser} method
+ */
+export interface VerifyUserParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.verifyChat | verifyChat} method
+ */
+export interface VerifyChatParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+     */
+    custom_description?: string
+}
+
+/**
+ * Params object for {@link APIMethods.removeUserVerification | removeUserVerification} method
+ */
+export interface RemoveUserVerificationParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.removeChatVerification | removeChatVerification} method
+ */
+export interface RemoveChatVerificationParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+}
+
+/**
+ * Params object for {@link APIMethods.readBusinessMessage | readBusinessMessage} method
+ */
+export interface ReadBusinessMessageParams {
+    /**
+     * Unique identifier of the business connection on behalf of which to read the message
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.
+     */
+    chat_id: number
+    /**
+     * Unique identifier of the message to mark as read
+     */
+    message_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.deleteBusinessMessages | deleteBusinessMessages} method
+ */
+export interface DeleteBusinessMessagesParams {
+    /**
+     * Unique identifier of the business connection on behalf of which to delete the messages
+     */
+    business_connection_id: string
+    /**
+     * A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See [deleteMessage](https://core.telegram.org/bots/api#deletemessage) for limitations on which messages can be deleted
+     */
+    message_ids: number[]
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountName | setBusinessAccountName} method
+ */
+export interface SetBusinessAccountNameParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new value of the first name for the business account; 1-64 characters
+     */
+    first_name: string
+    /**
+     * The new value of the last name for the business account; 0-64 characters
+     */
+    last_name?: string
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountUsername | setBusinessAccountUsername} method
+ */
+export interface SetBusinessAccountUsernameParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new value of the username for the business account; 0-32 characters
+     */
+    username?: string
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountBio | setBusinessAccountBio} method
+ */
+export interface SetBusinessAccountBioParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new value of the bio for the business account; 0-140 characters
+     */
+    bio?: string
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountProfilePhoto | setBusinessAccountProfilePhoto} method
+ */
+export interface SetBusinessAccountProfilePhotoParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * The new profile photo to set
+     */
+    photo: Objects.TelegramInputProfilePhoto
+    /**
+     * Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo.
+     */
+    is_public?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.removeBusinessAccountProfilePhoto | removeBusinessAccountProfilePhoto} method
+ */
+export interface RemoveBusinessAccountProfilePhotoParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo (if present) becomes the main photo.
+     */
+    is_public?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.setBusinessAccountGiftSettings | setBusinessAccountGiftSettings} method
+ */
+export interface SetBusinessAccountGiftSettingsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
+     */
+    show_gift_button: boolean
+    /**
+     * Types of gifts accepted by the business account
+     */
+    accepted_gift_types: Objects.TelegramAcceptedGiftTypes
+}
+
+/**
+ * Params object for {@link APIMethods.getBusinessAccountStarBalance | getBusinessAccountStarBalance} method
+ */
+export interface GetBusinessAccountStarBalanceParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+}
+
+/**
+ * Params object for {@link APIMethods.transferBusinessAccountStars | transferBusinessAccountStars} method
+ */
+export interface TransferBusinessAccountStarsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Number of Telegram Stars to transfer; 1-10000
+     */
+    star_count: number
+}
+
+/**
+ * Params object for {@link APIMethods.getBusinessAccountGifts | getBusinessAccountGifts} method
+ */
+export interface GetBusinessAccountGiftsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Pass True to exclude gifts that aren't saved to the account's profile page
+     */
+    exclude_unsaved?: boolean
+    /**
+     * Pass True to exclude gifts that are saved to the account's profile page
+     */
+    exclude_saved?: boolean
+    /**
+     * Pass True to exclude gifts that can be purchased an unlimited number of times
+     */
+    exclude_unlimited?: boolean
+    /**
+     * Pass True to exclude gifts that can be purchased a limited number of times
+     */
+    exclude_limited?: boolean
+    /**
+     * Pass True to exclude unique gifts
+     */
+    exclude_unique?: boolean
+    /**
+     * Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.
+     */
+    sort_by_price?: boolean
+    /**
+     * Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results
+     */
+    offset?: string
+    /**
+     * The maximum number of gifts to be returned; 1-100. Defaults to 100
+     */
+    limit?: number
+}
+
+/**
+ * Params object for {@link APIMethods.convertGiftToStars | convertGiftToStars} method
+ */
+export interface ConvertGiftToStarsParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the regular gift that should be converted to Telegram Stars
+     */
+    owned_gift_id: string
+}
+
+/**
+ * Params object for {@link APIMethods.upgradeGift | upgradeGift} method
+ */
+export interface UpgradeGiftParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the regular gift that should be upgraded to a unique one
+     */
+    owned_gift_id: string
+    /**
+     * Pass True to keep the original gift text, sender and receiver in the upgraded gift
+     */
+    keep_original_details?: boolean
+    /**
+     * The amount of Telegram Stars that will be paid for the upgrade from the business account balance. If `gift.prepaid_upgrade_star_count > 0`, then pass 0, otherwise, the *can\_transfer\_stars* business bot right is required and `gift.upgrade_star_count` must be passed.
+     */
+    star_count?: number
+}
+
+/**
+ * Params object for {@link APIMethods.transferGift | transferGift} method
+ */
+export interface TransferGiftParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the regular gift that should be transferred
+     */
+    owned_gift_id: string
+    /**
+     * Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.
+     */
+    new_owner_chat_id: number
+    /**
+     * The amount of Telegram Stars that will be paid for the transfer from the business account balance. If positive, then the *can\_transfer\_stars* business bot right is required.
+     */
+    star_count?: number
+}
+
+/**
+ * Params object for {@link APIMethods.postStory | postStory} method
+ */
+export interface PostStoryParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Content of the story
+     */
+    content: Objects.TelegramInputStoryContent
+    /**
+     * Period after which the story is moved to the archive, in seconds; must be one of `6 * 3600`, `12 * 3600`, `86400`, or `2 * 86400`
+     */
+    active_period: number
+    /**
+     * Caption of the story, 0-2048 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the story caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * A JSON-serialized list of clickable areas to be shown on the story
+     */
+    areas?: Objects.TelegramStoryArea[]
+    /**
+     * Pass *True* to keep the story accessible after it expires
+     */
+    post_to_chat_page?: boolean
+    /**
+     * Pass *True* if the content of the story must be protected from forwarding and screenshotting
+     */
+    protect_content?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.editStory | editStory} method
+ */
+export interface EditStoryParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the story to edit
+     */
+    story_id: number
+    /**
+     * Content of the story
+     */
+    content: Objects.TelegramInputStoryContent
+    /**
+     * Caption of the story, 0-2048 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the story caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * A JSON-serialized list of clickable areas to be shown on the story
+     */
+    areas?: Objects.TelegramStoryArea[]
+}
+
+/**
+ * Params object for {@link APIMethods.deleteStory | deleteStory} method
+ */
+export interface DeleteStoryParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the story to delete
+     */
+    story_id: number
 }
 
 /**
@@ -2702,7 +3141,7 @@ export interface SendStickerParams {
      */
     message_thread_id?: number
     /**
-     * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Video and animated stickers can't be sent via an HTTP URL.
+     * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Video and animated stickers can't be sent via an HTTP URL.
      */
     sticker: Objects.TelegramInputFile | string
     /**
@@ -2763,8 +3202,6 @@ export interface GetCustomEmojiStickersParams {
     custom_emoji_ids: string[]
 }
 
-export type UploadStickerFileStickerFormat = "static" | "animated" | "video"
-
 /**
  * Params object for {@link APIMethods.uploadStickerFile | uploadStickerFile} method
  */
@@ -2774,16 +3211,14 @@ export interface UploadStickerFileParams {
      */
     user_id: number
     /**
-     * A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See [https://core.telegram.org/stickers](https://core.telegram.org/stickers) for technical requirements. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
+     * A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See [](https://core.telegram.org/stickers)[https://core.telegram.org/stickers](https://core.telegram.org/stickers) for technical requirements. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     sticker: Objects.TelegramInputFile
     /**
      * Format of the sticker, must be one of “static”, “animated”, “video”
      */
-    sticker_format: UploadStickerFileStickerFormat
+    sticker_format: string
 }
-
-export type CreateNewStickerSetStickerType = "mask" | "custom_emoji"
 
 /**
  * Params object for {@link APIMethods.createNewStickerSet | createNewStickerSet} method
@@ -2808,7 +3243,7 @@ export interface CreateNewStickerSetParams {
     /**
      * Type of stickers in the set, pass “regular”, “mask”, or “custom\_emoji”. By default, a regular sticker set is created.
      */
-    sticker_type?: CreateNewStickerSetStickerType
+    sticker_type?: string
     /**
      * Pass *True* if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context; for custom emoji sticker sets only
      */
@@ -2935,8 +3370,6 @@ export interface SetStickerSetTitleParams {
     title: string
 }
 
-export type SetStickerSetThumbnailFormat = "static" | "animated" | "video"
-
 /**
  * Params object for {@link APIMethods.setStickerSetThumbnail | setStickerSetThumbnail} method
  */
@@ -2950,13 +3383,13 @@ export interface SetStickerSetThumbnailParams {
      */
     user_id: number
     /**
-     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **.WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [](https://core.telegram.org/stickers#animation-requirements)[https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **.WEBM** video with the thumbnail up to 32 kilobytes in size; see [](https://core.telegram.org/stickers#video-requirements)[https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
      * Format of the thumbnail, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, or “video” for a **.WEBM** video
      */
-    format: SetStickerSetThumbnailFormat
+    format: string
 }
 
 /**
@@ -2981,88 +3414,6 @@ export interface DeleteStickerSetParams {
      * Sticker set name
      */
     name: string
-}
-
-/**
- * Params object for {@link APIMethods.sendGift | sendGift} method
- */
-export interface SendGiftParams {
-    /**
-     * Required if *chat\_id* is not specified. Unique identifier of the target user who will receive the gift.
-     */
-    user_id?: number
-    /**
-     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@channelusername`) that will receive the gift.
-     */
-    chat_id?: number | string
-    /**
-     * Identifier of the gift
-     */
-    gift_id: string
-    /**
-     * Pass *True* to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
-     */
-    pay_for_upgrade?: boolean
-    /**
-     * Text that will be shown along with the gift; 0-255 characters
-     */
-    text?: string | { toString(): string }
-    /**
-     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
-     */
-    text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
-    /**
-     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
-     */
-    text_entities?: Objects.TelegramMessageEntity[]
-}
-
-/**
- * Params object for {@link APIMethods.verifyUser | verifyUser} method
- */
-export interface VerifyUserParams {
-    /**
-     * Unique identifier of the target user
-     */
-    user_id: number
-    /**
-     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
-     */
-    custom_description?: string
-}
-
-/**
- * Params object for {@link APIMethods.verifyChat | verifyChat} method
- */
-export interface VerifyChatParams {
-    /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id: number | string
-    /**
-     * Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
-     */
-    custom_description?: string
-}
-
-/**
- * Params object for {@link APIMethods.removeUserVerification | removeUserVerification} method
- */
-export interface RemoveUserVerificationParams {
-    /**
-     * Unique identifier of the target user
-     */
-    user_id: number
-}
-
-/**
- * Params object for {@link APIMethods.removeChatVerification | removeChatVerification} method
- */
-export interface RemoveChatVerificationParams {
-    /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id: number | string
 }
 
 /**
@@ -3296,7 +3647,7 @@ export interface CreateInvoiceLinkParams {
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.
+     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 10000 Telegram Stars.
      */
     subscription_period?: number
     /**
