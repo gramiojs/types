@@ -56,7 +56,8 @@ export const typesRemapper: TTypeRemapper = {
 			property.name === "message_text" ||
 			(object?.name === "InputPollOption" && property.name === "text") ||
 			(object.name === "sendPoll" && property.name === "question") ||
-			(object?.name === "sendGift" && property.name === "text")
+			(object?.name === "sendGift" && property.name === "text") ||
+			(object.name === "giftPremiumSubscription" && property.name === "text")
 		)
 			return "(string | { toString(): string})";
 
