@@ -22,13 +22,25 @@ const markups = [
 //TODO: json schema to (T, params[T])
 export const typesRemapper: TTypeRemapper = {
 	float: () => "number",
-	integer: () => "number",
+	integer: (property, object, objectType) => {
+		if (property.enumeration)
+			return (
+				(objectType === "object" ? OBJECTS_PREFIX : "") +
+				TextEditor.uppercaseFirstLetter(object.name) +
+				TextEditor.uppercaseFirstLetter(
+					TextEditor.fromSnakeToCamelCase(property.name),
+				)
+			);
+
+		return "number";
+	},
 	//[INFO] no need in enumeration because union types generate before that
 	string: (property, object, objectType, parentProperty) => {
 		//TODO: maybe place it to another place?
 		if (
 			property.name === "media" ||
-			(object.name.includes("InputMedia") && property.name === "thumbnail")
+			(object.name.includes("InputMedia") && property.name === "thumbnail") ||
+			property?.description?.includes("More information on Sending Files")
 		)
 			return `${
 				(objectType === "object" ? "" : "Objects.") + OBJECTS_PREFIX

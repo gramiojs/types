@@ -7,9 +7,13 @@ export class CodeGenerator {
 		return ["/**", valueLines.map((line) => `* ${line}`).join("\n"), "*/"];
 	}
 
-	static generateUnionType(name: string, enumeration: string[]) {
+	static generateUnionType(
+		name: string,
+		enumeration: string[] | number[],
+		type: "number" | "string" = "string",
+	) {
 		return `export type ${name} = ${enumeration
-			.map((value) => `"${value}"`)
+			.map((value) => (type === "number" ? `${value}` : `"${value}"`))
 			.join(" | ")}`;
 	}
 }

@@ -122,11 +122,6 @@ if (InputFile) {
 			type: "bool",
 			default: "Blob",
 		},
-		{
-			required: true,
-			type: "bool",
-			default: "Promise<Blob>",
-		},
 		// TODO: improve typings by JSON Schema
 	] as IBotAPI.IArgument[];
 }

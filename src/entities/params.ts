@@ -13,15 +13,20 @@ export class Params {
 
 		const unionTypes = method.arguments
 			.filter((argument) => argument.enumeration)
-			.map((argument) =>
-				CodeGenerator.generateUnionType(
+			.map((argument) => {
+				return CodeGenerator.generateUnionType(
 					TextEditor.uppercaseFirstLetter(method.name) +
 						TextEditor.uppercaseFirstLetter(
 							TextEditor.fromSnakeToCamelCase(argument.name),
 						),
-					argument.enumeration as string[],
-				),
-			);
+					method.name === "postStory" && argument.name === "active_period"
+						? [6 * 3600, 12 * 3600, 86400, 2 * 86400]
+						: (argument.enumeration as string[]),
+					argument.type === "integer" || argument.type === "float"
+						? "number"
+						: "string",
+				);
+			});
 
 		return [
 			...unionTypes,
