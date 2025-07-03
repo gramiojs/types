@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.1.0 (03.07.2025)
  *
- * Generated at 03.07.2025, 15:22:22 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 03.07.2025, 17:20:49 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -4357,7 +4357,7 @@ export interface TelegramUniqueGiftInfo {
     /**
      * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now
      */
-    next_transfer_date?: string
+    next_transfer_date?: number
 }
 
 /**
@@ -4473,7 +4473,7 @@ export interface TelegramOwnedGiftUnique {
     /**
      * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now
      */
-    next_transfer_date?: string
+    next_transfer_date?: number
 }
 
 /**
