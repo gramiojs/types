@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.1.0 (03.07.2025)
  *
- * Generated at 04.07.2025, 09:25:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 11.07.2025, 23:40:10 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1765,7 +1765,7 @@ export interface TelegramChecklistTask {
     /**
      * Text of the task
      */
-    text: string
+    text: string | { toString(): string }
     /**
      * *Optional*. Special entities that appear in the task text
      */
@@ -1789,7 +1789,7 @@ export interface TelegramChecklist {
     /**
      * Title of the checklist
      */
-    title: string
+    title: string | { toString(): string }
     /**
      * *Optional*. Special entities that appear in the checklist title
      */
