@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v9.0.0 (11.04.2025)
+ * Based on Bot API v9.1.0 (03.07.2025)
  *
- * Generated at 13.04.2025, 15:19:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 04.07.2025, 09:25:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1247,7 +1247,7 @@ export interface SendPollParams {
      */
     question_entities?: Objects.TelegramMessageEntity[]
     /**
-     * A JSON-serialized list of 2-10 answer options
+     * A JSON-serialized list of 2-12 answer options
      */
     options: Objects.TelegramInputPollOption[]
     /**
@@ -1322,6 +1322,46 @@ export interface SendPollParams {
         | { toJSON(): Objects.TelegramReplyKeyboardRemove }
         | Objects.TelegramForceReply
         | { toJSON(): Objects.TelegramForceReply }
+}
+
+/**
+ * Params object for {@link APIMethods.sendChecklist | sendChecklist} method
+ */
+export interface SendChecklistParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier for the target chat
+     */
+    chat_id: number
+    /**
+     * A JSON-serialized object for the checklist to send
+     */
+    checklist: Objects.TelegramInputChecklist
+    /**
+     * Sends the message silently. Users will receive a notification with no sound.
+     */
+    disable_notification?: boolean
+    /**
+     * Protects the contents of the sent message from forwarding and saving
+     */
+    protect_content?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message
+     */
+    message_effect_id?: string
+    /**
+     * A JSON-serialized object for description of the message to reply to
+     */
+    reply_parameters?: Objects.TelegramReplyParameters
+    /**
+     * A JSON-serialized object for an inline keyboard
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
 export type SendDiceEmoji = "🎲" | "🎯" | "🏀" | "⚽" | "🎳" | "🎰"
@@ -1566,7 +1606,7 @@ export interface PromoteChatMemberParams {
      */
     is_anonymous?: boolean
     /**
-     * Pass *True* if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
+     * Pass *True* if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege.
      */
     can_manage_chat?: boolean
     /**
@@ -1606,7 +1646,7 @@ export interface PromoteChatMemberParams {
      */
     can_delete_stories?: boolean
     /**
-     * Pass *True* if the administrator can post messages in the channel, or access channel statistics; for channels only
+     * Pass *True* if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
      */
     can_post_messages?: boolean
     /**
@@ -2606,6 +2646,34 @@ export interface StopMessageLiveLocationParams {
 }
 
 /**
+ * Params object for {@link APIMethods.editMessageChecklist | editMessageChecklist} method
+ */
+export interface EditMessageChecklistParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier for the target chat
+     */
+    chat_id: number
+    /**
+     * Unique identifier for the target message
+     */
+    message_id: number
+    /**
+     * A JSON-serialized object for the new checklist
+     */
+    checklist: Objects.TelegramInputChecklist
+    /**
+     * A JSON-serialized object for the new inline keyboard for the message
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
  * Params object for {@link APIMethods.editMessageReplyMarkup | editMessageReplyMarkup} method
  */
 export interface EditMessageReplyMarkupParams {
@@ -2890,7 +2958,7 @@ export interface SetBusinessAccountProfilePhotoParams {
      */
     photo: Objects.TelegramInputProfilePhoto
     /**
-     * Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo.
+     * Pass *True* to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo.
      */
     is_public?: boolean
 }
@@ -2904,7 +2972,7 @@ export interface RemoveBusinessAccountProfilePhotoParams {
      */
     business_connection_id: string
     /**
-     * Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo (if present) becomes the main photo.
+     * Pass *True* to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo (if present) becomes the main photo.
      */
     is_public?: boolean
 }
@@ -2918,7 +2986,7 @@ export interface SetBusinessAccountGiftSettingsParams {
      */
     business_connection_id: string
     /**
-     * Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
+     * Pass *True*, if a button for sending a gift to the user or by the business account must always be shown in the input field
      */
     show_gift_button: boolean
     /**
@@ -2960,27 +3028,27 @@ export interface GetBusinessAccountGiftsParams {
      */
     business_connection_id: string
     /**
-     * Pass True to exclude gifts that aren't saved to the account's profile page
+     * Pass *True* to exclude gifts that aren't saved to the account's profile page
      */
     exclude_unsaved?: boolean
     /**
-     * Pass True to exclude gifts that are saved to the account's profile page
+     * Pass *True* to exclude gifts that are saved to the account's profile page
      */
     exclude_saved?: boolean
     /**
-     * Pass True to exclude gifts that can be purchased an unlimited number of times
+     * Pass *True* to exclude gifts that can be purchased an unlimited number of times
      */
     exclude_unlimited?: boolean
     /**
-     * Pass True to exclude gifts that can be purchased a limited number of times
+     * Pass *True* to exclude gifts that can be purchased a limited number of times
      */
     exclude_limited?: boolean
     /**
-     * Pass True to exclude unique gifts
+     * Pass *True* to exclude unique gifts
      */
     exclude_unique?: boolean
     /**
-     * Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.
+     * Pass *True* to sort results by gift price instead of send date. Sorting is applied before pagination.
      */
     sort_by_price?: boolean
     /**
@@ -3020,7 +3088,7 @@ export interface UpgradeGiftParams {
      */
     owned_gift_id: string
     /**
-     * Pass True to keep the original gift text, sender and receiver in the upgraded gift
+     * Pass *True* to keep the original gift text, sender and receiver in the upgraded gift
      */
     keep_original_details?: boolean
     /**

@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v9.0.0 (11.04.2025)
+ * Based on Bot API v9.1.0 (03.07.2025)
  *
- * Generated at 13.04.2025, 15:19:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 04.07.2025, 09:25:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -540,7 +540,7 @@ export interface TelegramMessage {
      */
     has_protected_content?: boolean
     /**
-     * *Optional*. True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message
+     * *Optional*. *True*, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message
      */
     is_from_offline?: boolean
     /**
@@ -620,13 +620,17 @@ export interface TelegramMessage {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. True, if the caption must be shown above the message media
+     * *Optional*. *True*, if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
      * *Optional*. *True*, if the message media is covered by a spoiler animation
      */
     has_media_spoiler?: boolean
+    /**
+     * *Optional*. Message is a checklist
+     */
+    checklist?: TelegramChecklist
     /**
      * *Optional*. Message is a shared contact, information about the contact
      */
@@ -751,6 +755,18 @@ export interface TelegramMessage {
      * *Optional*. Service message: chat background set
      */
     chat_background_set?: TelegramChatBackground
+    /**
+     * *Optional*. Service message: some tasks in a checklist were marked as done or not done
+     */
+    checklist_tasks_done?: TelegramChecklistTasksDone
+    /**
+     * *Optional*. Service message: tasks were added to a checklist
+     */
+    checklist_tasks_added?: TelegramChecklistTasksAdded
+    /**
+     * *Optional*. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed
+     */
+    direct_message_price_changed?: TelegramDirectMessagePriceChanged
     /**
      * *Optional*. Service message: forum topic created
      */
@@ -943,7 +959,7 @@ export interface TelegramTextQuote {
      */
     position: number
     /**
-     * *Optional*. True, if the quote was chosen manually by the message sender. Otherwise, the quote was added automatically by the server.
+     * *Optional*. *True*, if the quote was chosen manually by the message sender. Otherwise, the quote was added automatically by the server.
      */
     is_manual?: boolean
 }
@@ -1014,6 +1030,10 @@ export interface TelegramExternalReplyInfo {
      * *Optional*. *True*, if the message media is covered by a spoiler animation
      */
     has_media_spoiler?: boolean
+    /**
+     * *Optional*. Message is a checklist
+     */
+    checklist?: TelegramChecklist
     /**
      * *Optional*. Message is a shared contact, information about the contact
      */
@@ -1733,6 +1753,154 @@ export interface TelegramPoll {
 }
 
 /**
+ * Describes a task in a checklist.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#checklisttask)
+ */
+export interface TelegramChecklistTask {
+    /**
+     * Unique identifier of the task
+     */
+    id: number
+    /**
+     * Text of the task
+     */
+    text: string
+    /**
+     * *Optional*. Special entities that appear in the task text
+     */
+    text_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. User that completed the task; omitted if the task wasn't completed
+     */
+    completed_by_user?: TelegramUser
+    /**
+     * *Optional*. Point in time (Unix timestamp) when the task was completed; 0 if the task wasn't completed
+     */
+    completion_date?: number
+}
+
+/**
+ * Describes a checklist.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#checklist)
+ */
+export interface TelegramChecklist {
+    /**
+     * Title of the checklist
+     */
+    title: string
+    /**
+     * *Optional*. Special entities that appear in the checklist title
+     */
+    title_entities?: TelegramMessageEntity[]
+    /**
+     * List of tasks in the checklist
+     */
+    tasks: TelegramChecklistTask[]
+    /**
+     * *Optional*. *True*, if users other than the creator of the list can add tasks to the list
+     */
+    others_can_add_tasks?: boolean
+    /**
+     * *Optional*. *True*, if users other than the creator of the list can mark tasks as done or not done
+     */
+    others_can_mark_tasks_as_done?: boolean
+}
+
+/**
+ * Describes a task to add to a checklist.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputchecklisttask)
+ */
+export interface TelegramInputChecklistTask {
+    /**
+     * Unique identifier of the task; must be positive and unique among all task identifiers currently present in the checklist
+     */
+    id: number
+    /**
+     * Text of the task; 1-100 characters after entities parsing
+     */
+    text: string | { toString(): string }
+    /**
+     * Optional. Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * *Optional*. List of special entities that appear in the text, which can be specified instead of parse\_mode. Currently, only *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, and *custom\_emoji* entities are allowed.
+     */
+    text_entities?: TelegramMessageEntity[]
+}
+
+/**
+ * Describes a checklist to create.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputchecklist)
+ */
+export interface TelegramInputChecklist {
+    /**
+     * Title of the checklist; 1-255 characters after entities parsing
+     */
+    title: string | { toString(): string }
+    /**
+     * Optional. Mode for parsing entities in the title. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * *Optional*. List of special entities that appear in the title, which can be specified instead of parse\_mode. Currently, only *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, and *custom\_emoji* entities are allowed.
+     */
+    title_entities?: TelegramMessageEntity[]
+    /**
+     * List of 1-30 tasks in the checklist
+     */
+    tasks: TelegramInputChecklistTask[]
+    /**
+     * *Optional*. Pass *True* if other users can add tasks to the checklist
+     */
+    others_can_add_tasks?: boolean
+    /**
+     * *Optional*. Pass *True* if other users can mark tasks as done or not done in the checklist
+     */
+    others_can_mark_tasks_as_done?: boolean
+}
+
+/**
+ * Describes a service message about checklist tasks marked as done or not done.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#checklisttasksdone)
+ */
+export interface TelegramChecklistTasksDone {
+    /**
+     * *Optional*. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    checklist_message?: TelegramMessage
+    /**
+     * *Optional*. Identifiers of the tasks that were marked as done
+     */
+    marked_as_done_task_ids?: number[]
+    /**
+     * *Optional*. Identifiers of the tasks that were marked as not done
+     */
+    marked_as_not_done_task_ids?: number[]
+}
+
+/**
+ * Describes a service message about tasks added to a checklist.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#checklisttasksadded)
+ */
+export interface TelegramChecklistTasksAdded {
+    /**
+     * *Optional*. Message containing the checklist to which the tasks were added. Note that the Message object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    checklist_message?: TelegramMessage
+    /**
+     * List of tasks added to the checklist
+     */
+    tasks: TelegramChecklistTask[]
+}
+
+/**
  * This object represents a point on the map.
  *
  * [Documentation](https://core.telegram.org/bots/api/#location)
@@ -2197,7 +2365,7 @@ export interface TelegramChatShared {
  */
 export interface TelegramWriteAccessAllowed {
     /**
-     * *Optional*. True, if the access was granted after the user accepted an explicit request from a Web App sent by the method [requestWriteAccess](https://core.telegram.org/bots/webapps#initializing-mini-apps)
+     * *Optional*. *True*, if the access was granted after the user accepted an explicit request from a Web App sent by the method [requestWriteAccess](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
     from_request?: boolean
     /**
@@ -2205,7 +2373,7 @@ export interface TelegramWriteAccessAllowed {
      */
     web_app_name?: string
     /**
-     * *Optional*. True, if the access was granted when the bot was added to the attachment or side menu
+     * *Optional*. *True*, if the access was granted when the bot was added to the attachment or side menu
      */
     from_attachment_menu?: boolean
 }
@@ -2263,6 +2431,22 @@ export interface TelegramPaidMessagePriceChanged {
      * The new number of Telegram Stars that must be paid by non-administrator users of the supergroup chat for each sent message
      */
     paid_message_star_count: number
+}
+
+/**
+ * Describes a service message about a change in the price of direct messages sent to a channel chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#directmessagepricechanged)
+ */
+export interface TelegramDirectMessagePriceChanged {
+    /**
+     * *True*, if direct messages are enabled for the channel chat; false otherwise
+     */
+    are_direct_messages_enabled: boolean
+    /**
+     * *Optional*. The new number of Telegram Stars that must be paid by users for each direct message sent to the channel. Does not apply to users who have been exempted by administrators. Defaults to 0.
+     */
+    direct_message_star_count?: number
 }
 
 /**
@@ -2782,19 +2966,19 @@ export interface TelegramSwitchInlineQueryChosenChat {
      */
     query?: string
     /**
-     * *Optional*. True, if private chats with users can be chosen
+     * *Optional*. *True*, if private chats with users can be chosen
      */
     allow_user_chats?: boolean
     /**
-     * *Optional*. True, if private chats with bots can be chosen
+     * *Optional*. *True*, if private chats with bots can be chosen
      */
     allow_bot_chats?: boolean
     /**
-     * *Optional*. True, if group and supergroup chats can be chosen
+     * *Optional*. *True*, if group and supergroup chats can be chosen
      */
     allow_group_chats?: boolean
     /**
-     * *Optional*. True, if channel chats can be chosen
+     * *Optional*. *True*, if channel chats can be chosen
      */
     allow_channel_chats?: boolean
 }
@@ -2954,7 +3138,7 @@ export interface TelegramChatAdministratorRights {
      */
     is_anonymous: boolean
     /**
-     * *True*, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
+     * *True*, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege.
      */
     can_manage_chat: boolean
     /**
@@ -2994,7 +3178,7 @@ export interface TelegramChatAdministratorRights {
      */
     can_delete_stories: boolean
     /**
-     * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; for channels only
+     * *Optional*. *True*, if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
      */
     can_post_messages?: boolean
     /**
@@ -3042,11 +3226,11 @@ export interface TelegramChatMemberUpdated {
      */
     invite_link?: TelegramChatInviteLink
     /**
-     * *Optional*. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
+     * *Optional*. *True*, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
      */
     via_join_request?: boolean
     /**
-     * *Optional*. True, if the user joined the chat via a chat folder invite link
+     * *Optional*. *True*, if the user joined the chat via a chat folder invite link
      */
     via_chat_folder_invite_link?: boolean
 }
@@ -3118,7 +3302,7 @@ export interface TelegramChatMemberAdministrator {
      */
     is_anonymous: boolean
     /**
-     * *True*, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
+     * *True*, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege.
      */
     can_manage_chat: boolean
     /**
@@ -3158,7 +3342,7 @@ export interface TelegramChatMemberAdministrator {
      */
     can_delete_stories: boolean
     /**
-     * *Optional*. *True*, if the administrator can post messages in the channel, or access channel statistics; for channels only
+     * *Optional*. *True*, if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
      */
     can_post_messages?: boolean
     /**
@@ -3246,7 +3430,7 @@ export interface TelegramChatMemberRestricted {
      */
     can_send_voice_notes: boolean
     /**
-     * *True*, if the user is allowed to send polls
+     * *True*, if the user is allowed to send polls and checklists
      */
     can_send_polls: boolean
     /**
@@ -3382,7 +3566,7 @@ export interface TelegramChatPermissions {
      */
     can_send_voice_notes?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to send polls
+     * *Optional*. *True*, if the user is allowed to send polls and checklists
      */
     can_send_polls?: boolean
     /**
@@ -3724,9 +3908,9 @@ export type TelegramReactionType =
     | TelegramReactionTypePaid
 
 export type TelegramReactionTypeEmojiEmoji =
+    | "❤"
     | "👍"
     | "👎"
-    | "❤"
     | "🔥"
     | "🥰"
     | "👏"
@@ -3809,7 +3993,7 @@ export interface TelegramReactionTypeEmoji {
      */
     type: "emoji"
     /**
-     * Reaction emoji. Currently, it can be one of "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡"
+     * Reaction emoji. Currently, it can be one of "❤", "👍", "👎", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡"
      */
     emoji: TelegramReactionTypeEmojiEmoji
 }
@@ -4125,7 +4309,7 @@ export interface TelegramGiftInfo {
      */
     prepaid_upgrade_star_count?: number
     /**
-     * *Optional*. True, if the gift can be upgraded to a unique gift
+     * *Optional*. *True*, if the gift can be upgraded to a unique gift
      */
     can_be_upgraded?: boolean
     /**
@@ -4137,12 +4321,12 @@ export interface TelegramGiftInfo {
      */
     entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
+     * *Optional*. *True*, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
      */
     is_private?: boolean
 }
 
-export type TelegramUniqueGiftInfoOrigin = "upgrade" | "transfer"
+export type TelegramUniqueGiftInfoOrigin = "upgrade" | "transfer" | "resale"
 
 /**
  * Describes a service message about a unique gift that was sent or received.
@@ -4155,9 +4339,13 @@ export interface TelegramUniqueGiftInfo {
      */
     gift: TelegramUniqueGift
     /**
-     * Origin of the gift. Currently, either “upgrade” or “transfer”
+     * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, or “resale” for gifts bought from other users
      */
     origin: TelegramUniqueGiftInfoOrigin
+    /**
+     * *Optional*. For gifts bought from other users, the price paid for the gift
+     */
+    last_resale_star_count?: number
     /**
      * *Optional*. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
      */
@@ -4166,6 +4354,10 @@ export interface TelegramUniqueGiftInfo {
      * *Optional*. Number of Telegram Stars that must be paid to transfer the gift; omitted if the bot cannot transfer the gift
      */
     transfer_star_count?: number
+    /**
+     * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now
+     */
+    next_transfer_date?: number
 }
 
 /**
@@ -4215,19 +4407,19 @@ export interface TelegramOwnedGiftRegular {
      */
     entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
+     * *Optional*. *True*, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
      */
     is_private?: boolean
     /**
-     * *Optional*. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
+     * *Optional*. *True*, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
      */
     is_saved?: boolean
     /**
-     * *Optional*. True, if the gift can be upgraded to a unique gift; for gifts received on behalf of business accounts only
+     * *Optional*. *True*, if the gift can be upgraded to a unique gift; for gifts received on behalf of business accounts only
      */
     can_be_upgraded?: boolean
     /**
-     * *Optional*. True, if the gift was refunded and isn't available anymore
+     * *Optional*. *True*, if the gift was refunded and isn't available anymore
      */
     was_refunded?: boolean
     /**
@@ -4267,17 +4459,21 @@ export interface TelegramOwnedGiftUnique {
      */
     send_date: number
     /**
-     * *Optional*. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
+     * *Optional*. *True*, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
      */
     is_saved?: boolean
     /**
-     * *Optional*. True, if the gift can be transferred to another owner; for gifts received on behalf of business accounts only
+     * *Optional*. *True*, if the gift can be transferred to another owner; for gifts received on behalf of business accounts only
      */
     can_be_transferred?: boolean
     /**
      * *Optional*. Number of Telegram Stars that must be paid to transfer the gift; omitted if the bot cannot transfer the gift
      */
     transfer_star_count?: number
+    /**
+     * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now
+     */
+    next_transfer_date?: number
 }
 
 /**
@@ -4307,19 +4503,19 @@ export interface TelegramOwnedGifts {
  */
 export interface TelegramAcceptedGiftTypes {
     /**
-     * True, if unlimited regular gifts are accepted
+     * *True*, if unlimited regular gifts are accepted
      */
     unlimited_gifts: boolean
     /**
-     * True, if limited regular gifts are accepted
+     * *True*, if limited regular gifts are accepted
      */
     limited_gifts: boolean
     /**
-     * True, if unique gifts or gifts that can be upgraded to unique for free are accepted
+     * *True*, if unique gifts or gifts that can be upgraded to unique for free are accepted
      */
     unique_gifts: boolean
     /**
-     * True, if a Telegram Premium subscription is accepted
+     * *True*, if a Telegram Premium subscription is accepted
      */
     premium_subscription: boolean
 }
@@ -4641,7 +4837,7 @@ export interface TelegramChatBoostSourceGiveaway {
      */
     prize_star_count?: number
     /**
-     * *Optional*. True, if the giveaway was completed, but there was no user to win the prize
+     * *Optional*. *True*, if the giveaway was completed, but there was no user to win the prize
      */
     is_unclaimed?: boolean
 }
@@ -4729,59 +4925,59 @@ export interface TelegramUserChatBoosts {
  */
 export interface TelegramBusinessBotRights {
     /**
-     * *Optional*. True, if the bot can send and edit messages in the private chats that had incoming messages in the last 24 hours
+     * *Optional*. *True*, if the bot can send and edit messages in the private chats that had incoming messages in the last 24 hours
      */
     can_reply?: boolean
     /**
-     * *Optional*. True, if the bot can mark incoming private messages as read
+     * *Optional*. *True*, if the bot can mark incoming private messages as read
      */
     can_read_messages?: boolean
     /**
-     * *Optional*. True, if the bot can delete messages sent by the bot
+     * *Optional*. *True*, if the bot can delete messages sent by the bot
      */
-    can_delete_outgoing_messages?: boolean
+    can_delete_sent_messages?: boolean
     /**
-     * *Optional*. True, if the bot can delete all private messages in managed chats
+     * *Optional*. *True*, if the bot can delete all private messages in managed chats
      */
     can_delete_all_messages?: boolean
     /**
-     * *Optional*. True, if the bot can edit the first and last name of the business account
+     * *Optional*. *True*, if the bot can edit the first and last name of the business account
      */
     can_edit_name?: boolean
     /**
-     * *Optional*. True, if the bot can edit the bio of the business account
+     * *Optional*. *True*, if the bot can edit the bio of the business account
      */
     can_edit_bio?: boolean
     /**
-     * *Optional*. True, if the bot can edit the profile photo of the business account
+     * *Optional*. *True*, if the bot can edit the profile photo of the business account
      */
     can_edit_profile_photo?: boolean
     /**
-     * *Optional*. True, if the bot can edit the username of the business account
+     * *Optional*. *True*, if the bot can edit the username of the business account
      */
     can_edit_username?: boolean
     /**
-     * *Optional*. True, if the bot can change the privacy settings pertaining to gifts for the business account
+     * *Optional*. *True*, if the bot can change the privacy settings pertaining to gifts for the business account
      */
     can_change_gift_settings?: boolean
     /**
-     * *Optional*. True, if the bot can view gifts and the amount of Telegram Stars owned by the business account
+     * *Optional*. *True*, if the bot can view gifts and the amount of Telegram Stars owned by the business account
      */
     can_view_gifts_and_stars?: boolean
     /**
-     * *Optional*. True, if the bot can convert regular gifts owned by the business account to Telegram Stars
+     * *Optional*. *True*, if the bot can convert regular gifts owned by the business account to Telegram Stars
      */
     can_convert_gifts_to_stars?: boolean
     /**
-     * *Optional*. True, if the bot can transfer and upgrade gifts owned by the business account
+     * *Optional*. *True*, if the bot can transfer and upgrade gifts owned by the business account
      */
     can_transfer_and_upgrade_gifts?: boolean
     /**
-     * *Optional*. True, if the bot can transfer Telegram Stars received by the business account to its own account, or use them to upgrade and transfer gifts
+     * *Optional*. *True*, if the bot can transfer Telegram Stars received by the business account to its own account, or use them to upgrade and transfer gifts
      */
     can_transfer_stars?: boolean
     /**
-     * *Optional*. True, if the bot can post, edit and delete stories on behalf of the business account
+     * *Optional*. *True*, if the bot can post, edit and delete stories on behalf of the business account
      */
     can_manage_stories?: boolean
 }
@@ -4813,7 +5009,7 @@ export interface TelegramBusinessConnection {
      */
     rights?: TelegramBusinessBotRights
     /**
-     * True, if the connection is active
+     * *True*, if the connection is active
      */
     is_enabled: boolean
 }
@@ -7087,11 +7283,11 @@ export interface TelegramSuccessfulPayment {
      */
     subscription_expiration_date?: number
     /**
-     * *Optional*. True, if the payment is a recurring payment for a subscription
+     * *Optional*. *True*, if the payment is a recurring payment for a subscription
      */
     is_recurring?: boolean
     /**
-     * *Optional*. True, if the payment is the first payment for a subscription
+     * *Optional*. *True*, if the payment is the first payment for a subscription
      */
     is_first_recurring?: boolean
     /**

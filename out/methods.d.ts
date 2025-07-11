@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v9.0.0 (11.04.2025)
+ * Based on Bot API v9.1.0 (03.07.2025)
  *
- * Generated at 13.04.2025, 15:19:06 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 04.07.2025, 09:25:08 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -197,6 +197,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#sendpoll)
      */
     sendPoll: CallAPI<Params.SendPollParams, Objects.TelegramMessage>
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendchecklist)
+     */
+    sendChecklist: CallAPI<Params.SendChecklistParams, Objects.TelegramMessage>
     /**
      * Use this method to send an animated emoji that will display a random value. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
      *
@@ -714,6 +720,15 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited [Message](https://core.telegram.org/bots/api/#message) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagechecklist)
+     */
+    editMessageChecklist: CallAPI<
+        Params.EditMessageChecklistParams,
+        Objects.TelegramMessage
+    >
+    /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagereplymarkup)
@@ -798,7 +813,7 @@ export interface APIMethods {
      */
     readBusinessMessage: CallAPI<Params.ReadBusinessMessageParams, true>
     /**
-     * Delete messages on behalf of a business account. Requires the *can\_delete\_outgoing\_messages* business bot right to delete messages sent by the bot itself, or the *can\_delete\_all\_messages* business bot right to delete any message. Returns *True* on success.
+     * Delete messages on behalf of a business account. Requires the *can\_delete\_sent\_messages* business bot right to delete messages sent by the bot itself, or the *can\_delete\_all\_messages* business bot right to delete any message. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#deletebusinessmessages)
      */
@@ -1071,6 +1086,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#answerprecheckoutquery)
      */
     answerPreCheckoutQuery: CallAPI<Params.AnswerPreCheckoutQueryParams, true>
+    /**
+     * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a [StarAmount](https://core.telegram.org/bots/api/#staramount) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getmystarbalance)
+     */
+    getMyStarBalance: CallAPIWithoutParams<Objects.TelegramStarAmount>
     /**
      * Returns the bot's Telegram Star transactions in chronological order. On success, returns a [StarTransactions](https://core.telegram.org/bots/api/#startransactions) object.
      *
