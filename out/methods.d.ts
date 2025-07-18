@@ -13,7 +13,7 @@
  *
  * Based on Bot API v9.1.0 (03.07.2025)
  *
- * Generated at 11.07.2025, 23:40:10 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 18.07.2025, 13:37:29 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -165,7 +165,7 @@ export interface APIMethods {
      */
     sendPaidMedia: CallAPI<Params.SendPaidMediaParams, Objects.TelegramMessage>
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of [Messages](https://core.telegram.org/bots/api/#message) that were sent is returned.
+     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of [Message](https://core.telegram.org/bots/api/#message) objects that were sent is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendmediagroup)
      */
