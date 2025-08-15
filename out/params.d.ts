@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v9.1.0 (03.07.2025)
+ * Based on Bot API v9.2.0 (15.08.2025)
  *
- * Generated at 18.07.2025, 13:37:29 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 15.08.2025, 21:16:28 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -102,6 +102,10 @@ export interface SendMessageParams {
      */
     message_thread_id?: number
     /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
      * Text of the message to be sent, 1-4096 characters after entities parsing
      */
     text: string | { toString(): string }
@@ -134,6 +138,10 @@ export interface SendMessageParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -164,6 +172,10 @@ export interface ForwardMessageParams {
      */
     message_thread_id?: number
     /**
+     * Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
      * Unique identifier for the chat where the original message was sent (or channel username in the format `@channelusername`)
      */
     from_chat_id: number | string
@@ -179,6 +191,10 @@ export interface ForwardMessageParams {
      * Protects the contents of the forwarded message from forwarding and saving
      */
     protect_content?: boolean
+    /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
     /**
      * Message identifier in the chat specified in *from\_chat\_id*
      */
@@ -197,6 +213,10 @@ export interface ForwardMessagesParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the messages will be forwarded; required if the messages are forwarded to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
      */
@@ -227,6 +247,10 @@ export interface CopyMessageParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Unique identifier for the chat where the original message was sent (or channel username in the format `@channelusername`)
      */
@@ -268,6 +292,10 @@ export interface CopyMessageParams {
      */
     allow_paid_broadcast?: boolean
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -297,6 +325,10 @@ export interface CopyMessagesParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
      */
@@ -335,6 +367,10 @@ export interface SendPhotoParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
@@ -376,6 +412,10 @@ export interface SendPhotoParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -409,6 +449,10 @@ export interface SendAudioParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
@@ -458,6 +502,10 @@ export interface SendAudioParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -491,6 +539,10 @@ export interface SendDocumentParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * File to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
@@ -532,6 +584,10 @@ export interface SendDocumentParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -565,6 +621,10 @@ export interface SendVideoParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
@@ -634,6 +694,10 @@ export interface SendVideoParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -667,6 +731,10 @@ export interface SendAnimationParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
@@ -724,6 +792,10 @@ export interface SendAnimationParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -757,6 +829,10 @@ export interface SendVoiceParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files)
      */
@@ -794,6 +870,10 @@ export interface SendVoiceParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -828,6 +908,10 @@ export interface SendVideoNoteParams {
      */
     message_thread_id?: number
     /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
      * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Sending video notes by a URL is currently unsupported
      */
     video_note: Objects.TelegramInputFile | string
@@ -860,6 +944,10 @@ export interface SendVideoNoteParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -889,6 +977,14 @@ export interface SendPaidMediaParams {
      * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
      */
     chat_id: number | string
+    /**
+     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     */
+    message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * The number of Telegram Stars that must be paid to buy access to the media; 1-10000
      */
@@ -930,6 +1026,10 @@ export interface SendPaidMediaParams {
      */
     allow_paid_broadcast?: boolean
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -963,6 +1063,10 @@ export interface SendMediaGroupParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * A JSON-serialized array describing messages to be sent, must include 2-10 items
      */
@@ -1011,6 +1115,10 @@ export interface SendLocationParams {
      */
     message_thread_id?: number
     /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
      * Latitude of the location
      */
     latitude: number
@@ -1051,6 +1159,10 @@ export interface SendLocationParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -1084,6 +1196,10 @@ export interface SendVenueParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Latitude of the venue
      */
@@ -1133,6 +1249,10 @@ export interface SendVenueParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -1167,6 +1287,10 @@ export interface SendContactParams {
      */
     message_thread_id?: number
     /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
      * Contact's phone number
      */
     phone_number: string
@@ -1199,6 +1323,10 @@ export interface SendContactParams {
      */
     message_effect_id?: string
     /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
      * Description of the message to reply to
      */
     reply_parameters?: Objects.TelegramReplyParameters
@@ -1227,7 +1355,7 @@ export interface SendPollParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). Polls can't be sent to channel direct messages chats.
      */
     chat_id: number | string
     /**
@@ -1383,6 +1511,10 @@ export interface SendDiceParams {
      */
     message_thread_id?: number
     /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
      * Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
      */
     emoji?: SendDiceEmoji
@@ -1402,6 +1534,10 @@ export interface SendDiceParams {
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
+    /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
     /**
      * Description of the message to reply to
      */
@@ -1442,7 +1578,7 @@ export interface SendChatActionParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`). Channel chats and channel direct messages chats aren't supported.
      */
     chat_id: number | string
     /**
@@ -1661,6 +1797,10 @@ export interface PromoteChatMemberParams {
      * Pass *True* if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
      */
     can_manage_topics?: boolean
+    /**
+     * Pass *True* if the administrator can manage direct messages within the channel and decline suggested posts; for channels only
+     */
+    can_manage_direct_messages?: boolean
 }
 
 /**
@@ -1982,7 +2122,7 @@ export interface UnpinAllChatMessagesParams {
  */
 export interface LeaveChatParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`). Channel direct messages chats aren't supported; leave the corresponding channel instead.
      */
     chat_id: number | string
 }
@@ -2446,314 +2586,6 @@ export interface GetMyDefaultAdministratorRightsParams {
 }
 
 /**
- * Params object for {@link APIMethods.editMessageText | editMessageText} method
- */
-export interface EditMessageTextParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message to be edited was sent
-     */
-    business_connection_id?: string
-    /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id?: number | string
-    /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
-     */
-    message_id?: number
-    /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
-     */
-    inline_message_id?: string
-    /**
-     * New text of the message, 1-4096 characters after entities parsing
-     */
-    text: string | { toString(): string }
-    /**
-     * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
-     */
-    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
-    /**
-     * A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse\_mode*
-     */
-    entities?: Objects.TelegramMessageEntity[]
-    /**
-     * Link preview generation options for the message
-     */
-    link_preview_options?: Objects.TelegramLinkPreviewOptions
-    /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.editMessageCaption | editMessageCaption} method
- */
-export interface EditMessageCaptionParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message to be edited was sent
-     */
-    business_connection_id?: string
-    /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id?: number | string
-    /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
-     */
-    message_id?: number
-    /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
-     */
-    inline_message_id?: string
-    /**
-     * New caption of the message, 0-1024 characters after entities parsing
-     */
-    caption?: string | { toString(): string }
-    /**
-     * Mode for parsing entities in the message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
-     */
-    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
-    /**
-     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
-     */
-    caption_entities?: Objects.TelegramMessageEntity[]
-    /**
-     * Pass *True*, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
-     */
-    show_caption_above_media?: boolean
-    /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.editMessageMedia | editMessageMedia} method
- */
-export interface EditMessageMediaParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message to be edited was sent
-     */
-    business_connection_id?: string
-    /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id?: number | string
-    /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
-     */
-    message_id?: number
-    /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
-     */
-    inline_message_id?: string
-    /**
-     * A JSON-serialized object for a new media content of the message
-     */
-    media: Objects.TelegramInputMedia
-    /**
-     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.editMessageLiveLocation | editMessageLiveLocation} method
- */
-export interface EditMessageLiveLocationParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message to be edited was sent
-     */
-    business_connection_id?: string
-    /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id?: number | string
-    /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
-     */
-    message_id?: number
-    /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
-     */
-    inline_message_id?: string
-    /**
-     * Latitude of new location
-     */
-    latitude: number
-    /**
-     * Longitude of new location
-     */
-    longitude: number
-    /**
-     * New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current *live\_period* by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then *live\_period* remains unchanged
-     */
-    live_period?: number
-    /**
-     * The radius of uncertainty for the location, measured in meters; 0-1500
-     */
-    horizontal_accuracy?: number
-    /**
-     * Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
-     */
-    heading?: number
-    /**
-     * The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
-     */
-    proximity_alert_radius?: number
-    /**
-     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.stopMessageLiveLocation | stopMessageLiveLocation} method
- */
-export interface StopMessageLiveLocationParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message to be edited was sent
-     */
-    business_connection_id?: string
-    /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id?: number | string
-    /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message with live location to stop
-     */
-    message_id?: number
-    /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
-     */
-    inline_message_id?: string
-    /**
-     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.editMessageChecklist | editMessageChecklist} method
- */
-export interface EditMessageChecklistParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message will be sent
-     */
-    business_connection_id: string
-    /**
-     * Unique identifier for the target chat
-     */
-    chat_id: number
-    /**
-     * Unique identifier for the target message
-     */
-    message_id: number
-    /**
-     * A JSON-serialized object for the new checklist
-     */
-    checklist: Objects.TelegramInputChecklist
-    /**
-     * A JSON-serialized object for the new inline keyboard for the message
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.editMessageReplyMarkup | editMessageReplyMarkup} method
- */
-export interface EditMessageReplyMarkupParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message to be edited was sent
-     */
-    business_connection_id?: string
-    /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id?: number | string
-    /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
-     */
-    message_id?: number
-    /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
-     */
-    inline_message_id?: string
-    /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.stopPoll | stopPoll} method
- */
-export interface StopPollParams {
-    /**
-     * Unique identifier of the business connection on behalf of which the message to be edited was sent
-     */
-    business_connection_id?: string
-    /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id: number | string
-    /**
-     * Identifier of the original message with the poll
-     */
-    message_id: number
-    /**
-     * A JSON-serialized object for a new message [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
-     */
-    reply_markup?:
-        | Objects.TelegramInlineKeyboardMarkup
-        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
-}
-
-/**
- * Params object for {@link APIMethods.deleteMessage | deleteMessage} method
- */
-export interface DeleteMessageParams {
-    /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id: number | string
-    /**
-     * Identifier of the message to delete
-     */
-    message_id: number
-}
-
-/**
- * Params object for {@link APIMethods.deleteMessages | deleteMessages} method
- */
-export interface DeleteMessagesParams {
-    /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
-     */
-    chat_id: number | string
-    /**
-     * A JSON-serialized list of 1-100 identifiers of messages to delete. See [deleteMessage](https://core.telegram.org/bots/api/#deletemessage) for limitations on which messages can be deleted
-     */
-    message_ids: number[]
-}
-
-/**
  * Params object for {@link APIMethods.sendGift | sendGift} method
  */
 export interface SendGiftParams {
@@ -2838,7 +2670,7 @@ export interface VerifyUserParams {
  */
 export interface VerifyChatParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). Channel direct messages chats can't be verified.
      */
     chat_id: number | string
     /**
@@ -3212,6 +3044,350 @@ export interface DeleteStoryParams {
 }
 
 /**
+ * Params object for {@link APIMethods.editMessageText | editMessageText} method
+ */
+export interface EditMessageTextParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id?: number | string
+    /**
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     */
+    message_id?: number
+    /**
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     */
+    inline_message_id?: string
+    /**
+     * New text of the message, 1-4096 characters after entities parsing
+     */
+    text: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse\_mode*
+     */
+    entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Link preview generation options for the message
+     */
+    link_preview_options?: Objects.TelegramLinkPreviewOptions
+    /**
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.editMessageCaption | editMessageCaption} method
+ */
+export interface EditMessageCaptionParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id?: number | string
+    /**
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     */
+    message_id?: number
+    /**
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     */
+    inline_message_id?: string
+    /**
+     * New caption of the message, 0-1024 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the message caption. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Pass *True*, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+     */
+    show_caption_above_media?: boolean
+    /**
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.editMessageMedia | editMessageMedia} method
+ */
+export interface EditMessageMediaParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id?: number | string
+    /**
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     */
+    message_id?: number
+    /**
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     */
+    inline_message_id?: string
+    /**
+     * A JSON-serialized object for a new media content of the message
+     */
+    media: Objects.TelegramInputMedia
+    /**
+     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.editMessageLiveLocation | editMessageLiveLocation} method
+ */
+export interface EditMessageLiveLocationParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id?: number | string
+    /**
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     */
+    message_id?: number
+    /**
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     */
+    inline_message_id?: string
+    /**
+     * Latitude of new location
+     */
+    latitude: number
+    /**
+     * Longitude of new location
+     */
+    longitude: number
+    /**
+     * New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current *live\_period* by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then *live\_period* remains unchanged
+     */
+    live_period?: number
+    /**
+     * The radius of uncertainty for the location, measured in meters; 0-1500
+     */
+    horizontal_accuracy?: number
+    /**
+     * Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
+     */
+    heading?: number
+    /**
+     * The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
+     */
+    proximity_alert_radius?: number
+    /**
+     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.stopMessageLiveLocation | stopMessageLiveLocation} method
+ */
+export interface StopMessageLiveLocationParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id?: number | string
+    /**
+     * Required if *inline\_message\_id* is not specified. Identifier of the message with live location to stop
+     */
+    message_id?: number
+    /**
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     */
+    inline_message_id?: string
+    /**
+     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.editMessageChecklist | editMessageChecklist} method
+ */
+export interface EditMessageChecklistParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier for the target chat
+     */
+    chat_id: number
+    /**
+     * Unique identifier for the target message
+     */
+    message_id: number
+    /**
+     * A JSON-serialized object for the new checklist
+     */
+    checklist: Objects.TelegramInputChecklist
+    /**
+     * A JSON-serialized object for the new inline keyboard for the message
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.editMessageReplyMarkup | editMessageReplyMarkup} method
+ */
+export interface EditMessageReplyMarkupParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id?: number | string
+    /**
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     */
+    message_id?: number
+    /**
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     */
+    inline_message_id?: string
+    /**
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.stopPoll | stopPoll} method
+ */
+export interface StopPollParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message to be edited was sent
+     */
+    business_connection_id?: string
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Identifier of the original message with the poll
+     */
+    message_id: number
+    /**
+     * A JSON-serialized object for a new message [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+}
+
+/**
+ * Params object for {@link APIMethods.approveSuggestedPost | approveSuggestedPost} method
+ */
+export interface ApproveSuggestedPostParams {
+    /**
+     * Unique identifier for the target direct messages chat
+     */
+    chat_id: number
+    /**
+     * Identifier of a suggested post message to approve
+     */
+    message_id: number
+    /**
+     * Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future
+     */
+    send_date?: number
+}
+
+/**
+ * Params object for {@link APIMethods.declineSuggestedPost | declineSuggestedPost} method
+ */
+export interface DeclineSuggestedPostParams {
+    /**
+     * Unique identifier for the target direct messages chat
+     */
+    chat_id: number
+    /**
+     * Identifier of a suggested post message to decline
+     */
+    message_id: number
+    /**
+     * Comment for the creator of the suggested post; 0-128 characters
+     */
+    comment?: string
+}
+
+/**
+ * Params object for {@link APIMethods.deleteMessage | deleteMessage} method
+ */
+export interface DeleteMessageParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Identifier of the message to delete
+     */
+    message_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.deleteMessages | deleteMessages} method
+ */
+export interface DeleteMessagesParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * A JSON-serialized list of 1-100 identifiers of messages to delete. See [deleteMessage](https://core.telegram.org/bots/api/#deletemessage) for limitations on which messages can be deleted
+     */
+    message_ids: number[]
+}
+
+/**
  * Params object for {@link APIMethods.sendSticker | sendSticker} method
  */
 export interface SendStickerParams {
@@ -3227,6 +3403,10 @@ export interface SendStickerParams {
      * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      */
     message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
     /**
      * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api/#sending-files). Video and animated stickers can't be sent via an HTTP URL.
      */
@@ -3251,6 +3431,10 @@ export interface SendStickerParams {
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
+    /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
     /**
      * Description of the message to reply to
      */
@@ -3596,6 +3780,10 @@ export interface SendInvoiceParams {
      */
     message_thread_id?: number
     /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
      * Product name, 1-32 characters
      */
     title: string
@@ -3695,6 +3883,10 @@ export interface SendInvoiceParams {
      * Unique identifier of the message effect to be added to the message; for private chats only
      */
     message_effect_id?: string
+    /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
     /**
      * Description of the message to reply to
      */
@@ -3910,7 +4102,7 @@ export interface SendGameParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat
+     * Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats.
      */
     chat_id: number
     /**

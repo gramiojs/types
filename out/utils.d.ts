@@ -13,9 +13,9 @@
  * //   ^? type SendMessageParams = SendMessageParams"
  * ```
  *
- * Based on Bot API v9.1.0 (03.07.2025)
+ * Based on Bot API v9.2.0 (15.08.2025)
  *
- * Generated at 18.07.2025, 13:37:29 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 15.08.2025, 21:16:28 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"

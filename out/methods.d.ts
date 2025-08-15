@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v9.1.0 (03.07.2025)
+ * Based on Bot API v9.2.0 (15.08.2025)
  *
- * Generated at 18.07.2025, 13:37:29 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 15.08.2025, 21:16:28 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -385,19 +385,19 @@ export interface APIMethods {
      */
     setChatDescription: CallAPI<Params.SetChatDescriptionParams, true>
     /**
-     * Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can\_pin\_messages' administrator right in a supergroup or 'can\_edit\_messages' administrator right in a channel. Returns *True* on success.
+     * Use this method to add a message to the list of pinned messages in a chat. In private chats and channel direct messages chats, all non-service messages can be pinned. Conversely, the bot must be an administrator with the 'can\_pin\_messages' right or the 'can\_edit\_messages' right to pin messages in groups and channels respectively. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#pinchatmessage)
      */
     pinChatMessage: CallAPI<Params.PinChatMessageParams, true>
     /**
-     * Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can\_pin\_messages' administrator right in a supergroup or 'can\_edit\_messages' administrator right in a channel. Returns *True* on success.
+     * Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the 'can\_pin\_messages' right or the 'can\_edit\_messages' right to unpin messages in groups and channels respectively. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#unpinchatmessage)
      */
     unpinChatMessage: CallAPI<Params.UnpinChatMessageParams, true>
     /**
-     * Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can\_pin\_messages' administrator right in a supergroup or 'can\_edit\_messages' administrator right in a channel. Returns *True* on success.
+     * Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the 'can\_pin\_messages' right or the 'can\_edit\_messages' right to unpin all pinned messages in groups and channels respectively. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#unpinallchatmessages)
      */
@@ -675,96 +675,6 @@ export interface APIMethods {
         Objects.TelegramChatAdministratorRights
     >
     /**
-     * Use this method to edit text and [game](https://core.telegram.org/bots/api/#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#editmessagetext)
-     */
-    editMessageText: CallAPI<
-        Params.EditMessageTextParams,
-        Objects.TelegramMessage | true
-    >
-    /**
-     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#editmessagecaption)
-     */
-    editMessageCaption: CallAPIWithOptionalParams<
-        Params.EditMessageCaptionParams,
-        Objects.TelegramMessage | true
-    >
-    /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#editmessagemedia)
-     */
-    editMessageMedia: CallAPI<
-        Params.EditMessageMediaParams,
-        Objects.TelegramMessage | true
-    >
-    /**
-     * Use this method to edit live location messages. A location can be edited until its *live\_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](https://core.telegram.org/bots/api/#stopmessagelivelocation). On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#editmessagelivelocation)
-     */
-    editMessageLiveLocation: CallAPI<
-        Params.EditMessageLiveLocationParams,
-        Objects.TelegramMessage | true
-    >
-    /**
-     * Use this method to stop updating a live location message before *live\_period* expires. On success, if the message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#stopmessagelivelocation)
-     */
-    stopMessageLiveLocation: CallAPIWithOptionalParams<
-        Params.StopMessageLiveLocationParams,
-        Objects.TelegramMessage | true
-    >
-    /**
-     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited [Message](https://core.telegram.org/bots/api/#message) is returned.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#editmessagechecklist)
-     */
-    editMessageChecklist: CallAPI<
-        Params.EditMessageChecklistParams,
-        Objects.TelegramMessage
-    >
-    /**
-     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#editmessagereplymarkup)
-     */
-    editMessageReplyMarkup: CallAPIWithOptionalParams<
-        Params.EditMessageReplyMarkupParams,
-        Objects.TelegramMessage | true
-    >
-    /**
-     * Use this method to stop a poll which was sent by the bot. On success, the stopped [Poll](https://core.telegram.org/bots/api/#poll) is returned.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#stoppoll)
-     */
-    stopPoll: CallAPI<Params.StopPollParams, Objects.TelegramPoll>
-    /**
-     * Use this method to delete a message, including service messages, with the following limitations:
-     * \- A message can only be deleted if it was sent less than 48 hours ago.
-     * \- Service messages about a supergroup, channel, or forum topic creation can't be deleted.
-     * \- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
-     * \- Bots can delete outgoing messages in private chats, groups, and supergroups.
-     * \- Bots can delete incoming messages in private chats.
-     * \- Bots granted *can\_post\_messages* permissions can delete outgoing messages in channels.
-     * \- If the bot is an administrator of a group, it can delete any message there.
-     * \- If the bot has *can\_delete\_messages* permission in a supergroup or a channel, it can delete any message there.
-     * Returns *True* on success.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#deletemessage)
-     */
-    deleteMessage: CallAPI<Params.DeleteMessageParams, true>
-    /**
-     * Use this method to delete multiple messages simultaneously. If some of the specified messages can't be found, they are skipped. Returns *True* on success.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#deletemessages)
-     */
-    deleteMessages: CallAPI<Params.DeleteMessagesParams, true>
-    /**
      * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getavailablegifts)
@@ -929,6 +839,109 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#deletestory)
      */
     deleteStory: CallAPI<Params.DeleteStoryParams, true>
+    /**
+     * Use this method to edit text and [game](https://core.telegram.org/bots/api/#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagetext)
+     */
+    editMessageText: CallAPI<
+        Params.EditMessageTextParams,
+        Objects.TelegramMessage | true
+    >
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagecaption)
+     */
+    editMessageCaption: CallAPIWithOptionalParams<
+        Params.EditMessageCaptionParams,
+        Objects.TelegramMessage | true
+    >
+    /**
+     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagemedia)
+     */
+    editMessageMedia: CallAPI<
+        Params.EditMessageMediaParams,
+        Objects.TelegramMessage | true
+    >
+    /**
+     * Use this method to edit live location messages. A location can be edited until its *live\_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](https://core.telegram.org/bots/api/#stopmessagelivelocation). On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagelivelocation)
+     */
+    editMessageLiveLocation: CallAPI<
+        Params.EditMessageLiveLocationParams,
+        Objects.TelegramMessage | true
+    >
+    /**
+     * Use this method to stop updating a live location message before *live\_period* expires. On success, if the message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#stopmessagelivelocation)
+     */
+    stopMessageLiveLocation: CallAPIWithOptionalParams<
+        Params.StopMessageLiveLocationParams,
+        Objects.TelegramMessage | true
+    >
+    /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited [Message](https://core.telegram.org/bots/api/#message) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagechecklist)
+     */
+    editMessageChecklist: CallAPI<
+        Params.EditMessageChecklistParams,
+        Objects.TelegramMessage
+    >
+    /**
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagereplymarkup)
+     */
+    editMessageReplyMarkup: CallAPIWithOptionalParams<
+        Params.EditMessageReplyMarkupParams,
+        Objects.TelegramMessage | true
+    >
+    /**
+     * Use this method to stop a poll which was sent by the bot. On success, the stopped [Poll](https://core.telegram.org/bots/api/#poll) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#stoppoll)
+     */
+    stopPoll: CallAPI<Params.StopPollParams, Objects.TelegramPoll>
+    /**
+     * Use this method to approve a suggested post in a direct messages chat. The bot must have the 'can\_post\_messages' administrator right in the corresponding channel chat. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#approvesuggestedpost)
+     */
+    approveSuggestedPost: CallAPI<Params.ApproveSuggestedPostParams, true>
+    /**
+     * Use this method to decline a suggested post in a direct messages chat. The bot must have the 'can\_manage\_direct\_messages' administrator right in the corresponding channel chat. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#declinesuggestedpost)
+     */
+    declineSuggestedPost: CallAPI<Params.DeclineSuggestedPostParams, true>
+    /**
+     * Use this method to delete a message, including service messages, with the following limitations:
+     * \- A message can only be deleted if it was sent less than 48 hours ago.
+     * \- Service messages about a supergroup, channel, or forum topic creation can't be deleted.
+     * \- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
+     * \- Bots can delete outgoing messages in private chats, groups, and supergroups.
+     * \- Bots can delete incoming messages in private chats.
+     * \- Bots granted *can\_post\_messages* permissions can delete outgoing messages in channels.
+     * \- If the bot is an administrator of a group, it can delete any message there.
+     * \- If the bot has *can\_delete\_messages* administrator right in a supergroup or a channel, it can delete any message there.
+     * \- If the bot has *can\_manage\_direct\_messages* administrator right in a channel, it can delete any message in the corresponding direct messages chat.
+     * Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deletemessage)
+     */
+    deleteMessage: CallAPI<Params.DeleteMessageParams, true>
+    /**
+     * Use this method to delete multiple messages simultaneously. If some of the specified messages can't be found, they are skipped. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deletemessages)
+     */
+    deleteMessages: CallAPI<Params.DeleteMessagesParams, true>
     /**
      * Use this method to send static .WEBP, [animated](https://telegram.org/blog/animated-stickers) .TGS, or [video](https://telegram.org/blog/video-stickers-better-reactions) .WEBM stickers. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
      *

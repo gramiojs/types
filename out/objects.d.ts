@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v9.1.0 (03.07.2025)
+ * Based on Bot API v9.2.0 (15.08.2025)
  *
- * Generated at 18.07.2025, 13:37:29 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 15.08.2025, 21:16:28 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -261,6 +261,10 @@ export interface TelegramChat {
      * *Optional*. *True*, if the supergroup chat is a forum (has [topics](https://telegram.org/blog/topics-in-groups-collectible-usernames#topics-in-groups) enabled)
      */
     is_forum?: boolean
+    /**
+     * *Optional*. *True*, if the chat is the direct messages chat of a channel
+     */
+    is_direct_messages?: boolean
 }
 
 export type TelegramChatFullInfoType =
@@ -304,6 +308,10 @@ export interface TelegramChatFullInfo {
      */
     is_forum?: boolean
     /**
+     * *Optional*. *True*, if the chat is the direct messages chat of a channel
+     */
+    is_direct_messages?: boolean
+    /**
      * Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See [accent colors](https://core.telegram.org/bots/api/#accent-colors) for more details.
      */
     accent_color_id: number
@@ -339,6 +347,10 @@ export interface TelegramChatFullInfo {
      * *Optional*. For private chats, the personal channel of the user
      */
     personal_chat?: TelegramChat
+    /**
+     * *Optional*. Information about the corresponding channel chat; for direct messages chats only
+     */
+    parent_chat?: TelegramChat
     /**
      * *Optional*. List of available reactions allowed in the chat. If omitted, then all [emoji reactions](https://core.telegram.org/bots/api/#reactiontypeemoji) are allowed.
      */
@@ -472,6 +484,10 @@ export interface TelegramMessage {
      */
     message_thread_id?: number
     /**
+     * *Optional*. Information about the direct messages chat topic that contains the message
+     */
+    direct_messages_topic?: TelegramDirectMessagesTopic
+    /**
      * *Optional*. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats
      */
     from?: TelegramUser
@@ -512,7 +528,7 @@ export interface TelegramMessage {
      */
     is_automatic_forward?: boolean
     /**
-     * *Optional*. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further *reply\_to\_message* fields even if it itself is a reply.
+     * *Optional*. For replies in the same chat and message thread, the original message. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain further *reply\_to\_message* fields even if it itself is a reply.
      */
     reply_to_message?: TelegramMessage
     /**
@@ -527,6 +543,10 @@ export interface TelegramMessage {
      * *Optional*. For replies to a story, the original story
      */
     reply_to_story?: TelegramStory
+    /**
+     * *Optional*. Identifier of the specific checklist task that is being replied to
+     */
+    reply_to_checklist_task_id?: number
     /**
      * *Optional*. Bot through which the message was sent
      */
@@ -543,6 +563,10 @@ export interface TelegramMessage {
      * *Optional*. *True*, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message
      */
     is_from_offline?: boolean
+    /**
+     * *Optional*. *True*, if the message is a paid post. Note that such posts must not be deleted for 24 hours to receive the payment and can't be edited.
+     */
+    is_paid_post?: boolean
     /**
      * *Optional*. The unique identifier of a media message group this message belongs to
      */
@@ -567,6 +591,10 @@ export interface TelegramMessage {
      * *Optional*. Options used for link preview generation for the message, if it is a text message and link preview options were changed
      */
     link_preview_options?: TelegramLinkPreviewOptions
+    /**
+     * *Optional*. Information about suggested post parameters if the message is a suggested post in a channel direct messages chat. If the message is an approved or declined suggested post, then it can't be edited.
+     */
+    suggested_post_info?: TelegramSuggestedPostInfo
     /**
      * *Optional*. Unique identifier of the message effect added to the message
      */
@@ -700,7 +728,7 @@ export interface TelegramMessage {
      */
     migrate_from_chat_id?: number
     /**
-     * *Optional*. Specified message was pinned. Note that the Message object in this field will not contain further *reply\_to\_message* fields even if it itself is a reply.
+     * *Optional*. Specified message was pinned. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain further *reply\_to\_message* fields even if it itself is a reply.
      */
     pinned_message?: TelegramMaybeInaccessibleMessage
     /**
@@ -811,6 +839,26 @@ export interface TelegramMessage {
      * *Optional*. Service message: the price for paid messages has changed in the chat
      */
     paid_message_price_changed?: TelegramPaidMessagePriceChanged
+    /**
+     * *Optional*. Service message: a suggested post was approved
+     */
+    suggested_post_approved?: TelegramSuggestedPostApproved
+    /**
+     * *Optional*. Service message: approval of a suggested post has failed
+     */
+    suggested_post_approval_failed?: TelegramSuggestedPostApprovalFailed
+    /**
+     * *Optional*. Service message: a suggested post was declined
+     */
+    suggested_post_declined?: TelegramSuggestedPostDeclined
+    /**
+     * *Optional*. Service message: payment for a suggested post was received
+     */
+    suggested_post_paid?: TelegramSuggestedPostPaid
+    /**
+     * *Optional*. Service message: payment for a suggested post was refunded
+     */
+    suggested_post_refunded?: TelegramSuggestedPostRefunded
     /**
      * *Optional*. Service message: video chat scheduled
      */
@@ -1083,7 +1131,7 @@ export interface TelegramReplyParameters {
      */
     message_id: number
     /**
-     * *Optional*. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format `@channelusername`). Not supported for messages sent on behalf of a business account.
+     * *Optional*. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format `@channelusername`). Not supported for messages sent on behalf of a business account and messages from channel direct messages chats.
      */
     chat_id?: number | string
     /**
@@ -1106,6 +1154,10 @@ export interface TelegramReplyParameters {
      * *Optional*. Position of the quote in the original message in UTF-16 code units
      */
     quote_position?: number
+    /**
+     * *Optional*. Identifier of the specific checklist task to be replied to
+     */
+    checklist_task_id?: number
 }
 
 /**
@@ -1871,7 +1923,7 @@ export interface TelegramInputChecklist {
  */
 export interface TelegramChecklistTasksDone {
     /**
-     * *Optional*. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     * *Optional*. Message containing the checklist whose tasks were marked as done or not done. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
      */
     checklist_message?: TelegramMessage
     /**
@@ -1891,7 +1943,7 @@ export interface TelegramChecklistTasksDone {
  */
 export interface TelegramChecklistTasksAdded {
     /**
-     * *Optional*. Message containing the checklist to which the tasks were added. Note that the Message object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     * *Optional*. Message containing the checklist to which the tasks were added. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
      */
     checklist_message?: TelegramMessage
     /**
@@ -2450,6 +2502,105 @@ export interface TelegramDirectMessagePriceChanged {
 }
 
 /**
+ * Describes a service message about the approval of a suggested post.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostapproved)
+ */
+export interface TelegramSuggestedPostApproved {
+    /**
+     * *Optional*. Message containing the suggested post. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    suggested_post_message?: TelegramMessage
+    /**
+     * *Optional*. Amount paid for the post
+     */
+    price?: TelegramSuggestedPostPrice
+    /**
+     * Date when the post will be published
+     */
+    send_date: number
+}
+
+/**
+ * Describes a service message about the failed approval of a suggested post. Currently, only caused by insufficient user funds at the time of approval.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostapprovalfailed)
+ */
+export interface TelegramSuggestedPostApprovalFailed {
+    /**
+     * *Optional*. Message containing the suggested post whose approval has failed. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    suggested_post_message?: TelegramMessage
+    /**
+     * Expected price of the post
+     */
+    price: TelegramSuggestedPostPrice
+}
+
+/**
+ * Describes a service message about the rejection of a suggested post.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostdeclined)
+ */
+export interface TelegramSuggestedPostDeclined {
+    /**
+     * *Optional*. Message containing the suggested post. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    suggested_post_message?: TelegramMessage
+    /**
+     * *Optional*. Comment with which the post was declined
+     */
+    comment?: string
+}
+
+export type TelegramSuggestedPostPaidCurrency = "XTR" | "TON"
+
+/**
+ * Describes a service message about a successful payment for a suggested post.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostpaid)
+ */
+export interface TelegramSuggestedPostPaid {
+    /**
+     * *Optional*. Message containing the suggested post. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    suggested_post_message?: TelegramMessage
+    /**
+     * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins
+     */
+    currency: TelegramSuggestedPostPaidCurrency
+    /**
+     * *Optional*. The amount of the currency that was received by the channel in nanotoncoins; for payments in toncoins only
+     */
+    amount?: number
+    /**
+     * *Optional*. The amount of Telegram Stars that was received by the channel; for payments in Telegram Stars only
+     */
+    star_amount?: TelegramStarAmount
+}
+
+export type TelegramSuggestedPostRefundedReason =
+    | "post_deleted"
+    | "24"
+    | "payment_refunded"
+
+/**
+ * Describes a service message about a payment refund for a suggested post.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostrefunded)
+ */
+export interface TelegramSuggestedPostRefunded {
+    /**
+     * *Optional*. Message containing the suggested post. Note that the [Message](https://core.telegram.org/bots/api/#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    suggested_post_message?: TelegramMessage
+    /**
+     * Reason for the refund. Currently, one of “post\_deleted” if the post was deleted within 24 hours of being posted or removed from scheduled messages without being posted, or “payment\_refunded” if the payer refunded their payment.
+     */
+    reason: TelegramSuggestedPostRefundedReason
+}
+
+/**
  * This object represents a service message about the creation of a scheduled giveaway.
  *
  * [Documentation](https://core.telegram.org/bots/api/#giveawaycreated)
@@ -2611,6 +2762,78 @@ export interface TelegramLinkPreviewOptions {
      * *Optional*. *True*, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text
      */
     show_above_text?: boolean
+}
+
+export type TelegramSuggestedPostPriceCurrency = "XTR" | "TON"
+
+/**
+ * Desribes price of a suggested post.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostprice)
+ */
+export interface TelegramSuggestedPostPrice {
+    /**
+     * Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins
+     */
+    currency: TelegramSuggestedPostPriceCurrency
+    /**
+     * The amount of the currency that will be paid for the post in the *smallest units* of the currency, i.e. Telegram Stars or nanotoncoins. Currently, price in Telegram Stars must be between 5 and 100000, and price in nanotoncoins must be between 10000000 and 10000000000000.
+     */
+    amount: number
+}
+
+export type TelegramSuggestedPostInfoState = "pending" | "approved" | "declined"
+
+/**
+ * Contains information about a suggested post.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostinfo)
+ */
+export interface TelegramSuggestedPostInfo {
+    /**
+     * State of the suggested post. Currently, it can be one of “pending”, “approved”, “declined”.
+     */
+    state: TelegramSuggestedPostInfoState
+    /**
+     * *Optional*. Proposed price of the post. If the field is omitted, then the post is unpaid.
+     */
+    price?: TelegramSuggestedPostPrice
+    /**
+     * *Optional*. Proposed send date of the post. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user or administrator who approves it.
+     */
+    send_date?: number
+}
+
+/**
+ * Contains parameters of a post that is being suggested by the bot.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#suggestedpostparameters)
+ */
+export interface TelegramSuggestedPostParameters {
+    /**
+     * *Optional*. Proposed price for the post. If the field is omitted, then the post is unpaid.
+     */
+    price?: TelegramSuggestedPostPrice
+    /**
+     * *Optional*. Proposed send date of the post. If specified, then the date must be between 300 second and 2678400 seconds (30 days) in the future. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user who approves it.
+     */
+    send_date?: number
+}
+
+/**
+ * Describes a topic of a direct messages chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#directmessagestopic)
+ */
+export interface TelegramDirectMessagesTopic {
+    /**
+     * Unique identifier of the topic
+     */
+    topic_id: number
+    /**
+     * *Optional*. Information about the user that created the topic. Currently, it is always present
+     */
+    user?: TelegramUser
 }
 
 /**
@@ -2894,17 +3117,17 @@ export interface TelegramInlineKeyboardButton {
      */
     login_url?: TelegramLoginUrl
     /**
-     * *Optional*. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent on behalf of a Telegram Business account.
+     * *Optional*. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account.
      */
     switch_inline_query?: string
     /**
      * *Optional*. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
      *
-     * This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent on behalf of a Telegram Business account.
+     * This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent in channel direct messages chats and on behalf of a Telegram Business account.
      */
     switch_inline_query_current_chat?: string
     /**
-     * *Optional*. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent on behalf of a Telegram Business account.
+     * *Optional*. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account.
      */
     switch_inline_query_chosen_chat?: TelegramSwitchInlineQueryChosenChat
     /**
@@ -3193,6 +3416,10 @@ export interface TelegramChatAdministratorRights {
      * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
      */
     can_manage_topics?: boolean
+    /**
+     * *Optional*. *True*, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
+     */
+    can_manage_direct_messages?: boolean
 }
 
 /**
@@ -3357,6 +3584,10 @@ export interface TelegramChatMemberAdministrator {
      * *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
      */
     can_manage_topics?: boolean
+    /**
+     * *Optional*. *True*, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
+     */
+    can_manage_direct_messages?: boolean
     /**
      * *Optional*. Custom title for this user
      */
@@ -4156,6 +4387,10 @@ export interface TelegramGift {
      * *Optional*. The number of remaining gifts of this type that can be sent; for limited gifts only
      */
     remaining_count?: number
+    /**
+     * *Optional*. Information about the chat that published the gift
+     */
+    publisher_chat?: TelegramChat
 }
 
 /**
@@ -4284,6 +4519,10 @@ export interface TelegramUniqueGift {
      * Backdrop of the gift
      */
     backdrop: TelegramUniqueGiftBackdrop
+    /**
+     * *Optional*. Information about the chat that published the gift
+     */
+    publisher_chat?: TelegramChat
 }
 
 /**
@@ -4633,7 +4872,7 @@ export interface TelegramBotCommandScopeChat {
      */
     type: "chat"
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`). Channel direct messages chats and channel chats aren't supported.
      */
     chat_id: number | string
 }
@@ -4649,7 +4888,7 @@ export interface TelegramBotCommandScopeChatAdministrators {
      */
     type: "chat_administrators"
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`). Channel direct messages chats and channel chats aren't supported.
      */
     chat_id: number | string
 }
@@ -4665,7 +4904,7 @@ export interface TelegramBotCommandScopeChatMember {
      */
     type: "chat_member"
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`). Channel direct messages chats and channel chats aren't supported.
      */
     chat_id: number | string
     /**
