@@ -15,7 +15,7 @@
  *
  * Based on Bot API v9.2.0 (15.08.2025)
  *
- * Generated at 17.08.2025, 20:22:38 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 02.09.2025, 18:26:26 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
