@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.2.0 (15.08.2025)
  *
- * Generated at 02.09.2025, 18:26:26 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 06.09.2025, 10:17:36 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1875,7 +1875,7 @@ export interface TelegramInputChecklistTask {
      */
     text: string | { toString(): string }
     /**
-     * Optional. Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     * *Optional*. Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -1895,7 +1895,7 @@ export interface TelegramInputChecklist {
      */
     title: string | { toString(): string }
     /**
-     * Optional. Mode for parsing entities in the title. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     * *Optional*. Mode for parsing entities in the title. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
      */
     parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
@@ -2935,11 +2935,11 @@ export interface TelegramKeyboardButton {
      */
     text: string
     /**
-     * *Optional.* If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users\_shared” service message. Available in private chats only.
+     * *Optional*. If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users\_shared” service message. Available in private chats only.
      */
     request_users?: TelegramKeyboardButtonRequestUsers
     /**
-     * *Optional.* If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a “chat\_shared” service message. Available in private chats only.
+     * *Optional*. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a “chat\_shared” service message. Available in private chats only.
      */
     request_chat?: TelegramKeyboardButtonRequestChat
     /**
