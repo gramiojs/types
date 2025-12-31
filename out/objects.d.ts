@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v9.2.0 (15.08.2025)
+ * Based on Bot API v9.3.0 (31.12.2025)
  *
- * Generated at 06.09.2025, 10:17:36 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 31.12.2025, 11:48:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -223,6 +223,10 @@ export interface TelegramUser {
      * *Optional*. *True*, if the bot has a main Web App. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
      */
     has_main_web_app?: boolean
+    /**
+     * *Optional*. *True*, if the bot has forum topic mode enabled in private chats. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
+     */
+    has_topics_enabled?: boolean
 }
 
 export type TelegramChatType = "private" | "group" | "supergroup" | "channel"
@@ -467,6 +471,18 @@ export interface TelegramChatFullInfo {
      * *Optional*. For supergroups, the location to which the supergroup is connected
      */
     location?: TelegramChatLocation
+    /**
+     * *Optional*. For private chats, the rating of the user if any
+     */
+    rating?: TelegramUserRating
+    /**
+     * *Optional*. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews
+     */
+    unique_gift_colors?: TelegramUniqueGiftColors
+    /**
+     * *Optional*. The number of Telegram Stars a general user have to pay to send a message to the chat
+     */
+    paid_message_star_count?: number
 }
 
 /**
@@ -480,7 +496,7 @@ export interface TelegramMessage {
      */
     message_id: number
     /**
-     * *Optional*. Unique identifier of a message thread to which the message belongs; for supergroups only
+     * *Optional*. Unique identifier of a message thread or forum topic to which the message belongs; for supergroups and private chats only
      */
     message_thread_id?: number
     /**
@@ -520,7 +536,7 @@ export interface TelegramMessage {
      */
     forward_origin?: TelegramMessageOrigin
     /**
-     * *Optional*. *True*, if the message is sent to a forum topic
+     * *Optional*. *True*, if the message is sent to a topic in a forum supergroup or a private chat with the bot
      */
     is_topic_message?: boolean
     /**
@@ -759,6 +775,10 @@ export interface TelegramMessage {
      * *Optional*. Service message: a unique gift was sent or received
      */
     unique_gift?: TelegramUniqueGiftInfo
+    /**
+     * *Optional*. Service message: upgrade of a gift was purchased after the gift was sent
+     */
+    gift_upgrade_sent?: TelegramGiftInfo
     /**
      * *Optional*. The domain name of the website on which the user has logged in. [More about Telegram Login »](https://core.telegram.org/widgets/login)
      */
@@ -1823,9 +1843,13 @@ export interface TelegramChecklistTask {
      */
     text_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. User that completed the task; omitted if the task wasn't completed
+     * *Optional*. User that completed the task; omitted if the task wasn't completed by a user
      */
     completed_by_user?: TelegramUser
+    /**
+     * *Optional*. Chat that completed the task; omitted if the task wasn't completed by a chat
+     */
+    completed_by_chat?: TelegramChat
     /**
      * *Optional*. Point in time (Unix timestamp) when the task was completed; 0 if the task wasn't completed
      */
@@ -2292,6 +2316,10 @@ export interface TelegramForumTopicCreated {
      * *Optional*. Unique identifier of the custom emoji shown as the topic icon
      */
     icon_custom_emoji_id?: string
+    /**
+     * *Optional*. *True*, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot
+     */
+    is_name_implicit?: boolean
 }
 
 /**
@@ -3915,6 +3943,30 @@ export interface TelegramBusinessOpeningHours {
 }
 
 /**
+ * This object describes the rating of a user based on their Telegram Star spendings.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#userrating)
+ */
+export interface TelegramUserRating {
+    /**
+     * Current level of the user, indicating their reliability when purchasing digital goods and services. A higher level suggests a more trustworthy customer; a negative level is likely reason for concern.
+     */
+    level: number
+    /**
+     * Numerical value of the user's rating; the higher the rating, the better
+     */
+    rating: number
+    /**
+     * The rating value required to get the current level
+     */
+    current_level_rating: number
+    /**
+     * *Optional*. The rating value required to get to the next level; omitted if the maximum level was reached
+     */
+    next_level_rating?: number
+}
+
+/**
  * Describes the position of a clickable area within a story.
  *
  * [Documentation](https://core.telegram.org/bots/api/#storyareaposition)
@@ -4355,6 +4407,30 @@ export interface TelegramForumTopic {
      * *Optional*. Unique identifier of the custom emoji shown as the topic icon
      */
     icon_custom_emoji_id?: string
+    /**
+     * *Optional*. *True*, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot
+     */
+    is_name_implicit?: boolean
+}
+
+/**
+ * This object describes the background of a gift.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#giftbackground)
+ */
+export interface TelegramGiftBackground {
+    /**
+     * Center color of the background in RGB format
+     */
+    center_color: number
+    /**
+     * Edge color of the background in RGB format
+     */
+    edge_color: number
+    /**
+     * Text color of the background in RGB format
+     */
+    text_color: number
 }
 
 /**
@@ -4380,13 +4456,37 @@ export interface TelegramGift {
      */
     upgrade_star_count?: number
     /**
-     * *Optional*. The total number of the gifts of this type that can be sent; for limited gifts only
+     * *Optional*. *True*, if the gift can only be purchased by Telegram Premium subscribers
+     */
+    is_premium?: boolean
+    /**
+     * *Optional*. *True*, if the gift can be used (after being upgraded) to customize a user's appearance
+     */
+    has_colors?: boolean
+    /**
+     * *Optional*. The total number of gifts of this type that can be sent by all users; for limited gifts only
      */
     total_count?: number
     /**
-     * *Optional*. The number of remaining gifts of this type that can be sent; for limited gifts only
+     * *Optional*. The number of remaining gifts of this type that can be sent by all users; for limited gifts only
      */
     remaining_count?: number
+    /**
+     * *Optional*. The total number of gifts of this type that can be sent by the bot; for limited gifts only
+     */
+    personal_total_count?: number
+    /**
+     * *Optional*. The number of remaining gifts of this type that can be sent by the bot; for limited gifts only
+     */
+    personal_remaining_count?: number
+    /**
+     * *Optional*. Background of the gift
+     */
+    background?: TelegramGiftBackground
+    /**
+     * *Optional*. The total number of different unique gifts that can be obtained by upgrading the gift
+     */
+    unique_gift_variant_count?: number
     /**
      * *Optional*. Information about the chat that published the gift
      */
@@ -4490,11 +4590,47 @@ export interface TelegramUniqueGiftBackdrop {
 }
 
 /**
+ * This object contains information about the color scheme for a user's name, message replies and link previews based on a unique gift.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#uniquegiftcolors)
+ */
+export interface TelegramUniqueGiftColors {
+    /**
+     * Custom emoji identifier of the unique gift's model
+     */
+    model_custom_emoji_id: string
+    /**
+     * Custom emoji identifier of the unique gift's symbol
+     */
+    symbol_custom_emoji_id: string
+    /**
+     * Main color used in light themes; RGB format
+     */
+    light_theme_main_color: number
+    /**
+     * List of 1-3 additional colors used in light themes; RGB format
+     */
+    light_theme_other_colors: number[]
+    /**
+     * Main color used in dark themes; RGB format
+     */
+    dark_theme_main_color: number
+    /**
+     * List of 1-3 additional colors used in dark themes; RGB format
+     */
+    dark_theme_other_colors: number[]
+}
+
+/**
  * This object describes a unique gift that was upgraded from a regular gift.
  *
  * [Documentation](https://core.telegram.org/bots/api/#uniquegift)
  */
 export interface TelegramUniqueGift {
+    /**
+     * Identifier of the regular gift from which the gift was upgraded
+     */
+    gift_id: string
     /**
      * Human-readable name of the regular gift from which this unique gift was upgraded
      */
@@ -4520,6 +4656,18 @@ export interface TelegramUniqueGift {
      */
     backdrop: TelegramUniqueGiftBackdrop
     /**
+     * *Optional*. *True*, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers
+     */
+    is_premium?: boolean
+    /**
+     * *Optional*. *True*, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram
+     */
+    is_from_blockchain?: boolean
+    /**
+     * *Optional*. The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews; for business account gifts and gifts that are currently on sale only
+     */
+    colors?: TelegramUniqueGiftColors
+    /**
      * *Optional*. Information about the chat that published the gift
      */
     publisher_chat?: TelegramChat
@@ -4544,9 +4692,13 @@ export interface TelegramGiftInfo {
      */
     convert_star_count?: number
     /**
-     * *Optional*. Number of Telegram Stars that were prepaid by the sender for the ability to upgrade the gift
+     * *Optional*. Number of Telegram Stars that were prepaid for the ability to upgrade the gift
      */
     prepaid_upgrade_star_count?: number
+    /**
+     * *Optional*. *True*, if the gift's upgrade was purchased after the gift was sent
+     */
+    is_upgrade_separate?: boolean
     /**
      * *Optional*. *True*, if the gift can be upgraded to a unique gift
      */
@@ -4563,9 +4715,19 @@ export interface TelegramGiftInfo {
      * *Optional*. *True*, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
      */
     is_private?: boolean
+    /**
+     * *Optional*. Unique number reserved for this gift when upgraded. See the *number* field in [UniqueGift](https://core.telegram.org/bots/api/#uniquegift)
+     */
+    unique_gift_number?: number
 }
 
-export type TelegramUniqueGiftInfoOrigin = "upgrade" | "transfer" | "resale"
+export type TelegramUniqueGiftInfoOrigin =
+    | "upgrade"
+    | "transfer"
+    | "resale"
+    | "gifted_upgrade"
+    | "offer"
+export type TelegramUniqueGiftInfoLastResaleCurrency = "XTR" | "TON"
 
 /**
  * Describes a service message about a unique gift that was sent or received.
@@ -4578,13 +4740,17 @@ export interface TelegramUniqueGiftInfo {
      */
     gift: TelegramUniqueGift
     /**
-     * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, or “resale” for gifts bought from other users
+     * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted\_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers
      */
     origin: TelegramUniqueGiftInfoOrigin
     /**
-     * *Optional*. For gifts bought from other users, the price paid for the gift
+     * *Optional*. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
      */
-    last_resale_star_count?: number
+    last_resale_currency?: TelegramUniqueGiftInfoLastResaleCurrency
+    /**
+     * *Optional*. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanotoncoins
+     */
+    last_resale_amount?: number
     /**
      * *Optional*. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
      */
@@ -4662,13 +4828,21 @@ export interface TelegramOwnedGiftRegular {
      */
     was_refunded?: boolean
     /**
-     * *Optional*. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars
+     * *Optional*. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars; for gifts received on behalf of business accounts only
      */
     convert_star_count?: number
     /**
-     * *Optional*. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift
+     * *Optional*. Number of Telegram Stars that were paid for the ability to upgrade the gift
      */
     prepaid_upgrade_star_count?: number
+    /**
+     * *Optional*. *True*, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only
+     */
+    is_upgrade_separate?: boolean
+    /**
+     * *Optional*. Unique number reserved for this gift when upgraded. See the *number* field in [UniqueGift](https://core.telegram.org/bots/api/#uniquegift)
+     */
+    unique_gift_number?: number
 }
 
 /**
@@ -4757,6 +4931,10 @@ export interface TelegramAcceptedGiftTypes {
      * *True*, if a Telegram Premium subscription is accepted
      */
     premium_subscription: boolean
+    /**
+     * *True*, if transfers of unique gifts from channels are accepted
+     */
+    gifts_from_channels: boolean
 }
 
 /**

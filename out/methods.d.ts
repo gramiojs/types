@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v9.2.0 (15.08.2025)
+ * Based on Bot API v9.3.0 (31.12.2025)
  *
- * Generated at 06.09.2025, 10:17:36 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 31.12.2025, 11:48:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -209,6 +209,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#senddice)
      */
     sendDice: CallAPI<Params.SendDiceParams, Objects.TelegramMessage>
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendmessagedraft)
+     */
+    sendMessageDraft: CallAPI<Params.SendMessageDraftParams, true>
     /**
      * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns *True* on success.
      *
@@ -466,7 +472,7 @@ export interface APIMethods {
         Objects.TelegramForumTopic
     >
     /**
-     * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator rights, unless it is the creator of the topic. Returns *True* on success.
+     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator rights, unless it is the creator of the topic. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editforumtopic)
      */
@@ -484,13 +490,13 @@ export interface APIMethods {
      */
     reopenForumTopic: CallAPI<Params.ReopenForumTopicParams, true>
     /**
-     * Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can\_delete\_messages* administrator rights. Returns *True* on success.
+     * Use this method to delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_delete\_messages* administrator rights. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#deleteforumtopic)
      */
     deleteForumTopic: CallAPI<Params.DeleteForumTopicParams, true>
     /**
-     * Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the *can\_pin\_messages* administrator right in the supergroup. Returns *True* on success.
+     * Use this method to clear the list of pinned messages in a forum topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_pin\_messages* administrator right in the supergroup. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#unpinallforumtopicmessages)
      */
@@ -804,6 +810,18 @@ export interface APIMethods {
         Objects.TelegramOwnedGifts
     >
     /**
+     * Returns the gifts owned and hosted by a user. Returns [OwnedGifts](https://core.telegram.org/bots/api/#ownedgifts) on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getusergifts)
+     */
+    getUserGifts: CallAPI<Params.GetUserGiftsParams, Objects.TelegramOwnedGifts>
+    /**
+     * Returns the gifts owned by a chat. Returns [OwnedGifts](https://core.telegram.org/bots/api/#ownedgifts) on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getchatgifts)
+     */
+    getChatGifts: CallAPI<Params.GetChatGiftsParams, Objects.TelegramOwnedGifts>
+    /**
      * Converts a given regular gift to Telegram Stars. Requires the *can\_convert\_gifts\_to\_stars* business bot right. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#convertgifttostars)
@@ -827,6 +845,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#poststory)
      */
     postStory: CallAPI<Params.PostStoryParams, Objects.TelegramStory>
+    /**
+     * Reposts a story on behalf of a business account from another business account. Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot. Requires the *can\_manage\_stories* business bot right for both business accounts. Returns [Story](https://core.telegram.org/bots/api/#story) on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#repoststory)
+     */
+    repostStory: CallAPI<Params.RepostStoryParams, Objects.TelegramStory>
     /**
      * Edits a story previously posted by the bot on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api/#story) on success.
      *

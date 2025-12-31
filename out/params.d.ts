@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v9.2.0 (15.08.2025)
+ * Based on Bot API v9.3.0 (31.12.2025)
  *
- * Generated at 06.09.2025, 10:17:36 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 31.12.2025, 11:48:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -98,7 +98,7 @@ export interface SendMessageParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -168,7 +168,7 @@ export interface ForwardMessageParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -192,6 +192,10 @@ export interface ForwardMessageParams {
      */
     protect_content?: boolean
     /**
+     * Unique identifier of the message effect to be added to the message; only available when forwarding to private chats
+     */
+    message_effect_id?: string
+    /**
      * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only
      */
     suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
@@ -210,7 +214,7 @@ export interface ForwardMessagesParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -244,7 +248,7 @@ export interface CopyMessageParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -292,6 +296,10 @@ export interface CopyMessageParams {
      */
     allow_paid_broadcast?: boolean
     /**
+     * Unique identifier of the message effect to be added to the message; only available when copying to private chats
+     */
+    message_effect_id?: string
+    /**
      * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
      */
     suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
@@ -322,7 +330,7 @@ export interface CopyMessagesParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -364,7 +372,7 @@ export interface SendPhotoParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -446,7 +454,7 @@ export interface SendAudioParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -536,7 +544,7 @@ export interface SendDocumentParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -618,7 +626,7 @@ export interface SendVideoParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -728,7 +736,7 @@ export interface SendAnimationParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -826,7 +834,7 @@ export interface SendVoiceParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -904,7 +912,7 @@ export interface SendVideoNoteParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -978,7 +986,7 @@ export interface SendPaidMediaParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -986,7 +994,7 @@ export interface SendPaidMediaParams {
      */
     direct_messages_topic_id?: number
     /**
-     * The number of Telegram Stars that must be paid to buy access to the media; 1-10000
+     * The number of Telegram Stars that must be paid to buy access to the media; 1-25000
      */
     star_count: number
     /**
@@ -1060,7 +1068,7 @@ export interface SendMediaGroupParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -1111,7 +1119,7 @@ export interface SendLocationParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -1193,7 +1201,7 @@ export interface SendVenueParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -1283,7 +1291,7 @@ export interface SendContactParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -1359,7 +1367,7 @@ export interface SendPollParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -1507,7 +1515,7 @@ export interface SendDiceParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -1556,6 +1564,36 @@ export interface SendDiceParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
+/**
+ * Params object for {@link APIMethods.sendMessageDraft | sendMessageDraft} method
+ */
+export interface SendMessageDraftParams {
+    /**
+     * Unique identifier for the target private chat
+     */
+    chat_id: number
+    /**
+     * Unique identifier for the target message thread
+     */
+    message_thread_id?: number
+    /**
+     * Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated
+     */
+    draft_id: number
+    /**
+     * Text of the message to be sent, 1-4096 characters after entities parsing
+     */
+    text: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api/#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse\_mode*
+     */
+    entities?: Objects.TelegramMessageEntity[]
+}
+
 export type SendChatActionAction =
     | "typing"
     | "upload_photo"
@@ -1582,7 +1620,7 @@ export interface SendChatActionParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread; for supergroups only
+     * Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -1754,7 +1792,7 @@ export interface PromoteChatMemberParams {
      */
     can_manage_video_chats?: boolean
     /**
-     * Pass *True* if the administrator can restrict, ban or unban chat members, or access supergroup statistics
+     * Pass *True* if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to *True* for promotions of channel administrators
      */
     can_restrict_members?: boolean
     /**
@@ -2598,7 +2636,7 @@ export interface SendGiftParams {
      */
     chat_id?: number | string
     /**
-     * Identifier of the gift
+     * Identifier of the gift; limited gifts can't be sent to channel chats
      */
     gift_id: string
     /**
@@ -2872,9 +2910,59 @@ export interface GetBusinessAccountGiftsParams {
      */
     exclude_unlimited?: boolean
     /**
-     * Pass *True* to exclude gifts that can be purchased a limited number of times
+     * Pass *True* to exclude gifts that can be purchased a limited number of times and can be upgraded to unique
      */
-    exclude_limited?: boolean
+    exclude_limited_upgradable?: boolean
+    /**
+     * Pass *True* to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique
+     */
+    exclude_limited_non_upgradable?: boolean
+    /**
+     * Pass *True* to exclude unique gifts
+     */
+    exclude_unique?: boolean
+    /**
+     * Pass *True* to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram
+     */
+    exclude_from_blockchain?: boolean
+    /**
+     * Pass *True* to sort results by gift price instead of send date. Sorting is applied before pagination.
+     */
+    sort_by_price?: boolean
+    /**
+     * Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results
+     */
+    offset?: string
+    /**
+     * The maximum number of gifts to be returned; 1-100. Defaults to 100
+     */
+    limit?: number
+}
+
+/**
+ * Params object for {@link APIMethods.getUserGifts | getUserGifts} method
+ */
+export interface GetUserGiftsParams {
+    /**
+     * Unique identifier of the user
+     */
+    user_id: number
+    /**
+     * Pass *True* to exclude gifts that can be purchased an unlimited number of times
+     */
+    exclude_unlimited?: boolean
+    /**
+     * Pass *True* to exclude gifts that can be purchased a limited number of times and can be upgraded to unique
+     */
+    exclude_limited_upgradable?: boolean
+    /**
+     * Pass *True* to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique
+     */
+    exclude_limited_non_upgradable?: boolean
+    /**
+     * Pass *True* to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram
+     */
+    exclude_from_blockchain?: boolean
     /**
      * Pass *True* to exclude unique gifts
      */
@@ -2884,7 +2972,57 @@ export interface GetBusinessAccountGiftsParams {
      */
     sort_by_price?: boolean
     /**
-     * Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results
+     * Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results
+     */
+    offset?: string
+    /**
+     * The maximum number of gifts to be returned; 1-100. Defaults to 100
+     */
+    limit?: number
+}
+
+/**
+ * Params object for {@link APIMethods.getChatGifts | getChatGifts} method
+ */
+export interface GetChatGiftsParams {
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Pass *True* to exclude gifts that aren't saved to the chat's profile page. Always *True*, unless the bot has the *can\_post\_messages* administrator right in the channel.
+     */
+    exclude_unsaved?: boolean
+    /**
+     * Pass *True* to exclude gifts that are saved to the chat's profile page. Always *False*, unless the bot has the *can\_post\_messages* administrator right in the channel.
+     */
+    exclude_saved?: boolean
+    /**
+     * Pass *True* to exclude gifts that can be purchased an unlimited number of times
+     */
+    exclude_unlimited?: boolean
+    /**
+     * Pass *True* to exclude gifts that can be purchased a limited number of times and can be upgraded to unique
+     */
+    exclude_limited_upgradable?: boolean
+    /**
+     * Pass *True* to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique
+     */
+    exclude_limited_non_upgradable?: boolean
+    /**
+     * Pass *True* to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram
+     */
+    exclude_from_blockchain?: boolean
+    /**
+     * Pass *True* to exclude unique gifts
+     */
+    exclude_unique?: boolean
+    /**
+     * Pass *True* to sort results by gift price instead of send date. Sorting is applied before pagination.
+     */
+    sort_by_price?: boolean
+    /**
+     * Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results
      */
     offset?: string
     /**
@@ -2985,6 +3123,38 @@ export interface PostStoryParams {
      * A JSON-serialized list of clickable areas to be shown on the story
      */
     areas?: Objects.TelegramStoryArea[]
+    /**
+     * Pass *True* to keep the story accessible after it expires
+     */
+    post_to_chat_page?: boolean
+    /**
+     * Pass *True* if the content of the story must be protected from forwarding and screenshotting
+     */
+    protect_content?: boolean
+}
+
+export type RepostStoryActivePeriod = 86400
+
+/**
+ * Params object for {@link APIMethods.repostStory | repostStory} method
+ */
+export interface RepostStoryParams {
+    /**
+     * Unique identifier of the business connection
+     */
+    business_connection_id: string
+    /**
+     * Unique identifier of the chat which posted the story that should be reposted
+     */
+    from_chat_id: number
+    /**
+     * Unique identifier of the story that should be reposted
+     */
+    from_story_id: number
+    /**
+     * Period after which the story is moved to the archive, in seconds; must be one of `6 * 3600`, `12 * 3600`, `86400`, or `2 * 86400`
+     */
+    active_period: RepostStoryActivePeriod
     /**
      * Pass *True* to keep the story accessible after it expires
      */
@@ -3400,7 +3570,7 @@ export interface SendStickerParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -3776,7 +3946,7 @@ export interface SendInvoiceParams {
      */
     chat_id: number | string
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
@@ -4106,7 +4276,7 @@ export interface SendGameParams {
      */
     chat_id: number
     /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
     message_thread_id?: number
     /**
