@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.3.0 (31.12.2025)
  *
- * Generated at 31.12.2025, 11:48:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 08.02.2026, 13:52:42 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2986,6 +2986,14 @@ export interface TelegramKeyboardButton {
      * *Optional*. If specified, the described [Web App](https://core.telegram.org/bots/webapps) will be launched when the button is pressed. The Web App will be able to send a “web\_app\_data” service message. Available in private chats only.
      */
     web_app?: TelegramWebAppInfo
+    /**
+     * *Optional*. Custom emoji identifier to be shown alongside the button text. Currently not exposed to documentation
+     */
+    icon_custom_emoji_id?: string
+    /**
+     * *Optional*. Visual style of the button. Currently can be one of `danger`, `primary`, or `success`. Currently not exposed to documentation
+     */
+    style?: "danger" | "primary" | "success"
 }
 
 /**
@@ -3174,6 +3182,14 @@ export interface TelegramInlineKeyboardButton {
      * **NOTE:** This type of button **must** always be the first button in the first row and can only be used in invoice messages.
      */
     pay?: boolean
+    /**
+     * *Optional*. Custom emoji identifier to be shown alongside the button text. Currently not exposed to documentation
+     */
+    icon_custom_emoji_id?: string
+    /**
+     * *Optional*. Visual style of the button. Currently can be one of `danger`, `primary`, or `success`. Currently not exposed to documentation
+     */
+    style?: "danger" | "primary" | "success"
 }
 
 /**
