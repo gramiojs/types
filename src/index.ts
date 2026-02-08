@@ -157,6 +157,35 @@ if (getStarTransactions) {
 	};
 }
 
+const buttonStyleProperties: IBotAPI.IProperty[] = [
+	{
+		name: "icon_custom_emoji_id",
+		description:
+			"*Optional*. Custom emoji identifier to be shown alongside the button text. Currently not exposed to documentation",
+		type: "string",
+		required: false,
+	},
+	{
+		name: "style",
+		description:
+			"*Optional*. Visual style of the button. Currently can be one of `danger`, `primary`, or `success`. Currently not exposed to documentation",
+		type: "any_of",
+		required: false,
+		any_of: [
+			{ type: "string", default: "danger" } as IBotAPI.IArgument,
+			{ type: "string", default: "primary" } as IBotAPI.IArgument,
+			{ type: "string", default: "success" } as IBotAPI.IArgument,
+		] as IBotAPI.IArgument[],
+	},
+];
+
+for (const buttonName of ["InlineKeyboardButton", "KeyboardButton"]) {
+	const button = schema.objects.find((x) => x.name === buttonName);
+	if (button?.properties) {
+		button.properties.push(...buttonStyleProperties);
+	}
+}
+
 const header = generateHeader(schema.version, schema.recent_changes);
 
 const files: IGeneratedFile[] = [
