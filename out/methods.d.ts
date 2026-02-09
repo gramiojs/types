@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v9.3.0 (31.12.2025)
+ * Based on Bot API v9.4.0 (09.02.2026)
  *
- * Generated at 08.02.2026, 13:52:42 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 09.02.2026, 15:45:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type {
@@ -241,6 +241,15 @@ export interface APIMethods {
         Objects.TelegramUserProfilePhotos
     >
     /**
+     * Use this method to get a list of profile audios for a user. Returns a [UserProfileAudios](https://core.telegram.org/bots/api/#userprofileaudios) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getuserprofileaudios)
+     */
+    getUserProfileAudios: CallAPI<
+        Params.GetUserProfileAudiosParams,
+        Objects.TelegramUserProfileAudios
+    >
+    /**
      * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method [requestEmojiStatusAccess](https://core.telegram.org/bots/webapps#initializing-mini-apps). Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setuseremojistatus)
@@ -463,7 +472,7 @@ export interface APIMethods {
      */
     getForumTopicIconStickers: CallAPIWithoutParams<Objects.TelegramSticker[]>
     /**
-     * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator rights. Returns information about the created topic as a [ForumTopic](https://core.telegram.org/bots/api/#forumtopic) object.
+     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator right. Returns information about the created topic as a [ForumTopic](https://core.telegram.org/bots/api/#forumtopic) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#createforumtopic)
      */
@@ -644,6 +653,18 @@ export interface APIMethods {
         Params.GetMyShortDescriptionParams,
         Objects.TelegramBotShortDescription
     >
+    /**
+     * Changes the profile photo of the bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setmyprofilephoto)
+     */
+    setMyProfilePhoto: CallAPI<Params.SetMyProfilePhotoParams, true>
+    /**
+     * Removes the profile photo of the bot. Requires no parameters. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#removemyprofilephoto)
+     */
+    removeMyProfilePhoto: CallAPIWithoutParams<true>
     /**
      * Use this method to change the bot's menu button in a private chat, or the default menu button. Returns *True* on success.
      *

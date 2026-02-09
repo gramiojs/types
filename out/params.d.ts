@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v9.3.0 (31.12.2025)
+ * Based on Bot API v9.4.0 (09.02.2026)
  *
- * Generated at 08.02.2026, 13:52:42 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 09.02.2026, 15:45:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1670,6 +1670,24 @@ export interface GetUserProfilePhotosParams {
 }
 
 /**
+ * Params object for {@link APIMethods.getUserProfileAudios | getUserProfileAudios} method
+ */
+export interface GetUserProfileAudiosParams {
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+    /**
+     * Sequential number of the first audio to be returned. By default, all audios are returned.
+     */
+    offset?: number
+    /**
+     * Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+     */
+    limit?: number
+}
+
+/**
  * Params object for {@link APIMethods.setUserEmojiStatus | setUserEmojiStatus} method
  */
 export interface SetUserEmojiStatusParams {
@@ -2573,6 +2591,16 @@ export interface GetMyShortDescriptionParams {
      * A two-letter ISO 639-1 language code or an empty string
      */
     language_code?: string
+}
+
+/**
+ * Params object for {@link APIMethods.setMyProfilePhoto | setMyProfilePhoto} method
+ */
+export interface SetMyProfilePhotoParams {
+    /**
+     * The new profile photo to set
+     */
+    photo: Objects.TelegramInputProfilePhoto
 }
 
 /**

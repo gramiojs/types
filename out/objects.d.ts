@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v9.3.0 (31.12.2025)
+ * Based on Bot API v9.4.0 (09.02.2026)
  *
- * Generated at 08.02.2026, 13:52:42 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 09.02.2026, 15:45:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -227,6 +227,10 @@ export interface TelegramUser {
      * *Optional*. *True*, if the bot has forum topic mode enabled in private chats. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
      */
     has_topics_enabled?: boolean
+    /**
+     * *Optional*. *True*, if the bot allows users to create and delete topics in private chats. Returned only in [getMe](https://core.telegram.org/bots/api/#getme).
+     */
+    allows_users_to_create_topics?: boolean
 }
 
 export type TelegramChatType = "private" | "group" | "supergroup" | "channel"
@@ -476,6 +480,10 @@ export interface TelegramChatFullInfo {
      */
     rating?: TelegramUserRating
     /**
+     * *Optional*. For private chats, the first audio added to the profile of the user
+     */
+    first_profile_audio?: TelegramAudio
+    /**
      * *Optional*. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews
      */
     unique_gift_colors?: TelegramUniqueGiftColors
@@ -707,6 +715,14 @@ export interface TelegramMessage {
      * *Optional*. A member was removed from the group, information about them (this member may be the bot itself)
      */
     left_chat_member?: TelegramUser
+    /**
+     * *Optional*. Service message: chat owner has left
+     */
+    chat_owner_left?: TelegramChatOwnerLeft
+    /**
+     * *Optional*. Service message: chat owner has changed
+     */
+    chat_owner_changed?: TelegramChatOwnerChanged
     /**
      * *Optional*. A chat title was changed to this value
      */
@@ -1452,6 +1468,40 @@ export interface TelegramStory {
     id: number
 }
 
+export type TelegramVideoQualityCodec = "h265" | "av01"
+
+/**
+ * This object represents a video file of a specific quality.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#videoquality)
+ */
+export interface TelegramVideoQuality {
+    /**
+     * Identifier for this file, which can be used to download or reuse the file
+     */
+    file_id: string
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     */
+    file_unique_id: string
+    /**
+     * Video width
+     */
+    width: number
+    /**
+     * Video height
+     */
+    height: number
+    /**
+     * Codec that was used to encode the video, for example, “h264”, “h265”, or “av01”
+     */
+    codec: TelegramVideoQualityCodec
+    /**
+     * *Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+     */
+    file_size?: number
+}
+
 /**
  * This object represents a video file.
  *
@@ -1490,6 +1540,10 @@ export interface TelegramVideo {
      * *Optional*. Timestamp in seconds from which the video will play in the message
      */
     start_timestamp?: number
+    /**
+     * *Optional*. List of available qualities of the video
+     */
+    qualities?: TelegramVideoQuality[]
     /**
      * *Optional*. Original filename as defined by the sender
      */
@@ -2881,6 +2935,22 @@ export interface TelegramUserProfilePhotos {
 }
 
 /**
+ * This object represents the audios displayed on a user's profile.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#userprofileaudios)
+ */
+export interface TelegramUserProfileAudios {
+    /**
+     * Total number of profile audios for the target user
+     */
+    total_count: number
+    /**
+     * Requested profile audios
+     */
+    audios: TelegramAudio[]
+}
+
+/**
  * This object represents a file ready to be downloaded. The file can be downloaded via the link `https://api.telegram.org/file/bot<token>/<file_path>`. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling [getFile](https://core.telegram.org/bots/api/#getfile).
  *
  * The maximum file size to download is 20 MB
@@ -2952,16 +3022,26 @@ export interface TelegramReplyKeyboardMarkup {
     selective?: boolean
 }
 
+export type TelegramKeyboardButtonStyle = "danger" | "success" | "primary"
+
 /**
- * This object represents one button of the reply keyboard. At most one of the optional fields must be used to specify type of the button. For simple text buttons, *String* can be used instead of this object to specify the button text.
+ * This object represents one button of the reply keyboard. At most one of the fields other than *text*, *icon\_custom\_emoji\_id*, and *style* must be used to specify the type of the button. For simple text buttons, *String* can be used instead of this object to specify the button text.
  *
  * [Documentation](https://core.telegram.org/bots/api/#keyboardbutton)
  */
 export interface TelegramKeyboardButton {
     /**
-     * Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed
+     * Text of the button. If none of the fields other than *text*, *icon\_custom\_emoji\_id*, and *style* are used, it will be sent as a message when the button is pressed
      */
     text: string
+    /**
+     * *Optional*. Unique identifier of the custom emoji shown before the text of the button. Can only be used by bots that purchased additional usernames on [Fragment](https://fragment.com) or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
+     */
+    icon_custom_emoji_id?: string
+    /**
+     * *Optional*. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
+     */
+    style?: TelegramKeyboardButtonStyle
     /**
      * *Optional*. If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users\_shared” service message. Available in private chats only.
      */
@@ -3126,8 +3206,10 @@ export interface TelegramInlineKeyboardMarkup {
     inline_keyboard: TelegramInlineKeyboardButton[][]
 }
 
+export type TelegramInlineKeyboardButtonStyle = "danger" | "success" | "primary"
+
 /**
- * This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
+ * This object represents one button of an inline keyboard. Exactly one of the fields other than *text*, *icon\_custom\_emoji\_id*, and *style* must be used to specify the type of the button.
  *
  * [Documentation](https://core.telegram.org/bots/api/#inlinekeyboardbutton)
  */
@@ -3136,6 +3218,14 @@ export interface TelegramInlineKeyboardButton {
      * Label text on the button
      */
     text: string
+    /**
+     * *Optional*. Unique identifier of the custom emoji shown before the text of the button. Can only be used by bots that purchased additional usernames on [Fragment](https://fragment.com) or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
+     */
+    icon_custom_emoji_id?: string
+    /**
+     * *Optional*. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
+     */
+    style?: TelegramInlineKeyboardButtonStyle
     /**
      * *Optional*. HTTP or tg:// URL to be opened when the button is pressed. Links `tg://user?id=<user_id>` can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.
      */
@@ -4521,6 +4611,12 @@ export interface TelegramGifts {
     gifts: TelegramGift[]
 }
 
+export type TelegramUniqueGiftModelRarity =
+    | "uncommon"
+    | "rare"
+    | "epic"
+    | "legendary"
+
 /**
  * This object describes the model of a unique gift.
  *
@@ -4536,9 +4632,13 @@ export interface TelegramUniqueGiftModel {
      */
     sticker: TelegramSticker
     /**
-     * The number of unique gifts that receive this model for every 1000 gifts upgraded
+     * The number of unique gifts that receive this model for every 1000 gift upgrades. Always 0 for crafted gifts.
      */
     rarity_per_mille: number
+    /**
+     * *Optional*. Rarity of the model if it is a crafted model. Currently, can be “uncommon”, “rare”, “epic”, or “legendary”.
+     */
+    rarity?: TelegramUniqueGiftModelRarity
 }
 
 /**
@@ -4675,6 +4775,10 @@ export interface TelegramUniqueGift {
      * *Optional*. *True*, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers
      */
     is_premium?: boolean
+    /**
+     * *Optional*. *True*, if the gift was used to craft another gift and isn't available anymore
+     */
+    is_burned?: boolean
     /**
      * *Optional*. *True*, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram
      */
@@ -5337,6 +5441,30 @@ export interface TelegramChatBoostRemoved {
      * Source of the removed boost
      */
     source: TelegramChatBoostSource
+}
+
+/**
+ * Describes a service message about the chat owner leaving the chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#chatownerleft)
+ */
+export interface TelegramChatOwnerLeft {
+    /**
+     * *Optional*. The user which will be the new owner of the chat if the previous owner does not return to the chat
+     */
+    new_owner?: TelegramUser
+}
+
+/**
+ * Describes a service message about an ownership change in the chat.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#chatownerchanged)
+ */
+export interface TelegramChatOwnerChanged {
+    /**
+     * The new owner of the chat
+     */
+    new_owner: TelegramUser
 }
 
 /**
