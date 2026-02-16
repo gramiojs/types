@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.4.0 (09.02.2026)
  *
- * Generated at 09.02.2026, 15:45:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 16.02.2026, 12:41:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -1493,7 +1493,7 @@ export interface SendChecklistParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * A JSON-serialized object for an inline keyboard
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3462,7 +3462,7 @@ export interface EditMessageChecklistParams {
      */
     checklist: Objects.TelegramInputChecklist
     /**
-     * A JSON-serialized object for the new inline keyboard for the message
+     * A JSON-serialized object for the new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) for the message
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup

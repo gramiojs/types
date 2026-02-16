@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.4.0 (09.02.2026)
  *
- * Generated at 09.02.2026, 15:45:52 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
+ * Generated at 16.02.2026, 12:41:16 using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -916,7 +916,7 @@ export interface TelegramMessage {
      */
     web_app_data?: TelegramWebAppData
     /**
-     * *Optional*. Inline keyboard attached to the message. `login_url` buttons are represented as ordinary `url` buttons.
+     * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message. `login_url` buttons are represented as ordinary `url` buttons.
      */
     reply_markup?:
         | TelegramInlineKeyboardMarkup
@@ -6804,7 +6804,7 @@ export interface TelegramInlineQueryResultDocument {
      */
     description?: string
     /**
-     * *Optional*. Inline keyboard attached to the message
+     * *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message
      */
     reply_markup?:
         | TelegramInlineKeyboardMarkup
