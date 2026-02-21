@@ -4,3 +4,4 @@ bun.lockb
 tg-bot-api
 source
 .env
+**/*.local.json
