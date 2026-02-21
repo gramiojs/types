@@ -1,16 +1,10 @@
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
-import type {
-	Field,
-	FieldBoolean,
-	ObjectWithFields,
-	ObjectWithOneOf,
-} from "@gramio/schema-parser";
 import { getCustomSchema } from "@gramio/schema-parser";
 import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
-import { CodeGenerator, fetchCurrencies, generateHeader } from "./helpers";
+import { CodeGenerator, generateHeader } from "./helpers";
 
 export interface IGeneratedFile {
 	name: string;
@@ -23,130 +17,16 @@ const schema = await getCustomSchema();
 const { methods } = schema;
 const objects = schema.objects
 
-// ─── Synthetic / patched objects ──────────────────────────────────────────────
+// ─── Build markupTypes from schema ────────────────────────────────────────────
+// schema-parser marks objects like InlineKeyboardMarkup with semanticType:"markup".
+// We derive the set once so generators can emit `| { toJSON(): T }` unions.
 
-// Currencies — derived from Telegram's supported-currencies endpoint
-const currenciesList = await fetchCurrencies();
-currenciesList.push("XTR");
+const markupTypes = new Set(
+	objects
+		.filter((o) => o.semanticType === "markup")
+		.map((o) => o.name),
+);
 
-objects.push({
-	name: "Currencies",
-	anchor: "#supported-currencies",
-	description:
-		"Telegram payments currently support the currencies listed below.",
-	type: "oneOf",
-	oneOf: currenciesList.map((currency) => ({
-		type: "string",
-		key: "",
-		const: currency,
-	})) as Field[],
-} satisfies ObjectWithOneOf);
-
-// APIResponseOk<Methods> — generic helper (generic is non-standard; handled in Objects.generate)
-objects.push({
-	name: "APIResponseOk",
-	anchor: "#making-requests",
-	description:
-		"If 'ok' equals True, the request was successful and the result of the query can be found in the 'result' field.",
-	type: "fields",
-	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
-	fields: [
-		{
-			key: "ok",
-			type: "boolean",
-			const: true,
-			required: true,
-			description: "If 'ok' equals True, the request was successful",
-		} satisfies FieldBoolean,
-		{
-			key: "result",
-			// Hack: we need the literal TypeScript expression `APIMethodReturn<Methods>`
-			// as the type. We abuse boolean+const the same way the old generator did.
-			type: "boolean",
-			const: "APIMethodReturn<Methods>" as unknown as boolean,
-			required: true,
-			description:
-				"The result of the query can be found in the 'result' field",
-		} satisfies FieldBoolean,
-	],
-} as ObjectWithFields & { generic?: string });
-
-objects.push({
-	name: "APIResponseError",
-	anchor: "#making-requests",
-	description:
-		"In case of an unsuccessful request, 'ok' equals false and the error is explained in the 'description'.",
-	type: "fields",
-	fields: [
-		{
-			key: "ok",
-			type: "boolean",
-			const: false,
-			required: true,
-			description: "In case of an unsuccessful request, 'ok' equals false",
-		} satisfies FieldBoolean,
-		{
-			key: "description",
-			type: "string",
-			required: true,
-			description: "The error is explained in the 'description'",
-		},
-		{
-			key: "error_code",
-			type: "integer",
-			required: true,
-			description: "An Integer 'error_code' field",
-		},
-		{
-			key: "parameters",
-			type: "reference",
-			required: true,
-			description:
-				"Optional field 'parameters' of the type [ResponseParameters](https://core.telegram.org/bots/api/#responseparameters)",
-			reference: { name: "ResponseParameters", anchor: "#responseparameters" },
-		},
-	],
-} satisfies ObjectWithFields);
-
-objects.push({
-	name: "APIResponse",
-	anchor: "#making-requests",
-	description: "Union type of Response",
-	type: "oneOf",
-	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
-	oneOf: [
-		{
-			type: "reference",
-			key: "",
-			reference: { name: "APIResponseOk<Methods>", anchor: "#making-requests" },
-		},
-		{
-			type: "reference",
-			key: "",
-			reference: { name: "APIResponseError", anchor: "#making-requests" },
-		},
-	] as Field[],
-} as ObjectWithOneOf & { generic?: string });
-
-// InputFile — override "unknown" stub with a Blob union
-const inputFileIdx = objects.findIndex((o) => o.name === "InputFile");
-if (inputFileIdx !== -1) {
-	objects[inputFileIdx] = {
-		name: "InputFile",
-		anchor: "#inputfile",
-		description:
-			"This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data.",
-		type: "oneOf",
-		oneOf: [
-			{
-				type: "boolean",
-				key: "",
-				// Same hack as before: use the literal TS expression "Blob" as the type
-				const: "Blob" as unknown as boolean,
-			} satisfies FieldBoolean,
-		],
-	} satisfies ObjectWithOneOf;
-}
 // ─── File generation ──────────────────────────────────────────────────────────
 
 const header = generateHeader(schema.version);
@@ -169,7 +49,7 @@ const files: IGeneratedFile[] = [
 				`import type { APIMethodReturn } from "./utils"`,
 				"",
 			],
-			Objects.generateMany(objects),
+			Objects.generateMany(objects, markupTypes),
 		],
 	},
 	{
@@ -189,7 +69,7 @@ const files: IGeneratedFile[] = [
 				`import type * as Objects from "./objects"`,
 				"",
 			],
-			Params.generateMany(methods),
+			Params.generateMany(methods, markupTypes),
 		],
 	},
 	{

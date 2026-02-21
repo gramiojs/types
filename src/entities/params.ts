@@ -4,16 +4,17 @@ import type { FieldContext } from "./properties";
 import { Properties } from "./properties";
 
 export class Params {
-	static generateMany(methods: Method[]) {
-		return methods.flatMap(Params.generate);
+	static generateMany(methods: Method[], markupTypes: Set<string> = new Set()) {
+		return methods.flatMap((m) => Params.generate(m, markupTypes));
 	}
 
-	static generate(method: Method) {
+	static generate(method: Method, markupTypes: Set<string> = new Set()) {
 		if (!method.parameters.length) return [];
 
 		const ctx: FieldContext = {
 			objectName: method.name,
 			objectType: "method",
+			markupTypes,
 		};
 
 		// Collect enum union type aliases for parameters that carry string/integer enums

@@ -3,19 +3,14 @@ import { OBJECTS_PREFIX } from "../config";
 import { CodeGenerator, TextEditor } from "../helpers";
 import type { TObjectType } from "../types";
 
-const markups = [
-	"ReplyKeyboardMarkup",
-	"InlineKeyboardMarkup",
-	"ReplyKeyboardRemove",
-	"ForceReply",
-];
-
 export type FieldContext = {
 	/** Name of the enclosing object or method. */
 	objectName: string;
 	objectType: TObjectType;
 	/** The direct parent field (e.g. the `array` field when resolving `arrayOf`). */
 	parentField?: Field;
+	/** Object names that carry semanticType:"markup" — used to emit `| { toJSON() }` unions. */
+	markupTypes?: Set<string>;
 };
 
 function objectsPrefix(objectType: TObjectType) {
@@ -51,37 +46,22 @@ export function fieldToType(field: Field, ctx: FieldContext): string {
 		}
 
 		case "string": {
-			// InputFile | string — media / thumbnail fields and explicit flag in description
-			if (
-				field.key === "media" ||
-				(ctx.objectName.includes("InputMedia") && field.key === "thumbnail") ||
-				field.description?.includes("More information on Sending Files")
-			)
-				return `${objectsPrefix(ctx.objectType) + OBJECTS_PREFIX}InputFile | string`;
-
 			// Parse-mode literal union
 			if (field.key?.includes("parse_mode"))
 				return `"HTML" | "MarkdownV2" | "Markdown"`;
 
-			// FormattableString compatible — text-with-entities fields
-			if (
-				field.description?.includes("after entities parsing") ||
-				field.key === "message_text" ||
-				(ctx.objectName === "InputPollOption" && field.key === "text") ||
-				(ctx.objectName === "sendPoll" && field.key === "question") ||
-				(ctx.objectName === "sendGift" && field.key === "text") ||
-				(ctx.objectName === "giftPremiumSubscription" && field.key === "text") ||
-				(ctx.objectName === "ChecklistTask" && field.key === "text") ||
-				(ctx.objectName === "Checklist" && field.key === "title")
-			)
-				return "(string | { toString(): string})";
+			// FormattableString — schema-parser emits semanticType:"formattable" for
+			// fields whose description contains "after entities parsing" and for the
+			// known hardcoded set (message_text, InputPollOption.text, etc.).
+			if (field.semanticType === "formattable")
+				return "(string | { toString(): string})"
 
-			// Currency code — ISO 4217
-			if (field.description?.includes("ISO 4217"))
-				return `${objectsPrefix(ctx.objectType) + OBJECTS_PREFIX}Currencies`;
+			if (ctx.objectName === "APIResponseOk" && field.key === "result")
+				return "APIMethodReturn<Methods>";
 
-			// Update type discriminator inside allowed_updates array
-			if (ctx.parentField?.key === "allowed_updates")
+			// Update type discriminator — schema-parser emits semanticType:"updateType"
+			// on string elements inside the allowed_updates array.
+			if (field.semanticType === "updateType")
 				return `Exclude<keyof ${
 					objectsPrefix(ctx.objectType) + OBJECTS_PREFIX
 				}Update, "update_id">`;
@@ -115,8 +95,12 @@ export function fieldToType(field: Field, ctx: FieldContext): string {
 				OBJECTS_PREFIX +
 				TextEditor.uppercaseFirstLetter(field.reference.name);
 
-			// Keyboard markup types — accept plain object OR gramio keyboard class
-			if (markups.includes(field.reference.name))
+			if (field.reference.name === "APIResponseOk")
+				return `${refName}<Methods>`;
+
+			// Keyboard markup types — objects whose schema carries semanticType:"markup".
+			// The markupTypes set is built once in index.ts from schema.objects.
+			if (ctx.markupTypes?.has(field.reference.name))
 				return `${refName} | { toJSON(): ${refName} }`;
 
 			return refName;

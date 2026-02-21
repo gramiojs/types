@@ -33,34 +33,12 @@ src/index.ts                    ← orchestrates everything
 
 ### Key files
 
-- **`src/index.ts`** — entry point. Fetches the schema, applies all manual patches/overrides, drives file generation.
-- **`src/entities/properties.ts`** — `fieldToType(field, ctx)` converts a `Field` (discriminated union from `@gramio/schema-parser`) to a TypeScript type string. Contains all the special-case logic (parse_mode, InputFile|string, FormattableString, Currencies, allowed_updates, keyboard markup unions).
-- **`src/entities/objects.ts`** — handles `"fields"` / `"oneOf"` / empty marker objects; generates enum union type aliases before each interface.
-- **`src/entities/methods.ts`** — generates the `APIMethods` interface.
-- **`src/entities/params.ts`** — generates `*Params` interfaces; builds enum union aliases from method parameters.
-- **`src/types.ts`** — local extensions that fill gaps in `@gramio/schema-parser`'s TypeScript types (the library's interfaces don't yet fully match the JSON it emits).
-
-### Manual patches in `src/index.ts`
-
-Several things the Telegram docs don't express cleanly are injected/overridden by hand:
-
-| Patch | Reason |
-|-------|--------|
-| `Currencies` object | Built from the currencies.json endpoint |
-| `APIResponseOk/Error/Response` | Generic wrapper types not in the API schema |
-| `InputFile` override | Docs say "unknown"; needs `Blob` union |
-| `InlineKeyboardButton/KeyboardButton` extra fields | Undocumented `style` / `icon_custom_emoji_id` properties |
-
-### Schema library (`@gramio/schema-parser`) — known gaps
-
-The library's TypeScript interfaces lag behind their JSON output. `src/types.ts` extends them:
-
-- `FieldInteger`/`FieldFloat`: missing `min?`, `max?`
-- `FieldString`: missing `default?`, `minLen?`, `maxLen?` (JSON emits `default` where the types declare `const`)
-- `Method`: missing `hasMultipart: boolean`
-- `Object` union: missing `ObjectUnknown` — at runtime, empty marker objects (`ForumTopicClosed` etc.) have `type: undefined, fields: undefined` rather than a `"unknown"` discriminant
-
-The live HTML parser also doesn't extract string-discriminator literals (`"creator"`) or integer enums from descriptions (e.g. `icon_color`, `sendChatAction.action`). These are present in the bundled `custom-schema.json` but lost in a live re-parse.
+-   **`src/index.ts`** — entry point. Fetches the schema, applies all manual patches/overrides, drives file generation.
+-   **`src/entities/properties.ts`** — `fieldToType(field, ctx)` converts a `Field` (discriminated union from `@gramio/schema-parser`) to a TypeScript type string. Contains all the special-case logic (parse_mode, InputFile|string, FormattableString, Currencies, allowed_updates, keyboard markup unions).
+-   **`src/entities/objects.ts`** — handles `"fields"` / `"oneOf"` / empty marker objects; generates enum union type aliases before each interface.
+-   **`src/entities/methods.ts`** — generates the `APIMethods` interface.
+-   **`src/entities/params.ts`** — generates `*Params` interfaces; builds enum union aliases from method parameters.
+-   **`src/types.ts`** — single export: `TObjectType = "object" | "method"` used throughout the entities.
 
 ### CI/CD
 
