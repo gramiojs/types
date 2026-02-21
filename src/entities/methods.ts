@@ -1,30 +1,28 @@
+import type { Field, Method } from "@gramio/schema-parser";
 import { CodeGenerator, TextEditor } from "../helpers";
-import type { IBotAPI } from "../types";
-import { typesRemapper } from "./properties";
+import type { FieldContext } from "./properties";
+import { fieldToType } from "./properties";
 
-function generateMethod(method: IBotAPI.IMethod) {
-	const returnType = typesRemapper[method.return_type.type](
-		method.return_type,
-		method,
-		"method",
-	);
+const TG_DOCS = "https://core.telegram.org/bots/api/";
 
-	if (!method.arguments?.length)
+function generateMethod(method: Method) {
+	const ctx: FieldContext = { objectName: method.name, objectType: "method" };
+	const returnType = fieldToType(method.returns as Field, ctx);
+
+	if (!method.parameters.length)
 		return `${method.name}: CallAPIWithoutParams<${returnType}>`;
 
-	const tCallType = method.arguments.every((argument) => !argument.required)
+	const tCallType = method.parameters.every((p) => !p.required)
 		? "CallAPIWithOptionalParams"
 		: "CallAPI";
 
-	return `${
-		method.name
-	}: ${tCallType}<Params.${`${TextEditor.uppercaseFirstLetter(
+	return `${method.name}: ${tCallType}<Params.${TextEditor.uppercaseFirstLetter(
 		method.name,
-	)}Params`}, ${returnType}>`;
+	)}Params, ${returnType}>`;
 }
 
 export class APIMethods {
-	static generateMany(methods: IBotAPI.IMethod[]) {
+	static generateMany(methods: Method[]) {
 		return [
 			...CodeGenerator.generateComment(
 				"This object is a map of [API methods](https://core.telegram.org/bots/api#available-methods) types (functions map with input/output)",
@@ -35,11 +33,10 @@ export class APIMethods {
 		];
 	}
 
-	static generate(method: IBotAPI.IMethod) {
+	static generate(method: Method) {
+		const doc = `${method.description ?? ""}\n\n[Documentation](${TG_DOCS}${method.anchor})`;
 		return [
-			...CodeGenerator.generateComment(
-				`${method.description}\n\n[Documentation](${method.documentation_link})`,
-			),
+			...CodeGenerator.generateComment(doc),
 			generateMethod(method),
 		];
 	}

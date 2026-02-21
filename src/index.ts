@@ -1,192 +1,155 @@
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
+import type {
+	Field,
+	FieldBoolean,
+	ObjectWithFields,
+	ObjectWithOneOf,
+} from "@gramio/schema-parser";
+import { getCustomSchema } from "@gramio/schema-parser";
 import prettier from "prettier";
-import { OUTPUT_PATH, PRETTIER_OPTIONS, SCHEMA_FILE_PATH } from "./config";
+import { OUTPUT_PATH, PRETTIER_OPTIONS } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
 import { CodeGenerator, fetchCurrencies, generateHeader } from "./helpers";
-import type { IBotAPI } from "./types";
 
 export interface IGeneratedFile {
 	name: string;
 	lines: string[][];
 }
 
-const schemaFile = await fs.readFile(SCHEMA_FILE_PATH);
-const schema = JSON.parse(String(schemaFile)) as IBotAPI.ISchema;
+// ─── Fetch & parse ────────────────────────────────────────────────────────────
 
+const schema = await getCustomSchema();
+const { methods } = schema;
+const objects = schema.objects
+
+// ─── Synthetic / patched objects ──────────────────────────────────────────────
+
+// Currencies — derived from Telegram's supported-currencies endpoint
 const currenciesList = await fetchCurrencies();
-
 currenciesList.push("XTR");
 
-schema.objects.push({
+objects.push({
 	name: "Currencies",
-	type: "any_of",
+	anchor: "#supported-currencies",
 	description:
 		"Telegram payments currently support the currencies listed below.",
-	documentation_link:
-		"https://core.telegram.org/bots/payments#supported-currencies",
-	any_of: currenciesList.map((currency) => ({
+	type: "oneOf",
+	oneOf: currenciesList.map((currency) => ({
 		type: "string",
-		default: currency,
-	})) as IBotAPI.IArgument[],
-});
+		key: "",
+		const: currency,
+	})) as Field[],
+} satisfies ObjectWithOneOf);
 
-schema.objects.push({
+// APIResponseOk<Methods> — generic helper (generic is non-standard; handled in Objects.generate)
+objects.push({
 	name: "APIResponseOk",
-	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
+	anchor: "#making-requests",
 	description:
 		"If 'ok' equals True, the request was successful and the result of the query can be found in the 'result' field.",
-	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
-	properties: [
+	type: "fields",
+	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
+	fields: [
 		{
-			name: "ok",
+			key: "ok",
+			type: "boolean",
+			const: true,
+			required: true,
 			description: "If 'ok' equals True, the request was successful",
-			type: "bool",
-			required: true,
-			default: true,
-		},
+		} satisfies FieldBoolean,
 		{
-			name: "result",
-			description: "The result of the query can be found in the 'result' field",
-			type: "bool",
-			//![INFO] some hack for make result: APIMethodReturns<Methods>
-			default: "APIMethodReturn<Methods>",
+			key: "result",
+			// Hack: we need the literal TypeScript expression `APIMethodReturn<Methods>`
+			// as the type. We abuse boolean+const the same way the old generator did.
+			type: "boolean",
+			const: "APIMethodReturn<Methods>" as unknown as boolean,
 			required: true,
-		},
+			description:
+				"The result of the query can be found in the 'result' field",
+		} satisfies FieldBoolean,
 	],
-});
+} as ObjectWithFields & { generic?: string });
 
-schema.objects.push({
+objects.push({
 	name: "APIResponseError",
+	anchor: "#making-requests",
 	description:
-		"In case of an unsuccessful request, 'ok' equals false and the error is explained in the 'description'. An Integer 'error_code' field is also returned, but its contents are subject to change in the future. Some errors may also have an optional field 'parameters' of the type ResponseParameters, which can help to automatically handle the error.",
-	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
-	properties: [
+		"In case of an unsuccessful request, 'ok' equals false and the error is explained in the 'description'.",
+	type: "fields",
+	fields: [
 		{
-			name: "ok",
-			description: "In case of an unsuccessful request, 'ok' equals false",
-			type: "bool",
+			key: "ok",
+			type: "boolean",
+			const: false,
 			required: true,
-			default: false,
-		},
+			description: "In case of an unsuccessful request, 'ok' equals false",
+		} satisfies FieldBoolean,
 		{
-			name: "description",
-			description: "The error is explained in the 'description'",
+			key: "description",
 			type: "string",
 			required: true,
+			description: "The error is explained in the 'description'",
 		},
 		{
-			name: "error_code",
-			description:
-				"An Integer 'error_code' field is also returned, but its contents are subject to change in the future",
+			key: "error_code",
 			type: "integer",
 			required: true,
+			description: "An Integer 'error_code' field",
 		},
 		{
-			name: "parameters",
-			description:
-				"Some errors may also have an optional field 'parameters' of the type [ResponseParameters](https://core.telegram.org/bots/api/#responseparameters), which can help to automatically handle the error.",
+			key: "parameters",
 			type: "reference",
-			reference: "ResponseParameters",
 			required: true,
+			description:
+				"Optional field 'parameters' of the type [ResponseParameters](https://core.telegram.org/bots/api/#responseparameters)",
+			reference: { name: "ResponseParameters", anchor: "#responseparameters" },
 		},
 	],
-});
+} satisfies ObjectWithFields);
 
-schema.objects.push({
+objects.push({
 	name: "APIResponse",
+	anchor: "#making-requests",
 	description: "Union type of Response",
+	type: "oneOf",
 	generic: "<Methods extends keyof APIMethods = keyof APIMethods>",
-	documentation_link: "https://core.telegram.org/bots/api/#making-requests",
-	type: "any_of",
-	any_of: [
+	oneOf: [
 		{
 			type: "reference",
-			reference: "APIResponseOk<Methods>",
+			key: "",
+			reference: { name: "APIResponseOk<Methods>", anchor: "#making-requests" },
 		},
 		{
 			type: "reference",
-			reference: "APIResponseError",
+			key: "",
+			reference: { name: "APIResponseError", anchor: "#making-requests" },
 		},
-		// JSON-SCHEMA to ts wrong result?
-	] as IBotAPI.IArgument[],
-});
+	] as Field[],
+} as ObjectWithOneOf & { generic?: string });
 
-const InputFile = schema.objects.find((x) => x.name === "InputFile");
-
-if (InputFile) {
-	InputFile.type = "any_of";
-	InputFile.any_of = [
-		{
-			required: true,
-			type: "bool",
-			default: "Blob",
-		},
-		// TODO: improve typings by JSON Schema
-	] as IBotAPI.IArgument[];
-}
-
-const createForumTopic = schema.methods.find(
-	(x) => x.name === "createForumTopic",
-);
-
-if (createForumTopic) {
-	const icon_color = createForumTopic.arguments?.find(
-		(x) => x.name === "icon_color",
-	);
-	const RGBs = icon_color?.description.match(/\b0x[0-9a-fA-F]{6}/g);
-	if (icon_color && RGBs) {
-		icon_color.type = "any_of";
-		icon_color.any_of = RGBs.map((x) => ({
-			type: "bool",
-			required: true,
-			default: x.replace(/\b0x/, "0x"),
-		})) as IBotAPI.IArgument[];
-	}
-}
-
-const getStarTransactions = schema.methods.find(
-	(x) => x.name === "getStarTransactions",
-);
-
-if (getStarTransactions) {
-	// @ts-expect-error
-	getStarTransactions.return_type = {
-		type: "reference",
-		reference: "StarTransactions",
-	};
-}
-
-const buttonStyleProperties: IBotAPI.IProperty[] = [
-	{
-		name: "icon_custom_emoji_id",
+// InputFile — override "unknown" stub with a Blob union
+const inputFileIdx = objects.findIndex((o) => o.name === "InputFile");
+if (inputFileIdx !== -1) {
+	objects[inputFileIdx] = {
+		name: "InputFile",
+		anchor: "#inputfile",
 		description:
-			"*Optional*. Custom emoji identifier to be shown alongside the button text. Currently not exposed to documentation",
-		type: "string",
-		required: false,
-	},
-	{
-		name: "style",
-		description:
-			"*Optional*. Visual style of the button. Currently can be one of `danger`, `primary`, or `success`. Currently not exposed to documentation",
-		type: "any_of",
-		required: false,
-		any_of: [
-			{ type: "string", default: "danger" } as IBotAPI.IArgument,
-			{ type: "string", default: "primary" } as IBotAPI.IArgument,
-			{ type: "string", default: "success" } as IBotAPI.IArgument,
-		] as IBotAPI.IArgument[],
-	},
-];
-
-for (const buttonName of ["InlineKeyboardButton", "KeyboardButton"]) {
-	const button = schema.objects.find((x) => x.name === buttonName);
-	if (button?.properties) {
-		button.properties.push(...buttonStyleProperties);
-	}
+			"This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data.",
+		type: "oneOf",
+		oneOf: [
+			{
+				type: "boolean",
+				key: "",
+				// Same hack as before: use the literal TS expression "Blob" as the type
+				const: "Blob" as unknown as boolean,
+			} satisfies FieldBoolean,
+		],
+	} satisfies ObjectWithOneOf;
 }
+// ─── File generation ──────────────────────────────────────────────────────────
 
-const header = generateHeader(schema.version, schema.recent_changes);
+const header = generateHeader(schema.version);
 
 const files: IGeneratedFile[] = [
 	{
@@ -206,7 +169,7 @@ const files: IGeneratedFile[] = [
 				`import type { APIMethodReturn } from "./utils"`,
 				"",
 			],
-			Objects.generateMany(schema.objects),
+			Objects.generateMany(objects),
 		],
 	},
 	{
@@ -226,7 +189,7 @@ const files: IGeneratedFile[] = [
 				`import type * as Objects from "./objects"`,
 				"",
 			],
-			Params.generateMany(schema.methods),
+			Params.generateMany(methods),
 		],
 	},
 	{
@@ -250,7 +213,7 @@ const files: IGeneratedFile[] = [
 				`import type * as Objects from "./objects"`,
 				"",
 			],
-			APIMethods.generateMany(schema.methods),
+			APIMethods.generateMany(methods),
 		],
 	},
 	{

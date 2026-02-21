@@ -1,4 +1,4 @@
-import type { IBotAPI } from "./types";
+import type { Version } from "@gramio/schema-parser";
 
 export class CodeGenerator {
 	static generateComment(value: string | string[]) {
@@ -34,10 +34,12 @@ export class TextEditor {
 	}
 }
 
-export function generateHeader(
-	version: IBotAPI.IVersion,
-	recentChanges: IBotAPI.IRecentChangesObject,
-) {
+export function generateHeader(version: Version) {
+	const { major, minor, release_date } = version;
+	const dateStr = `${String(release_date.day).padStart(2, "0")}.${String(
+		release_date.month,
+	).padStart(2, "0")}.${release_date.year}`;
+
 	return (description: string, additional: string[] = []) => [
 		"/**",
 		"* @module",
@@ -46,15 +48,11 @@ export function generateHeader(
 		"* ",
 		...additional.map((x) => `* ${x}`),
 		"* ",
-		`* Based on Bot API v${version.major}.${version.minor}.${
-			version.patch
-		} (${String(recentChanges.day).padStart(2, "0")}.${String(
-			recentChanges.month,
-		).padStart(2, "0")}.${recentChanges.year})`,
+		`* Based on Bot API v${major}.${minor} (${dateStr})`,
 		"* ",
 		`* Generated at ${new Date().toLocaleString(
 			"ru",
-		)} using [types](https://github.com/gramiojs/types) and [schema](https://ark0f.github.io/tg-bot-api) generators`,
+		)} using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators`,
 		"*/",
 		"",
 		"",
