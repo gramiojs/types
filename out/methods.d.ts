@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v9.4 (09.02.2026)
+ * Based on Bot API v9.5 (01.03.2026)
  *
- * Generated at 21.02.2026, 18:22:02 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 01.03.2026, 10:44:44 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -29,7 +29,7 @@ import type * as Objects from "./objects"
  */
 export interface APIMethods {
     /**
-     * Use this method to receive incoming updates using long polling ([wiki](https://en.wikipedia.org/wiki/Push_technology#Long_polling)). Returns an Array of [Update](https://core.telegram.org/bots/api/#update) objects.
+     * Use this method to receive incoming updates using long polling ([wiki](https://en.wikipedia.org/wiki/Push_technology#Long_polling)). Returns an Array of [Update](https://core.telegram.org/bots/api#update) objects.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getupdates)
      */
@@ -38,7 +38,7 @@ export interface APIMethods {
         Objects.TelegramUpdate[]
     >
     /**
-     * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](https://core.telegram.org/bots/api/#update). In case of an unsuccessful request (a request with response [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) different from `2XY`), we will repeat the request and give up after a reasonable amount of attempts. Returns *True* on success.
+     * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](https://core.telegram.org/bots/api#update). In case of an unsuccessful request (a request with response [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) different from `2XY`), we will repeat the request and give up after a reasonable amount of attempts. Returns *True* on success.
      *
      * If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter *secret\_token*. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
      *
@@ -46,19 +46,19 @@ export interface APIMethods {
      */
     setWebhook: CallAPI<Params.SetWebhookParams, true>
     /**
-     * Use this method to remove webhook integration if you decide to switch back to [getUpdates](https://core.telegram.org/bots/api/#getupdates). Returns *True* on success.
+     * Use this method to remove webhook integration if you decide to switch back to [getUpdates](https://core.telegram.org/bots/api#getupdates). Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#deletewebhook)
      */
     deleteWebhook: CallAPIWithOptionalParams<Params.DeleteWebhookParams, true>
     /**
-     * Use this method to get current webhook status. Requires no parameters. On success, returns a [WebhookInfo](https://core.telegram.org/bots/api/#webhookinfo) object. If the bot is using [getUpdates](https://core.telegram.org/bots/api/#getupdates), will return an object with the *url* field empty.
+     * Use this method to get current webhook status. Requires no parameters. On success, returns a [WebhookInfo](https://core.telegram.org/bots/api#webhookinfo) object. If the bot is using [getUpdates](https://core.telegram.org/bots/api#getupdates), will return an object with the *url* field empty.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getwebhookinfo)
      */
     getWebhookInfo: CallAPIWithoutParams<Objects.TelegramWebhookInfo>
     /**
-     * A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a [User](https://core.telegram.org/bots/api/#user) object.
+     * A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a [User](https://core.telegram.org/bots/api#user) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getme)
      */
@@ -76,13 +76,13 @@ export interface APIMethods {
      */
     close: CallAPIWithoutParams<true>
     /**
-     * Use this method to send text messages. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send text messages. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendmessage)
      */
     sendMessage: CallAPI<Params.SendMessageParams, Objects.TelegramMessage>
     /**
-     * Use this method to forward messages of any kind. Service messages and messages with protected content can't be forwarded. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to forward messages of any kind. Service messages and messages with protected content can't be forwarded. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#forwardmessage)
      */
@@ -91,7 +91,7 @@ export interface APIMethods {
         Objects.TelegramMessage
     >
     /**
-     * Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an array of [MessageId](https://core.telegram.org/bots/api/#messageid) of the sent messages is returned.
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#forwardmessages)
      */
@@ -100,13 +100,13 @@ export interface APIMethods {
         Objects.TelegramMessageId[]
     >
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api/#poll) can be copied only if the value of the field *correct\_option\_id* is known to the bot. The method is analogous to the method [forwardMessage](https://core.telegram.org/bots/api/#forwardmessage), but the copied message doesn't have a link to the original message. Returns the [MessageId](https://core.telegram.org/bots/api/#messageid) of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_id* is known to the bot. The method is analogous to the method [forwardMessage](https://core.telegram.org/bots/api#forwardmessage), but the copied message doesn't have a link to the original message. Returns the [MessageId](https://core.telegram.org/bots/api#messageid) of the sent message on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#copymessage)
      */
     copyMessage: CallAPI<Params.CopyMessageParams, Objects.TelegramMessageId>
     /**
-     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api/#poll) can be copied only if the value of the field *correct\_option\_id* is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api/#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of [MessageId](https://core.telegram.org/bots/api/#messageid) of the sent messages is returned.
+     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_id* is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#copymessages)
      */
@@ -115,57 +115,57 @@ export interface APIMethods {
         Objects.TelegramMessageId[]
     >
     /**
-     * Use this method to send photos. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send photos. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendphoto)
      */
     sendPhoto: CallAPI<Params.SendPhotoParams, Objects.TelegramMessage>
     /**
-     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      *
-     * For sending voice messages, use the [sendVoice](https://core.telegram.org/bots/api/#sendvoice) method instead.
+     * For sending voice messages, use the [sendVoice](https://core.telegram.org/bots/api#sendvoice) method instead.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendaudio)
      */
     sendAudio: CallAPI<Params.SendAudioParams, Objects.TelegramMessage>
     /**
-     * Use this method to send general files. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * Use this method to send general files. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      *
      * [Documentation](https://core.telegram.org/bots/api/#senddocument)
      */
     sendDocument: CallAPI<Params.SendDocumentParams, Objects.TelegramMessage>
     /**
-     * Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as [Document](https://core.telegram.org/bots/api/#document)). On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as [Document](https://core.telegram.org/bots/api#document)). On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendvideo)
      */
     sendVideo: CallAPI<Params.SendVideoParams, Objects.TelegramMessage>
     /**
-     * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendanimation)
      */
     sendAnimation: CallAPI<Params.SendAnimationParams, Objects.TelegramMessage>
     /**
-     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as [Audio](https://core.telegram.org/bots/api/#audio) or [Document](https://core.telegram.org/bots/api/#document)). On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as [Audio](https://core.telegram.org/bots/api#audio) or [Document](https://core.telegram.org/bots/api#document)). On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendvoice)
      */
     sendVoice: CallAPI<Params.SendVoiceParams, Objects.TelegramMessage>
     /**
-     * As of [v.4.0](https://telegram.org/blog/video-messages-and-telescope), Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * As of [v.4.0](https://telegram.org/blog/video-messages-and-telescope), Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendvideonote)
      */
     sendVideoNote: CallAPI<Params.SendVideoNoteParams, Objects.TelegramMessage>
     /**
-     * Use this method to send paid media. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send paid media. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendpaidmedia)
      */
     sendPaidMedia: CallAPI<Params.SendPaidMediaParams, Objects.TelegramMessage>
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of [Message](https://core.telegram.org/bots/api/#message) objects that were sent is returned.
+     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of [Message](https://core.telegram.org/bots/api#message) objects that were sent is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendmediagroup)
      */
@@ -174,43 +174,43 @@ export interface APIMethods {
         Objects.TelegramMessage[]
     >
     /**
-     * Use this method to send point on the map. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send point on the map. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendlocation)
      */
     sendLocation: CallAPI<Params.SendLocationParams, Objects.TelegramMessage>
     /**
-     * Use this method to send information about a venue. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send information about a venue. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendvenue)
      */
     sendVenue: CallAPI<Params.SendVenueParams, Objects.TelegramMessage>
     /**
-     * Use this method to send phone contacts. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send phone contacts. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendcontact)
      */
     sendContact: CallAPI<Params.SendContactParams, Objects.TelegramMessage>
     /**
-     * Use this method to send a native poll. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send a native poll. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendpoll)
      */
     sendPoll: CallAPI<Params.SendPollParams, Objects.TelegramMessage>
     /**
-     * Use this method to send a checklist on behalf of a connected business account. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendchecklist)
      */
     sendChecklist: CallAPI<Params.SendChecklistParams, Objects.TelegramMessage>
     /**
-     * Use this method to send an animated emoji that will display a random value. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send an animated emoji that will display a random value. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#senddice)
      */
     sendDice: CallAPI<Params.SendDiceParams, Objects.TelegramMessage>
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns *True* on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendmessagedraft)
      */
@@ -218,7 +218,7 @@ export interface APIMethods {
     /**
      * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns *True* on success.
      *
-     * > Example: The [ImageBot](https://t.me/imagebot) needs some time to process a request and upload the image. Instead of sending a text message along the lines of “Retrieving image, please wait…”, the bot may use [sendChatAction](https://core.telegram.org/bots/api/#sendchataction) with *action* = *upload\_photo*. The user will see a “sending photo” status for the bot.
+     * > Example: The [ImageBot](https://t.me/imagebot) needs some time to process a request and upload the image. Instead of sending a text message along the lines of “Retrieving image, please wait…”, the bot may use [sendChatAction](https://core.telegram.org/bots/api#sendchataction) with *action* = *upload\_photo*. The user will see a “sending photo” status for the bot.
      *
      * We only recommend using this method when a response from the bot will take a **noticeable** amount of time to arrive.
      *
@@ -232,7 +232,7 @@ export interface APIMethods {
      */
     setMessageReaction: CallAPI<Params.SetMessageReactionParams, true>
     /**
-     * Use this method to get a list of profile pictures for a user. Returns a [UserProfilePhotos](https://core.telegram.org/bots/api/#userprofilephotos) object.
+     * Use this method to get a list of profile pictures for a user. Returns a [UserProfilePhotos](https://core.telegram.org/bots/api#userprofilephotos) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getuserprofilephotos)
      */
@@ -241,7 +241,7 @@ export interface APIMethods {
         Objects.TelegramUserProfilePhotos
     >
     /**
-     * Use this method to get a list of profile audios for a user. Returns a [UserProfileAudios](https://core.telegram.org/bots/api/#userprofileaudios) object.
+     * Use this method to get a list of profile audios for a user. Returns a [UserProfileAudios](https://core.telegram.org/bots/api#userprofileaudios) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getuserprofileaudios)
      */
@@ -256,13 +256,13 @@ export interface APIMethods {
      */
     setUserEmojiStatus: CallAPI<Params.SetUserEmojiStatusParams, true>
     /**
-     * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a [File](https://core.telegram.org/bots/api/#file) object is returned. The file can then be downloaded via the link `https://api.telegram.org/file/bot<token>/<file_path>`, where `<file_path>` is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling [getFile](https://core.telegram.org/bots/api/#getfile) again.
+     * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a [File](https://core.telegram.org/bots/api#file) object is returned. The file can then be downloaded via the link `https://api.telegram.org/file/bot<token>/<file_path>`, where `<file_path>` is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling [getFile](https://core.telegram.org/bots/api#getfile) again.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getfile)
      */
     getFile: CallAPI<Params.GetFileParams, Objects.TelegramFile>
     /**
-     * Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless [unbanned](https://core.telegram.org/bots/api/#unbanchatmember) first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns *True* on success.
+     * Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless [unbanned](https://core.telegram.org/bots/api#unbanchatmember) first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#banchatmember)
      */
@@ -295,7 +295,13 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is [unbanned](https://core.telegram.org/bots/api/#unbanchatsenderchat), the owner of the banned chat won't be able to send messages on behalf of **any of their channels**. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns *True* on success.
+     * Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the *can\_manage\_tags* administrator right. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setchatmembertag)
+     */
+    setChatMemberTag: CallAPI<Params.SetChatMemberTagParams, true>
+    /**
+     * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is [unbanned](https://core.telegram.org/bots/api#unbanchatsenderchat), the owner of the banned chat won't be able to send messages on behalf of **any of their channels**. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#banchatsenderchat)
      */
@@ -319,7 +325,7 @@ export interface APIMethods {
      */
     exportChatInviteLink: CallAPI<Params.ExportChatInviteLinkParams, string>
     /**
-     * Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method [revokeChatInviteLink](https://core.telegram.org/bots/api/#revokechatinvitelink). Returns the new invite link as [ChatInviteLink](https://core.telegram.org/bots/api/#chatinvitelink) object.
+     * Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method [revokeChatInviteLink](https://core.telegram.org/bots/api#revokechatinvitelink). Returns the new invite link as [ChatInviteLink](https://core.telegram.org/bots/api#chatinvitelink) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#createchatinvitelink)
      */
@@ -328,7 +334,7 @@ export interface APIMethods {
         Objects.TelegramChatInviteLink
     >
     /**
-     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a [ChatInviteLink](https://core.telegram.org/bots/api/#chatinvitelink) object.
+     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a [ChatInviteLink](https://core.telegram.org/bots/api#chatinvitelink) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editchatinvitelink)
      */
@@ -337,7 +343,7 @@ export interface APIMethods {
         Objects.TelegramChatInviteLink
     >
     /**
-     * Use this method to create a [subscription invite link](https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions) for a channel chat. The bot must have the *can\_invite\_users* administrator rights. The link can be edited using the method [editChatSubscriptionInviteLink](https://core.telegram.org/bots/api/#editchatsubscriptioninvitelink) or revoked using the method [revokeChatInviteLink](https://core.telegram.org/bots/api/#revokechatinvitelink). Returns the new invite link as a [ChatInviteLink](https://core.telegram.org/bots/api/#chatinvitelink) object.
+     * Use this method to create a [subscription invite link](https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions) for a channel chat. The bot must have the *can\_invite\_users* administrator rights. The link can be edited using the method [editChatSubscriptionInviteLink](https://core.telegram.org/bots/api#editchatsubscriptioninvitelink) or revoked using the method [revokeChatInviteLink](https://core.telegram.org/bots/api#revokechatinvitelink). Returns the new invite link as a [ChatInviteLink](https://core.telegram.org/bots/api#chatinvitelink) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#createchatsubscriptioninvitelink)
      */
@@ -346,7 +352,7 @@ export interface APIMethods {
         Objects.TelegramChatInviteLink
     >
     /**
-     * Use this method to edit a subscription invite link created by the bot. The bot must have the *can\_invite\_users* administrator rights. Returns the edited invite link as a [ChatInviteLink](https://core.telegram.org/bots/api/#chatinvitelink) object.
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the *can\_invite\_users* administrator rights. Returns the edited invite link as a [ChatInviteLink](https://core.telegram.org/bots/api#chatinvitelink) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editchatsubscriptioninvitelink)
      */
@@ -355,7 +361,7 @@ export interface APIMethods {
         Objects.TelegramChatInviteLink
     >
     /**
-     * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as [ChatInviteLink](https://core.telegram.org/bots/api/#chatinvitelink) object.
+     * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as [ChatInviteLink](https://core.telegram.org/bots/api#chatinvitelink) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#revokechatinvitelink)
      */
@@ -424,13 +430,13 @@ export interface APIMethods {
      */
     leaveChat: CallAPI<Params.LeaveChatParams, true>
     /**
-     * Use this method to get up-to-date information about the chat. Returns a [ChatFullInfo](https://core.telegram.org/bots/api/#chatfullinfo) object on success.
+     * Use this method to get up-to-date information about the chat. Returns a [ChatFullInfo](https://core.telegram.org/bots/api#chatfullinfo) object on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchat)
      */
     getChat: CallAPI<Params.GetChatParams, Objects.TelegramChatFullInfo>
     /**
-     * Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of [ChatMember](https://core.telegram.org/bots/api/#chatmember) objects.
+     * Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of [ChatMember](https://core.telegram.org/bots/api#chatmember) objects.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchatadministrators)
      */
@@ -445,7 +451,7 @@ export interface APIMethods {
      */
     getChatMemberCount: CallAPI<Params.GetChatMemberCountParams, number>
     /**
-     * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a [ChatMember](https://core.telegram.org/bots/api/#chatmember) object on success.
+     * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a [ChatMember](https://core.telegram.org/bots/api#chatmember) object on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchatmember)
      */
@@ -454,25 +460,25 @@ export interface APIMethods {
         Objects.TelegramChatMember
     >
     /**
-     * Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field *can\_set\_sticker\_set* optionally returned in [getChat](https://core.telegram.org/bots/api/#getchat) requests to check if the bot can use this method. Returns *True* on success.
+     * Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field *can\_set\_sticker\_set* optionally returned in [getChat](https://core.telegram.org/bots/api#getchat) requests to check if the bot can use this method. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setchatstickerset)
      */
     setChatStickerSet: CallAPI<Params.SetChatStickerSetParams, true>
     /**
-     * Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field *can\_set\_sticker\_set* optionally returned in [getChat](https://core.telegram.org/bots/api/#getchat) requests to check if the bot can use this method. Returns *True* on success.
+     * Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field *can\_set\_sticker\_set* optionally returned in [getChat](https://core.telegram.org/bots/api#getchat) requests to check if the bot can use this method. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#deletechatstickerset)
      */
     deleteChatStickerSet: CallAPI<Params.DeleteChatStickerSetParams, true>
     /**
-     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of [Sticker](https://core.telegram.org/bots/api/#sticker) objects.
+     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of [Sticker](https://core.telegram.org/bots/api#sticker) objects.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getforumtopiciconstickers)
      */
     getForumTopicIconStickers: CallAPIWithoutParams<Objects.TelegramSticker[]>
     /**
-     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator right. Returns information about the created topic as a [ForumTopic](https://core.telegram.org/bots/api/#forumtopic) object.
+     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator right. Returns information about the created topic as a [ForumTopic](https://core.telegram.org/bots/api#forumtopic) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#createforumtopic)
      */
@@ -561,7 +567,7 @@ export interface APIMethods {
      */
     answerCallbackQuery: CallAPI<Params.AnswerCallbackQueryParams, true>
     /**
-     * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a [UserChatBoosts](https://core.telegram.org/bots/api/#userchatboosts) object.
+     * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a [UserChatBoosts](https://core.telegram.org/bots/api#userchatboosts) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getuserchatboosts)
      */
@@ -570,7 +576,7 @@ export interface APIMethods {
         Objects.TelegramUserChatBoosts
     >
     /**
-     * Use this method to get information about the connection of the bot with a business account. Returns a [BusinessConnection](https://core.telegram.org/bots/api/#businessconnection) object on success.
+     * Use this method to get information about the connection of the bot with a business account. Returns a [BusinessConnection](https://core.telegram.org/bots/api#businessconnection) object on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getbusinessconnection)
      */
@@ -585,7 +591,7 @@ export interface APIMethods {
      */
     setMyCommands: CallAPI<Params.SetMyCommandsParams, true>
     /**
-     * Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, [higher level commands](https://core.telegram.org/bots/api/#determining-list-of-commands) will be shown to affected users. Returns *True* on success.
+     * Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, [higher level commands](https://core.telegram.org/bots/api#determining-list-of-commands) will be shown to affected users. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#deletemycommands)
      */
@@ -594,7 +600,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of [BotCommand](https://core.telegram.org/bots/api/#botcommand) objects. If commands aren't set, an empty list is returned.
+     * Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of [BotCommand](https://core.telegram.org/bots/api#botcommand) objects. If commands aren't set, an empty list is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getmycommands)
      */
@@ -609,7 +615,7 @@ export interface APIMethods {
      */
     setMyName: CallAPIWithOptionalParams<Params.SetMyNameParams, true>
     /**
-     * Use this method to get the current bot name for the given user language. Returns [BotName](https://core.telegram.org/bots/api/#botname) on success.
+     * Use this method to get the current bot name for the given user language. Returns [BotName](https://core.telegram.org/bots/api#botname) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getmyname)
      */
@@ -627,7 +633,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to get the current bot description for the given user language. Returns [BotDescription](https://core.telegram.org/bots/api/#botdescription) on success.
+     * Use this method to get the current bot description for the given user language. Returns [BotDescription](https://core.telegram.org/bots/api#botdescription) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getmydescription)
      */
@@ -645,7 +651,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to get the current bot short description for the given user language. Returns [BotShortDescription](https://core.telegram.org/bots/api/#botshortdescription) on success.
+     * Use this method to get the current bot short description for the given user language. Returns [BotShortDescription](https://core.telegram.org/bots/api#botshortdescription) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getmyshortdescription)
      */
@@ -675,7 +681,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns [MenuButton](https://core.telegram.org/bots/api/#menubutton) on success.
+     * Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns [MenuButton](https://core.telegram.org/bots/api#menubutton) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchatmenubutton)
      */
@@ -693,7 +699,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to get the current default administrator rights of the bot. Returns [ChatAdministratorRights](https://core.telegram.org/bots/api/#chatadministratorrights) on success.
+     * Use this method to get the current default administrator rights of the bot. Returns [ChatAdministratorRights](https://core.telegram.org/bots/api#chatadministratorrights) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getmydefaultadministratorrights)
      */
@@ -702,7 +708,7 @@ export interface APIMethods {
         Objects.TelegramChatAdministratorRights
     >
     /**
-     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api/#gifts) object.
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a [Gifts](https://core.telegram.org/bots/api#gifts) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getavailablegifts)
      */
@@ -804,7 +810,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Returns the amount of Telegram Stars owned by a managed business account. Requires the *can\_view\_gifts\_and\_stars* business bot right. Returns [StarAmount](https://core.telegram.org/bots/api/#staramount) on success.
+     * Returns the amount of Telegram Stars owned by a managed business account. Requires the *can\_view\_gifts\_and\_stars* business bot right. Returns [StarAmount](https://core.telegram.org/bots/api#staramount) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getbusinessaccountstarbalance)
      */
@@ -822,7 +828,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Returns the gifts received and owned by a managed business account. Requires the *can\_view\_gifts\_and\_stars* business bot right. Returns [OwnedGifts](https://core.telegram.org/bots/api/#ownedgifts) on success.
+     * Returns the gifts received and owned by a managed business account. Requires the *can\_view\_gifts\_and\_stars* business bot right. Returns [OwnedGifts](https://core.telegram.org/bots/api#ownedgifts) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getbusinessaccountgifts)
      */
@@ -831,13 +837,13 @@ export interface APIMethods {
         Objects.TelegramOwnedGifts
     >
     /**
-     * Returns the gifts owned and hosted by a user. Returns [OwnedGifts](https://core.telegram.org/bots/api/#ownedgifts) on success.
+     * Returns the gifts owned and hosted by a user. Returns [OwnedGifts](https://core.telegram.org/bots/api#ownedgifts) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getusergifts)
      */
     getUserGifts: CallAPI<Params.GetUserGiftsParams, Objects.TelegramOwnedGifts>
     /**
-     * Returns the gifts owned by a chat. Returns [OwnedGifts](https://core.telegram.org/bots/api/#ownedgifts) on success.
+     * Returns the gifts owned by a chat. Returns [OwnedGifts](https://core.telegram.org/bots/api#ownedgifts) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchatgifts)
      */
@@ -861,19 +867,19 @@ export interface APIMethods {
      */
     transferGift: CallAPI<Params.TransferGiftParams, true>
     /**
-     * Posts a story on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api/#story) on success.
+     * Posts a story on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api#story) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#poststory)
      */
     postStory: CallAPI<Params.PostStoryParams, Objects.TelegramStory>
     /**
-     * Reposts a story on behalf of a business account from another business account. Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot. Requires the *can\_manage\_stories* business bot right for both business accounts. Returns [Story](https://core.telegram.org/bots/api/#story) on success.
+     * Reposts a story on behalf of a business account from another business account. Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot. Requires the *can\_manage\_stories* business bot right for both business accounts. Returns [Story](https://core.telegram.org/bots/api#story) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#repoststory)
      */
     repostStory: CallAPI<Params.RepostStoryParams, Objects.TelegramStory>
     /**
-     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api/#story) on success.
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api#story) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editstory)
      */
@@ -885,7 +891,7 @@ export interface APIMethods {
      */
     deleteStory: CallAPI<Params.DeleteStoryParams, true>
     /**
-     * Use this method to edit text and [game](https://core.telegram.org/bots/api/#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     * Use this method to edit text and [game](https://core.telegram.org/bots/api#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagetext)
      */
@@ -894,7 +900,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagecaption)
      */
@@ -903,7 +909,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagemedia)
      */
@@ -912,7 +918,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to edit live location messages. A location can be edited until its *live\_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](https://core.telegram.org/bots/api/#stopmessagelivelocation). On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned.
+     * Use this method to edit live location messages. A location can be edited until its *live\_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](https://core.telegram.org/bots/api#stopmessagelivelocation). On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagelivelocation)
      */
@@ -921,7 +927,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to stop updating a live location message before *live\_period* expires. On success, if the message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned.
+     * Use this method to stop updating a live location message before *live\_period* expires. On success, if the message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#stopmessagelivelocation)
      */
@@ -930,7 +936,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagechecklist)
      */
@@ -939,7 +945,7 @@ export interface APIMethods {
         Objects.TelegramMessage
     >
     /**
-     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagereplymarkup)
      */
@@ -948,7 +954,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to stop a poll which was sent by the bot. On success, the stopped [Poll](https://core.telegram.org/bots/api/#poll) is returned.
+     * Use this method to stop a poll which was sent by the bot. On success, the stopped [Poll](https://core.telegram.org/bots/api#poll) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#stoppoll)
      */
@@ -988,13 +994,13 @@ export interface APIMethods {
      */
     deleteMessages: CallAPI<Params.DeleteMessagesParams, true>
     /**
-     * Use this method to send static .WEBP, [animated](https://telegram.org/blog/animated-stickers) .TGS, or [video](https://telegram.org/blog/video-stickers-better-reactions) .WEBM stickers. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send static .WEBP, [animated](https://telegram.org/blog/animated-stickers) .TGS, or [video](https://telegram.org/blog/video-stickers-better-reactions) .WEBM stickers. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendsticker)
      */
     sendSticker: CallAPI<Params.SendStickerParams, Objects.TelegramMessage>
     /**
-     * Use this method to get a sticker set. On success, a [StickerSet](https://core.telegram.org/bots/api/#stickerset) object is returned.
+     * Use this method to get a sticker set. On success, a [StickerSet](https://core.telegram.org/bots/api#stickerset) object is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getstickerset)
      */
@@ -1003,7 +1009,7 @@ export interface APIMethods {
         Objects.TelegramStickerSet
     >
     /**
-     * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of [Sticker](https://core.telegram.org/bots/api/#sticker) objects.
+     * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of [Sticker](https://core.telegram.org/bots/api#sticker) objects.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getcustomemojistickers)
      */
@@ -1012,7 +1018,7 @@ export interface APIMethods {
         Objects.TelegramSticker[]
     >
     /**
-     * Use this method to upload a file with a sticker for later use in the [createNewStickerSet](https://core.telegram.org/bots/api/#createnewstickerset), [addStickerToSet](https://core.telegram.org/bots/api/#addstickertoset), or [replaceStickerInSet](https://core.telegram.org/bots/api/#replacestickerinset) methods (the file can be used multiple times). Returns the uploaded [File](https://core.telegram.org/bots/api/#file) on success.
+     * Use this method to upload a file with a sticker for later use in the [createNewStickerSet](https://core.telegram.org/bots/api#createnewstickerset), [addStickerToSet](https://core.telegram.org/bots/api#addstickertoset), or [replaceStickerInSet](https://core.telegram.org/bots/api#replacestickerinset) methods (the file can be used multiple times). Returns the uploaded [File](https://core.telegram.org/bots/api#file) on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#uploadstickerfile)
      */
@@ -1045,7 +1051,7 @@ export interface APIMethods {
      */
     deleteStickerFromSet: CallAPI<Params.DeleteStickerFromSetParams, true>
     /**
-     * Use this method to replace an existing sticker in a sticker set with a new one. The method is equivalent to calling [deleteStickerFromSet](https://core.telegram.org/bots/api/#deletestickerfromset), then [addStickerToSet](https://core.telegram.org/bots/api/#addstickertoset), then [setStickerPositionInSet](https://core.telegram.org/bots/api/#setstickerpositioninset). Returns *True* on success.
+     * Use this method to replace an existing sticker in a sticker set with a new one. The method is equivalent to calling [deleteStickerFromSet](https://core.telegram.org/bots/api#deletestickerfromset), then [addStickerToSet](https://core.telegram.org/bots/api#addstickertoset), then [setStickerPositionInSet](https://core.telegram.org/bots/api#setstickerpositioninset). Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#replacestickerinset)
      */
@@ -1063,7 +1069,7 @@ export interface APIMethods {
      */
     setStickerKeywords: CallAPI<Params.SetStickerKeywordsParams, true>
     /**
-     * Use this method to change the [mask position](https://core.telegram.org/bots/api/#maskposition) of a mask sticker. The sticker must belong to a sticker set that was created by the bot. Returns *True* on success.
+     * Use this method to change the [mask position](https://core.telegram.org/bots/api#maskposition) of a mask sticker. The sticker must belong to a sticker set that was created by the bot. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setstickermaskposition)
      */
@@ -1103,7 +1109,7 @@ export interface APIMethods {
      */
     answerInlineQuery: CallAPI<Params.AnswerInlineQueryParams, true>
     /**
-     * Use this method to set the result of an interaction with a [Web App](https://core.telegram.org/bots/webapps) and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a [SentWebAppMessage](https://core.telegram.org/bots/api/#sentwebappmessage) object is returned.
+     * Use this method to set the result of an interaction with a [Web App](https://core.telegram.org/bots/webapps) and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a [SentWebAppMessage](https://core.telegram.org/bots/api#sentwebappmessage) object is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#answerwebappquery)
      */
@@ -1112,7 +1118,7 @@ export interface APIMethods {
         Objects.TelegramSentWebAppMessage
     >
     /**
-     * Stores a message that can be sent by a user of a Mini App. Returns a [PreparedInlineMessage](https://core.telegram.org/bots/api/#preparedinlinemessage) object.
+     * Stores a message that can be sent by a user of a Mini App. Returns a [PreparedInlineMessage](https://core.telegram.org/bots/api#preparedinlinemessage) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#savepreparedinlinemessage)
      */
@@ -1121,7 +1127,7 @@ export interface APIMethods {
         Objects.TelegramPreparedInlineMessage
     >
     /**
-     * Use this method to send invoices. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send invoices. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendinvoice)
      */
@@ -1133,25 +1139,25 @@ export interface APIMethods {
      */
     createInvoiceLink: CallAPI<Params.CreateInvoiceLinkParams, string>
     /**
-     * If you sent an invoice requesting a shipping address and the parameter *is\_flexible* was specified, the Bot API will send an [Update](https://core.telegram.org/bots/api/#update) with a *shipping\_query* field to the bot. Use this method to reply to shipping queries. On success, *True* is returned.
+     * If you sent an invoice requesting a shipping address and the parameter *is\_flexible* was specified, the Bot API will send an [Update](https://core.telegram.org/bots/api#update) with a *shipping\_query* field to the bot. Use this method to reply to shipping queries. On success, *True* is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#answershippingquery)
      */
     answerShippingQuery: CallAPI<Params.AnswerShippingQueryParams, true>
     /**
-     * Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an [Update](https://core.telegram.org/bots/api/#update) with the field *pre\_checkout\_query*. Use this method to respond to such pre-checkout queries. On success, *True* is returned. **Note:** The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
+     * Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an [Update](https://core.telegram.org/bots/api#update) with the field *pre\_checkout\_query*. Use this method to respond to such pre-checkout queries. On success, *True* is returned. **Note:** The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#answerprecheckoutquery)
      */
     answerPreCheckoutQuery: CallAPI<Params.AnswerPreCheckoutQueryParams, true>
     /**
-     * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a [StarAmount](https://core.telegram.org/bots/api/#staramount) object.
+     * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a [StarAmount](https://core.telegram.org/bots/api#staramount) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getmystarbalance)
      */
     getMyStarBalance: CallAPIWithoutParams<Objects.TelegramStarAmount>
     /**
-     * Returns the bot's Telegram Star transactions in chronological order. On success, returns a [StarTransactions](https://core.telegram.org/bots/api/#startransactions) object.
+     * Returns the bot's Telegram Star transactions in chronological order. On success, returns a [StarTransactions](https://core.telegram.org/bots/api#startransactions) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getstartransactions)
      */
@@ -1183,13 +1189,13 @@ export interface APIMethods {
      */
     setPassportDataErrors: CallAPI<Params.SetPassportDataErrorsParams, true>
     /**
-     * Use this method to send a game. On success, the sent [Message](https://core.telegram.org/bots/api/#message) is returned.
+     * Use this method to send a game. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendgame)
      */
     sendGame: CallAPI<Params.SendGameParams, Objects.TelegramMessage>
     /**
-     * Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the [Message](https://core.telegram.org/bots/api/#message) is returned, otherwise *True* is returned. Returns an error, if the new score is not greater than the user's current score in the chat and *force* is *False*.
+     * Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Returns an error, if the new score is not greater than the user's current score in the chat and *force* is *False*.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setgamescore)
      */
@@ -1198,7 +1204,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of [GameHighScore](https://core.telegram.org/bots/api/#gamehighscore) objects.
+     * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of [GameHighScore](https://core.telegram.org/bots/api#gamehighscore) objects.
      *
      * > This method will currently return scores for the target user, plus two of their closest neighbors on each side. Will also return the top three users if the user and their neighbors are not among them. Please note that this behavior is subject to change.
      *
