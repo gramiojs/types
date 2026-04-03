@@ -27,7 +27,7 @@ jobs:
 
             - name: Get version
               id: version
-              run: echo "version=$(bun run --silent -e 'console.log(require("./package.json").version)')" >> "$GITHUB_OUTPUT"
+              run: echo "version=$(bun -e 'console.log(require("./package.json").version)')" >> "$GITHUB_OUTPUT"
 
             - name: Prepare to JSR publish
               run: bun jsr
