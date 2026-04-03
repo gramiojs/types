@@ -48,13 +48,16 @@ jobs:
 
             - name: Publish package to JSR
               run: bunx jsr publish
+              continue-on-error: true
 
             - name: Publish package to NPM
               run: bun publish --access public
+              continue-on-error: true
               env:
                   NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: GitHub Release
+              continue-on-error: true
               uses: ncipollo/release-action@v1
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
