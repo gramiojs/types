@@ -8,9 +8,9 @@
  * import { TelegramUser, SendMessageParams, APIMethods, APIMethodReturn } from "@gramio/types";
  * ```
  *
- * Based on Bot API v9.5 (01.03.2026)
+ * Based on Bot API v9.6 (03.04.2026)
  *
- * Generated at 01.03.2026, 10:44:44 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 03.04.2026, 15:40:56 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 export type * from "./methods"

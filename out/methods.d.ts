@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v9.5 (01.03.2026)
+ * Based on Bot API v9.6 (03.04.2026)
  *
- * Generated at 01.03.2026, 10:44:44 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 03.04.2026, 15:40:56 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -585,6 +585,18 @@ export interface APIMethods {
         Objects.TelegramBusinessConnection
     >
     /**
+     * Use this method to get the token of a managed bot. Returns the token as *String* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getmanagedbottoken)
+     */
+    getManagedBotToken: CallAPI<Params.GetManagedBotTokenParams, string>
+    /**
+     * Use this method to revoke the current token of a managed bot and generate a new one. Returns the new token as *String* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#replacemanagedbottoken)
+     */
+    replaceManagedBotToken: CallAPI<Params.ReplaceManagedBotTokenParams, string>
+    /**
      * Use this method to change the list of the bot's commands. See [this manual](https://core.telegram.org/bots/features#commands) for more details about bot commands. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#setmycommands)
@@ -891,6 +903,33 @@ export interface APIMethods {
      */
     deleteStory: CallAPI<Params.DeleteStoryParams, true>
     /**
+     * Use this method to set the result of an interaction with a [Web App](https://core.telegram.org/bots/webapps) and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a [SentWebAppMessage](https://core.telegram.org/bots/api#sentwebappmessage) object is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#answerwebappquery)
+     */
+    answerWebAppQuery: CallAPI<
+        Params.AnswerWebAppQueryParams,
+        Objects.TelegramSentWebAppMessage
+    >
+    /**
+     * Stores a message that can be sent by a user of a Mini App. Returns a [PreparedInlineMessage](https://core.telegram.org/bots/api#preparedinlinemessage) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#savepreparedinlinemessage)
+     */
+    savePreparedInlineMessage: CallAPI<
+        Params.SavePreparedInlineMessageParams,
+        Objects.TelegramPreparedInlineMessage
+    >
+    /**
+     * Stores a keyboard button that can be used by a user within a Mini App. Returns a [PreparedKeyboardButton](https://core.telegram.org/bots/api#preparedkeyboardbutton) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#savepreparedkeyboardbutton)
+     */
+    savePreparedKeyboardButton: CallAPI<
+        Params.SavePreparedKeyboardButtonParams,
+        Objects.TelegramPreparedKeyboardButton
+    >
+    /**
      * Use this method to edit text and [game](https://core.telegram.org/bots/api#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagetext)
@@ -1108,24 +1147,6 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#answerinlinequery)
      */
     answerInlineQuery: CallAPI<Params.AnswerInlineQueryParams, true>
-    /**
-     * Use this method to set the result of an interaction with a [Web App](https://core.telegram.org/bots/webapps) and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a [SentWebAppMessage](https://core.telegram.org/bots/api#sentwebappmessage) object is returned.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#answerwebappquery)
-     */
-    answerWebAppQuery: CallAPI<
-        Params.AnswerWebAppQueryParams,
-        Objects.TelegramSentWebAppMessage
-    >
-    /**
-     * Stores a message that can be sent by a user of a Mini App. Returns a [PreparedInlineMessage](https://core.telegram.org/bots/api#preparedinlinemessage) object.
-     *
-     * [Documentation](https://core.telegram.org/bots/api/#savepreparedinlinemessage)
-     */
-    savePreparedInlineMessage: CallAPI<
-        Params.SavePreparedInlineMessageParams,
-        Objects.TelegramPreparedInlineMessage
-    >
     /**
      * Use this method to send invoices. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *

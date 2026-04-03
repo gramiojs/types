@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v9.5 (01.03.2026)
+ * Based on Bot API v9.6 (03.04.2026)
  *
- * Generated at 01.03.2026, 10:44:44 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 03.04.2026, 15:40:56 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -380,7 +380,7 @@ export interface SendPhotoParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     photo: Objects.TelegramInputFile | string
     /**
@@ -462,7 +462,7 @@ export interface SendAudioParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     audio: Objects.TelegramInputFile | string
     /**
@@ -490,7 +490,7 @@ export interface SendAudioParams {
      */
     title?: string
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -552,11 +552,11 @@ export interface SendDocumentParams {
      */
     direct_messages_topic_id?: number
     /**
-     * File to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     document: Objects.TelegramInputFile | string
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -634,7 +634,7 @@ export interface SendVideoParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     video: Objects.TelegramInputFile | string
     /**
@@ -650,11 +650,11 @@ export interface SendVideoParams {
      */
     height?: number
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
-     * Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     cover?: Objects.TelegramInputFile | string
     /**
@@ -744,7 +744,7 @@ export interface SendAnimationParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     animation: Objects.TelegramInputFile | string
     /**
@@ -760,7 +760,7 @@ export interface SendAnimationParams {
      */
     height?: number
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -842,7 +842,7 @@ export interface SendVoiceParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     voice: Objects.TelegramInputFile | string
     /**
@@ -920,7 +920,7 @@ export interface SendVideoNoteParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending video notes by a URL is currently unsupported
+     * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files). Sending video notes by a URL is currently unsupported
      */
     video_note: Objects.TelegramInputFile | string
     /**
@@ -932,7 +932,7 @@ export interface SendVideoNoteParams {
      */
     length?: number
     /**
-     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -1395,13 +1395,29 @@ export interface SendPollParams {
      */
     type?: SendPollType
     /**
-     * *True*, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to *False*
+     * Pass *True*, if the poll allows multiple answers, defaults to *False*
      */
     allows_multiple_answers?: boolean
     /**
-     * 0-based identifier of the correct answer option, required for polls in quiz mode
+     * Pass *True*, if the poll allows to change chosen answer options, defaults to *False* for quizzes and to *True* for regular polls
      */
-    correct_option_id?: number
+    allows_revoting?: boolean
+    /**
+     * Pass *True*, if the poll options must be shown in random order
+     */
+    shuffle_options?: boolean
+    /**
+     * Pass *True*, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes
+     */
+    allow_adding_options?: boolean
+    /**
+     * Pass *True*, if poll results must be shown only after the poll closes
+     */
+    hide_results_until_closes?: boolean
+    /**
+     * A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode
+     */
+    correct_option_ids?: number[]
     /**
      * Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing
      */
@@ -1415,17 +1431,29 @@ export interface SendPollParams {
      */
     explanation_entities?: Objects.TelegramMessageEntity[]
     /**
-     * Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with *close\_date*.
+     * Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with *close\_date*.
      */
     open_period?: number
     /**
-     * Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with *open\_period*.
+     * Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 2628000 seconds in the future. Can't be used together with *open\_period*.
      */
     close_date?: number
     /**
      * Pass *True* if the poll needs to be immediately closed. This can be useful for poll preview.
      */
     is_closed?: boolean
+    /**
+     * Description of the poll to be sent, 0-1024 characters after entities parsing
+     */
+    description?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the poll description. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     */
+    description_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of *description\_parse\_mode*
+     */
+    description_entities?: Objects.TelegramMessageEntity[]
     /**
      * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
      */
@@ -1500,7 +1528,7 @@ export interface SendChecklistParams {
         | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
 }
 
-export type SendDiceEmoji = "🎲" | "🎯" | "🏀" | "⚽" | "🎳" | "🎰"
+export type SendDiceEmoji = "рџЋІ" | "рџЋЇ" | "рџЏЂ" | "вљЅ" | "рџЋі" | "рџЋ°"
 
 /**
  * Params object for {@link APIMethods.sendDice | sendDice} method
@@ -1523,7 +1551,7 @@ export interface SendDiceParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Emoji on which the dice throw animation is based. Currently, must be one of “![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)”, “![🎯](https://telegram.org/img/emoji/40/F09F8EAF.png)”, “![🏀](https://telegram.org/img/emoji/40/F09F8F80.png)”, “![⚽](https://telegram.org/img/emoji/40/E29ABD.png)”, “![🎳](https://telegram.org/img/emoji/40/F09F8EB3.png)”, or “![🎰](https://telegram.org/img/emoji/40/F09F8EB0.png)”. Dice can have values 1-6 for “![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)”, “![🎯](https://telegram.org/img/emoji/40/F09F8EAF.png)” and “![🎳](https://telegram.org/img/emoji/40/F09F8EB3.png)”, values 1-5 for “![🏀](https://telegram.org/img/emoji/40/F09F8F80.png)” and “![⚽](https://telegram.org/img/emoji/40/E29ABD.png)”, and values 1-64 for “![🎰](https://telegram.org/img/emoji/40/F09F8EB0.png)”. Defaults to “![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)”
+     * Emoji on which the dice throw animation is based. Currently, must be one of “рџЋІ”, “рџЋЇ”, “рџЏЂ”, “вљЅ”, “рџЋі”, or “рџЋ°”. Dice can have values 1-6 for “рџЋІ”, “рџЋЇ” and “рџЋі”, values 1-5 for “рџЏЂ” and “вљЅ”, and values 1-64 for “рџЋ°”. Defaults to “рџЋІ”
      */
     emoji?: SendDiceEmoji
     /**
@@ -2498,6 +2526,26 @@ export interface GetBusinessConnectionParams {
 }
 
 /**
+ * Params object for {@link APIMethods.getManagedBotToken | getManagedBotToken} method
+ */
+export interface GetManagedBotTokenParams {
+    /**
+     * User identifier of the managed bot whose token will be returned
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.replaceManagedBotToken | replaceManagedBotToken} method
+ */
+export interface ReplaceManagedBotTokenParams {
+    /**
+     * User identifier of the managed bot whose token will be replaced
+     */
+    user_id: number
+}
+
+/**
  * Params object for {@link APIMethods.setMyCommands | setMyCommands} method
  */
 export interface SetMyCommandsParams {
@@ -2698,11 +2746,11 @@ export interface SendGiftParams {
      */
     text?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
-     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_entities?: Objects.TelegramMessageEntity[]
 }
@@ -2730,11 +2778,11 @@ export interface GiftPremiumSubscriptionParams {
      */
     text?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
-     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_entities?: Objects.TelegramMessageEntity[]
 }
@@ -3264,6 +3312,64 @@ export interface DeleteStoryParams {
 }
 
 /**
+ * Params object for {@link APIMethods.answerWebAppQuery | answerWebAppQuery} method
+ */
+export interface AnswerWebAppQueryParams {
+    /**
+     * Unique identifier for the query to be answered
+     */
+    web_app_query_id: string
+    /**
+     * A JSON-serialized object describing the message to be sent
+     */
+    result: Objects.TelegramInlineQueryResult
+}
+
+/**
+ * Params object for {@link APIMethods.savePreparedInlineMessage | savePreparedInlineMessage} method
+ */
+export interface SavePreparedInlineMessageParams {
+    /**
+     * Unique identifier of the target user that can use the prepared message
+     */
+    user_id: number
+    /**
+     * A JSON-serialized object describing the message to be sent
+     */
+    result: Objects.TelegramInlineQueryResult
+    /**
+     * Pass *True* if the message can be sent to private chats with users
+     */
+    allow_user_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to private chats with bots
+     */
+    allow_bot_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to group and supergroup chats
+     */
+    allow_group_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to channel chats
+     */
+    allow_channel_chats?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.savePreparedKeyboardButton | savePreparedKeyboardButton} method
+ */
+export interface SavePreparedKeyboardButtonParams {
+    /**
+     * Unique identifier of the target user that can use the button
+     */
+    user_id: number
+    /**
+     * A JSON-serialized object describing the button to be saved. The button must be of the type *request\_users*, *request\_chat*, or *request\_managed\_bot*
+     */
+    button: Objects.TelegramKeyboardButton
+}
+
+/**
  * Params object for {@link APIMethods.editMessageText | editMessageText} method
  */
 export interface EditMessageTextParams {
@@ -3628,7 +3734,7 @@ export interface SendStickerParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Video and animated stickers can't be sent via an HTTP URL.
+     * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files). Video and animated stickers can't be sent via an HTTP URL.
      */
     sticker: Objects.TelegramInputFile | string
     /**
@@ -3704,7 +3810,7 @@ export interface UploadStickerFileParams {
      */
     user_id: number
     /**
-     * A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See [https://core.telegram.org/stickers](https://core.telegram.org/stickers) for technical requirements. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See [https://core.telegram.org/stickers](https://core.telegram.org/stickers) for technical requirements. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
      */
     sticker: Objects.TelegramInputFile
     /**
@@ -3880,7 +3986,7 @@ export interface SetStickerSetThumbnailParams {
      */
     user_id: number
     /**
-     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **.WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+     * A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see [https://core.telegram.org/stickers#animation-requirements](https://core.telegram.org/stickers#animation-requirements) for animated sticker technical requirements), or a **.WEBM** video with the thumbnail up to 32 kilobytes in size; see [https://core.telegram.org/stickers#video-requirements](https://core.telegram.org/stickers#video-requirements) for video sticker technical requirements. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files). Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
@@ -3941,50 +4047,6 @@ export interface AnswerInlineQueryParams {
      * A JSON-serialized object describing a button to be shown above inline query results
      */
     button?: Objects.TelegramInlineQueryResultsButton
-}
-
-/**
- * Params object for {@link APIMethods.answerWebAppQuery | answerWebAppQuery} method
- */
-export interface AnswerWebAppQueryParams {
-    /**
-     * Unique identifier for the query to be answered
-     */
-    web_app_query_id: string
-    /**
-     * A JSON-serialized object describing the message to be sent
-     */
-    result: Objects.TelegramInlineQueryResult
-}
-
-/**
- * Params object for {@link APIMethods.savePreparedInlineMessage | savePreparedInlineMessage} method
- */
-export interface SavePreparedInlineMessageParams {
-    /**
-     * Unique identifier of the target user that can use the prepared message
-     */
-    user_id: number
-    /**
-     * A JSON-serialized object describing the message to be sent
-     */
-    result: Objects.TelegramInlineQueryResult
-    /**
-     * Pass *True* if the message can be sent to private chats with users
-     */
-    allow_user_chats?: boolean
-    /**
-     * Pass *True* if the message can be sent to private chats with bots
-     */
-    allow_bot_chats?: boolean
-    /**
-     * Pass *True* if the message can be sent to group and supergroup chats
-     */
-    allow_group_chats?: boolean
-    /**
-     * Pass *True* if the message can be sent to channel chats
-     */
-    allow_channel_chats?: boolean
 }
 
 /**
