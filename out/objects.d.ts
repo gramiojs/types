@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.6 (03.04.2026)
  *
- * Generated at 11.04.2026, 00:49:04 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 10.04.2026, 21:54:52 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -7669,7 +7669,7 @@ export interface TelegramInputTextMessageContent {
     /**
      * Text of the message to be sent, 1-4096 characters
      */
-    message_text: string
+    message_text: string | { toString(): string }
     /**
      * *Optional*. Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
