@@ -10,8 +10,9 @@ const hash = createHash("sha1")
 	.update(JSON.stringify(schema.version))
 	.digest("hex");
 
+const force = process.argv.includes("--force");
 const previousHash = await fs.readFile("./hash.txt").then(String);
-if (previousHash === hash) {
+if (previousHash === hash && !force) {
 	console.log("No changes in Telegram Bot API Schema");
 	process.exit(1);
 }

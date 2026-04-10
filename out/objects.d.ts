@@ -10,7 +10,7 @@
  *
  * Based on Bot API v9.6 (03.04.2026)
  *
- * Generated at 03.04.2026, 15:40:56 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 11.04.2026, 00:49:04 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -120,7 +120,7 @@ export interface TelegramUpdate {
      */
     removed_chat_boost?: TelegramChatBoostRemoved
     /**
-     * *Optional*. A new bot was created to be managed by the bot or token of a bot was changed
+     * *Optional*. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed
      */
     managed_bot?: TelegramManagedBotUpdated
 }
@@ -708,7 +708,7 @@ export interface TelegramMessage {
      */
     dice?: TelegramDice
     /**
-     * *Optional*. Message is a game, information about the game. [More about games В»](https://core.telegram.org/bots/api#games)
+     * *Optional*. Message is a game, information about the game. [More about games »](https://core.telegram.org/bots/api#games)
      */
     game?: TelegramGame
     /**
@@ -780,15 +780,15 @@ export interface TelegramMessage {
      */
     pinned_message?: TelegramMaybeInaccessibleMessage
     /**
-     * *Optional*. Message is an invoice for a [payment](https://core.telegram.org/bots/api#payments), information about the invoice. [More about payments В»](https://core.telegram.org/bots/api#payments)
+     * *Optional*. Message is an invoice for a [payment](https://core.telegram.org/bots/api#payments), information about the invoice. [More about payments »](https://core.telegram.org/bots/api#payments)
      */
     invoice?: TelegramInvoice
     /**
-     * *Optional*. Message is a service message about a successful payment, information about the payment. [More about payments В»](https://core.telegram.org/bots/api#payments)
+     * *Optional*. Message is a service message about a successful payment, information about the payment. [More about payments »](https://core.telegram.org/bots/api#payments)
      */
     successful_payment?: TelegramSuccessfulPayment
     /**
-     * *Optional*. Message is a service message about a refunded payment, information about the payment. [More about payments В»](https://core.telegram.org/bots/api#payments)
+     * *Optional*. Message is a service message about a refunded payment, information about the payment. [More about payments »](https://core.telegram.org/bots/api#payments)
      */
     refunded_payment?: TelegramRefundedPayment
     /**
@@ -812,7 +812,7 @@ export interface TelegramMessage {
      */
     gift_upgrade_sent?: TelegramGiftInfo
     /**
-     * *Optional*. The domain name of the website on which the user has logged in. [More about Telegram Login В»](https://core.telegram.org/widgets/login)
+     * *Optional*. The domain name of the website on which the user has logged in. [More about Telegram Login »](https://core.telegram.org/widgets/login)
      */
     connected_website?: string
     /**
@@ -1164,7 +1164,7 @@ export interface TelegramExternalReplyInfo {
      */
     dice?: TelegramDice
     /**
-     * *Optional*. Message is a game, information about the game. [More about games В»](https://core.telegram.org/bots/api#games)
+     * *Optional*. Message is a game, information about the game. [More about games »](https://core.telegram.org/bots/api#games)
      */
     game?: TelegramGame
     /**
@@ -1176,7 +1176,7 @@ export interface TelegramExternalReplyInfo {
      */
     giveaway_winners?: TelegramGiveawayWinners
     /**
-     * *Optional*. Message is an invoice for a [payment](https://core.telegram.org/bots/api#payments), information about the invoice. [More about payments В»](https://core.telegram.org/bots/api#payments)
+     * *Optional*. Message is an invoice for a [payment](https://core.telegram.org/bots/api#payments), information about the invoice. [More about payments »](https://core.telegram.org/bots/api#payments)
      */
     invoice?: TelegramInvoice
     /**
@@ -1784,7 +1784,7 @@ export interface TelegramDice {
      */
     emoji: string
     /**
-     * Value of the dice, 1-6 for “рџЋІ”, “рџЋЇ” and “рџЋі” base emoji, 1-5 for “рџЏЂ” and “вљЅ” base emoji, 1-64 for “рџЋ°” base emoji
+     * Value of the dice, 1-6 for “![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)”, “![🎯](https://telegram.org/img/emoji/40/F09F8EAF.png)” and “![🎳](https://telegram.org/img/emoji/40/F09F8EB3.png)” base emoji, 1-5 for “![🏀](https://telegram.org/img/emoji/40/F09F8F80.png)” and “![⚽](https://telegram.org/img/emoji/40/E29ABD.png)” base emoji, 1-64 for “![🎰](https://telegram.org/img/emoji/40/F09F8EB0.png)” base emoji
      */
     value: number
 }
@@ -2232,7 +2232,7 @@ export interface TelegramManagedBotCreated {
 }
 
 /**
- * This object contains information about the creation or token update of a bot that is managed by the current bot.
+ * This object contains information about the creation, token update, or owner update of a bot that is managed by the current bot.
  *
  * [Documentation](https://core.telegram.org/bots/api/#managedbotupdated)
  */
@@ -3222,7 +3222,7 @@ export interface TelegramKeyboardButton {
 }
 
 /**
- * This object defines the criteria used to request suitable users. Information about the selected users will be shared with the bot when the corresponding button is pressed. [More about requesting users В»](https://core.telegram.org/bots/features#chat-and-user-selection)
+ * This object defines the criteria used to request suitable users. Information about the selected users will be shared with the bot when the corresponding button is pressed. [More about requesting users »](https://core.telegram.org/bots/features#chat-and-user-selection)
  *
  * [Documentation](https://core.telegram.org/bots/api/#keyboardbuttonrequestusers)
  */
@@ -3258,7 +3258,7 @@ export interface TelegramKeyboardButtonRequestUsers {
 }
 
 /**
- * This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. [More about requesting chats В»](https://core.telegram.org/bots/features#chat-and-user-selection).
+ * This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. [More about requesting chats »](https://core.telegram.org/bots/features#chat-and-user-selection).
  *
  * [Documentation](https://core.telegram.org/bots/api/#keyboardbuttonrequestchat)
  */
@@ -3432,7 +3432,7 @@ export interface TelegramInlineKeyboardButton {
      */
     callback_game?: TelegramCallbackGame
     /**
-     * *Optional*. Specify *True*, to send a [Pay button](https://core.telegram.org/bots/api#payments). Substrings “в­ђ” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.
+     * *Optional*. Specify *True*, to send a [Pay button](https://core.telegram.org/bots/api#payments). Substrings “![⭐](https://telegram.org/img/emoji/40/E2AD90.png)” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.
      *
      * **NOTE:** This type of button **must** always be the first button in the first row and can only be used in invoice messages.
      */
@@ -5863,7 +5863,7 @@ export interface TelegramInputMediaPhoto {
      */
     type: "photo"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
@@ -5899,15 +5899,15 @@ export interface TelegramInputMediaVideo {
      */
     type: "video"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
-     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     cover?: TelegramInputFile | string
     /**
@@ -5963,11 +5963,11 @@ export interface TelegramInputMediaAnimation {
      */
     type: "animation"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
@@ -6015,11 +6015,11 @@ export interface TelegramInputMediaAudio {
      */
     type: "audio"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
@@ -6059,11 +6059,11 @@ export interface TelegramInputMediaDocument {
      */
     type: "document"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
@@ -6114,7 +6114,7 @@ export interface TelegramInputPaidMediaPhoto {
      */
     type: "photo"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
 }
@@ -6130,15 +6130,15 @@ export interface TelegramInputPaidMediaVideo {
      */
     type: "video"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
-     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     cover?: TelegramInputFile | string
     /**
@@ -6186,7 +6186,7 @@ export interface TelegramInputProfilePhotoStatic {
      */
     type: "static"
     /**
-     * The static profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * The static profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     photo: TelegramInputFile | string
 }
@@ -6202,7 +6202,7 @@ export interface TelegramInputProfilePhotoAnimated {
      */
     type: "animated"
     /**
-     * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     animation: TelegramInputFile | string
     /**
@@ -6234,7 +6234,7 @@ export interface TelegramInputStoryContentPhoto {
      */
     type: "photo"
     /**
-     * The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     photo: TelegramInputFile | string
 }
@@ -6250,7 +6250,7 @@ export interface TelegramInputStoryContentVideo {
      */
     type: "video"
     /**
-     * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the video was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the video was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     video: TelegramInputFile | string
     /**
@@ -6402,7 +6402,7 @@ export type TelegramInputStickerFormat = "static" | "animated" | "video"
  */
 export interface TelegramInputSticker {
     /**
-     * The added sticker. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new file using multipart/form-data under <file\_attach\_name> name. Animated and video stickers can't be uploaded via HTTP URL. [More information on Sending Files В»](https://core.telegram.org/bots/api#sending-files)
+     * The added sticker. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new file using multipart/form-data under <file\_attach\_name> name. Animated and video stickers can't be uploaded via HTTP URL. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     sticker: TelegramInputFile | string
     /**

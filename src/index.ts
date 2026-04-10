@@ -14,6 +14,22 @@ export interface IGeneratedFile {
 // ─── Fetch & parse ────────────────────────────────────────────────────────────
 
 const schema = await getCustomSchema();
+
+// Guard against UTF-8 → CP1251 mojibake. A 4-byte emoji in UTF-8 starts with
+// `F0 9F`, which when decoded as windows-1251 becomes "рџ". That sequence never
+// legitimately appears in the Telegram Bot API schema, so its presence means
+// the upstream HTTP response was decoded with the wrong charset (this shipped
+// broken strings like `SendDiceEmoji = "рџЋІ" | ...` in v9.6.0).
+{
+	const serialized = JSON.stringify(schema);
+	const match = serialized.match(/.{0,40}рџ.{0,40}/);
+	if (match) {
+		throw new Error(
+			`Schema contains UTF-8 → CP1251 mojibake — upstream response was decoded with the wrong charset.\nContext: ${match[0]}`,
+		);
+	}
+}
+
 const { methods } = schema;
 const objects = schema.objects
 

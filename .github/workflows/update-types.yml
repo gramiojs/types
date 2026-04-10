@@ -4,6 +4,11 @@ on:
     schedule:
         - cron: "0 * * * *"
     workflow_dispatch:
+        inputs:
+            force:
+                description: "Skip hash check and force generation"
+                type: boolean
+                default: false
 
 permissions:
     contents: write
@@ -29,7 +34,7 @@ jobs:
 
             - id: cicd
               name: Get hash from schema
-              run: bun cicd
+              run: bun cicd ${{ github.event.inputs.force == 'true' && '--force' || '' }}
 
             - name: Generate types
               run: bun generate

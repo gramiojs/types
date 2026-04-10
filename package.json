@@ -31,6 +31,8 @@
 	"scripts": {
 		"dirty-fix": "bun scripts/dirty-fix.ts",
 		"cicd": "bun scripts/cicd.ts",
+		"cicd:force": "bun scripts/cicd.ts --force",
+		"force-release": "gh workflow run update-types.yml -f force=true",
 		"jsr": "bun scripts/release-jsr.ts",
 		"generate": "bun src/index.ts",
 		"lint": "bunx @biomejs/biome check ./src",
