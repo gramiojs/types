@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v9.6 (03.04.2026)
+ * Based on Bot API v10.0 (08.05.2026)
  *
- * Generated at 10.04.2026, 21:54:52 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 08.05.2026, 14:21:34 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -121,6 +121,12 @@ export interface APIMethods {
      */
     sendPhoto: CallAPI<Params.SendPhotoParams, Objects.TelegramMessage>
     /**
+     * Use this method to send live photos. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendlivephoto)
+     */
+    sendLivePhoto: CallAPI<Params.SendLivePhotoParams, Objects.TelegramMessage>
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      *
      * For sending voice messages, use the [sendVoice](https://core.telegram.org/bots/api#sendvoice) method instead.
@@ -165,7 +171,7 @@ export interface APIMethods {
      */
     sendPaidMedia: CallAPI<Params.SendPaidMediaParams, Objects.TelegramMessage>
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of [Message](https://core.telegram.org/bots/api#message) objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of [Message](https://core.telegram.org/bots/api#message) objects that were sent is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendmediagroup)
      */
@@ -210,7 +216,7 @@ export interface APIMethods {
      */
     sendDice: CallAPI<Params.SendDiceParams, Objects.TelegramMessage>
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns *True* on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you **must** call [sendMessage](https://core.telegram.org/bots/api#sendmessage) with the complete message to persist it in the user's chat. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendmessagedraft)
      */
@@ -436,7 +442,7 @@ export interface APIMethods {
      */
     getChat: CallAPI<Params.GetChatParams, Objects.TelegramChatFullInfo>
     /**
-     * Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of [ChatMember](https://core.telegram.org/bots/api#chatmember) objects.
+     * Use this method to get a list of administrators in a chat. Returns an Array of [ChatMember](https://core.telegram.org/bots/api#chatmember) objects.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchatadministrators)
      */
@@ -458,6 +464,15 @@ export interface APIMethods {
     getChatMember: CallAPI<
         Params.GetChatMemberParams,
         Objects.TelegramChatMember
+    >
+    /**
+     * Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an array of [Message](https://core.telegram.org/bots/api#message) objects is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getuserpersonalchatmessages)
+     */
+    getUserPersonalChatMessages: CallAPI<
+        Params.GetUserPersonalChatMessagesParams,
+        Objects.TelegramMessage[]
     >
     /**
      * Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field *can\_set\_sticker\_set* optionally returned in [getChat](https://core.telegram.org/bots/api#getchat) requests to check if the bot can use this method. Returns *True* on success.
@@ -567,6 +582,15 @@ export interface APIMethods {
      */
     answerCallbackQuery: CallAPI<Params.AnswerCallbackQueryParams, true>
     /**
+     * Use this method to reply to a received guest message. On success, a [SentGuestMessage](https://core.telegram.org/bots/api#sentguestmessage) object is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#answerguestquery)
+     */
+    answerGuestQuery: CallAPI<
+        Params.AnswerGuestQueryParams,
+        Objects.TelegramSentGuestMessage
+    >
+    /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a [UserChatBoosts](https://core.telegram.org/bots/api#userchatboosts) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getuserchatboosts)
@@ -596,6 +620,24 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#replacemanagedbottoken)
      */
     replaceManagedBotToken: CallAPI<Params.ReplaceManagedBotTokenParams, string>
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a [BotAccessSettings](https://core.telegram.org/bots/api#botaccesssettings) object on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getmanagedbotaccesssettings)
+     */
+    getManagedBotAccessSettings: CallAPI<
+        Params.GetManagedBotAccessSettingsParams,
+        Objects.TelegramBotAccessSettings
+    >
+    /**
+     * Use this method to change the access settings of a managed bot. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setmanagedbotaccesssettings)
+     */
+    setManagedBotAccessSettings: CallAPI<
+        Params.SetManagedBotAccessSettingsParams,
+        true
+    >
     /**
      * Use this method to change the list of the bot's commands. See [this manual](https://core.telegram.org/bots/features#commands) for more details about bot commands. Returns *True* on success.
      *
@@ -948,7 +990,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagemedia)
      */
@@ -1032,6 +1074,21 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#deletemessages)
      */
     deleteMessages: CallAPI<Params.DeleteMessagesParams, true>
+    /**
+     * Use this method to remove a reaction from a message in a group or a supergroup chat. The bot must have the 'can\_delete\_messages' administrator right in the chat. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deletemessagereaction)
+     */
+    deleteMessageReaction: CallAPI<Params.DeleteMessageReactionParams, true>
+    /**
+     * Use this method to remove up to 10000 recent reactions in a group or a supergroup chat added by a given user or chat. The bot must have the 'can\_delete\_messages' administrator right in the chat. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deleteallmessagereactions)
+     */
+    deleteAllMessageReactions: CallAPI<
+        Params.DeleteAllMessageReactionsParams,
+        true
+    >
     /**
      * Use this method to send static .WEBP, [animated](https://telegram.org/blog/animated-stickers) .TGS, or [video](https://telegram.org/blog/video-stickers-better-reactions) .WEBM stickers. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
