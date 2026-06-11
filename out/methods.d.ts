@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v10.0 (08.05.2026)
+ * Based on Bot API v10.1 (11.06.2026)
  *
- * Generated at 08.05.2026, 14:21:34 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 11.06.2026, 18:06:00 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -387,6 +387,24 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#declinechatjoinrequest)
      */
     declineChatJoinRequest: CallAPI<Params.DeclineChatJoinRequestParams, true>
+    /**
+     * Use this method to process a received chat join request query. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#answerchatjoinrequestquery)
+     */
+    answerChatJoinRequestQuery: CallAPI<
+        Params.AnswerChatJoinRequestQueryParams,
+        true
+    >
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendchatjoinrequestwebapp)
+     */
+    sendChatJoinRequestWebApp: CallAPI<
+        Params.SendChatJoinRequestWebAppParams,
+        true
+    >
     /**
      * Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns *True* on success.
      *
@@ -972,11 +990,11 @@ export interface APIMethods {
         Objects.TelegramPreparedKeyboardButton
     >
     /**
-     * Use this method to edit text and [game](https://core.telegram.org/bots/api#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     * Use this method to edit text, rich and [game](https://core.telegram.org/bots/api#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagetext)
      */
-    editMessageText: CallAPI<
+    editMessageText: CallAPIWithOptionalParams<
         Params.EditMessageTextParams,
         Objects.TelegramMessage | true
     >
@@ -990,7 +1008,7 @@ export interface APIMethods {
         Objects.TelegramMessage | true
     >
     /**
-     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagemedia)
      */
@@ -1197,6 +1215,21 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#deletestickerset)
      */
     deleteStickerSet: CallAPI<Params.DeleteStickerSetParams, true>
+    /**
+     * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendrichmessage)
+     */
+    sendRichMessage: CallAPI<
+        Params.SendRichMessageParams,
+        Objects.TelegramMessage
+    >
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you **must** call [sendRichMessage](https://core.telegram.org/bots/api#sendrichmessage) with the complete message to persist it in the user's chat. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendrichmessagedraft)
+     */
+    sendRichMessageDraft: CallAPI<Params.SendRichMessageDraftParams, true>
     /**
      * Use this method to send answers to an inline query. On success, *True* is returned.
      * No more than **50** results per query are allowed.

@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v10.0 (08.05.2026)
+ * Based on Bot API v10.1 (11.06.2026)
  *
- * Generated at 08.05.2026, 14:21:34 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 11.06.2026, 18:06:00 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -84,11 +84,11 @@ export interface TelegramUpdate {
      */
     callback_query?: TelegramCallbackQuery
     /**
-     * *Optional*. New incoming shipping query. Only for invoices with flexible price
+     * *Optional*. New incoming shipping query. Only for invoices with flexible price.
      */
     shipping_query?: TelegramShippingQuery
     /**
-     * *Optional*. New incoming pre-checkout query. Contains full information about checkout
+     * *Optional*. New incoming pre-checkout query. Contains full information about checkout.
      */
     pre_checkout_query?: TelegramPreCheckoutQuery
     /**
@@ -96,7 +96,7 @@ export interface TelegramUpdate {
      */
     purchased_paid_media?: TelegramPaidMediaPurchased
     /**
-     * *Optional*. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot
+     * *Optional*. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot.
      */
     poll?: TelegramPoll
     /**
@@ -168,7 +168,7 @@ export interface TelegramWebhookInfo {
      */
     max_connections?: number
     /**
-     * *Optional*. A list of update types the bot is subscribed to. Defaults to all update types except *chat\_member*
+     * *Optional*. A list of update types the bot is subscribed to. Defaults to all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count*.
      */
     allowed_updates?: Exclude<keyof TelegramUpdate, "update_id">[]
 }
@@ -247,6 +247,10 @@ export interface TelegramUser {
      * *Optional*. *True*, if other bots can be created to be controlled by the bot. Returned only in [getMe](https://core.telegram.org/bots/api#getme).
      */
     can_manage_bots?: boolean
+    /**
+     * *Optional*. *True*, if the bot supports join request queries and can be assigned to process them. Returned only in [getMe](https://core.telegram.org/bots/api#getme).
+     */
+    supports_join_request_queries?: boolean
 }
 
 export type TelegramChatType = "private" | "group" | "supergroup" | "channel"
@@ -504,9 +508,13 @@ export interface TelegramChatFullInfo {
      */
     unique_gift_colors?: TelegramUniqueGiftColors
     /**
-     * *Optional*. The number of Telegram Stars a general user have to pay to send a message to the chat
+     * *Optional*. The number of Telegram Stars a general user has to pay to send a message to the chat
      */
     paid_message_star_count?: number
+    /**
+     * *Optional*. The bot that processes join request queries in the chat. The field is only available to chat administrators.
+     */
+    guard_bot?: TelegramUser
 }
 
 /**
@@ -516,7 +524,7 @@ export interface TelegramChatFullInfo {
  */
 export interface TelegramMessage {
     /**
-     * Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent
+     * Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
      */
     message_id: number
     /**
@@ -528,7 +536,7 @@ export interface TelegramMessage {
      */
     direct_messages_topic?: TelegramDirectMessagesTopic
     /**
-     * *Optional*. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats
+     * *Optional*. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats.
      */
     from?: TelegramUser
     /**
@@ -660,7 +668,11 @@ export interface TelegramMessage {
      */
     effect_id?: string
     /**
-     * *Optional*. Message is an animation, information about the animation. For backward compatibility, when this field is set, the *document* field will also be set
+     * *Optional*. Message is a rich formatted message
+     */
+    rich_message?: TelegramRichMessage
+    /**
+     * *Optional*. Message is an animation, information about the animation. For backward compatibility, when this field is set, the *document* field will also be set.
      */
     animation?: TelegramAnimation
     /**
@@ -672,7 +684,7 @@ export interface TelegramMessage {
      */
     document?: TelegramDocument
     /**
-     * *Optional*. Message is a live photo, information about the live photo. For backward compatibility, when this field is set, the *photo* field will also be set
+     * *Optional*. Message is a live photo, information about the live photo. For backward compatibility, when this field is set, the *photo* field will also be set.
      */
     live_photo?: TelegramLivePhoto
     /**
@@ -740,7 +752,7 @@ export interface TelegramMessage {
      */
     poll?: TelegramPoll
     /**
-     * *Optional*. Message is a venue, information about the venue. For backward compatibility, when this field is set, the *location* field will also be set
+     * *Optional*. Message is a venue, information about the venue. For backward compatibility, when this field is set, the *location* field will also be set.
      */
     venue?: TelegramVenue
     /**
@@ -982,7 +994,7 @@ export interface TelegramMessage {
  */
 export interface TelegramMessageId {
     /**
-     * Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent
+     * Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
      */
     message_id: number
 }
@@ -1048,7 +1060,7 @@ export type TelegramMessageEntityType =
  */
 export interface TelegramMessageEntity {
     /**
-     * Type of the entity. Currently, can be “mention” (`@username`), “hashtag” (`#hashtag` or `#hashtag@chatusername`), “cashtag” (`$USD` or `$USD@chatusername`), “bot\_command” (`/start@jobs_bot`), “url” (`https://telegram.org`), “email” (`do-not-reply@telegram.org`), “phone\_number” (`+1-212-555-0123`), “bold” (**bold text**), “italic” (*italic text*), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable\_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text\_link” (for clickable text URLs), “text\_mention” (for users [without usernames](https://telegram.org/blog/edit#new-mentions)), “custom\_emoji” (for inline custom emoji stickers), or “date\_time” (for formatted date and time)
+     * Type of the entity. Currently, can be “mention” (`@username`), “hashtag” (`#hashtag` or `#hashtag@chatusername`), “cashtag” (`$USD` or `$USD@chatusername`), “bot\_command” (`/start@jobs_bot`), “url” (`https://telegram.org`), “email” (`do-not-reply@telegram.org`), “phone\_number” (`+1-212-555-0123`), “bold” (**bold text**), “italic” (*italic text*), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable\_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text\_link” (for clickable text URLs), “text\_mention” (for users [without usernames](https://telegram.org/blog/edit#new-mentions)), “custom\_emoji” (for inline custom emoji stickers), or “date\_time” (for formatted date and time).
      */
     type: TelegramMessageEntityType
     /**
@@ -1072,7 +1084,7 @@ export interface TelegramMessageEntity {
      */
     language?: string
     /**
-     * *Optional*. For “custom\_emoji” only, unique identifier of the custom emoji. Use [getCustomEmojiStickers](https://core.telegram.org/bots/api#getcustomemojistickers) to get full information about the sticker
+     * *Optional*. For “custom\_emoji” only, unique identifier of the custom emoji. Use [getCustomEmojiStickers](https://core.telegram.org/bots/api#getcustomemojistickers) to get full information about the sticker.
      */
     custom_emoji_id?: string
     /**
@@ -1760,7 +1772,7 @@ export type TelegramPaidMedia =
     | TelegramPaidMediaVideo
 
 /**
- *
+ * The paid media is a [live photo](https://core.telegram.org/bots/api#livephoto).
  *
  * [Documentation](https://core.telegram.org/bots/api/#paidmedialivephoto)
  */
@@ -1876,6 +1888,18 @@ export interface TelegramDice {
 }
 
 /**
+ * Represents an HTTP link.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#link)
+ */
+export interface TelegramLink {
+    /**
+     * URL of the link
+     */
+    url: string
+}
+
+/**
  * At most **one** of the optional fields can be present in any given object.
  *
  * [Documentation](https://core.telegram.org/bots/api/#pollmedia)
@@ -1893,6 +1917,10 @@ export interface TelegramPollMedia {
      * *Optional*. Media is a general file, information about the file; currently, can't be received in a poll option
      */
     document?: TelegramDocument
+    /**
+     * *Optional*. The HTTP link attached to the poll option
+     */
+    link?: TelegramLink
     /**
      * *Optional*. Media is a live photo, information about the live photo
      */
@@ -1947,6 +1975,7 @@ export type TelegramInputPollMedia =
  * This object represents the content of a poll option to be sent. It should be one of
  *
  * *   [InputMediaAnimation](https://core.telegram.org/bots/api#inputmediaanimation)
+ * *   [InputMediaLink](https://core.telegram.org/bots/api#inputmedialink)
  * *   [InputMediaLivePhoto](https://core.telegram.org/bots/api#inputmedialivephoto)
  * *   [InputMediaLocation](https://core.telegram.org/bots/api#inputmedialocation)
  * *   [InputMediaPhoto](https://core.telegram.org/bots/api#inputmediaphoto)
@@ -1958,6 +1987,7 @@ export type TelegramInputPollMedia =
  */
 export type TelegramInputPollOptionMedia =
     | TelegramInputMediaAnimation
+    | TelegramInputMediaLink
     | TelegramInputMediaLivePhoto
     | TelegramInputMediaLocation
     | TelegramInputMediaPhoto
@@ -2016,11 +2046,11 @@ export interface TelegramInputPollOption {
      */
     text: string | { toString(): string }
     /**
-     * *Optional*. Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Currently, only custom emoji entities are allowed
+     * *Optional*. Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Currently, only custom emoji entities are allowed.
      */
     text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
-     * *Optional*. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of *text\_parse\_mode*
+     * *Optional*. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of *text\_parse\_mode*.
      */
     text_entities?: TelegramMessageEntity[]
     /**
@@ -2110,7 +2140,7 @@ export interface TelegramPoll {
      */
     members_only: boolean
     /**
-     * *Optional*. A list of two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes indicating the countries from which users can vote in the poll. If omitted, then users from any country can participate in the poll.
+     * *Optional*. A list of two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes indicating the countries from which users can vote in the poll. The country code “FT” is used for users with anonymous numbers. If omitted, then users from any country can participate in the poll.
      */
     country_codes?: string[]
     /**
@@ -2342,7 +2372,7 @@ export interface TelegramLocation {
  */
 export interface TelegramVenue {
     /**
-     * Venue location. Can't be a live location
+     * Venue location. Can't be a live location.
      */
     location: TelegramLocation
     /**
@@ -2664,7 +2694,7 @@ export interface TelegramBackgroundTypePattern {
      */
     intensity: number
     /**
-     * *Optional*. *True*, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only
+     * *Optional*. *True*, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only.
      */
     is_inverted?: true
     /**
@@ -2808,7 +2838,7 @@ export interface TelegramUsersShared {
      */
     request_id: number
     /**
-     * Information about users shared with the bot.
+     * Information about users shared with the bot
      */
     users: TelegramSharedUser[]
 }
@@ -2828,11 +2858,11 @@ export interface TelegramChatShared {
      */
     chat_id: number
     /**
-     * *Optional*. Title of the chat, if the title was requested by the bot.
+     * *Optional*. Title of the chat, if the title was requested by the bot
      */
     title?: string
     /**
-     * *Optional*. Username of the chat, if the username was requested by the bot and available.
+     * *Optional*. Username of the chat, if the username was requested by the bot and available
      */
     username?: string
     /**
@@ -2997,7 +3027,7 @@ export interface TelegramSuggestedPostPaid {
      */
     suggested_post_message?: TelegramMessage
     /**
-     * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins
+     * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
      */
     currency: TelegramSuggestedPostPaidCurrency
     /**
@@ -3178,7 +3208,7 @@ export interface TelegramLinkPreviewOptions {
      */
     is_disabled?: boolean
     /**
-     * *Optional*. URL to use for the link preview. If empty, then the first URL found in the message text will be used
+     * *Optional*. URL to use for the link preview. If empty, then the first URL found in the message text will be used.
      */
     url?: string
     /**
@@ -3204,7 +3234,7 @@ export type TelegramSuggestedPostPriceCurrency = "XTR" | "TON"
  */
 export interface TelegramSuggestedPostPrice {
     /**
-     * Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins
+     * Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins.
      */
     currency: TelegramSuggestedPostPriceCurrency
     /**
@@ -3262,7 +3292,7 @@ export interface TelegramDirectMessagesTopic {
      */
     topic_id: number
     /**
-     * *Optional*. Information about the user that created the topic. Currently, it is always present
+     * *Optional*. Information about the user that created the topic. Currently, it is always present.
      */
     user?: TelegramUser
 }
@@ -3380,7 +3410,7 @@ export type TelegramKeyboardButtonStyle = "danger" | "success" | "primary"
  */
 export interface TelegramKeyboardButton {
     /**
-     * Text of the button. If none of the fields other than *text*, *icon\_custom\_emoji\_id*, and *style* are used, it will be sent as a message when the button is pressed
+     * Text of the button. If none of the fields other than *text*, *icon\_custom\_emoji\_id*, and *style* are used, it will be sent as a message when the button is pressed.
      */
     text: string
     /**
@@ -3428,7 +3458,7 @@ export interface TelegramKeyboardButton {
  */
 export interface TelegramKeyboardButtonRequestUsers {
     /**
-     * Signed 32-bit identifier of the request that will be received back in the [UsersShared](https://core.telegram.org/bots/api#usersshared) object. Must be unique within the message
+     * Signed 32-bit identifier of the request that will be received back in the [UsersShared](https://core.telegram.org/bots/api#usersshared) object. Must be unique within the message.
      */
     request_id: number
     /**
@@ -3464,11 +3494,11 @@ export interface TelegramKeyboardButtonRequestUsers {
  */
 export interface TelegramKeyboardButtonRequestChat {
     /**
-     * Signed 32-bit identifier of the request, which will be received back in the [ChatShared](https://core.telegram.org/bots/api#chatshared) object. Must be unique within the message
+     * Signed 32-bit identifier of the request, which will be received back in the [ChatShared](https://core.telegram.org/bots/api#chatshared) object. Must be unique within the message.
      */
     request_id: number
     /**
-     * Pass *True* to request a channel chat, pass *False* to request a group or a supergroup chat.
+     * Pass *True* to request a channel chat, pass *False* to request a group or a supergroup chat
      */
     chat_is_channel: boolean
     /**
@@ -3516,7 +3546,7 @@ export interface TelegramKeyboardButtonRequestChat {
  */
 export interface TelegramKeyboardButtonRequestManagedBot {
     /**
-     * Signed 32-bit identifier of the request. Must be unique within the message
+     * Signed 32-bit identifier of the request. Must be unique within the message.
      */
     request_id: number
     /**
@@ -3622,7 +3652,7 @@ export interface TelegramInlineKeyboardButton {
      */
     switch_inline_query_chosen_chat?: TelegramSwitchInlineQueryChosenChat
     /**
-     * *Optional*. Description of the button that copies the specified text to the clipboard.
+     * *Optional*. Description of the button that copies the specified text to the clipboard
      */
     copy_text?: TelegramCopyTextButton
     /**
@@ -3658,7 +3688,7 @@ export interface TelegramLoginUrl {
      */
     url: string
     /**
-     * *Optional*. New text of the button in forwarded messages.
+     * *Optional*. New text of the button in forwarded messages
      */
     forward_text?: string
     /**
@@ -3666,7 +3696,7 @@ export interface TelegramLoginUrl {
      */
     bot_username?: string
     /**
-     * *Optional*. Pass *True* to request the permission for your bot to send messages to the user.
+     * *Optional*. Pass *True* to request the permission for your bot to send messages to the user
      */
     request_write_access?: boolean
 }
@@ -3678,7 +3708,7 @@ export interface TelegramLoginUrl {
  */
 export interface TelegramSwitchInlineQueryChosenChat {
     /**
-     * *Optional*. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
+     * *Optional*. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted.
      */
     query?: string
     /**
@@ -3730,7 +3760,7 @@ export interface TelegramCallbackQuery {
      */
     message?: TelegramMaybeInaccessibleMessage
     /**
-     * *Optional*. Identifier of the message sent via the bot in inline mode, that originated the query.
+     * *Optional*. Identifier of the message sent via the bot in inline mode, that originated the query
      */
     inline_message_id?: string
     /**
@@ -3946,7 +3976,7 @@ export interface TelegramChatMemberUpdated {
      */
     new_chat_member: TelegramChatMember
     /**
-     * *Optional*. Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
+     * *Optional*. Chat invite link, which was used by the user to join the chat; for joining by invite link events only
      */
     invite_link?: TelegramChatInviteLink
     /**
@@ -4142,7 +4172,7 @@ export interface TelegramChatMemberRestricted {
      */
     is_member: boolean
     /**
-     * *True*, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
+     * *True*, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues
      */
     can_send_messages: boolean
     /**
@@ -4206,7 +4236,7 @@ export interface TelegramChatMemberRestricted {
      */
     can_manage_topics: boolean
     /**
-     * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever
+     * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever.
      */
     until_date: number
 }
@@ -4242,7 +4272,7 @@ export interface TelegramChatMemberBanned {
      */
     user: TelegramUser
     /**
-     * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever
+     * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever.
      */
     until_date: number
 }
@@ -4270,13 +4300,17 @@ export interface TelegramChatJoinRequest {
      */
     date: number
     /**
-     * *Optional*. Bio of the user.
+     * *Optional*. Bio of the user
      */
     bio?: string
     /**
      * *Optional*. Chat invite link that was used by the user to send the join request
      */
     invite_link?: TelegramChatInviteLink
+    /**
+     * *Optional*. Identifier of the join request query. If present, then the bot must call [sendChatJoinRequestWebApp](https://core.telegram.org/bots/api#sendchatjoinrequestwebapp) or directly call [answerChatJoinRequestQuery](https://core.telegram.org/bots/api#answerchatjoinrequestquery) within 10 seconds.
+     */
+    query_id?: string
 }
 
 /**
@@ -4286,7 +4320,7 @@ export interface TelegramChatJoinRequest {
  */
 export interface TelegramChatPermissions {
     /**
-     * *Optional*. *True*, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
+     * *Optional*. *True*, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues
      */
     can_send_messages?: boolean
     /**
@@ -4334,7 +4368,7 @@ export interface TelegramChatPermissions {
      */
     can_edit_tag?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
+     * *Optional*. *True*, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups.
      */
     can_change_info?: boolean
     /**
@@ -4342,11 +4376,11 @@ export interface TelegramChatPermissions {
      */
     can_invite_users?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to pin messages. Ignored in public supergroups
+     * *Optional*. *True*, if the user is allowed to pin messages. Ignored in public supergroups.
      */
     can_pin_messages?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages
+     * *Optional*. *True*, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages.
      */
     can_manage_topics?: boolean
 }
@@ -4773,7 +4807,7 @@ export interface TelegramReactionTypeEmoji {
      */
     type: "emoji"
     /**
-     * Reaction emoji. Currently, it can be one of "![❤](https://telegram.org/img/emoji/40/E29DA4.png)", "![👍](https://telegram.org/img/emoji/40/F09F918D.png)", "![👎](https://telegram.org/img/emoji/40/F09F918E.png)", "![🔥](https://telegram.org/img/emoji/40/F09F94A5.png)", "![🥰](https://telegram.org/img/emoji/40/F09FA5B0.png)", "![👏](https://telegram.org/img/emoji/40/F09F918F.png)", "![😁](https://telegram.org/img/emoji/40/F09F9881.png)", "![🤔](https://telegram.org/img/emoji/40/F09FA494.png)", "![🤯](https://telegram.org/img/emoji/40/F09FA4AF.png)", "![😱](https://telegram.org/img/emoji/40/F09F98B1.png)", "![🤬](https://telegram.org/img/emoji/40/F09FA4AC.png)", "![😢](https://telegram.org/img/emoji/40/F09F98A2.png)", "![🎉](https://telegram.org/img/emoji/40/F09F8E89.png)", "![🤩](https://telegram.org/img/emoji/40/F09FA4A9.png)", "![🤮](https://telegram.org/img/emoji/40/F09FA4AE.png)", "![💩](https://telegram.org/img/emoji/40/F09F92A9.png)", "![🙏](https://telegram.org/img/emoji/40/F09F998F.png)", "![👌](https://telegram.org/img/emoji/40/F09F918C.png)", "![🕊](https://telegram.org/img/emoji/40/F09F958A.png)", "![🤡](https://telegram.org/img/emoji/40/F09FA4A1.png)", "![🥱](https://telegram.org/img/emoji/40/F09FA5B1.png)", "![🥴](https://telegram.org/img/emoji/40/F09FA5B4.png)", "![😍](https://telegram.org/img/emoji/40/F09F988D.png)", "![🐳](https://telegram.org/img/emoji/40/F09F90B3.png)", "![❤‍🔥](https://telegram.org/img/emoji/40/E29DA4E2808DF09F94A5.png)", "![🌚](https://telegram.org/img/emoji/40/F09F8C9A.png)", "![🌭](https://telegram.org/img/emoji/40/F09F8CAD.png)", "![💯](https://telegram.org/img/emoji/40/F09F92AF.png)", "![🤣](https://telegram.org/img/emoji/40/F09FA4A3.png)", "![⚡](https://telegram.org/img/emoji/40/E29AA1.png)", "![🍌](https://telegram.org/img/emoji/40/F09F8D8C.png)", "![🏆](https://telegram.org/img/emoji/40/F09F8F86.png)", "![💔](https://telegram.org/img/emoji/40/F09F9294.png)", "![🤨](https://telegram.org/img/emoji/40/F09FA4A8.png)", "![😐](https://telegram.org/img/emoji/40/F09F9890.png)", "![🍓](https://telegram.org/img/emoji/40/F09F8D93.png)", "![🍾](https://telegram.org/img/emoji/40/F09F8DBE.png)", "![💋](https://telegram.org/img/emoji/40/F09F928B.png)", "![🖕](https://telegram.org/img/emoji/40/F09F9695.png)", "![😈](https://telegram.org/img/emoji/40/F09F9888.png)", "![😴](https://telegram.org/img/emoji/40/F09F98B4.png)", "![😭](https://telegram.org/img/emoji/40/F09F98AD.png)", "![🤓](https://telegram.org/img/emoji/40/F09FA493.png)", "![👻](https://telegram.org/img/emoji/40/F09F91BB.png)", "![👨‍💻](https://telegram.org/img/emoji/40/F09F91A8E2808DF09F92BB.png)", "![👀](https://telegram.org/img/emoji/40/F09F9180.png)", "![🎃](https://telegram.org/img/emoji/40/F09F8E83.png)", "![🙈](https://telegram.org/img/emoji/40/F09F9988.png)", "![😇](https://telegram.org/img/emoji/40/F09F9887.png)", "![😨](https://telegram.org/img/emoji/40/F09F98A8.png)", "![🤝](https://telegram.org/img/emoji/40/F09FA49D.png)", "![✍](https://telegram.org/img/emoji/40/E29C8D.png)", "![🤗](https://telegram.org/img/emoji/40/F09FA497.png)", "![🫡](https://telegram.org/img/emoji/40/F09FABA1.png)", "![🎅](https://telegram.org/img/emoji/40/F09F8E85.png)", "![🎄](https://telegram.org/img/emoji/40/F09F8E84.png)", "![☃](https://telegram.org/img/emoji/40/E29883.png)", "![💅](https://telegram.org/img/emoji/40/F09F9285.png)", "![🤪](https://telegram.org/img/emoji/40/F09FA4AA.png)", "![🗿](https://telegram.org/img/emoji/40/F09F97BF.png)", "![🆒](https://telegram.org/img/emoji/40/F09F8692.png)", "![💘](https://telegram.org/img/emoji/40/F09F9298.png)", "![🙉](https://telegram.org/img/emoji/40/F09F9989.png)", "![🦄](https://telegram.org/img/emoji/40/F09FA684.png)", "![😘](https://telegram.org/img/emoji/40/F09F9898.png)", "![💊](https://telegram.org/img/emoji/40/F09F928A.png)", "![🙊](https://telegram.org/img/emoji/40/F09F998A.png)", "![😎](https://telegram.org/img/emoji/40/F09F988E.png)", "![👾](https://telegram.org/img/emoji/40/F09F91BE.png)", "![🤷‍♂](https://telegram.org/img/emoji/40/F09FA4B7E2808DE29982.png)", "![🤷](https://telegram.org/img/emoji/40/F09FA4B7.png)", "![🤷‍♀](https://telegram.org/img/emoji/40/F09FA4B7E2808DE29980.png)", "![😡](https://telegram.org/img/emoji/40/F09F98A1.png)"
+     * Reaction emoji. Currently, it can be one of "![❤](https://telegram.org/img/emoji/40/E29DA4.png)", "![👍](https://telegram.org/img/emoji/40/F09F918D.png)", "![👎](https://telegram.org/img/emoji/40/F09F918E.png)", "![🔥](https://telegram.org/img/emoji/40/F09F94A5.png)", "![🥰](https://telegram.org/img/emoji/40/F09FA5B0.png)", "![👏](https://telegram.org/img/emoji/40/F09F918F.png)", "![😁](https://telegram.org/img/emoji/40/F09F9881.png)", "![🤔](https://telegram.org/img/emoji/40/F09FA494.png)", "![🤯](https://telegram.org/img/emoji/40/F09FA4AF.png)", "![😱](https://telegram.org/img/emoji/40/F09F98B1.png)", "![🤬](https://telegram.org/img/emoji/40/F09FA4AC.png)", "![😢](https://telegram.org/img/emoji/40/F09F98A2.png)", "![🎉](https://telegram.org/img/emoji/40/F09F8E89.png)", "![🤩](https://telegram.org/img/emoji/40/F09FA4A9.png)", "![🤮](https://telegram.org/img/emoji/40/F09FA4AE.png)", "![💩](https://telegram.org/img/emoji/40/F09F92A9.png)", "![🙏](https://telegram.org/img/emoji/40/F09F998F.png)", "![👌](https://telegram.org/img/emoji/40/F09F918C.png)", "![🕊](https://telegram.org/img/emoji/40/F09F958A.png)", "![🤡](https://telegram.org/img/emoji/40/F09FA4A1.png)", "![🥱](https://telegram.org/img/emoji/40/F09FA5B1.png)", "![🥴](https://telegram.org/img/emoji/40/F09FA5B4.png)", "![😍](https://telegram.org/img/emoji/40/F09F988D.png)", "![🐳](https://telegram.org/img/emoji/40/F09F90B3.png)", "![❤‍🔥](https://telegram.org/img/emoji/40/E29DA4E2808DF09F94A5.png)", "![🌚](https://telegram.org/img/emoji/40/F09F8C9A.png)", "![🌭](https://telegram.org/img/emoji/40/F09F8CAD.png)", "![💯](https://telegram.org/img/emoji/40/F09F92AF.png)", "![🤣](https://telegram.org/img/emoji/40/F09FA4A3.png)", "![⚡](https://telegram.org/img/emoji/40/E29AA1.png)", "![🍌](https://telegram.org/img/emoji/40/F09F8D8C.png)", "![🏆](https://telegram.org/img/emoji/40/F09F8F86.png)", "![💔](https://telegram.org/img/emoji/40/F09F9294.png)", "![🤨](https://telegram.org/img/emoji/40/F09FA4A8.png)", "![😐](https://telegram.org/img/emoji/40/F09F9890.png)", "![🍓](https://telegram.org/img/emoji/40/F09F8D93.png)", "![🍾](https://telegram.org/img/emoji/40/F09F8DBE.png)", "![💋](https://telegram.org/img/emoji/40/F09F928B.png)", "![🖕](https://telegram.org/img/emoji/40/F09F9695.png)", "![😈](https://telegram.org/img/emoji/40/F09F9888.png)", "![😴](https://telegram.org/img/emoji/40/F09F98B4.png)", "![😭](https://telegram.org/img/emoji/40/F09F98AD.png)", "![🤓](https://telegram.org/img/emoji/40/F09FA493.png)", "![👻](https://telegram.org/img/emoji/40/F09F91BB.png)", "![👨‍💻](https://telegram.org/img/emoji/40/F09F91A8E2808DF09F92BB.png)", "![👀](https://telegram.org/img/emoji/40/F09F9180.png)", "![🎃](https://telegram.org/img/emoji/40/F09F8E83.png)", "![🙈](https://telegram.org/img/emoji/40/F09F9988.png)", "![😇](https://telegram.org/img/emoji/40/F09F9887.png)", "![😨](https://telegram.org/img/emoji/40/F09F98A8.png)", "![🤝](https://telegram.org/img/emoji/40/F09FA49D.png)", "![✍](https://telegram.org/img/emoji/40/E29C8D.png)", "![🤗](https://telegram.org/img/emoji/40/F09FA497.png)", "![🫡](https://telegram.org/img/emoji/40/F09FABA1.png)", "![🎅](https://telegram.org/img/emoji/40/F09F8E85.png)", "![🎄](https://telegram.org/img/emoji/40/F09F8E84.png)", "![☃](https://telegram.org/img/emoji/40/E29883.png)", "![💅](https://telegram.org/img/emoji/40/F09F9285.png)", "![🤪](https://telegram.org/img/emoji/40/F09FA4AA.png)", "![🗿](https://telegram.org/img/emoji/40/F09F97BF.png)", "![🆒](https://telegram.org/img/emoji/40/F09F8692.png)", "![💘](https://telegram.org/img/emoji/40/F09F9298.png)", "![🙉](https://telegram.org/img/emoji/40/F09F9989.png)", "![🦄](https://telegram.org/img/emoji/40/F09FA684.png)", "![😘](https://telegram.org/img/emoji/40/F09F9898.png)", "![💊](https://telegram.org/img/emoji/40/F09F928A.png)", "![🙊](https://telegram.org/img/emoji/40/F09F998A.png)", "![😎](https://telegram.org/img/emoji/40/F09F988E.png)", "![👾](https://telegram.org/img/emoji/40/F09F91BE.png)", "![🤷‍♂](https://telegram.org/img/emoji/40/F09FA4B7E2808DE29982.png)", "![🤷](https://telegram.org/img/emoji/40/F09FA4B7.png)", "![🤷‍♀](https://telegram.org/img/emoji/40/F09FA4B7E2808DE29980.png)", "![😡](https://telegram.org/img/emoji/40/F09F98A1.png)".
      */
     emoji: TelegramReactionTypeEmojiEmoji
 }
@@ -5143,7 +5177,7 @@ export interface TelegramUniqueGift {
      */
     base_name: string
     /**
-     * Unique name of the gift. This name can be used in `https://t.me/nft/...` links and story areas
+     * Unique name of the gift. This name can be used in `https://t.me/nft/...` links and story areas.
      */
     name: string
     /**
@@ -5227,7 +5261,7 @@ export interface TelegramGiftInfo {
      */
     is_private?: true
     /**
-     * *Optional*. Unique number reserved for this gift when upgraded. See the *number* field in [UniqueGift](https://core.telegram.org/bots/api#uniquegift)
+     * *Optional*. Unique number reserved for this gift when upgraded. See the *number* field in [UniqueGift](https://core.telegram.org/bots/api#uniquegift).
      */
     unique_gift_number?: number
 }
@@ -5251,7 +5285,7 @@ export interface TelegramUniqueGiftInfo {
      */
     gift: TelegramUniqueGift
     /**
-     * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted\_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers
+     * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted\_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers.
      */
     origin: TelegramUniqueGiftInfoOrigin
     /**
@@ -5271,7 +5305,7 @@ export interface TelegramUniqueGiftInfo {
      */
     transfer_star_count?: number
     /**
-     * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now
+     * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now.
      */
     next_transfer_date?: number
 }
@@ -5351,7 +5385,7 @@ export interface TelegramOwnedGiftRegular {
      */
     is_upgrade_separate?: true
     /**
-     * *Optional*. Unique number reserved for this gift when upgraded. See the *number* field in [UniqueGift](https://core.telegram.org/bots/api#uniquegift)
+     * *Optional*. Unique number reserved for this gift when upgraded. See the *number* field in [UniqueGift](https://core.telegram.org/bots/api#uniquegift).
      */
     unique_gift_number?: number
 }
@@ -5395,7 +5429,7 @@ export interface TelegramOwnedGiftUnique {
      */
     transfer_star_count?: number
     /**
-     * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now
+     * *Optional*. Point in time (Unix timestamp) when the gift can be transferred. If it is in the past, then the gift can be transferred now.
      */
     next_transfer_date?: number
 }
@@ -5415,7 +5449,7 @@ export interface TelegramOwnedGifts {
      */
     gifts: TelegramOwnedGift[]
     /**
-     * *Optional*. Offset for the next request. If empty, then there are no more results
+     * *Optional*. Offset for the next request. If empty, then there are no more results.
      */
     next_offset?: string
 }
@@ -5491,7 +5525,7 @@ export interface TelegramBotCommand {
      */
     command: string
     /**
-     * Description of the command; 1-256 characters.
+     * Description of the command; 1-256 characters
      */
     description: string
 }
@@ -6037,7 +6071,7 @@ export interface TelegramPreparedInlineMessage {
      */
     id: string
     /**
-     * Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used
+     * Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used.
      */
     expiration_date: number
 }
@@ -6220,6 +6254,22 @@ export interface TelegramInputMediaDocument {
      * *Optional*. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always *True*, if the document is sent as part of an album.
      */
     disable_content_type_detection?: boolean
+}
+
+/**
+ * Represents an HTTP link to be sent.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputmedialink)
+ */
+export interface TelegramInputMediaLink {
+    /**
+     * Type of the result, must be *link*
+     */
+    type: "link"
+    /**
+     * HTTP URL of the link
+     */
+    url: string
 }
 
 /**
@@ -6811,6 +6861,1123 @@ export interface TelegramInputSticker {
     keywords?: string[]
 }
 
+/**
+ * Rich formatted message.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richmessage)
+ */
+export interface TelegramRichMessage {
+    /**
+     * Content of the message
+     */
+    blocks: TelegramRichBlock[]
+    /**
+     * *Optional*. *True*, if the rich message must be shown right-to-left
+     */
+    is_rtl?: boolean
+}
+
+/**
+ * Describes a rich message to be sent. Exactly **one** of the fields *html* or *markdown* must be used.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichmessage)
+ */
+export interface TelegramInputRichMessage {
+    /**
+     * *Optional*. Content of the rich message to send described using HTML formatting. See [rich message formatting options](https://core.telegram.org/bots/api#rich-message-formatting-options) for more details.
+     */
+    html?: string
+    /**
+     * *Optional*. Content of the rich message to send described using Markdown formatting. See [rich message formatting options](https://core.telegram.org/bots/api#rich-message-formatting-options) for more details.
+     */
+    markdown?: string
+    /**
+     * *Optional*. Pass *True* if the rich message must be shown right-to-left
+     */
+    is_rtl?: boolean
+    /**
+     * *Optional*. Pass *True* to skip automatic detection of entities (e.g., URLs, email addresses, username mentions, hashtags, cashtags, bot commands, or phone numbers) in the text
+     */
+    skip_entity_detection?: boolean
+}
+
+/**
+ * This object represents a rich formatted text. Currently, it can be either a String for plain text, an Array of [RichText](https://core.telegram.org/bots/api#richtext), or any of the following types:
+ *
+ * *   [RichTextBold](https://core.telegram.org/bots/api#richtextbold)
+ * *   [RichTextItalic](https://core.telegram.org/bots/api#richtextitalic)
+ * *   [RichTextUnderline](https://core.telegram.org/bots/api#richtextunderline)
+ * *   [RichTextStrikethrough](https://core.telegram.org/bots/api#richtextstrikethrough)
+ * *   [RichTextSpoiler](https://core.telegram.org/bots/api#richtextspoiler)
+ * *   [RichTextDateTime](https://core.telegram.org/bots/api#richtextdatetime)
+ * *   [RichTextTextMention](https://core.telegram.org/bots/api#richtexttextmention)
+ * *   [RichTextSubscript](https://core.telegram.org/bots/api#richtextsubscript)
+ * *   [RichTextSuperscript](https://core.telegram.org/bots/api#richtextsuperscript)
+ * *   [RichTextMarked](https://core.telegram.org/bots/api#richtextmarked)
+ * *   [RichTextCode](https://core.telegram.org/bots/api#richtextcode)
+ * *   [RichTextCustomEmoji](https://core.telegram.org/bots/api#richtextcustomemoji)
+ * *   [RichTextMathematicalExpression](https://core.telegram.org/bots/api#richtextmathematicalexpression)
+ * *   [RichTextUrl](https://core.telegram.org/bots/api#richtexturl)
+ * *   [RichTextEmailAddress](https://core.telegram.org/bots/api#richtextemailaddress)
+ * *   [RichTextPhoneNumber](https://core.telegram.org/bots/api#richtextphonenumber)
+ * *   [RichTextBankCardNumber](https://core.telegram.org/bots/api#richtextbankcardnumber)
+ * *   [RichTextMention](https://core.telegram.org/bots/api#richtextmention)
+ * *   [RichTextHashtag](https://core.telegram.org/bots/api#richtexthashtag)
+ * *   [RichTextCashtag](https://core.telegram.org/bots/api#richtextcashtag)
+ * *   [RichTextBotCommand](https://core.telegram.org/bots/api#richtextbotcommand)
+ * *   [RichTextAnchor](https://core.telegram.org/bots/api#richtextanchor)
+ * *   [RichTextAnchorLink](https://core.telegram.org/bots/api#richtextanchorlink)
+ * *   [RichTextReference](https://core.telegram.org/bots/api#richtextreference)
+ * *   [RichTextReferenceLink](https://core.telegram.org/bots/api#richtextreferencelink)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtext)
+ */
+export type TelegramRichText =
+    | TelegramRichTextBold
+    | TelegramRichTextItalic
+    | TelegramRichTextUnderline
+    | TelegramRichTextStrikethrough
+    | TelegramRichTextSpoiler
+    | TelegramRichTextDateTime
+    | TelegramRichTextTextMention
+    | TelegramRichTextSubscript
+    | TelegramRichTextSuperscript
+    | TelegramRichTextMarked
+    | TelegramRichTextCode
+    | TelegramRichTextCustomEmoji
+    | TelegramRichTextMathematicalExpression
+    | TelegramRichTextUrl
+    | TelegramRichTextEmailAddress
+    | TelegramRichTextPhoneNumber
+    | TelegramRichTextBankCardNumber
+    | TelegramRichTextMention
+    | TelegramRichTextHashtag
+    | TelegramRichTextCashtag
+    | TelegramRichTextBotCommand
+    | TelegramRichTextAnchor
+    | TelegramRichTextAnchorLink
+    | TelegramRichTextReference
+    | TelegramRichTextReferenceLink
+
+/**
+ * A bold text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextbold)
+ */
+export interface TelegramRichTextBold {
+    /**
+     * Type of the rich text, always “bold”
+     */
+    type: "bold"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * An italicized text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextitalic)
+ */
+export interface TelegramRichTextItalic {
+    /**
+     * Type of the rich text, always “italic”
+     */
+    type: "italic"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * An underlined text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextunderline)
+ */
+export interface TelegramRichTextUnderline {
+    /**
+     * Type of the rich text, always “underline”
+     */
+    type: "underline"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A strikethrough text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextstrikethrough)
+ */
+export interface TelegramRichTextStrikethrough {
+    /**
+     * Type of the rich text, always “strikethrough”
+     */
+    type: "strikethrough"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A text covered by a spoiler.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextspoiler)
+ */
+export interface TelegramRichTextSpoiler {
+    /**
+     * Type of the rich text, always “spoiler”
+     */
+    type: "spoiler"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * Formatted date and time.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextdatetime)
+ */
+export interface TelegramRichTextDateTime {
+    /**
+     * Type of the rich text, always “date\_time”
+     */
+    type: "date_time"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The Unix time associated with the entity
+     */
+    unix_time: number
+    /**
+     * The string that defines the formatting of the date and time. See [date-time entity formatting](https://core.telegram.org/bots/api#date-time-entity-formatting) for more details.
+     */
+    date_time_format: string
+}
+
+/**
+ * A mention of a Telegram user by their identifier.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtexttextmention)
+ */
+export interface TelegramRichTextTextMention {
+    /**
+     * Type of the rich text, always “text\_mention”
+     */
+    type: "text_mention"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The mentioned user
+     */
+    user: TelegramUser
+}
+
+/**
+ * A subscript text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextsubscript)
+ */
+export interface TelegramRichTextSubscript {
+    /**
+     * Type of the rich text, always “subscript”
+     */
+    type: "subscript"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A superscript text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextsuperscript)
+ */
+export interface TelegramRichTextSuperscript {
+    /**
+     * Type of the rich text, always “superscript”
+     */
+    type: "superscript"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A marked text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextmarked)
+ */
+export interface TelegramRichTextMarked {
+    /**
+     * Type of the rich text, always “marked”
+     */
+    type: "marked"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A monowidth text.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextcode)
+ */
+export interface TelegramRichTextCode {
+    /**
+     * Type of the rich text, always “code”
+     */
+    type: "code"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A custom emoji.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextcustomemoji)
+ */
+export interface TelegramRichTextCustomEmoji {
+    /**
+     * Type of the rich text, always “custom\_emoji”
+     */
+    type: "custom_emoji"
+    /**
+     * Unique identifier of the custom emoji. Use [getCustomEmojiStickers](https://core.telegram.org/bots/api#getcustomemojistickers) to get full information about the sticker.
+     */
+    custom_emoji_id: string
+    /**
+     * Alternative emoji for the custom emoji
+     */
+    alternative_text: string
+}
+
+/**
+ * A mathematical expression.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextmathematicalexpression)
+ */
+export interface TelegramRichTextMathematicalExpression {
+    /**
+     * Type of the rich text, always “mathematical\_expression”
+     */
+    type: "mathematical_expression"
+    /**
+     * The expression in LaTeX format
+     */
+    expression: string
+}
+
+/**
+ * A text with a link.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtexturl)
+ */
+export interface TelegramRichTextUrl {
+    /**
+     * Type of the rich text, always “url”
+     */
+    type: "url"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * URL of the link
+     */
+    url: string
+}
+
+/**
+ * A text with an email address.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextemailaddress)
+ */
+export interface TelegramRichTextEmailAddress {
+    /**
+     * Type of the rich text, always “email\_address”
+     */
+    type: "email_address"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The email address
+     */
+    email_address: string
+}
+
+/**
+ * A text with a phone number.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextphonenumber)
+ */
+export interface TelegramRichTextPhoneNumber {
+    /**
+     * Type of the rich text, always “phone\_number”
+     */
+    type: "phone_number"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The phone number
+     */
+    phone_number: string
+}
+
+/**
+ * A text with a bank card number.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextbankcardnumber)
+ */
+export interface TelegramRichTextBankCardNumber {
+    /**
+     * Type of the rich text, always “bank\_card\_number”
+     */
+    type: "bank_card_number"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The bank card number
+     */
+    bank_card_number: string
+}
+
+/**
+ * A mention by a username.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextmention)
+ */
+export interface TelegramRichTextMention {
+    /**
+     * Type of the rich text, always “mention”
+     */
+    type: "mention"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The username
+     */
+    username: string
+}
+
+/**
+ * A hashtag.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtexthashtag)
+ */
+export interface TelegramRichTextHashtag {
+    /**
+     * Type of the rich text, always “hashtag”
+     */
+    type: "hashtag"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The hashtag
+     */
+    hashtag: string
+}
+
+/**
+ * A cashtag.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextcashtag)
+ */
+export interface TelegramRichTextCashtag {
+    /**
+     * Type of the rich text, always “cashtag”
+     */
+    type: "cashtag"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The cashtag
+     */
+    cashtag: string
+}
+
+/**
+ * A bot command.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextbotcommand)
+ */
+export interface TelegramRichTextBotCommand {
+    /**
+     * Type of the rich text, always “bot\_command”
+     */
+    type: "bot_command"
+    /**
+     * The text
+     */
+    text: TelegramRichText
+    /**
+     * The bot command
+     */
+    bot_command: string
+}
+
+/**
+ * An anchor.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextanchor)
+ */
+export interface TelegramRichTextAnchor {
+    /**
+     * Type of the rich text, always “anchor”
+     */
+    type: "anchor"
+    /**
+     * The name of the anchor
+     */
+    name: string
+}
+
+/**
+ * A link to an anchor.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextanchorlink)
+ */
+export interface TelegramRichTextAnchorLink {
+    /**
+     * Type of the rich text, always “anchor\_link”
+     */
+    type: "anchor_link"
+    /**
+     * The link text
+     */
+    text: TelegramRichText
+    /**
+     * The name of the anchor. If the name is empty, then the link brings back to the top of the message.
+     */
+    anchor_name: string
+}
+
+/**
+ * A reference.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextreference)
+ */
+export interface TelegramRichTextReference {
+    /**
+     * Type of the rich text, always “reference”
+     */
+    type: "reference"
+    /**
+     * Text of the reference
+     */
+    text: TelegramRichText
+    /**
+     * The name of the reference
+     */
+    name: string
+}
+
+/**
+ * A link to a reference.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richtextreferencelink)
+ */
+export interface TelegramRichTextReferenceLink {
+    /**
+     * Type of the rich text, always “reference\_link”
+     */
+    type: "reference_link"
+    /**
+     * The link text
+     */
+    text: TelegramRichText
+    /**
+     * The name of the reference
+     */
+    reference_name: string
+}
+
+/**
+ * Caption of a rich formatted block.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockcaption)
+ */
+export interface TelegramRichBlockCaption {
+    /**
+     * Block caption
+     */
+    text: TelegramRichText
+    /**
+     * *Optional*. Block credit which corresponds to the HTML tag <cite>
+     */
+    credit?: TelegramRichText
+}
+
+export type TelegramRichBlockTableCellAlign = "left" | "center" | "right"
+export type TelegramRichBlockTableCellValign = "top" | "middle" | "bottom"
+
+/**
+ * Cell in a table.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblocktablecell)
+ */
+export interface TelegramRichBlockTableCell {
+    /**
+     * *Optional*. Text in the cell. If omitted, then the cell is invisible.
+     */
+    text?: TelegramRichText
+    /**
+     * *Optional*. *True*, if the cell is a header cell
+     */
+    is_header?: true
+    /**
+     * *Optional*. The number of columns the cell spans if it is bigger than 1
+     */
+    colspan?: number
+    /**
+     * *Optional*. The number of rows the cell spans if it is bigger than 1
+     */
+    rowspan?: number
+    /**
+     * Horizontal cell content alignment. Currently, must be one of “left”, “center”, or “right”.
+     */
+    align: TelegramRichBlockTableCellAlign
+    /**
+     * Vertical cell content alignment. Currently, must be one of “top”, “middle”, or “bottom”.
+     */
+    valign: TelegramRichBlockTableCellValign
+}
+
+export type TelegramRichBlockListItemType = "a" | "A" | "i" | "I" | "1"
+
+/**
+ * An item of a list.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblocklistitem)
+ */
+export interface TelegramRichBlockListItem {
+    /**
+     * Label of the item
+     */
+    label: string
+    /**
+     * The content of the item
+     */
+    blocks: TelegramRichBlock[]
+    /**
+     * *Optional*. *True*, if the item has a checkbox
+     */
+    has_checkbox?: true
+    /**
+     * *Optional*. *True*, if the item has a checked checkbox
+     */
+    is_checked?: true
+    /**
+     * *Optional*. For ordered lists, the numeric value of the item label
+     */
+    value?: number
+    /**
+     * *Optional*. For ordered lists, the type of the item label; must be one of “a” for lowercase letters, “A” for uppercase letters, “i” for lowercase Roman numerals, “I” for uppercase Roman numerals, or “1” for decimal numbers
+     */
+    type?: TelegramRichBlockListItemType
+}
+
+/**
+ * This object represents a block in a rich formatted message. Currently, it can be any of the following types:
+ *
+ * *   [RichBlockParagraph](https://core.telegram.org/bots/api#richblockparagraph)
+ * *   [RichBlockSectionHeading](https://core.telegram.org/bots/api#richblocksectionheading)
+ * *   [RichBlockPreformatted](https://core.telegram.org/bots/api#richblockpreformatted)
+ * *   [RichBlockFooter](https://core.telegram.org/bots/api#richblockfooter)
+ * *   [RichBlockDivider](https://core.telegram.org/bots/api#richblockdivider)
+ * *   [RichBlockMathematicalExpression](https://core.telegram.org/bots/api#richblockmathematicalexpression)
+ * *   [RichBlockAnchor](https://core.telegram.org/bots/api#richblockanchor)
+ * *   [RichBlockList](https://core.telegram.org/bots/api#richblocklist)
+ * *   [RichBlockBlockQuotation](https://core.telegram.org/bots/api#richblockblockquotation)
+ * *   [RichBlockPullQuotation](https://core.telegram.org/bots/api#richblockpullquotation)
+ * *   [RichBlockCollage](https://core.telegram.org/bots/api#richblockcollage)
+ * *   [RichBlockSlideshow](https://core.telegram.org/bots/api#richblockslideshow)
+ * *   [RichBlockTable](https://core.telegram.org/bots/api#richblocktable)
+ * *   [RichBlockDetails](https://core.telegram.org/bots/api#richblockdetails)
+ * *   [RichBlockMap](https://core.telegram.org/bots/api#richblockmap)
+ * *   [RichBlockAnimation](https://core.telegram.org/bots/api#richblockanimation)
+ * *   [RichBlockAudio](https://core.telegram.org/bots/api#richblockaudio)
+ * *   [RichBlockPhoto](https://core.telegram.org/bots/api#richblockphoto)
+ * *   [RichBlockVideo](https://core.telegram.org/bots/api#richblockvideo)
+ * *   [RichBlockVoiceNote](https://core.telegram.org/bots/api#richblockvoicenote)
+ * *   [RichBlockThinking](https://core.telegram.org/bots/api#richblockthinking)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblock)
+ */
+export type TelegramRichBlock =
+    | TelegramRichBlockParagraph
+    | TelegramRichBlockSectionHeading
+    | TelegramRichBlockPreformatted
+    | TelegramRichBlockFooter
+    | TelegramRichBlockDivider
+    | TelegramRichBlockMathematicalExpression
+    | TelegramRichBlockAnchor
+    | TelegramRichBlockList
+    | TelegramRichBlockBlockQuotation
+    | TelegramRichBlockPullQuotation
+    | TelegramRichBlockCollage
+    | TelegramRichBlockSlideshow
+    | TelegramRichBlockTable
+    | TelegramRichBlockDetails
+    | TelegramRichBlockMap
+    | TelegramRichBlockAnimation
+    | TelegramRichBlockAudio
+    | TelegramRichBlockPhoto
+    | TelegramRichBlockVideo
+    | TelegramRichBlockVoiceNote
+    | TelegramRichBlockThinking
+
+/**
+ * A text paragraph, corresponding to the HTML tag `<p>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockparagraph)
+ */
+export interface TelegramRichBlockParagraph {
+    /**
+     * Type of the block, always “paragraph”
+     */
+    type: "paragraph"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A section heading, corresponding to the HTML tags `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, or `<h6>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblocksectionheading)
+ */
+export interface TelegramRichBlockSectionHeading {
+    /**
+     * Type of the block, always “heading”
+     */
+    type: "heading"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+    /**
+     * Relative size of the text font; 1-6, 1 is the largest, 6 is the smallest
+     */
+    size: number
+}
+
+/**
+ * A preformatted text block, corresponding to the nested HTML tags `<pre>` and `<code>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockpreformatted)
+ */
+export interface TelegramRichBlockPreformatted {
+    /**
+     * Type of the block, always “pre”
+     */
+    type: "pre"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+    /**
+     * *Optional*. The programming language of the text
+     */
+    language?: string
+}
+
+/**
+ * A footer, corresponding to the HTML tag `<footer>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockfooter)
+ */
+export interface TelegramRichBlockFooter {
+    /**
+     * Type of the block, always “footer”
+     */
+    type: "footer"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A divider, corresponding to the HTML tag `<hr/>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockdivider)
+ */
+export interface TelegramRichBlockDivider {
+    /**
+     * Type of the block, always “divider”
+     */
+    type: "divider"
+}
+
+/**
+ * A block with a mathematical expression in LaTeX format, corresponding to the custom HTML tag `<tg-math-block>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockmathematicalexpression)
+ */
+export interface TelegramRichBlockMathematicalExpression {
+    /**
+     * Type of the block, always “mathematical\_expression”
+     */
+    type: "mathematical_expression"
+    /**
+     * The mathematical expression in LaTeX format
+     */
+    expression: string
+}
+
+/**
+ * A block with an anchor, corresponding to the HTML tag `<a>` with the attribute `name`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockanchor)
+ */
+export interface TelegramRichBlockAnchor {
+    /**
+     * Type of the block, always “anchor”
+     */
+    type: "anchor"
+    /**
+     * The name of the anchor
+     */
+    name: string
+}
+
+/**
+ * A list of blocks, corresponding to the HTML tag `<ul>` or `<ol>` with multiple nested tags `<li>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblocklist)
+ */
+export interface TelegramRichBlockList {
+    /**
+     * Type of the block, always “list”
+     */
+    type: "list"
+    /**
+     * Items of the list
+     */
+    items: TelegramRichBlockListItem[]
+}
+
+/**
+ * A block quotation, corresponding to the HTML tag `<blockquote>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockblockquotation)
+ */
+export interface TelegramRichBlockBlockQuotation {
+    /**
+     * Type of the block, always “blockquote”
+     */
+    type: "blockquote"
+    /**
+     * Content of the block
+     */
+    blocks: TelegramRichBlock[]
+    /**
+     * *Optional*. Credit of the block
+     */
+    credit?: TelegramRichText
+}
+
+/**
+ * A quotation with centered text, loosely corresponding to the HTML tag `<aside>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockpullquotation)
+ */
+export interface TelegramRichBlockPullQuotation {
+    /**
+     * Type of the block, always “pullquote”
+     */
+    type: "pullquote"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+    /**
+     * *Optional*. Credit of the block
+     */
+    credit?: TelegramRichText
+}
+
+/**
+ * A collage, corresponding to the custom HTML tag `<tg-collage>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockcollage)
+ */
+export interface TelegramRichBlockCollage {
+    /**
+     * Type of the block, always “collage”
+     */
+    type: "collage"
+    /**
+     * Elements of the collage
+     */
+    blocks: TelegramRichBlock[]
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A slideshow, corresponding to the custom HTML tag `<tg-slideshow>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockslideshow)
+ */
+export interface TelegramRichBlockSlideshow {
+    /**
+     * Type of the block, always “slideshow”
+     */
+    type: "slideshow"
+    /**
+     * Elements of the slideshow
+     */
+    blocks: TelegramRichBlock[]
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A table, corresponding to the HTML tag `<table>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblocktable)
+ */
+export interface TelegramRichBlockTable {
+    /**
+     * Type of the block, always “table”
+     */
+    type: "table"
+    /**
+     * Cells of the table
+     */
+    cells: TelegramRichBlockTableCell[][]
+    /**
+     * *Optional*. *True*, if the table has borders
+     */
+    is_bordered?: true
+    /**
+     * *Optional*. *True*, if the table is striped
+     */
+    is_striped?: true
+    /**
+     * *Optional*. Caption of the table
+     */
+    caption?: TelegramRichText
+}
+
+/**
+ * An expandable block for details disclosure, corresponding to the HTML tag `<details>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockdetails)
+ */
+export interface TelegramRichBlockDetails {
+    /**
+     * Type of the block, always “details”
+     */
+    type: "details"
+    /**
+     * Always shown summary of the block
+     */
+    summary: TelegramRichText
+    /**
+     * Content of the block
+     */
+    blocks: TelegramRichBlock[]
+    /**
+     * *Optional*. *True*, if the content of the block is visible by default
+     */
+    is_open?: true
+}
+
+/**
+ * A block with a map, corresponding to the custom HTML tag `<tg-map>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockmap)
+ */
+export interface TelegramRichBlockMap {
+    /**
+     * Type of the block, always “map”
+     */
+    type: "map"
+    /**
+     * Location of the center of the map
+     */
+    location: TelegramLocation
+    /**
+     * Map zoom level; 13-20
+     */
+    zoom: number
+    /**
+     * Expected width of the map
+     */
+    width: number
+    /**
+     * Expected height of the map
+     */
+    height: number
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with an animation, corresponding to the HTML tag `<video>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockanimation)
+ */
+export interface TelegramRichBlockAnimation {
+    /**
+     * Type of the block, always “animation”
+     */
+    type: "animation"
+    /**
+     * The animation
+     */
+    animation: TelegramAnimation
+    /**
+     * *Optional*. *True*, if the media preview is covered by a spoiler animation
+     */
+    has_spoiler?: true
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a music file, corresponding to the HTML tag `<audio>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockaudio)
+ */
+export interface TelegramRichBlockAudio {
+    /**
+     * Type of the block, always “audio”
+     */
+    type: "audio"
+    /**
+     * The audio
+     */
+    audio: TelegramAudio
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a photo, corresponding to the HTML tag `<photo>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockphoto)
+ */
+export interface TelegramRichBlockPhoto {
+    /**
+     * Type of the block, always “photo”
+     */
+    type: "photo"
+    /**
+     * Available sizes of the photo
+     */
+    photo: TelegramPhotoSize[]
+    /**
+     * *Optional*. *True*, if the media preview is covered by a spoiler animation
+     */
+    has_spoiler?: true
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a video, corresponding to the HTML tag `<video>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockvideo)
+ */
+export interface TelegramRichBlockVideo {
+    /**
+     * Type of the block, always “video”
+     */
+    type: "video"
+    /**
+     * The video
+     */
+    video: TelegramVideo
+    /**
+     * *Optional*. *True*, if the media preview is covered by a spoiler animation
+     */
+    has_spoiler?: true
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a voice note, corresponding to the HTML tag `<audio>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockvoicenote)
+ */
+export interface TelegramRichBlockVoiceNote {
+    /**
+     * Type of the block, always “voice\_note”
+     */
+    type: "voice_note"
+    /**
+     * The voice note
+     */
+    voice_note: TelegramVoice
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a “Thinking…” placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](https://core.telegram.org/bots/api#sendrichmessagedraft), therefore it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji, which are recommended for usage in the block.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#richblockthinking)
+ */
+export interface TelegramRichBlockThinking {
+    /**
+     * Type of the block, always “thinking”
+     */
+    type: "thinking"
+    /**
+     * Text of the block. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji, which are recommended for usage in the block.
+     */
+    text: TelegramRichText
+}
+
 export type TelegramInlineQueryChatType =
     | "sender"
     | "private"
@@ -6841,7 +8008,7 @@ export interface TelegramInlineQuery {
      */
     offset: string
     /**
-     * *Optional*. Type of the chat from which the inline query was sent. Can be either “sender” for a private chat with the inline query sender, “private”, “group”, “supergroup”, or “channel”. The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat
+     * *Optional*. Type of the chat from which the inline query was sent. Can be either “sender” for a private chat with the inline query sender, “private”, “group”, “supergroup”, or “channel”. The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat.
      */
     chat_type?: TelegramInlineQueryChatType
     /**
@@ -6985,7 +8152,7 @@ export interface TelegramInlineQueryResultPhoto {
      */
     id: string
     /**
-     * A valid URL of the photo. Photo must be in **JPEG** format. Photo size must not exceed 5MB
+     * A valid URL of the photo. Photo must be in **JPEG** format. Photo size must not exceed 5MB.
      */
     photo_url: string
     /**
@@ -7076,7 +8243,7 @@ export interface TelegramInlineQueryResultGif {
      */
     thumbnail_url: string
     /**
-     * *Optional*. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
+     * *Optional*. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”.
      */
     thumbnail_mime_type?: TelegramInlineQueryResultGifThumbnailMimeType
     /**
@@ -7151,7 +8318,7 @@ export interface TelegramInlineQueryResultMpeg4Gif {
      */
     thumbnail_url: string
     /**
-     * *Optional*. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
+     * *Optional*. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”.
      */
     thumbnail_mime_type?: TelegramInlineQueryResultMpeg4GifThumbnailMimeType
     /**
@@ -7469,7 +8636,7 @@ export interface TelegramInlineQueryResultLocation {
      */
     horizontal_accuracy?: number
     /**
-     * *Optional*. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+     * *Optional*. Period in seconds during which the location can be updated, must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
      */
     live_period?: number
     /**
@@ -8031,9 +9198,10 @@ export interface TelegramInlineQueryResultCachedAudio {
 }
 
 /**
- * This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 5 types:
+ * This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following types:
  *
  * *   [InputTextMessageContent](https://core.telegram.org/bots/api#inputtextmessagecontent)
+ * *   [InputRichMessageContent](https://core.telegram.org/bots/api#inputrichmessagecontent)
  * *   [InputLocationMessageContent](https://core.telegram.org/bots/api#inputlocationmessagecontent)
  * *   [InputVenueMessageContent](https://core.telegram.org/bots/api#inputvenuemessagecontent)
  * *   [InputContactMessageContent](https://core.telegram.org/bots/api#inputcontactmessagecontent)
@@ -8043,6 +9211,7 @@ export interface TelegramInlineQueryResultCachedAudio {
  */
 export type TelegramInputMessageContent =
     | TelegramInputTextMessageContent
+    | TelegramInputRichMessageContent
     | TelegramInputLocationMessageContent
     | TelegramInputVenueMessageContent
     | TelegramInputContactMessageContent
@@ -8073,6 +9242,18 @@ export interface TelegramInputTextMessageContent {
 }
 
 /**
+ * Represents the [content](https://core.telegram.org/bots/api#inputmessagecontent) of a rich message to be sent as the result of an inline query.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichmessagecontent)
+ */
+export interface TelegramInputRichMessageContent {
+    /**
+     * Yes
+     */
+    rich_message: TelegramInputRichMessage
+}
+
+/**
  * Represents the [content](https://core.telegram.org/bots/api#inputmessagecontent) of a location message to be sent as the result of an inline query.
  *
  * [Documentation](https://core.telegram.org/bots/api/#inputlocationmessagecontent)
@@ -8091,7 +9272,7 @@ export interface TelegramInputLocationMessageContent {
      */
     horizontal_accuracy?: number
     /**
-     * *Optional*. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+     * *Optional*. Period in seconds during which the location can be updated, must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
      */
     live_period?: number
     /**
@@ -8459,7 +9640,7 @@ export interface TelegramSuccessfulPayment {
  */
 export interface TelegramRefundedPayment {
     /**
-     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code, or “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90). Currently, always “XTR”
+     * Three-letter ISO 4217 [currency](https://core.telegram.org/bots/payments#supported-currencies) code, or “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90). Currently, always “XTR”.
      */
     currency: TelegramCurrencies
     /**
@@ -8838,11 +10019,11 @@ export interface TelegramStarTransaction {
      */
     date: number
     /**
-     * *Optional*. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions
+     * *Optional*. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions.
      */
     source?: TelegramTransactionPartner
     /**
-     * *Optional*. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions
+     * *Optional*. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions.
      */
     receiver?: TelegramTransactionPartner
 }
@@ -9303,7 +10484,7 @@ export interface TelegramGame {
      */
     description: string
     /**
-     * Photo that will be displayed in the game message in chats.
+     * Photo that will be displayed in the game message in chats
      */
     photo: TelegramPhotoSize[]
     /**
@@ -9315,7 +10496,7 @@ export interface TelegramGame {
      */
     text_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Animation that will be displayed in the game message in chats. Upload via [BotFather](https://t.me/botfather)
+     * *Optional*. Animation that will be displayed in the game message in chats. Upload via [BotFather](https://t.me/botfather).
      */
     animation?: TelegramAnimation
 }
