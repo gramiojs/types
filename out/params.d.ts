@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v9.4 (09.02.2026)
+ * Based on Bot API v10.1 (11.06.2026)
  *
- * Generated at 30.06.2026, 13:04:01 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 30.06.2026, 16:16:26 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -45,7 +45,7 @@ export interface GetUpdatesParams {
  */
 export interface SetWebhookParams {
     /**
-     * HTTPS URL to send updates to. Use an empty string to remove webhook integration
+     * HTTPS URL to send updates to. Use an empty string to remove webhook integration.
      */
     url: string
     /**
@@ -70,7 +70,7 @@ export interface SetWebhookParams {
      */
     drop_pending_updates?: boolean
     /**
-     * A secret token to be sent in a header "X-Telegram-Bot-Api-Secret-Token" in every webhook request, 1-256 characters. Only characters `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. The header is useful to ensure that the request comes from a webhook set by you.
+     * A secret token to be sent in a header “X-Telegram-Bot-Api-Secret-Token” in every webhook request, 1-256 characters. Only characters `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. The header is useful to ensure that the request comes from a webhook set by you.
      */
     secret_token?: string
 }
@@ -94,7 +94,7 @@ export interface SendMessageParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -130,7 +130,7 @@ export interface SendMessageParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -146,7 +146,7 @@ export interface SendMessageParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -164,7 +164,7 @@ export interface SendMessageParams {
  */
 export interface ForwardMessageParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -176,7 +176,7 @@ export interface ForwardMessageParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Unique identifier for the chat where the original message was sent (or channel username in the format `@channelusername`)
+     * Unique identifier for the chat where the original message was sent (or username of the target bot, supergroup or channel in the format `@username`)
      */
     from_chat_id: number | string
     /**
@@ -210,7 +210,7 @@ export interface ForwardMessageParams {
  */
 export interface ForwardMessagesParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -222,7 +222,7 @@ export interface ForwardMessagesParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
+     * Unique identifier for the chat where the original messages were sent (or username of the target bot, supergroup or channel in the format `@username`)
      */
     from_chat_id: number | string
     /**
@@ -244,7 +244,7 @@ export interface ForwardMessagesParams {
  */
 export interface CopyMessageParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -256,7 +256,7 @@ export interface CopyMessageParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Unique identifier for the chat where the original message was sent (or channel username in the format `@channelusername`)
+     * Unique identifier for the chat where the original message was sent (or username of the target bot, supergroup or channel in the format `@username`)
      */
     from_chat_id: number | string
     /**
@@ -268,7 +268,7 @@ export interface CopyMessageParams {
      */
     video_start_timestamp?: number
     /**
-     * New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
+     * New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept.
      */
     caption?: string | { toString(): string }
     /**
@@ -292,7 +292,7 @@ export interface CopyMessageParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -308,7 +308,7 @@ export interface CopyMessageParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -326,7 +326,7 @@ export interface CopyMessageParams {
  */
 export interface CopyMessagesParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -338,7 +338,7 @@ export interface CopyMessagesParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
+     * Unique identifier for the chat where the original messages were sent (or username of the target bot, supergroup or channel in the format `@username`)
      */
     from_chat_id: number | string
     /**
@@ -368,7 +368,7 @@ export interface SendPhotoParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -412,7 +412,7 @@ export interface SendPhotoParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -428,7 +428,93 @@ export interface SendPhotoParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+        | Objects.TelegramReplyKeyboardMarkup
+        | { toJSON(): Objects.TelegramReplyKeyboardMarkup }
+        | Objects.TelegramReplyKeyboardRemove
+        | { toJSON(): Objects.TelegramReplyKeyboardRemove }
+        | Objects.TelegramForceReply
+        | { toJSON(): Objects.TelegramForceReply }
+}
+
+/**
+ * Params object for {@link APIMethods.sendLivePhoto | sendLivePhoto} method
+ */
+export interface SendLivePhotoParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent
+     */
+    business_connection_id?: string
+    /**
+     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     */
+    chat_id: number | string
+    /**
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
+     */
+    message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
+     * Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
+     */
+    live_photo: Objects.TelegramInputFile | string
+    /**
+     * The static photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
+     */
+    photo: Objects.TelegramInputFile | string
+    /**
+     * Video caption (may also be used when resending videos by *file\_id*), 0-1024 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Pass *True*, if the caption must be shown above the message media
+     */
+    show_caption_above_media?: boolean
+    /**
+     * Pass *True* if the video needs to be covered with a spoiler animation
+     */
+    has_spoiler?: boolean
+    /**
+     * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
+     */
+    disable_notification?: boolean
+    /**
+     * Protects the contents of the sent message from forwarding and saving
+     */
+    protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
+     */
+    allow_paid_broadcast?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message; for private chats only
+     */
+    message_effect_id?: string
+    /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
+     * Description of the message to reply to
+     */
+    reply_parameters?: Objects.TelegramReplyParameters
+    /**
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -450,7 +536,7 @@ export interface SendAudioParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -502,7 +588,7 @@ export interface SendAudioParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -518,7 +604,7 @@ export interface SendAudioParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -540,7 +626,7 @@ export interface SendDocumentParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -584,7 +670,7 @@ export interface SendDocumentParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -600,7 +686,7 @@ export interface SendDocumentParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -622,7 +708,7 @@ export interface SendVideoParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -694,7 +780,7 @@ export interface SendVideoParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -710,7 +796,7 @@ export interface SendVideoParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -732,7 +818,7 @@ export interface SendAnimationParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -792,7 +878,7 @@ export interface SendAnimationParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -808,7 +894,7 @@ export interface SendAnimationParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -830,7 +916,7 @@ export interface SendVoiceParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -870,7 +956,7 @@ export interface SendVoiceParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -886,7 +972,7 @@ export interface SendVoiceParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -908,7 +994,7 @@ export interface SendVideoNoteParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -920,7 +1006,7 @@ export interface SendVideoNoteParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending video notes by a URL is currently unsupported
+     * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending video notes by a URL is currently unsupported.
      */
     video_note: Objects.TelegramInputFile | string
     /**
@@ -944,7 +1030,7 @@ export interface SendVideoNoteParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -960,7 +1046,7 @@ export interface SendVideoNoteParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -982,7 +1068,7 @@ export interface SendPaidMediaParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`. If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
      */
     chat_id: number | string
     /**
@@ -1030,7 +1116,7 @@ export interface SendPaidMediaParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -1042,7 +1128,7 @@ export interface SendPaidMediaParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1064,7 +1150,7 @@ export interface SendMediaGroupParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1081,6 +1167,7 @@ export interface SendMediaGroupParams {
     media: (
         | Objects.TelegramInputMediaAudio
         | Objects.TelegramInputMediaDocument
+        | Objects.TelegramInputMediaLivePhoto
         | Objects.TelegramInputMediaPhoto
         | Objects.TelegramInputMediaVideo
     )[]
@@ -1093,7 +1180,7 @@ export interface SendMediaGroupParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -1115,7 +1202,7 @@ export interface SendLocationParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1139,7 +1226,7 @@ export interface SendLocationParams {
      */
     horizontal_accuracy?: number
     /**
-     * Period in seconds during which the location will be updated (see [Live Locations](https://telegram.org/blog/live-locations), should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+     * Period in seconds during which the location will be updated (see [Live Locations](https://telegram.org/blog/live-locations), should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
      */
     live_period?: number
     /**
@@ -1159,7 +1246,7 @@ export interface SendLocationParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -1175,7 +1262,7 @@ export interface SendLocationParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1188,11 +1275,6 @@ export interface SendLocationParams {
         | { toJSON(): Objects.TelegramForceReply }
 }
 
-export type SendVenueFoursquareType =
-    | "arts_entertainment/default"
-    | "arts_entertainment/aquarium"
-    | "food/icecream"
-
 /**
  * Params object for {@link APIMethods.sendVenue | sendVenue} method
  */
@@ -1202,7 +1284,7 @@ export interface SendVenueParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1234,9 +1316,9 @@ export interface SendVenueParams {
      */
     foursquare_id?: string
     /**
-     * Foursquare type of the venue, if known. (For example, "arts\_entertainment/default", "arts\_entertainment/aquarium" or "food/icecream".)
+     * Foursquare type of the venue, if known. (For example, “arts\_entertainment/default”, “arts\_entertainment/aquarium” or “food/icecream”.)
      */
-    foursquare_type?: SendVenueFoursquareType
+    foursquare_type?: string
     /**
      * Google Places identifier of the venue
      */
@@ -1254,7 +1336,7 @@ export interface SendVenueParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -1270,7 +1352,7 @@ export interface SendVenueParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1292,7 +1374,7 @@ export interface SendContactParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1328,7 +1410,7 @@ export interface SendContactParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -1344,7 +1426,7 @@ export interface SendContactParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1368,7 +1450,7 @@ export interface SendPollParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). Polls can't be sent to channel direct messages chats.
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`. Polls can't be sent to channel direct messages chats.
      */
     chat_id: number | string
     /**
@@ -1380,15 +1462,15 @@ export interface SendPollParams {
      */
     question: string | { toString(): string }
     /**
-     * Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Currently, only custom emoji entities are allowed
+     * Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Currently, only custom emoji entities are allowed.
      */
     question_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
-     * A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of *question\_parse\_mode*
+     * A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of *question\_parse\_mode*.
      */
     question_entities?: Objects.TelegramMessageEntity[]
     /**
-     * A JSON-serialized list of 2-12 answer options
+     * A JSON-serialized list of 1-12 answer options
      */
     options: Objects.TelegramInputPollOption[]
     /**
@@ -1396,17 +1478,41 @@ export interface SendPollParams {
      */
     is_anonymous?: boolean
     /**
-     * Poll type, "quiz" or "regular", defaults to "regular"
+     * Poll type, “quiz” or “regular”, defaults to “regular”
      */
     type?: SendPollType
     /**
-     * *True*, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to *False*
+     * Pass *True*, if the poll allows multiple answers, defaults to *False*
      */
     allows_multiple_answers?: boolean
     /**
-     * 0-based identifier of the correct answer option, required for polls in quiz mode
+     * Pass *True*, if the poll allows to change chosen answer options, defaults to *False* for quizzes and to *True* for regular polls
      */
-    correct_option_id?: number
+    allows_revoting?: boolean
+    /**
+     * Pass *True*, if the poll options must be shown in random order
+     */
+    shuffle_options?: boolean
+    /**
+     * Pass *True*, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes
+     */
+    allow_adding_options?: boolean
+    /**
+     * Pass *True*, if poll results must be shown only after the poll closes
+     */
+    hide_results_until_closes?: boolean
+    /**
+     * Pass *True*, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only
+     */
+    members_only?: boolean
+    /**
+     * A JSON-serialized list of 0-12 two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes indicating the countries from which users can vote in the poll; for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll.
+     */
+    country_codes?: string[]
+    /**
+     * A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode
+     */
+    correct_option_ids?: number[]
     /**
      * Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing
      */
@@ -1416,21 +1522,41 @@ export interface SendPollParams {
      */
     explanation_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
-     * A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of *explanation\_parse\_mode*
+     * A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of *explanation\_parse\_mode*.
      */
     explanation_entities?: Objects.TelegramMessageEntity[]
     /**
-     * Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with *close\_date*.
+     * Media added to the quiz explanation
+     */
+    explanation_media?: Objects.TelegramInputPollMedia
+    /**
+     * Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with *close\_date*.
      */
     open_period?: number
     /**
-     * Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with *open\_period*.
+     * Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 2628000 seconds in the future. Can't be used together with *open\_period*.
      */
     close_date?: number
     /**
      * Pass *True* if the poll needs to be immediately closed. This can be useful for poll preview.
      */
     is_closed?: boolean
+    /**
+     * Description of the poll to be sent, 0-1024 characters after entities parsing
+     */
+    description?: string | { toString(): string }
+    /**
+     * Mode for parsing entities in the poll description. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     */
+    description_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of *description\_parse\_mode*
+     */
+    description_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Media added to the poll description
+     */
+    media?: Objects.TelegramInputPollMedia
     /**
      * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
      */
@@ -1440,7 +1566,7 @@ export interface SendPollParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -1452,7 +1578,7 @@ export interface SendPollParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1474,9 +1600,9 @@ export interface SendChecklistParams {
      */
     business_connection_id: string
     /**
-     * Unique identifier for the target chat
+     * Unique identifier for the target chat or username of the target bot in the format `@username`
      */
-    chat_id: number
+    chat_id: number | string
     /**
      * A JSON-serialized object for the checklist to send
      */
@@ -1516,7 +1642,7 @@ export interface SendDiceParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1528,7 +1654,7 @@ export interface SendDiceParams {
      */
     direct_messages_topic_id?: number
     /**
-     * Emoji on which the dice throw animation is based. Currently, must be one of "![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)", "![🎯](https://telegram.org/img/emoji/40/F09F8EAF.png)", "![🏀](https://telegram.org/img/emoji/40/F09F8F80.png)", "![⚽](https://telegram.org/img/emoji/40/E29ABD.png)", "![🎳](https://telegram.org/img/emoji/40/F09F8EB3.png)", or "![🎰](https://telegram.org/img/emoji/40/F09F8EB0.png)". Dice can have values 1-6 for "![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)", "![🎯](https://telegram.org/img/emoji/40/F09F8EAF.png)" and "![🎳](https://telegram.org/img/emoji/40/F09F8EB3.png)", values 1-5 for "![🏀](https://telegram.org/img/emoji/40/F09F8F80.png)" and "![⚽](https://telegram.org/img/emoji/40/E29ABD.png)", and values 1-64 for "![🎰](https://telegram.org/img/emoji/40/F09F8EB0.png)". Defaults to "![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)"
+     * Emoji on which the dice throw animation is based. Currently, must be one of “![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)”, “![🎯](https://telegram.org/img/emoji/40/F09F8EAF.png)”, “![🏀](https://telegram.org/img/emoji/40/F09F8F80.png)”, “![⚽](https://telegram.org/img/emoji/40/E29ABD.png)”, “![🎳](https://telegram.org/img/emoji/40/F09F8EB3.png)”, or “![🎰](https://telegram.org/img/emoji/40/F09F8EB0.png)”. Dice can have values 1-6 for “![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)”, “![🎯](https://telegram.org/img/emoji/40/F09F8EAF.png)” and “![🎳](https://telegram.org/img/emoji/40/F09F8EB3.png)”, values 1-5 for “![🏀](https://telegram.org/img/emoji/40/F09F8F80.png)” and “![⚽](https://telegram.org/img/emoji/40/E29ABD.png)”, and values 1-64 for “![🎰](https://telegram.org/img/emoji/40/F09F8EB0.png)”. Defaults to “![🎲](https://telegram.org/img/emoji/40/F09F8EB2.png)”.
      */
     emoji?: SendDiceEmoji
     /**
@@ -1540,7 +1666,7 @@ export interface SendDiceParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -1556,7 +1682,7 @@ export interface SendDiceParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -1582,13 +1708,13 @@ export interface SendMessageDraftParams {
      */
     message_thread_id?: number
     /**
-     * Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated
+     * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
      */
     draft_id: number
     /**
-     * Text of the message to be sent, 1-4096 characters after entities parsing
+     * Text of the message to be sent, 0-4096 characters after entities parsing. Pass an empty text to show a “Thinking…” placeholder.
      */
-    text: string | { toString(): string }
+    text?: string | { toString(): string }
     /**
      * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
@@ -1621,7 +1747,7 @@ export interface SendChatActionParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`). Channel chats and channel direct messages chats aren't supported.
+     * Unique identifier for the target chat or username of the target bot or supergroup in the format `@username`. Channel chats and channel direct messages chats aren't supported.
      */
     chat_id: number | string
     /**
@@ -1639,7 +1765,7 @@ export interface SendChatActionParams {
  */
 export interface SetMessageReactionParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1725,7 +1851,7 @@ export interface GetFileParams {
  */
 export interface BanChatMemberParams {
     /**
-     * Unique identifier for the target group or username of the target supergroup or channel (in the format `@channelusername`)
+     * Unique identifier for the target group or username of the target supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1747,7 +1873,7 @@ export interface BanChatMemberParams {
  */
 export interface UnbanChatMemberParams {
     /**
-     * Unique identifier for the target group or username of the target supergroup or channel (in the format `@channelusername`)
+     * Unique identifier for the target group or username of the target supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1765,7 +1891,7 @@ export interface UnbanChatMemberParams {
  */
 export interface RestrictChatMemberParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1781,7 +1907,7 @@ export interface RestrictChatMemberParams {
      */
     use_independent_chat_permissions?: boolean
     /**
-     * Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever
+     * Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever.
      */
     until_date?: number
 }
@@ -1791,7 +1917,7 @@ export interface RestrictChatMemberParams {
  */
 export interface PromoteChatMemberParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1815,7 +1941,7 @@ export interface PromoteChatMemberParams {
      */
     can_manage_video_chats?: boolean
     /**
-     * Pass *True* if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to *True* for promotions of channel administrators
+     * Pass *True* if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to *True* for promotions of channel administrators.
      */
     can_restrict_members?: boolean
     /**
@@ -1862,6 +1988,10 @@ export interface PromoteChatMemberParams {
      * Pass *True* if the administrator can manage direct messages within the channel and decline suggested posts; for channels only
      */
     can_manage_direct_messages?: boolean
+    /**
+     * Pass *True* if the administrator can edit the tags of regular members; for groups and supergroups only
+     */
+    can_manage_tags?: boolean
 }
 
 /**
@@ -1869,7 +1999,7 @@ export interface PromoteChatMemberParams {
  */
 export interface SetChatAdministratorCustomTitleParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1883,11 +2013,29 @@ export interface SetChatAdministratorCustomTitleParams {
 }
 
 /**
+ * Params object for {@link APIMethods.setChatMemberTag | setChatMemberTag} method
+ */
+export interface SetChatMemberTagParams {
+    /**
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
+     */
+    chat_id: number | string
+    /**
+     * Unique identifier of the target user
+     */
+    user_id: number
+    /**
+     * New tag for the member; 0-16 characters, emoji are not allowed
+     */
+    tag?: string
+}
+
+/**
  * Params object for {@link APIMethods.banChatSenderChat | banChatSenderChat} method
  */
 export interface BanChatSenderChatParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1901,7 +2049,7 @@ export interface BanChatSenderChatParams {
  */
 export interface UnbanChatSenderChatParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1915,7 +2063,7 @@ export interface UnbanChatSenderChatParams {
  */
 export interface SetChatPermissionsParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1933,7 +2081,7 @@ export interface SetChatPermissionsParams {
  */
 export interface ExportChatInviteLinkParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
 }
@@ -1943,7 +2091,7 @@ export interface ExportChatInviteLinkParams {
  */
 export interface CreateChatInviteLinkParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1959,7 +2107,7 @@ export interface CreateChatInviteLinkParams {
      */
     member_limit?: number
     /**
-     * *True*, if users joining the chat via the link need to be approved by chat administrators. If *True*, *member\_limit* can't be specified
+     * *True*, if users joining the chat via the link need to be approved by chat administrators. If *True*, *member\_limit* can't be specified.
      */
     creates_join_request?: boolean
 }
@@ -1969,7 +2117,7 @@ export interface CreateChatInviteLinkParams {
  */
 export interface EditChatInviteLinkParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -1989,7 +2137,7 @@ export interface EditChatInviteLinkParams {
      */
     member_limit?: number
     /**
-     * *True*, if users joining the chat via the link need to be approved by chat administrators. If *True*, *member\_limit* can't be specified
+     * *True*, if users joining the chat via the link need to be approved by chat administrators. If *True*, *member\_limit* can't be specified.
      */
     creates_join_request?: boolean
 }
@@ -1999,7 +2147,7 @@ export interface EditChatInviteLinkParams {
  */
 export interface CreateChatSubscriptionInviteLinkParams {
     /**
-     * Unique identifier for the target channel chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target channel chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2021,7 +2169,7 @@ export interface CreateChatSubscriptionInviteLinkParams {
  */
 export interface EditChatSubscriptionInviteLinkParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2039,7 +2187,7 @@ export interface EditChatSubscriptionInviteLinkParams {
  */
 export interface RevokeChatInviteLinkParams {
     /**
-     * Unique identifier of the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier of the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2053,7 +2201,7 @@ export interface RevokeChatInviteLinkParams {
  */
 export interface ApproveChatJoinRequestParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2067,7 +2215,7 @@ export interface ApproveChatJoinRequestParams {
  */
 export interface DeclineChatJoinRequestParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2076,12 +2224,42 @@ export interface DeclineChatJoinRequestParams {
     user_id: number
 }
 
+export type AnswerChatJoinRequestQueryResult = "approve" | "decline" | "queue"
+
+/**
+ * Params object for {@link APIMethods.answerChatJoinRequestQuery | answerChatJoinRequestQuery} method
+ */
+export interface AnswerChatJoinRequestQueryParams {
+    /**
+     * Unique identifier of the join request query
+     */
+    chat_join_request_query_id: string
+    /**
+     * Result of the query. Must be either “approve” to allow the user to join the chat, “decline” to disallow the user to join the chat, or “queue” to leave the decision to other administrators.
+     */
+    result: AnswerChatJoinRequestQueryResult
+}
+
+/**
+ * Params object for {@link APIMethods.sendChatJoinRequestWebApp | sendChatJoinRequestWebApp} method
+ */
+export interface SendChatJoinRequestWebAppParams {
+    /**
+     * Unique identifier of the join request query
+     */
+    chat_join_request_query_id: string
+    /**
+     * The URL of the Mini App to be opened
+     */
+    web_app_url: string
+}
+
 /**
  * Params object for {@link APIMethods.setChatPhoto | setChatPhoto} method
  */
 export interface SetChatPhotoParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2095,7 +2273,7 @@ export interface SetChatPhotoParams {
  */
 export interface DeleteChatPhotoParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
 }
@@ -2105,7 +2283,7 @@ export interface DeleteChatPhotoParams {
  */
 export interface SetChatTitleParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2119,7 +2297,7 @@ export interface SetChatTitleParams {
  */
 export interface SetChatDescriptionParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2137,7 +2315,7 @@ export interface PinChatMessageParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2159,7 +2337,7 @@ export interface UnpinChatMessageParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2173,7 +2351,7 @@ export interface UnpinChatMessageParams {
  */
 export interface UnpinAllChatMessagesParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
 }
@@ -2183,7 +2361,7 @@ export interface UnpinAllChatMessagesParams {
  */
 export interface LeaveChatParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`). Channel direct messages chats aren't supported; leave the corresponding channel instead.
+     * Unique identifier for the target chat or username of the target supergroup or channel in the format `@username`. Channel direct messages chats aren't supported; leave the corresponding channel instead.
      */
     chat_id: number | string
 }
@@ -2193,7 +2371,7 @@ export interface LeaveChatParams {
  */
 export interface GetChatParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target supergroup or channel in the format `@username`
      */
     chat_id: number | string
 }
@@ -2203,9 +2381,13 @@ export interface GetChatParams {
  */
 export interface GetChatAdministratorsParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target supergroup or channel in the format `@username`
      */
     chat_id: number | string
+    /**
+     * Pass *True* to additionally receive all bots that are administrators of the chat. By default, bots other than the current bot are omitted.
+     */
+    return_bots?: boolean
 }
 
 /**
@@ -2213,7 +2395,7 @@ export interface GetChatAdministratorsParams {
  */
 export interface GetChatMemberCountParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target supergroup or channel in the format `@username`
      */
     chat_id: number | string
 }
@@ -2223,7 +2405,7 @@ export interface GetChatMemberCountParams {
  */
 export interface GetChatMemberParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup or channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2233,11 +2415,25 @@ export interface GetChatMemberParams {
 }
 
 /**
+ * Params object for {@link APIMethods.getUserPersonalChatMessages | getUserPersonalChatMessages} method
+ */
+export interface GetUserPersonalChatMessagesParams {
+    /**
+     * Unique identifier for the target user
+     */
+    user_id: number
+    /**
+     * The maximum number of messages to return; 1-20
+     */
+    limit: number
+}
+
+/**
  * Params object for {@link APIMethods.setChatStickerSet | setChatStickerSet} method
  */
 export interface SetChatStickerSetParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2251,7 +2447,7 @@ export interface SetChatStickerSetParams {
  */
 export interface DeleteChatStickerSetParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
 }
@@ -2264,7 +2460,7 @@ export type CreateForumTopicIconColor =
  */
 export interface CreateForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2272,7 +2468,7 @@ export interface CreateForumTopicParams {
      */
     name: string
     /**
-     * Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F)
+     * Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F).
      */
     icon_color?: CreateForumTopicIconColor
     /**
@@ -2286,7 +2482,7 @@ export interface CreateForumTopicParams {
  */
 export interface EditForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2294,11 +2490,11 @@ export interface EditForumTopicParams {
      */
     message_thread_id: number
     /**
-     * New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
+     * New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept.
      */
     name?: string
     /**
-     * New unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api#getforumtopiciconstickers) to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+     * New unique identifier of the custom emoji shown as the topic icon. Use [getForumTopicIconStickers](https://core.telegram.org/bots/api#getforumtopiciconstickers) to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept.
      */
     icon_custom_emoji_id?: string
 }
@@ -2308,7 +2504,7 @@ export interface EditForumTopicParams {
  */
 export interface CloseForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2322,7 +2518,7 @@ export interface CloseForumTopicParams {
  */
 export interface ReopenForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2336,7 +2532,7 @@ export interface ReopenForumTopicParams {
  */
 export interface DeleteForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2350,7 +2546,7 @@ export interface DeleteForumTopicParams {
  */
 export interface UnpinAllForumTopicMessagesParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2364,7 +2560,7 @@ export interface UnpinAllForumTopicMessagesParams {
  */
 export interface EditGeneralForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2378,7 +2574,7 @@ export interface EditGeneralForumTopicParams {
  */
 export interface CloseGeneralForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
 }
@@ -2388,7 +2584,7 @@ export interface CloseGeneralForumTopicParams {
  */
 export interface ReopenGeneralForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
 }
@@ -2398,7 +2594,7 @@ export interface ReopenGeneralForumTopicParams {
  */
 export interface HideGeneralForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
 }
@@ -2408,7 +2604,7 @@ export interface HideGeneralForumTopicParams {
  */
 export interface UnhideGeneralForumTopicParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
 }
@@ -2418,7 +2614,7 @@ export interface UnhideGeneralForumTopicParams {
  */
 export interface UnpinAllGeneralForumTopicMessagesParams {
     /**
-     * Unique identifier for the target chat or username of the target supergroup (in the format `@supergroupusername`)
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
      */
     chat_id: number | string
 }
@@ -2432,7 +2628,7 @@ export interface AnswerCallbackQueryParams {
      */
     callback_query_id: string
     /**
-     * Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters
+     * Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
      */
     text?: string
     /**
@@ -2452,11 +2648,25 @@ export interface AnswerCallbackQueryParams {
 }
 
 /**
+ * Params object for {@link APIMethods.answerGuestQuery | answerGuestQuery} method
+ */
+export interface AnswerGuestQueryParams {
+    /**
+     * Unique identifier for the query to be answered
+     */
+    guest_query_id: string
+    /**
+     * A JSON-serialized object describing the message to be sent
+     */
+    result: Objects.TelegramInlineQueryResult
+}
+
+/**
  * Params object for {@link APIMethods.getUserChatBoosts | getUserChatBoosts} method
  */
 export interface GetUserChatBoostsParams {
     /**
-     * Unique identifier for the chat or username of the channel (in the format `@channelusername`)
+     * Unique identifier for the chat or username of the channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -2476,6 +2686,54 @@ export interface GetBusinessConnectionParams {
 }
 
 /**
+ * Params object for {@link APIMethods.getManagedBotToken | getManagedBotToken} method
+ */
+export interface GetManagedBotTokenParams {
+    /**
+     * User identifier of the managed bot whose token will be returned
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.replaceManagedBotToken | replaceManagedBotToken} method
+ */
+export interface ReplaceManagedBotTokenParams {
+    /**
+     * User identifier of the managed bot whose token will be replaced
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.getManagedBotAccessSettings | getManagedBotAccessSettings} method
+ */
+export interface GetManagedBotAccessSettingsParams {
+    /**
+     * User identifier of the managed bot whose access settings will be returned
+     */
+    user_id: number
+}
+
+/**
+ * Params object for {@link APIMethods.setManagedBotAccessSettings | setManagedBotAccessSettings} method
+ */
+export interface SetManagedBotAccessSettingsParams {
+    /**
+     * User identifier of the managed bot whose access settings will be changed
+     */
+    user_id: number
+    /**
+     * Pass *True*, if only selected users can access the bot. The bot's owner can always access it.
+     */
+    is_access_restricted: boolean
+    /**
+     * A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if *is\_access\_restricted* is false.
+     */
+    added_user_ids?: number[]
+}
+
+/**
  * Params object for {@link APIMethods.setMyCommands | setMyCommands} method
  */
 export interface SetMyCommandsParams {
@@ -2488,7 +2746,7 @@ export interface SetMyCommandsParams {
      */
     scope?: Objects.TelegramBotCommandScope
     /**
-     * A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+     * A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
      */
     language_code?: string
 }
@@ -2502,7 +2760,7 @@ export interface DeleteMyCommandsParams {
      */
     scope?: Objects.TelegramBotCommandScope
     /**
-     * A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+     * A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
      */
     language_code?: string
 }
@@ -2608,11 +2866,11 @@ export interface SetMyProfilePhotoParams {
  */
 export interface SetChatMenuButtonParams {
     /**
-     * Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
+     * Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed.
      */
     chat_id?: number
     /**
-     * A JSON-serialized object for the bot's new menu button. Defaults to [MenuButtonDefault](https://core.telegram.org/bots/api#menubuttondefault)
+     * A JSON-serialized object for the bot's new menu button. Defaults to [MenuButtonDefault](https://core.telegram.org/bots/api#menubuttondefault).
      */
     menu_button?: Objects.TelegramMenuButton
 }
@@ -2622,7 +2880,7 @@ export interface SetChatMenuButtonParams {
  */
 export interface GetChatMenuButtonParams {
     /**
-     * Unique identifier for the target private chat. If not specified, default bot's menu button will be returned
+     * Unique identifier for the target private chat. If not specified, the bot's default menu button will be returned.
      */
     chat_id?: number
 }
@@ -2651,14 +2909,6 @@ export interface GetMyDefaultAdministratorRightsParams {
     for_channels?: boolean
 }
 
-export type SendGiftTextParseMode =
-    | "bold"
-    | "italic"
-    | "underline"
-    | "strikethrough"
-    | "spoiler"
-    | "custom_emoji"
-
 /**
  * Params object for {@link APIMethods.sendGift | sendGift} method
  */
@@ -2668,7 +2918,7 @@ export interface SendGiftParams {
      */
     user_id?: number
     /**
-     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@channelusername`) that will receive the gift.
+     * Required if *user\_id* is not specified. Unique identifier for the chat or username of the channel (in the format `@username`) that will receive the gift.
      */
     chat_id?: number | string
     /**
@@ -2684,23 +2934,16 @@ export interface SendGiftParams {
      */
     text?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than "bold", "italic", "underline", "strikethrough", "spoiler", and "custom\_emoji" are ignored.
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
-     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than "bold", "italic", "underline", "strikethrough", "spoiler", and "custom\_emoji" are ignored.
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_entities?: Objects.TelegramMessageEntity[]
 }
 
 export type GiftPremiumSubscriptionMonthCount = 3 | 6 | 12
-export type GiftPremiumSubscriptionTextParseMode =
-    | "bold"
-    | "italic"
-    | "underline"
-    | "strikethrough"
-    | "spoiler"
-    | "custom_emoji"
 
 /**
  * Params object for {@link APIMethods.giftPremiumSubscription | giftPremiumSubscription} method
@@ -2723,11 +2966,11 @@ export interface GiftPremiumSubscriptionParams {
      */
     text?: string | { toString(): string }
     /**
-     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than "bold", "italic", "underline", "strikethrough", "spoiler", and "custom\_emoji" are ignored.
+     * Mode for parsing entities in the text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
     /**
-     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than "bold", "italic", "underline", "strikethrough", "spoiler", and "custom\_emoji" are ignored.
+     * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of *text\_parse\_mode*. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
      */
     text_entities?: Objects.TelegramMessageEntity[]
 }
@@ -2751,7 +2994,7 @@ export interface VerifyUserParams {
  */
 export interface VerifyChatParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`). Channel direct messages chats can't be verified.
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`. Channel direct messages chats can't be verified.
      */
     chat_id: number | string
     /**
@@ -2775,7 +3018,7 @@ export interface RemoveUserVerificationParams {
  */
 export interface RemoveChatVerificationParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot or channel in the format `@username`
      */
     chat_id: number | string
 }
@@ -2807,7 +3050,7 @@ export interface DeleteBusinessMessagesParams {
      */
     business_connection_id: string
     /**
-     * A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See [deleteMessage](https://core.telegram.org/bots/api#deletemessage) for limitations on which messages can be deleted
+     * A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See [deleteMessage](https://core.telegram.org/bots/api#deletemessage) for limitations on which messages can be deleted.
      */
     message_ids: number[]
 }
@@ -2977,7 +3220,7 @@ export interface GetBusinessAccountGiftsParams {
      */
     offset?: string
     /**
-     * The maximum number of gifts to be returned; 1-100. Defaults to 100
+     * The maximum number of gifts to be returned; 1-100. Defaults to 100.
      */
     limit?: number
 }
@@ -3019,7 +3262,7 @@ export interface GetUserGiftsParams {
      */
     offset?: string
     /**
-     * The maximum number of gifts to be returned; 1-100. Defaults to 100
+     * The maximum number of gifts to be returned; 1-100. Defaults to 100.
      */
     limit?: number
 }
@@ -3029,7 +3272,7 @@ export interface GetUserGiftsParams {
  */
 export interface GetChatGiftsParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -3069,7 +3312,7 @@ export interface GetChatGiftsParams {
      */
     offset?: string
     /**
-     * The maximum number of gifts to be returned; 1-100. Defaults to 100
+     * The maximum number of gifts to be returned; 1-100. Defaults to 100.
      */
     limit?: number
 }
@@ -3257,6 +3500,64 @@ export interface DeleteStoryParams {
 }
 
 /**
+ * Params object for {@link APIMethods.answerWebAppQuery | answerWebAppQuery} method
+ */
+export interface AnswerWebAppQueryParams {
+    /**
+     * Unique identifier for the query to be answered
+     */
+    web_app_query_id: string
+    /**
+     * A JSON-serialized object describing the message to be sent
+     */
+    result: Objects.TelegramInlineQueryResult
+}
+
+/**
+ * Params object for {@link APIMethods.savePreparedInlineMessage | savePreparedInlineMessage} method
+ */
+export interface SavePreparedInlineMessageParams {
+    /**
+     * Unique identifier of the target user that can use the prepared message
+     */
+    user_id: number
+    /**
+     * A JSON-serialized object describing the message to be sent
+     */
+    result: Objects.TelegramInlineQueryResult
+    /**
+     * Pass *True* if the message can be sent to private chats with users
+     */
+    allow_user_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to private chats with bots
+     */
+    allow_bot_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to group and supergroup chats
+     */
+    allow_group_chats?: boolean
+    /**
+     * Pass *True* if the message can be sent to channel chats
+     */
+    allow_channel_chats?: boolean
+}
+
+/**
+ * Params object for {@link APIMethods.savePreparedKeyboardButton | savePreparedKeyboardButton} method
+ */
+export interface SavePreparedKeyboardButtonParams {
+    /**
+     * Unique identifier of the target user that can use the button
+     */
+    user_id: number
+    /**
+     * A JSON-serialized object describing the button to be saved. The button must be of the type *request\_users*, *request\_chat*, or *request\_managed\_bot*.
+     */
+    button: Objects.TelegramKeyboardButton
+}
+
+/**
  * Params object for {@link APIMethods.editMessageText | editMessageText} method
  */
 export interface EditMessageTextParams {
@@ -3265,21 +3566,21 @@ export interface EditMessageTextParams {
      */
     business_connection_id?: string
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`.
      */
     chat_id?: number | string
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
     /**
-     * New text of the message, 1-4096 characters after entities parsing
+     * New text of the message, 1-4096 characters after entity parsing; required if *rich\_message* isn't specified
      */
-    text: string | { toString(): string }
+    text?: string
     /**
      * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
@@ -3293,7 +3594,11 @@ export interface EditMessageTextParams {
      */
     link_preview_options?: Objects.TelegramLinkPreviewOptions
     /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     * New rich content of the message; required if *text* isn't specified
+     */
+    rich_message?: Objects.TelegramInputRichMessage
+    /**
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3309,15 +3614,15 @@ export interface EditMessageCaptionParams {
      */
     business_connection_id?: string
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`.
      */
     chat_id?: number | string
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
     /**
@@ -3337,7 +3642,7 @@ export interface EditMessageCaptionParams {
      */
     show_caption_above_media?: boolean
     /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3353,15 +3658,15 @@ export interface EditMessageMediaParams {
      */
     business_connection_id?: string
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`.
      */
     chat_id?: number | string
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
     /**
@@ -3369,7 +3674,7 @@ export interface EditMessageMediaParams {
      */
     media: Objects.TelegramInputMedia
     /**
-     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3385,15 +3690,15 @@ export interface EditMessageLiveLocationParams {
      */
     business_connection_id?: string
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`.
      */
     chat_id?: number | string
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
     /**
@@ -3405,7 +3710,7 @@ export interface EditMessageLiveLocationParams {
      */
     longitude: number
     /**
-     * New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current *live\_period* by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then *live\_period* remains unchanged
+     * New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current *live\_period* by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then *live\_period* remains unchanged.
      */
     live_period?: number
     /**
@@ -3421,7 +3726,7 @@ export interface EditMessageLiveLocationParams {
      */
     proximity_alert_radius?: number
     /**
-     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3437,19 +3742,19 @@ export interface StopMessageLiveLocationParams {
      */
     business_connection_id?: string
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`.
      */
     chat_id?: number | string
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message with live location to stop
+     * Required if *inline\_message\_id* is not specified. Identifier of the message with live location to stop.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
     /**
-     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     * A JSON-serialized object for a new [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3465,9 +3770,9 @@ export interface EditMessageChecklistParams {
      */
     business_connection_id: string
     /**
-     * Unique identifier for the target chat
+     * Unique identifier for the target chat or username of the target bot in the format `@username`
      */
-    chat_id: number
+    chat_id: number | string
     /**
      * Unique identifier for the target message
      */
@@ -3493,19 +3798,19 @@ export interface EditMessageReplyMarkupParams {
      */
     business_connection_id?: string
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`.
      */
     chat_id?: number | string
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit
+     * Required if *inline\_message\_id* is not specified. Identifier of the message to edit.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
     /**
-     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3521,7 +3826,7 @@ export interface StopPollParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -3529,7 +3834,7 @@ export interface StopPollParams {
      */
     message_id: number
     /**
-     * A JSON-serialized object for a new message [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards).
+     * A JSON-serialized object for a new message [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3549,7 +3854,7 @@ export interface ApproveSuggestedPostParams {
      */
     message_id: number
     /**
-     * Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future
+     * Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future.
      */
     send_date?: number
 }
@@ -3573,17 +3878,71 @@ export interface DeclineSuggestedPostParams {
 }
 
 /**
+ * Params object for {@link APIMethods.deleteMessage | deleteMessage} method
+ */
+export interface DeleteMessageParams {
+    /**
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
+     */
+    chat_id: number | string
+    /**
+     * Identifier of the message to delete
+     */
+    message_id: number
+}
+
+/**
  * Params object for {@link APIMethods.deleteMessages | deleteMessages} method
  */
 export interface DeleteMessagesParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
-     * A JSON-serialized list of 1-100 identifiers of messages to delete. See [deleteMessage](https://core.telegram.org/bots/api#deletemessage) for limitations on which messages can be deleted
+     * A JSON-serialized list of 1-100 identifiers of messages to delete. See [deleteMessage](https://core.telegram.org/bots/api#deletemessage) for limitations on which messages can be deleted.
      */
     message_ids: number[]
+}
+
+/**
+ * Params object for {@link APIMethods.deleteMessageReaction | deleteMessageReaction} method
+ */
+export interface DeleteMessageReactionParams {
+    /**
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
+     */
+    chat_id: number | string
+    /**
+     * Identifier of the target message
+     */
+    message_id: number
+    /**
+     * Identifier of the user whose reaction will be removed, if the reaction was added by a user
+     */
+    user_id?: number
+    /**
+     * Identifier of the chat whose reaction will be removed, if the reaction was added by a chat
+     */
+    actor_chat_id?: number
+}
+
+/**
+ * Params object for {@link APIMethods.deleteAllMessageReactions | deleteAllMessageReactions} method
+ */
+export interface DeleteAllMessageReactionsParams {
+    /**
+     * Unique identifier for the target chat or username of the target supergroup in the format `@username`
+     */
+    chat_id: number | string
+    /**
+     * Identifier of the user whose reactions will be removed, if the reactions were added by a user
+     */
+    user_id?: number
+    /**
+     * Identifier of the chat whose reactions will be removed, if the reactions were added by a chat
+     */
+    actor_chat_id?: number
 }
 
 /**
@@ -3595,7 +3954,7 @@ export interface SendStickerParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -3623,7 +3982,7 @@ export interface SendStickerParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -3639,7 +3998,7 @@ export interface SendStickerParams {
      */
     reply_parameters?: Objects.TelegramReplyParameters
     /**
-     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
      */
     reply_markup?:
         | Objects.TelegramInlineKeyboardMarkup
@@ -3687,7 +4046,7 @@ export interface UploadStickerFileParams {
      */
     sticker: Objects.TelegramInputFile
     /**
-     * Format of the sticker, must be one of "static", "animated", "video"
+     * Format of the sticker, must be one of “static”, “animated”, “video”
      */
     sticker_format: UploadStickerFileStickerFormat
 }
@@ -3715,7 +4074,7 @@ export interface CreateNewStickerSetParams {
      */
     stickers: Objects.TelegramInputSticker[]
     /**
-     * Type of stickers in the set, pass "regular", "mask", or "custom\_emoji". By default, a regular sticker set is created.
+     * Type of stickers in the set, pass “regular”, “mask”, or “custom\_emoji”. By default, a regular sticker set is created.
      */
     sticker_type?: CreateNewStickerSetStickerType
     /**
@@ -3863,7 +4222,7 @@ export interface SetStickerSetThumbnailParams {
      */
     thumbnail?: Objects.TelegramInputFile | string
     /**
-     * Format of the thumbnail, must be one of "static" for a **.WEBP** or **.PNG** image, "animated" for a **.TGS** animation, or "video" for a **.WEBM** video
+     * Format of the thumbnail, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, or “video” for a **.WEBM** video
      */
     format: SetStickerSetThumbnailFormat
 }
@@ -3877,7 +4236,7 @@ export interface SetCustomEmojiStickerSetThumbnailParams {
      */
     name: string
     /**
-     * Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail.
+     * Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail
      */
     custom_emoji_id?: string
 }
@@ -3890,6 +4249,90 @@ export interface DeleteStickerSetParams {
      * Sticker set name
      */
     name: string
+}
+
+/**
+ * Params object for {@link APIMethods.sendRichMessage | sendRichMessage} method
+ */
+export interface SendRichMessageParams {
+    /**
+     * Unique identifier of the business connection on behalf of which the message will be sent. Bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages.
+     */
+    business_connection_id?: string
+    /**
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
+     */
+    chat_id: number | string
+    /**
+     * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
+     */
+    message_thread_id?: number
+    /**
+     * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     */
+    direct_messages_topic_id?: number
+    /**
+     * The message to be sent
+     */
+    rich_message: Objects.TelegramInputRichMessage
+    /**
+     * Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.
+     */
+    disable_notification?: boolean
+    /**
+     * Protects the contents of the sent message from forwarding and saving
+     */
+    protect_content?: boolean
+    /**
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
+     */
+    allow_paid_broadcast?: boolean
+    /**
+     * Unique identifier of the message effect to be added to the message; for private chats only
+     */
+    message_effect_id?: string
+    /**
+     * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     */
+    suggested_post_parameters?: Objects.TelegramSuggestedPostParameters
+    /**
+     * Description of the message to reply to
+     */
+    reply_parameters?: Objects.TelegramReplyParameters
+    /**
+     * Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user.
+     */
+    reply_markup?:
+        | Objects.TelegramInlineKeyboardMarkup
+        | { toJSON(): Objects.TelegramInlineKeyboardMarkup }
+        | Objects.TelegramReplyKeyboardMarkup
+        | { toJSON(): Objects.TelegramReplyKeyboardMarkup }
+        | Objects.TelegramReplyKeyboardRemove
+        | { toJSON(): Objects.TelegramReplyKeyboardRemove }
+        | Objects.TelegramForceReply
+        | { toJSON(): Objects.TelegramForceReply }
+}
+
+/**
+ * Params object for {@link APIMethods.sendRichMessageDraft | sendRichMessageDraft} method
+ */
+export interface SendRichMessageDraftParams {
+    /**
+     * Unique identifier for the target private chat
+     */
+    chat_id: number
+    /**
+     * Unique identifier for the target message thread
+     */
+    message_thread_id?: number
+    /**
+     * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
+     */
+    draft_id: number
+    /**
+     * The partial message to be streamed
+     */
+    rich_message: Objects.TelegramInputRichMessage
 }
 
 /**
@@ -3923,55 +4366,11 @@ export interface AnswerInlineQueryParams {
 }
 
 /**
- * Params object for {@link APIMethods.answerWebAppQuery | answerWebAppQuery} method
- */
-export interface AnswerWebAppQueryParams {
-    /**
-     * Unique identifier for the query to be answered
-     */
-    web_app_query_id: string
-    /**
-     * A JSON-serialized object describing the message to be sent
-     */
-    result: Objects.TelegramInlineQueryResult
-}
-
-/**
- * Params object for {@link APIMethods.savePreparedInlineMessage | savePreparedInlineMessage} method
- */
-export interface SavePreparedInlineMessageParams {
-    /**
-     * Unique identifier of the target user that can use the prepared message
-     */
-    user_id: number
-    /**
-     * A JSON-serialized object describing the message to be sent
-     */
-    result: Objects.TelegramInlineQueryResult
-    /**
-     * Pass *True* if the message can be sent to private chats with users
-     */
-    allow_user_chats?: boolean
-    /**
-     * Pass *True* if the message can be sent to private chats with bots
-     */
-    allow_bot_chats?: boolean
-    /**
-     * Pass *True* if the message can be sent to group and supergroup chats
-     */
-    allow_group_chats?: boolean
-    /**
-     * Pass *True* if the message can be sent to channel chats
-     */
-    allow_channel_chats?: boolean
-}
-
-/**
  * Params object for {@link APIMethods.sendInvoice | sendInvoice} method
  */
 export interface SendInvoiceParams {
     /**
-     * Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+     * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`
      */
     chat_id: number | string
     /**
@@ -3999,7 +4398,7 @@ export interface SendInvoiceParams {
      */
     provider_token?: string
     /**
-     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies). Pass "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90).
+     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies). Pass “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     currency: Objects.TelegramCurrencies
     /**
@@ -4015,7 +4414,7 @@ export interface SendInvoiceParams {
      */
     suggested_tip_amounts?: number[]
     /**
-     * Unique deep-linking parameter. If left empty, **forwarded copies** of the sent message will have a *Pay* button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a *URL* button with a deep link to the bot (instead of a *Pay* button), with the value used as the start parameter
+     * Unique deep-linking parameter. If left empty, **forwarded copies** of the sent message will have a *Pay* button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a *URL* button with a deep link to the bot (instead of a *Pay* button), with the value used as the start parameter.
      */
     start_parameter?: string
     /**
@@ -4075,7 +4474,7 @@ export interface SendInvoiceParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -4123,7 +4522,7 @@ export interface CreateInvoiceLinkParams {
      */
     provider_token?: string
     /**
-     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies). Pass "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90).
+     * Three-letter ISO 4217 currency code, see [more on currencies](https://core.telegram.org/bots/payments#supported-currencies). Pass “XTR” for payments in [Telegram Stars](https://t.me/BotNews/90).
      */
     currency: Objects.TelegramCurrencies
     /**
@@ -4131,7 +4530,7 @@ export interface CreateInvoiceLinkParams {
      */
     prices: Objects.TelegramLabeledPrice[]
     /**
-     * The number of seconds the subscription will be active for before the next payment. The currency must be set to "XTR" (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 10000 Telegram Stars.
+     * The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 10000 Telegram Stars.
      */
     subscription_period?: number
     /**
@@ -4209,7 +4608,7 @@ export interface AnswerShippingQueryParams {
      */
     shipping_options?: Objects.TelegramShippingOption[]
     /**
-     * Required if *ok* is *False*. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable"). Telegram will display this message to the user.
+     * Required if *ok* is *False*. Error message in human readable form that explains why it is impossible to complete the order (e.g. “Sorry, delivery to your desired address is unavailable”). Telegram will display this message to the user.
      */
     error_message?: string
 }
@@ -4301,9 +4700,9 @@ export interface SendGameParams {
      */
     business_connection_id?: string
     /**
-     * Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats.
+     * Unique identifier for the target chat or username of the target bot in the format `@username`. Games can't be sent to channel direct messages chats and channel chats.
      */
-    chat_id: number
+    chat_id: number | string
     /**
      * Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
      */
@@ -4321,7 +4720,7 @@ export interface SendGameParams {
      */
     protect_content?: boolean
     /**
-     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+     * Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
      */
     allow_paid_broadcast?: boolean
     /**
@@ -4353,7 +4752,7 @@ export interface SetGameScoreParams {
      */
     score: number
     /**
-     * Pass *True* if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
+     * Pass *True* if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters.
      */
     force?: boolean
     /**
@@ -4361,15 +4760,15 @@ export interface SetGameScoreParams {
      */
     disable_edit_message?: boolean
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat.
      */
     chat_id?: number
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the sent message
+     * Required if *inline\_message\_id* is not specified. Identifier of the sent message.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
 }
@@ -4383,15 +4782,15 @@ export interface GetGameHighScoresParams {
      */
     user_id: number
     /**
-     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat
+     * Required if *inline\_message\_id* is not specified. Unique identifier for the target chat.
      */
     chat_id?: number
     /**
-     * Required if *inline\_message\_id* is not specified. Identifier of the sent message
+     * Required if *inline\_message\_id* is not specified. Identifier of the sent message.
      */
     message_id?: number
     /**
-     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message
+     * Required if *chat\_id* and *message\_id* are not specified. Identifier of the inline message.
      */
     inline_message_id?: string
 }
