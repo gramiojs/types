@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v10.1 (11.06.2026)
+ * Based on Bot API v10.2 (14.07.2026)
  *
- * Generated at 30.06.2026, 16:16:26 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 14.07.2026, 12:28:19 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -91,7 +91,7 @@ export interface APIMethods {
         Objects.TelegramMessage
     >
     /**
-     * Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an Array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#forwardmessages)
      */
@@ -106,7 +106,7 @@ export interface APIMethods {
      */
     copyMessage: CallAPI<Params.CopyMessageParams, Objects.TelegramMessageId>
     /**
-     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_id* is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
+     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_id* is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#copymessages)
      */
@@ -171,7 +171,7 @@ export interface APIMethods {
      */
     sendPaidMedia: CallAPI<Params.SendPaidMediaParams, Objects.TelegramMessage>
     /**
-     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of [Message](https://core.telegram.org/bots/api#message) objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of [Message](https://core.telegram.org/bots/api#message) objects that were sent is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendmediagroup)
      */
@@ -469,7 +469,7 @@ export interface APIMethods {
         Objects.TelegramChatMember[]
     >
     /**
-     * Use this method to get the number of members in a chat. Returns *Int* on success.
+     * Use this method to get the number of members in a chat. Returns *Integer* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getchatmembercount)
      */
@@ -484,7 +484,7 @@ export interface APIMethods {
         Objects.TelegramChatMember
     >
     /**
-     * Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an array of [Message](https://core.telegram.org/bots/api#message) objects is returned.
+     * Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an Array of [Message](https://core.telegram.org/bots/api#message) objects is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getuserpersonalchatmessages)
      */
@@ -1059,6 +1059,42 @@ export interface APIMethods {
      */
     stopPoll: CallAPI<Params.StopPollParams, Objects.TelegramPoll>
     /**
+     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editephemeralmessagetext)
+     */
+    editEphemeralMessageText: CallAPI<
+        Params.EditEphemeralMessageTextParams,
+        true
+    >
+    /**
+     * Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editephemeralmessagemedia)
+     */
+    editEphemeralMessageMedia: CallAPI<
+        Params.EditEphemeralMessageMediaParams,
+        true
+    >
+    /**
+     * Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editephemeralmessagecaption)
+     */
+    editEphemeralMessageCaption: CallAPI<
+        Params.EditEphemeralMessageCaptionParams,
+        true
+    >
+    /**
+     * Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editephemeralmessagereplymarkup)
+     */
+    editEphemeralMessageReplyMarkup: CallAPI<
+        Params.EditEphemeralMessageReplyMarkupParams,
+        true
+    >
+    /**
      * Use this method to approve a suggested post in a direct messages chat. The bot must have the 'can\_post\_messages' administrator right in the corresponding channel chat. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#approvesuggestedpost)
@@ -1092,6 +1128,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#deletemessages)
      */
     deleteMessages: CallAPI<Params.DeleteMessagesParams, true>
+    /**
+     * Use this method to delete an ephemeral message. Note that it is not guaranteed that the user will receive the message deletion event, especially if they are offline. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deleteephemeralmessage)
+     */
+    deleteEphemeralMessage: CallAPI<Params.DeleteEphemeralMessageParams, true>
     /**
      * Use this method to remove a reaction from a message in a group or a supergroup chat. The bot must have the 'can\_delete\_messages' administrator right in the chat. Returns *True* on success.
      *

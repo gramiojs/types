@@ -8,9 +8,9 @@
  * import { TelegramUser } from "@gramio/types/objects";
  * ```
  *
- * Based on Bot API v10.1 (11.06.2026)
+ * Based on Bot API v10.2 (14.07.2026)
  *
- * Generated at 30.06.2026, 16:16:26 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 14.07.2026, 12:28:19 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -127,6 +127,10 @@ export interface TelegramUpdate {
      * *Optional*. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed
      */
     managed_bot?: TelegramManagedBotUpdated
+    /**
+     * *Optional*. User payment subscription has changed
+     */
+    subscription?: TelegramBotSubscriptionUpdated
 }
 
 /**
@@ -512,6 +516,10 @@ export interface TelegramChatFullInfo {
      * *Optional*. The bot that processes join request queries in the chat. The field is only available to chat administrators.
      */
     guard_bot?: TelegramUser
+    /**
+     * *Optional*. The [Community](https://core.telegram.org/bots/api#community) to which the chat belongs
+     */
+    community?: TelegramCommunity
 }
 
 /**
@@ -521,7 +529,7 @@ export interface TelegramChatFullInfo {
  */
 export interface TelegramMessage {
     /**
-     * Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
+     * Unique message identifier inside this chat; 0 for ephemeral messages. In specific instances (e.g., a message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
      */
     message_id: number
     /**
@@ -553,6 +561,14 @@ export interface TelegramMessage {
      */
     sender_tag?: string
     /**
+     * *Optional*. For ephemeral messages, the user who received the message
+     */
+    receiver_user?: TelegramUser
+    /**
+     * For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires.
+     */
+    ephemeral_message_id: number
+    /**
      * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
      */
     date: number
@@ -581,7 +597,7 @@ export interface TelegramMessage {
      */
     is_automatic_forward?: true
     /**
-     * *Optional*. For replies in the same chat and message thread, the original message. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain further *reply\_to\_message* fields even if it itself is a reply.
+     * *Optional*. For replies in the same chat and message thread, the original message. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain further *reply\_to\_message* fields even if it itself is a reply. If the message is a reply to an ephemeral message, then this field may be omitted.
      */
     reply_to_message?: TelegramMessage
     /**
@@ -876,6 +892,14 @@ export interface TelegramMessage {
      * *Optional*. Service message: tasks were added to a checklist
      */
     checklist_tasks_added?: TelegramChecklistTasksAdded
+    /**
+     * *Optional*. Service message: chat added to a [Community](https://core.telegram.org/bots/api#community)
+     */
+    community_chat_added?: TelegramCommunityChatAdded
+    /**
+     * *Optional*. Service message: chat removed from a [Community](https://core.telegram.org/bots/api#community)
+     */
+    community_chat_removed?: TelegramCommunityChatRemoved
     /**
      * *Optional*. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed
      */
@@ -1236,11 +1260,11 @@ export interface TelegramExternalReplyInfo {
  */
 export interface TelegramReplyParameters {
     /**
-     * Identifier of the message that will be replied to in the current chat, or in the chat *chat\_id* if it is specified
+     * *Optional*. Identifier of the message that will be replied to in the current chat, or in the chat *chat\_id* if it is specified. Required if *ephemeral\_message\_id* isn't specified.
      */
-    message_id: number
+    message_id?: number
     /**
-     * *Optional*. If the message to be replied to is from a different chat, unique identifier for the chat or username of the bot, supergroup or channel in the format `@username`. Not supported for messages sent on behalf of a business account and messages from channel direct messages chats.
+     * *Optional*. If the message to be replied to is from a different chat, unique identifier for the chat or username of the bot, supergroup or channel in the format `@username`. Not supported for messages sent on behalf of a business account, messages from channel direct messages chats and ephemeral messages.
      */
     chat_id?: number | string
     /**
@@ -1248,7 +1272,15 @@ export interface TelegramReplyParameters {
      */
     allow_sending_without_reply?: boolean
     /**
-     * *Optional*. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, *custom\_emoji*, and *date\_time* entities. The message will fail to send if the quote isn't found in the original message.
+     * *Optional*. Identifier of the incoming ephemeral message that will be replied to in the current chat. A reply to an ephemeral message must itself be an ephemeral message. An ephemeral message may only be replied to within 15 seconds of being sent. Required if *message\_id* isn't specified.
+     */
+    ephemeral_message_id?: number
+    /**
+     * *Optional*. Pass *True* if the message should be sent even if the specified message to be replied to is not found. Always *False* for replies in another chat or forum topic, and sent ephemeral messages. Always *True* for messages sent on behalf of a business account.
+     */
+    allow_sending_without_reply?: boolean
+    /**
+     * *Optional*. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, *custom\_emoji*, and *date\_time* entities. The message will fail to send if the quote isn't found in the original message. Ignored for ephemeral messages.
      */
     quote?: string | { toString(): string }
     /**
@@ -2294,42 +2326,6 @@ export interface TelegramInputChecklist {
 }
 
 /**
- * Describes a service message about checklist tasks marked as done or not done.
- *
- * [Documentation](https://core.telegram.org/bots/api/#checklisttasksdone)
- */
-export interface TelegramChecklistTasksDone {
-    /**
-     * *Optional*. Message containing the checklist whose tasks were marked as done or not done. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
-     */
-    checklist_message?: TelegramMessage
-    /**
-     * *Optional*. Identifiers of the tasks that were marked as done
-     */
-    marked_as_done_task_ids?: number[]
-    /**
-     * *Optional*. Identifiers of the tasks that were marked as not done
-     */
-    marked_as_not_done_task_ids?: number[]
-}
-
-/**
- * Describes a service message about tasks added to a checklist.
- *
- * [Documentation](https://core.telegram.org/bots/api/#checklisttasksadded)
- */
-export interface TelegramChecklistTasksAdded {
-    /**
-     * *Optional*. Message containing the checklist to which the tasks were added. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
-     */
-    checklist_message?: TelegramMessage
-    /**
-     * List of tasks added to the checklist
-     */
-    tasks: TelegramChecklistTask[]
-}
-
-/**
  * This object represents a point on the map.
  *
  * [Documentation](https://core.telegram.org/bots/api/#location)
@@ -2471,6 +2467,29 @@ export interface TelegramManagedBotUpdated {
      * Information about the bot. Token of the bot can be fetched using the method [getManagedBotToken](https://core.telegram.org/bots/api#getmanagedbottoken).
      */
     bot: TelegramUser
+}
+
+export type TelegramBotSubscriptionUpdatedState =
+    "canceled" | "active" | "failed"
+
+/**
+ * This object contains information about changes to a user payment subscription toward the current bot.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#botsubscriptionupdated)
+ */
+export interface TelegramBotSubscriptionUpdated {
+    /**
+     * User who subscribed for payments toward the bot
+     */
+    user: TelegramUser
+    /**
+     * Bot-specified invoice payload
+     */
+    invoice_payload: string
+    /**
+     * The new state of the subscription. Currently, it can be one of “canceled” if the user canceled the subscription, “active” if the user re-enabled a previously canceled subscription, or “failed” if payment for the subscription failed.
+     */
+    state: TelegramBotSubscriptionUpdatedState
 }
 
 /**
@@ -2728,6 +2747,61 @@ export interface TelegramChatBackground {
 }
 
 /**
+ * Describes a service message about checklist tasks marked as done or not done.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#checklisttasksdone)
+ */
+export interface TelegramChecklistTasksDone {
+    /**
+     * *Optional*. Message containing the checklist whose tasks were marked as done or not done. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    checklist_message?: TelegramMessage
+    /**
+     * *Optional*. Identifiers of the tasks that were marked as done
+     */
+    marked_as_done_task_ids?: number[]
+    /**
+     * *Optional*. Identifiers of the tasks that were marked as not done
+     */
+    marked_as_not_done_task_ids?: number[]
+}
+
+/**
+ * Describes a service message about tasks added to a checklist.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#checklisttasksadded)
+ */
+export interface TelegramChecklistTasksAdded {
+    /**
+     * *Optional*. Message containing the checklist to which the tasks were added. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain the *reply\_to\_message* field even if it itself is a reply.
+     */
+    checklist_message?: TelegramMessage
+    /**
+     * List of tasks added to the checklist
+     */
+    tasks: TelegramChecklistTask[]
+}
+
+/**
+ * Describes a service message about a chat being added to a community.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#communitychatadded)
+ */
+export interface TelegramCommunityChatAdded {
+    /**
+     * The new community to which the chat belongs
+     */
+    community: TelegramCommunity
+}
+
+/**
+ * Describes a service message about a chat being removed from a community. Currently holds no information.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#communitychatremoved)
+ */
+export interface TelegramCommunityChatRemoved {}
+
+/**
  * This object represents a service message about a new forum topic created in the chat.
  *
  * [Documentation](https://core.telegram.org/bots/api/#forumtopiccreated)
@@ -2949,7 +3023,7 @@ export interface TelegramPaidMessagePriceChanged {
  */
 export interface TelegramDirectMessagePriceChanged {
     /**
-     * *True*, if direct messages are enabled for the channel chat; false otherwise
+     * *True*, if direct messages are enabled for the channel chat; *False* otherwise
      */
     are_direct_messages_enabled: boolean
     /**
@@ -3023,11 +3097,11 @@ export interface TelegramSuggestedPostPaid {
      */
     suggested_post_message?: TelegramMessage
     /**
-     * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
+     * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.
      */
     currency: TelegramSuggestedPostPaidCurrency
     /**
-     * *Optional*. The amount of the currency that was received by the channel in nanotoncoins; for payments in toncoins only
+     * *Optional*. The amount of the currency that was received by the channel in nanograms; for payments in TON grams only
      */
     amount?: number
     /**
@@ -3228,11 +3302,11 @@ export type TelegramSuggestedPostPriceCurrency = "XTR" | "TON"
  */
 export interface TelegramSuggestedPostPrice {
     /**
-     * Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins.
+     * Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for TON grams.
      */
     currency: TelegramSuggestedPostPriceCurrency
     /**
-     * The amount of the currency that will be paid for the post in the *smallest units* of the currency, i.e. Telegram Stars or nanotoncoins. Currently, price in Telegram Stars must be between 5 and 100000, and price in nanotoncoins must be between 10000000 and 10000000000000.
+     * The amount of the currency that will be paid for the post in the *smallest units* of the currency, i.e. Telegram Stars or nanograms. Currently, price in Telegram Stars must be between 5 and 100000, and price in nanograms must be between 10000000 and 10000000000000.
      */
     amount: number
 }
@@ -3372,15 +3446,15 @@ export interface TelegramReplyKeyboardMarkup {
      */
     keyboard: TelegramKeyboardButton[][]
     /**
-     * *Optional*. Requests clients to always show the keyboard when the regular keyboard is hidden. Defaults to *false*, in which case the custom keyboard can be hidden and opened with a keyboard icon.
+     * *Optional*. Requests clients to always show the keyboard when the regular keyboard is hidden. Defaults to *False*, in which case the custom keyboard can be hidden and opened with a keyboard icon.
      */
     is_persistent?: boolean
     /**
-     * *Optional*. Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons). Defaults to *false*, in which case the custom keyboard is always of the same height as the app's standard keyboard.
+     * *Optional*. Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons). Defaults to *False*, in which case the custom keyboard is always of the same height as the app's standard keyboard.
      */
     resize_keyboard?: boolean
     /**
-     * *Optional*. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat - the user can press a special button in the input field to see the custom keyboard again. Defaults to *false*.
+     * *Optional*. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat - the user can press a special button in the input field to see the custom keyboard again. Defaults to *False*.
      */
     one_time_keyboard?: boolean
     /**
@@ -3792,6 +3866,22 @@ export interface TelegramForceReply {
 }
 
 /**
+ * Represents a community (a group of chats).
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#community)
+ */
+export interface TelegramCommunity {
+    /**
+     * Unique identifier for this community. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
+     */
+    id: number
+    /**
+     * Name of the community
+     */
+    name: string
+}
+
+/**
  * This object represents a chat photo.
  *
  * [Documentation](https://core.telegram.org/bots/api/#chatphoto)
@@ -3938,7 +4028,7 @@ export interface TelegramChatAdministratorRights {
      */
     can_manage_direct_messages?: boolean
     /**
-     * *Optional*. *True*, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can\_pin\_messages.
+     * *Optional*. *True*, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can\_pin\_messages.
      */
     can_manage_tags?: boolean
 }
@@ -4110,7 +4200,7 @@ export interface TelegramChatMemberAdministrator {
      */
     can_manage_direct_messages?: boolean
     /**
-     * *Optional*. *True*, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can\_pin\_messages.
+     * *Optional*. *True*, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can\_pin\_messages.
      */
     can_manage_tags?: boolean
     /**
@@ -4302,7 +4392,7 @@ export interface TelegramChatJoinRequest {
      */
     invite_link?: TelegramChatInviteLink
     /**
-     * *Optional*. Identifier of the join request query; for bots assigned to process join request only. If present, then the bot must call [sendChatJoinRequestWebApp](https://core.telegram.org/bots/api#sendchatjoinrequestwebapp) or directly call [answerChatJoinRequestQuery](https://core.telegram.org/bots/api#answerchatjoinrequestquery) within 10 seconds.
+     * *Optional*. Identifier of the join request query; for bots assigned to process join requests only. If present, then the bot must call [sendChatJoinRequestWebApp](https://core.telegram.org/bots/api#sendchatjoinrequestwebapp) or directly call [answerChatJoinRequestQuery](https://core.telegram.org/bots/api#answerchatjoinrequestquery) within 10 seconds.
      */
     query_id?: string
 }
@@ -4374,7 +4464,7 @@ export interface TelegramChatPermissions {
      */
     can_pin_messages?: boolean
     /**
-     * *Optional*. *True*, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages.
+     * *Optional*. *True*, if the user is allowed to create forum topics. If omitted, defaults to the value of can\_pin\_messages.
      */
     can_manage_topics?: boolean
 }
@@ -5276,11 +5366,11 @@ export interface TelegramUniqueGiftInfo {
      */
     origin: TelegramUniqueGiftInfoOrigin
     /**
-     * *Optional*. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
+     * *Optional*. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.
      */
     last_resale_currency?: TelegramUniqueGiftInfoLastResaleCurrency
     /**
-     * *Optional*. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanotoncoins
+     * *Optional*. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanograms
      */
     last_resale_amount?: number
     /**
@@ -5514,6 +5604,10 @@ export interface TelegramBotCommand {
      * Description of the command; 1-256 characters
      */
     description: string
+    /**
+     * *Optional*. *True*, if the command sends an ephemeral message, which can be seen only by the sender of the message and the bot
+     */
+    is_ephemeral?: boolean
 }
 
 /**
@@ -6121,11 +6215,11 @@ export interface TelegramInputMediaAnimation {
      */
     type: "animation"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
@@ -6141,7 +6235,7 @@ export interface TelegramInputMediaAnimation {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -6173,11 +6267,11 @@ export interface TelegramInputMediaAudio {
      */
     type: "audio"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
@@ -6217,11 +6311,11 @@ export interface TelegramInputMediaDocument {
      */
     type: "document"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
@@ -6269,11 +6363,11 @@ export interface TelegramInputMediaLivePhoto {
      */
     type: "live_photo"
     /**
-     * Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
+     * Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
      */
     media: TelegramInputFile | string
     /**
-     * The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
+     * The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
      */
     photo: TelegramInputFile | string
     /**
@@ -6289,7 +6383,7 @@ export interface TelegramInputMediaLivePhoto {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -6333,7 +6427,7 @@ export interface TelegramInputMediaPhoto {
      */
     type: "photo"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
@@ -6349,7 +6443,7 @@ export interface TelegramInputMediaPhoto {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -6369,7 +6463,7 @@ export interface TelegramInputMediaSticker {
      */
     type: "sticker"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a .WEBP sticker from the Internet, or pass "attach://<file\_attach\_name>" to upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a .WEBP sticker from the Internet, or pass “attach://<file\_attach\_name>” to upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
@@ -6433,15 +6527,15 @@ export interface TelegramInputMediaVideo {
      */
     type: "video"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
-     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     cover?: TelegramInputFile | string
     /**
@@ -6461,7 +6555,7 @@ export interface TelegramInputMediaVideo {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -6484,6 +6578,38 @@ export interface TelegramInputMediaVideo {
      * *Optional*. Pass *True* if the video needs to be covered with a spoiler animation
      */
     has_spoiler?: boolean
+}
+
+/**
+ * Represents a voice message file to be sent.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputmediavoicenote)
+ */
+export interface TelegramInputMediaVoiceNote {
+    /**
+     * Type of the media, must be *voice\_note*
+     */
+    type: "voice_note"
+    /**
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     */
+    media: TelegramInputFile | string
+    /**
+     * *Optional*. Caption of the voice message to be sent, 0-1024 characters after entities parsing
+     */
+    caption?: string | { toString(): string }
+    /**
+     * *Optional*. Mode for parsing entities in the voice message caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+     */
+    parse_mode?: "HTML" | "MarkdownV2" | "Markdown"
+    /**
+     * *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse\_mode*
+     */
+    caption_entities?: TelegramMessageEntity[]
+    /**
+     * *Optional*. Duration of the voice message in seconds
+     */
+    duration?: number
 }
 
 /**
@@ -6518,11 +6644,11 @@ export interface TelegramInputPaidMediaLivePhoto {
      */
     type: "live_photo"
     /**
-     * Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
+     * Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
      */
     media: TelegramInputFile | string
     /**
-     * The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
+     * The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended) or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
      */
     photo: TelegramInputFile | string
 }
@@ -6538,7 +6664,7 @@ export interface TelegramInputPaidMediaPhoto {
      */
     type: "photo"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
 }
@@ -6554,15 +6680,15 @@ export interface TelegramInputPaidMediaVideo {
      */
     type: "video"
     /**
-     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * File to send. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     media: TelegramInputFile | string
     /**
-     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the thumbnail was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     thumbnail?: TelegramInputFile | string
     /**
-     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * *Optional*. Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new one using multipart/form-data under <file\_attach\_name> name. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     cover?: TelegramInputFile | string
     /**
@@ -6609,7 +6735,7 @@ export interface TelegramInputProfilePhotoStatic {
      */
     type: "static"
     /**
-     * The static profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * The static profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     photo: TelegramInputFile | string
 }
@@ -6625,7 +6751,7 @@ export interface TelegramInputProfilePhotoAnimated {
      */
     type: "animated"
     /**
-     * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     animation: TelegramInputFile | string
     /**
@@ -6656,7 +6782,7 @@ export interface TelegramInputStoryContentPhoto {
      */
     type: "photo"
     /**
-     * The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the photo was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     photo: TelegramInputFile | string
 }
@@ -6672,7 +6798,7 @@ export interface TelegramInputStoryContentVideo {
      */
     type: "video"
     /**
-     * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass "attach://<file\_attach\_name>" if the video was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass “attach://<file\_attach\_name>” if the video was uploaded using multipart/form-data under <file\_attach\_name>. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     video: TelegramInputFile | string
     /**
@@ -6824,7 +6950,7 @@ export type TelegramInputStickerFormat = "static" | "animated" | "video"
  */
 export interface TelegramInputSticker {
     /**
-     * The added sticker. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass "attach://<file\_attach\_name>" to upload a new file using multipart/form-data under <file\_attach\_name> name. Animated and video stickers can't be uploaded via HTTP URL. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
+     * The added sticker. Pass a *file\_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass “attach://<file\_attach\_name>” to upload a new file using multipart/form-data under <file\_attach\_name> name. Animated and video stickers can't be uploaded via HTTP URL. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
     sticker: TelegramInputFile | string
     /**
@@ -6862,19 +6988,27 @@ export interface TelegramRichMessage {
 }
 
 /**
- * Describes a rich message to be sent. Exactly **one** of the fields *html* or *markdown* must be used.
+ * Describes a rich message to be sent. Exactly **one** of the fields *html*, *markdown*, or *blocks* must be used.
  *
  * [Documentation](https://core.telegram.org/bots/api/#inputrichmessage)
  */
 export interface TelegramInputRichMessage {
     /**
-     * *Optional*. Content of the rich message to send described using HTML formatting. See [rich message formatting options](https://core.telegram.org/bots/api#rich-message-formatting-options) for more details.
+     * *Optional*. Content of the rich message to send described as a list of blocks
+     */
+    blocks?: TelegramInputRichBlock[]
+    /**
+     * *Optional*. Content of the rich message to send described using HTML formatting. See [rich message formatting options](https://core.telegram.org/bots/api#rich-message-formatting-options) for more details. Use *media* field to specify the media used in the message.
      */
     html?: string
     /**
-     * *Optional*. Content of the rich message to send described using Markdown formatting. See [rich message formatting options](https://core.telegram.org/bots/api#rich-message-formatting-options) for more details.
+     * *Optional*. Content of the rich message to send described using Markdown formatting. See [rich message formatting options](https://core.telegram.org/bots/api#rich-message-formatting-options) for more details. Use *media* field to specify the media used in the message.
      */
     markdown?: string
+    /**
+     * *Optional*. List of media that are specified in the *markdown* or *html* fields using `tg://photo?id=`, `tg://video?id=`, and `tg://audio?id=` links
+     */
+    media?: TelegramInputRichMessageMedia[]
     /**
      * *Optional*. Pass *True* if the rich message must be shown right-to-left
      */
@@ -6883,6 +7017,27 @@ export interface TelegramInputRichMessage {
      * *Optional*. Pass *True* to skip automatic detection of entities (e.g., URLs, email addresses, username mentions, hashtags, cashtags, bot commands, or phone numbers) in the text
      */
     skip_entity_detection?: boolean
+}
+
+/**
+ * Describes a media element embedded in an outgoing rich message.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichmessagemedia)
+ */
+export interface TelegramInputRichMessageMedia {
+    /**
+     * Unique identifier of the media used in a `tg://photo?id=`, `tg://video?id=`, or `tg://audio?id=` link. 1-64 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed.
+     */
+    id: string
+    /**
+     * The media to be sent. Everything except the media itself and its properties is ignored.
+     */
+    media:
+        | TelegramInputMediaAnimation
+        | TelegramInputMediaAudio
+        | TelegramInputMediaPhoto
+        | TelegramInputMediaVideo
+        | TelegramInputMediaVoiceNote
 }
 
 /**
@@ -7947,7 +8102,7 @@ export interface TelegramRichBlockVoiceNote {
 }
 
 /**
- * A block with a “Thinking…” placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](https://core.telegram.org/bots/api#sendrichmessagedraft), therefore it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji, which are recommended for usage in the block.
+ * A block with a “Thinking…” placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](https://core.telegram.org/bots/api#sendrichmessagedraft), therefore it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
  *
  * [Documentation](https://core.telegram.org/bots/api/#richblockthinking)
  */
@@ -7957,7 +8112,499 @@ export interface TelegramRichBlockThinking {
      */
     type: "thinking"
     /**
-     * Text of the block. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji, which are recommended for usage in the block.
+     * Text of the block. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
+     */
+    text: TelegramRichText
+}
+
+export type TelegramInputRichBlockListItemType = "a" | "A" | "i" | "I" | "1"
+
+/**
+ * An item of a list to be sent.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblocklistitem)
+ */
+export interface TelegramInputRichBlockListItem {
+    /**
+     * The content of the item
+     */
+    blocks: TelegramInputRichBlock[]
+    /**
+     * *Optional*. Pass *True* if the item has a checkbox
+     */
+    has_checkbox?: true
+    /**
+     * *Optional*. Pass *True* if the item has a checked checkbox
+     */
+    is_checked?: true
+    /**
+     * *Optional*. For ordered lists, the numeric value of the item label
+     */
+    value?: number
+    /**
+     * *Optional*. For ordered lists, the type of the item label; must be one of “a” for lowercase letters, “A” for uppercase letters, “i” for lowercase Roman numerals, “I” for uppercase Roman numerals, or “1” for decimal numbers
+     */
+    type?: TelegramInputRichBlockListItemType
+}
+
+/**
+ * This object represents a block in a rich formatted message to be sent. Currently, it can be any of the following types:
+ *
+ * *   [InputRichBlockParagraph](https://core.telegram.org/bots/api#inputrichblockparagraph)
+ * *   [InputRichBlockSectionHeading](https://core.telegram.org/bots/api#inputrichblocksectionheading)
+ * *   [InputRichBlockPreformatted](https://core.telegram.org/bots/api#inputrichblockpreformatted)
+ * *   [InputRichBlockFooter](https://core.telegram.org/bots/api#inputrichblockfooter)
+ * *   [InputRichBlockDivider](https://core.telegram.org/bots/api#inputrichblockdivider)
+ * *   [InputRichBlockMathematicalExpression](https://core.telegram.org/bots/api#inputrichblockmathematicalexpression)
+ * *   [InputRichBlockAnchor](https://core.telegram.org/bots/api#inputrichblockanchor)
+ * *   [InputRichBlockList](https://core.telegram.org/bots/api#inputrichblocklist)
+ * *   [InputRichBlockBlockQuotation](https://core.telegram.org/bots/api#inputrichblockblockquotation)
+ * *   [InputRichBlockPullQuotation](https://core.telegram.org/bots/api#inputrichblockpullquotation)
+ * *   [InputRichBlockCollage](https://core.telegram.org/bots/api#inputrichblockcollage)
+ * *   [InputRichBlockSlideshow](https://core.telegram.org/bots/api#inputrichblockslideshow)
+ * *   [InputRichBlockTable](https://core.telegram.org/bots/api#inputrichblocktable)
+ * *   [InputRichBlockDetails](https://core.telegram.org/bots/api#inputrichblockdetails)
+ * *   [InputRichBlockMap](https://core.telegram.org/bots/api#inputrichblockmap)
+ * *   [InputRichBlockAnimation](https://core.telegram.org/bots/api#inputrichblockanimation)
+ * *   [InputRichBlockAudio](https://core.telegram.org/bots/api#inputrichblockaudio)
+ * *   [InputRichBlockPhoto](https://core.telegram.org/bots/api#inputrichblockphoto)
+ * *   [InputRichBlockVideo](https://core.telegram.org/bots/api#inputrichblockvideo)
+ * *   [InputRichBlockVoiceNote](https://core.telegram.org/bots/api#inputrichblockvoicenote)
+ * *   [InputRichBlockThinking](https://core.telegram.org/bots/api#inputrichblockthinking)
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblock)
+ */
+export type TelegramInputRichBlock =
+    | TelegramInputRichBlockParagraph
+    | TelegramInputRichBlockSectionHeading
+    | TelegramInputRichBlockPreformatted
+    | TelegramInputRichBlockFooter
+    | TelegramInputRichBlockDivider
+    | TelegramInputRichBlockMathematicalExpression
+    | TelegramInputRichBlockAnchor
+    | TelegramInputRichBlockList
+    | TelegramInputRichBlockBlockQuotation
+    | TelegramInputRichBlockPullQuotation
+    | TelegramInputRichBlockCollage
+    | TelegramInputRichBlockSlideshow
+    | TelegramInputRichBlockTable
+    | TelegramInputRichBlockDetails
+    | TelegramInputRichBlockMap
+    | TelegramInputRichBlockAnimation
+    | TelegramInputRichBlockAudio
+    | TelegramInputRichBlockPhoto
+    | TelegramInputRichBlockVideo
+    | TelegramInputRichBlockVoiceNote
+    | TelegramInputRichBlockThinking
+
+/**
+ * A text paragraph, corresponding to the HTML tag `<p>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockparagraph)
+ */
+export interface TelegramInputRichBlockParagraph {
+    /**
+     * Type of the block, always “paragraph”
+     */
+    type: "paragraph"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A section heading, corresponding to the HTML tags `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, or `<h6>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblocksectionheading)
+ */
+export interface TelegramInputRichBlockSectionHeading {
+    /**
+     * Type of the block, always “heading”
+     */
+    type: "heading"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+    /**
+     * Relative size of the text font; 1-6, 1 is the largest, 6 is the smallest
+     */
+    size: number
+}
+
+/**
+ * A preformatted text block, corresponding to the nested HTML tags `<pre>` and `<code>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockpreformatted)
+ */
+export interface TelegramInputRichBlockPreformatted {
+    /**
+     * Type of the block, always “pre”
+     */
+    type: "pre"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+    /**
+     * *Optional*. The programming language of the text
+     */
+    language?: string
+}
+
+/**
+ * A footer, corresponding to the HTML tag `<footer>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockfooter)
+ */
+export interface TelegramInputRichBlockFooter {
+    /**
+     * Type of the block, always “footer”
+     */
+    type: "footer"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+}
+
+/**
+ * A divider, corresponding to the HTML tag `<hr/>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockdivider)
+ */
+export interface TelegramInputRichBlockDivider {
+    /**
+     * Type of the block, always “divider”
+     */
+    type: "divider"
+}
+
+/**
+ * A block with a mathematical expression in LaTeX format, corresponding to the custom HTML tag `<tg-math-block>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockmathematicalexpression)
+ */
+export interface TelegramInputRichBlockMathematicalExpression {
+    /**
+     * Type of the block, always “mathematical\_expression”
+     */
+    type: "mathematical_expression"
+    /**
+     * The mathematical expression in LaTeX format
+     */
+    expression: string
+}
+
+/**
+ * A block with an anchor, corresponding to the HTML tag `<a>` with the attribute `name`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockanchor)
+ */
+export interface TelegramInputRichBlockAnchor {
+    /**
+     * Type of the block, always “anchor”
+     */
+    type: "anchor"
+    /**
+     * The name of the anchor
+     */
+    name: string
+}
+
+/**
+ * A list of blocks, corresponding to the HTML tag `<ul>` or `<ol>` with multiple nested tags `<li>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblocklist)
+ */
+export interface TelegramInputRichBlockList {
+    /**
+     * Type of the block, always “list”
+     */
+    type: "list"
+    /**
+     * Items of the list
+     */
+    items: TelegramInputRichBlockListItem[]
+}
+
+/**
+ * A block quotation, corresponding to the HTML tag `<blockquote>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockblockquotation)
+ */
+export interface TelegramInputRichBlockBlockQuotation {
+    /**
+     * Type of the block, always “blockquote”
+     */
+    type: "blockquote"
+    /**
+     * Content of the block
+     */
+    blocks: TelegramInputRichBlock[]
+    /**
+     * *Optional*. Credit of the block
+     */
+    credit?: TelegramRichText
+}
+
+/**
+ * A quotation with centered text, loosely corresponding to the HTML tag `<aside>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockpullquotation)
+ */
+export interface TelegramInputRichBlockPullQuotation {
+    /**
+     * Type of the block, always “pullquote”
+     */
+    type: "pullquote"
+    /**
+     * Text of the block
+     */
+    text: TelegramRichText
+    /**
+     * *Optional*. Credit of the block
+     */
+    credit?: TelegramRichText
+}
+
+/**
+ * A collage, corresponding to the custom HTML tag `<tg-collage>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockcollage)
+ */
+export interface TelegramInputRichBlockCollage {
+    /**
+     * Type of the block, always “collage”
+     */
+    type: "collage"
+    /**
+     * Elements of the collage
+     */
+    blocks: TelegramInputRichBlock[]
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A slideshow, corresponding to the custom HTML tag `<tg-slideshow>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockslideshow)
+ */
+export interface TelegramInputRichBlockSlideshow {
+    /**
+     * Type of the block, always “slideshow”
+     */
+    type: "slideshow"
+    /**
+     * Elements of the slideshow
+     */
+    blocks: TelegramInputRichBlock[]
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A table, corresponding to the HTML tag `<table>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblocktable)
+ */
+export interface TelegramInputRichBlockTable {
+    /**
+     * Type of the block, always “table”
+     */
+    type: "table"
+    /**
+     * Cells of the table
+     */
+    cells: TelegramRichBlockTableCell[][]
+    /**
+     * *Optional*. Pass *True* if the table has borders
+     */
+    is_bordered?: true
+    /**
+     * *Optional*. Pass *True* if the table is striped
+     */
+    is_striped?: true
+    /**
+     * *Optional*. Caption of the table
+     */
+    caption?: TelegramRichText
+}
+
+/**
+ * An expandable block for details disclosure, corresponding to the HTML tag `<details>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockdetails)
+ */
+export interface TelegramInputRichBlockDetails {
+    /**
+     * Type of the block, always “details”
+     */
+    type: "details"
+    /**
+     * Always shown summary of the block
+     */
+    summary: TelegramRichText
+    /**
+     * Content of the block
+     */
+    blocks: TelegramInputRichBlock[]
+    /**
+     * *Optional*. Pass *True* if the content of the block is visible by default
+     */
+    is_open?: true
+}
+
+/**
+ * A block with a map, corresponding to the custom HTML tag `<tg-map>`. The map's width and height must not exceed 10000 in total. The width and height ratio must be at most 20.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockmap)
+ */
+export interface TelegramInputRichBlockMap {
+    /**
+     * Type of the block, always “map”
+     */
+    type: "map"
+    /**
+     * Location of the center of the map
+     */
+    location: TelegramLocation
+    /**
+     * Map zoom level; 0-24
+     */
+    zoom: number
+    /**
+     * Map width; 0-10000
+     */
+    width: number
+    /**
+     * Map height; 0-10000
+     */
+    height: number
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with an animation, corresponding to the HTML tag `<video>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockanimation)
+ */
+export interface TelegramInputRichBlockAnimation {
+    /**
+     * Type of the block, always “animation”
+     */
+    type: "animation"
+    /**
+     * The animation. Caption is ignored.
+     */
+    animation: TelegramInputMediaAnimation
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a music file, corresponding to the HTML tag `<audio>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockaudio)
+ */
+export interface TelegramInputRichBlockAudio {
+    /**
+     * Type of the block, always “audio”
+     */
+    type: "audio"
+    /**
+     * The audio. Caption is ignored.
+     */
+    audio: TelegramInputMediaAudio
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a photo, corresponding to the HTML tag `<img>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockphoto)
+ */
+export interface TelegramInputRichBlockPhoto {
+    /**
+     * Type of the block, always “photo”
+     */
+    type: "photo"
+    /**
+     * The photo. Caption is ignored.
+     */
+    photo: TelegramInputMediaPhoto
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a video, corresponding to the HTML tag `<video>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockvideo)
+ */
+export interface TelegramInputRichBlockVideo {
+    /**
+     * Type of the block, always “video”
+     */
+    type: "video"
+    /**
+     * The video. Caption is ignored.
+     */
+    video: TelegramInputMediaVideo
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a voice note, corresponding to the HTML tag `<audio>`.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockvoicenote)
+ */
+export interface TelegramInputRichBlockVoiceNote {
+    /**
+     * Type of the block, always “voice\_note”
+     */
+    type: "voice_note"
+    /**
+     * The voice note. Caption is ignored.
+     */
+    voice_note: TelegramInputMediaVoiceNote
+    /**
+     * *Optional*. Caption of the block
+     */
+    caption?: TelegramRichBlockCaption
+}
+
+/**
+ * A block with a “Thinking…” placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](https://core.telegram.org/bots/api#sendrichmessagedraft), therefore it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
+ *
+ * [Documentation](https://core.telegram.org/bots/api/#inputrichblockthinking)
+ */
+export interface TelegramInputRichBlockThinking {
+    /**
+     * Type of the block, always “thinking”
+     */
+    type: "thinking"
+    /**
+     * Text of the block. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
      */
     text: TelegramRichText
 }
@@ -8168,7 +8815,7 @@ export interface TelegramInlineQueryResultPhoto {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -8241,7 +8888,7 @@ export interface TelegramInlineQueryResultGif {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -8314,7 +8961,7 @@ export interface TelegramInlineQueryResultMpeg4Gif {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -8376,7 +9023,7 @@ export interface TelegramInlineQueryResultVideo {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -8835,7 +9482,7 @@ export interface TelegramInlineQueryResultCachedPhoto {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -8885,7 +9532,7 @@ export interface TelegramInlineQueryResultCachedGif {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -8935,7 +9582,7 @@ export interface TelegramInlineQueryResultCachedMpeg4Gif {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -9069,7 +9716,7 @@ export interface TelegramInlineQueryResultCachedVideo {
      */
     caption_entities?: TelegramMessageEntity[]
     /**
-     * *Optional*. Pass *True*, if the caption must be shown above the message media
+     * *Optional*. Pass *True* if the caption must be shown above the message media
      */
     show_caption_above_media?: boolean
     /**
@@ -9359,7 +10006,7 @@ export interface TelegramInputInvoiceMessageContent {
      */
     max_tip_amount?: number
     /**
-     * *Optional*. A JSON-serialized array of suggested amounts of tip in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max\_tip\_amount*.
+     * *Optional*. A JSON-serialized Array of suggested amounts of tip in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max\_tip\_amount*.
      */
     suggested_tip_amounts?: number[]
     /**
