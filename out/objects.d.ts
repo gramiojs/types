@@ -10,7 +10,7 @@
  *
  * Based on Bot API v10.2 (14.07.2026)
  *
- * Generated at 14.07.2026, 12:28:19 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 29.07.2026, 16:44:19 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -565,9 +565,9 @@ export interface TelegramMessage {
      */
     receiver_user?: TelegramUser
     /**
-     * For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires.
+     * *Optional*. For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires.
      */
-    ephemeral_message_id: number
+    ephemeral_message_id?: number
     /**
      * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
      */
@@ -873,7 +873,7 @@ export interface TelegramMessage {
      */
     passport_data?: TelegramPassportData
     /**
-     * *Optional*. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
+     * *Optional*. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location
      */
     proximity_alert_triggered?: TelegramProximityAlertTriggered
     /**
@@ -1267,10 +1267,6 @@ export interface TelegramReplyParameters {
      * *Optional*. If the message to be replied to is from a different chat, unique identifier for the chat or username of the bot, supergroup or channel in the format `@username`. Not supported for messages sent on behalf of a business account, messages from channel direct messages chats and ephemeral messages.
      */
     chat_id?: number | string
-    /**
-     * *Optional*. Pass *True* if the message should be sent even if the specified message to be replied to is not found. Always *False* for replies in another chat or forum topic. Always *True* for messages sent on behalf of a business account.
-     */
-    allow_sending_without_reply?: boolean
     /**
      * *Optional*. Identifier of the incoming ephemeral message that will be replied to in the current chat. A reply to an ephemeral message must itself be an ephemeral message. An ephemeral message may only be replied to within 15 seconds of being sent. Required if *message\_id* isn't specified.
      */

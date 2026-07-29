@@ -10,7 +10,7 @@
  *
  * Based on Bot API v10.2 (14.07.2026)
  *
- * Generated at 14.07.2026, 12:28:19 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 29.07.2026, 16:44:19 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -110,7 +110,7 @@ export interface SendMessageParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -392,7 +392,7 @@ export interface SendPhotoParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -482,7 +482,7 @@ export interface SendLivePhotoParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -576,7 +576,7 @@ export interface SendAudioParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -674,7 +674,7 @@ export interface SendDocumentParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -764,7 +764,7 @@ export interface SendVideoParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -882,7 +882,7 @@ export interface SendAnimationParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -988,7 +988,7 @@ export interface SendVoiceParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -1074,7 +1074,7 @@ export interface SendVideoNoteParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -1290,7 +1290,7 @@ export interface SendLocationParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -1380,7 +1380,7 @@ export interface SendVenueParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -1478,7 +1478,7 @@ export interface SendContactParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
@@ -3676,7 +3676,7 @@ export interface EditMessageTextParams {
     /**
      * New text of the message, 1-4096 characters after entity parsing; required if *rich\_message* isn't specified
      */
-    text?: string
+    text?: string | { toString(): string }
     /**
      * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
@@ -3956,7 +3956,7 @@ export interface EditEphemeralMessageTextParams {
     /**
      * New text of the message, 1-4096 characters after entity parsing
      */
-    text: string
+    text: string | { toString(): string }
     /**
      * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
@@ -4212,7 +4212,7 @@ export interface SendStickerParams {
      */
     receiver_user_id?: number
     /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
      */
     callback_query_id?: string
     /**
