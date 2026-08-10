@@ -10,7 +10,7 @@
  *
  * Based on Bot API v10.2 (14.07.2026)
  *
- * Generated at 29.07.2026, 16:44:19 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 10.08.2026, 09:34:45 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -3107,7 +3107,7 @@ export interface TelegramSuggestedPostPaid {
 }
 
 export type TelegramSuggestedPostRefundedReason =
-    "post_deleted" | "24" | "payment_refunded"
+    "post_deleted" | "payment_refunded"
 
 /**
  * Describes a service message about a payment refund for a suggested post.
