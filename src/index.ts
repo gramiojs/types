@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
-import { getCustomSchema } from "@gramio/schema-parser";
+import { type Field, getCustomSchema } from "@gramio/schema-parser";
 import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
@@ -32,6 +32,73 @@ const schema = await getCustomSchema();
 
 const { methods } = schema;
 const objects = schema.objects
+
+// Guard against silently losing FormattableString support. Telegram documents a
+// `parse_mode` sibling for exactly those text fields that accept formatting
+// entities, so each of them must reach the output as
+// `string | { toString(): string }` — see `fieldToType` in entities/properties.ts.
+// The pairing broke once already: Bot API 10.1 reworded editMessageText's
+// description from "after entities parsing" to the singular "after entity
+// parsing", the description-based detection in @gramio/schema-parser stopped
+// firing, and v10.1.0 shipped `SendMessageParams.text: string | { toString(): string }`
+// next to `EditMessageTextParams.text?: string`. Fail the generation instead of
+// publishing that asymmetry again — including when an older parser resolves.
+{
+	const isMessageEntities = (field: Field) =>
+		field.type === "array" &&
+		field.arrayOf.type === "reference" &&
+		field.arrayOf.reference.name === "MessageEntity";
+
+	const isFormattable = (field?: Field) =>
+		field?.type === "string" && field.semanticType === "formattable";
+
+	const problems: string[] = [];
+
+	function check(container: string, fields: Field[]) {
+		for (let i = 0; i < fields.length; i++) {
+			const parseMode = fields[i];
+			if (!parseMode.key?.endsWith("parse_mode")) continue;
+
+			// `${key}_parse_mode` names its target; a bare `parse_mode` claims the
+			// field it is documented under (skipping MessageEntity[] siblings).
+			let target: Field | undefined;
+			if (parseMode.key === "parse_mode") {
+				let index = i - 1;
+				while (index >= 0 && isMessageEntities(fields[index])) index--;
+				target = fields[index];
+			} else
+				target = fields.find(
+					(f) => f.key === parseMode.key.replace(/_parse_mode$/, ""),
+				);
+
+			if (!isFormattable(target))
+				problems.push(
+					`${container}.${target?.key ?? "?"} — partner of ` +
+						`${parseMode.key}, but not semanticType:"formattable"`,
+				);
+		}
+
+		// The reverse direction: a formattable mark on a container without any
+		// parse_mode sibling means a response field got widened by mistake.
+		if (!fields.some((f) => f.key?.endsWith("parse_mode")))
+			for (const field of fields)
+				if (isFormattable(field))
+					problems.push(
+						`${container}.${field.key} — semanticType:"formattable" without any parse_mode sibling`,
+					);
+	}
+
+	for (const method of methods) check(method.name, method.parameters);
+	for (const object of objects)
+		if (object.type === "fields") check(object.name, object.fields);
+
+	if (problems.length)
+		throw new Error(
+			`Formattable/parse_mode mismatch in the parsed schema — the generated types would be inconsistent (some text fields accepting FormattableString, others not). Fix the detection in @gramio/schema-parser (applyFormattableSiblings) or bump it:\n  ${problems.join(
+				"\n  ",
+			)}`,
+		);
+}
 
 // ─── Build markupTypes from schema ────────────────────────────────────────────
 // schema-parser marks objects like InlineKeyboardMarkup with semanticType:"markup".
