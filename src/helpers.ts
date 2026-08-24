@@ -1,4 +1,29 @@
-import type { Version } from "@gramio/schema-parser";
+import type { Method, Version } from "@gramio/schema-parser";
+
+export function assertMethodFields(
+	methods: Method[],
+	requirements: Record<string, readonly string[]>,
+) {
+	const missing = Object.entries(requirements).flatMap(
+		([methodName, fields]) => {
+			const method = methods.find(({ name }) => name === methodName);
+
+			return method
+				? fields
+						.filter(
+							(field) =>
+								!method.parameters.some((parameter) => parameter.key === field),
+						)
+						.map((field) => `${methodName}.${field}`)
+				: [methodName];
+		},
+	);
+
+	if (missing.length)
+		throw new Error(
+			`Required Bot API schema fields are missing: ${missing.join(", ")}`,
+		);
+}
 
 export class CodeGenerator {
 	static generateComment(value: string | string[]) {

@@ -4,7 +4,7 @@ import { type Field, getCustomSchema } from "@gramio/schema-parser";
 import prettier from "prettier";
 import { OUTPUT_PATH, PRETTIER_OPTIONS } from "./config";
 import { APIMethods, Objects, Params } from "./entities";
-import { CodeGenerator, generateHeader } from "./helpers";
+import { CodeGenerator, assertMethodFields, generateHeader } from "./helpers";
 
 export interface IGeneratedFile {
 	name: string;
@@ -31,37 +31,12 @@ const schema = await getCustomSchema();
 }
 
 const { methods } = schema;
-const objects = schema.objects
+const objects = schema.objects;
 
-// Telegram added the same stop controls to both draft methods in Bot API 10.3.
-// The upstream HTML briefly exposed them on sendMessageDraft only, which made a
-// successful regeneration silently remove the rich-draft fields. Keep this
-// assertion next to the schema boundary so no release can regress either
-// declaration even if the source page or parser changes again.
-{
-	const requiredDraftFields = ["can_stop", "keep_on_stop"];
-	const draftMethods = ["sendMessageDraft", "sendRichMessageDraft"];
-	const problems: string[] = [];
-
-	for (const methodName of draftMethods) {
-		const method = methods.find((candidate) => candidate.name === methodName);
-		if (!method) {
-			problems.push(`${methodName} is missing`);
-			continue;
-		}
-
-		for (const field of requiredDraftFields)
-			if (!method.parameters.some((parameter) => parameter.key === field))
-				problems.push(`${methodName}.${field} is missing`);
-	}
-
-	if (problems.length)
-		throw new Error(
-			`Bot API draft controls are incomplete in the parsed schema:\n  ${problems.join(
-				"\n  ",
-			)}`,
-		);
-}
+assertMethodFields(methods, {
+	sendMessageDraft: ["can_stop", "keep_on_stop"],
+	sendRichMessageDraft: ["can_stop", "keep_on_stop"],
+});
 
 // Guard against silently losing FormattableString support. Telegram documents a
 // `parse_mode` sibling for exactly those text fields that accept formatting
@@ -135,9 +110,7 @@ const objects = schema.objects
 // We derive the set once so generators can emit `| { toJSON(): T }` unions.
 
 const markupTypes = new Set(
-	objects
-		.filter((o) => o.semanticType === "markup")
-		.map((o) => o.name),
+	objects.filter((o) => o.semanticType === "markup").map((o) => o.name),
 );
 
 // ─── File generation ──────────────────────────────────────────────────────────
