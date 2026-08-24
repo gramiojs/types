@@ -10,14 +10,14 @@
  *
  * Based on Bot API v10.3 (24.08.2026)
  *
- * Generated at 24.08.2026, 16:05:11 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 25.08.2026, 02:33:22 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
 import type { APIMethodReturn } from "./utils"
 
 /**
- * This [object](https://core.telegram.org/bots/api#available-types) represents an incoming update.  
+ * This [object](https://core.telegram.org/bots/api#available-types) represents an incoming update.
  * At most **one** of the optional fields can be present in any given update.
  *
  * [Documentation](https://core.telegram.org/bots/api/#update)
@@ -304,7 +304,10 @@ export interface TelegramChat {
 }
 
 export type TelegramChatFullInfoType =
-    "private" | "group" | "supergroup" | "channel"
+    | "private"
+    | "group"
+    | "supergroup"
+    | "channel"
 
 /**
  * This object contains full information about a chat.
@@ -1057,7 +1060,8 @@ export interface TelegramInaccessibleMessage {
  * [Documentation](https://core.telegram.org/bots/api/#maybeinaccessiblemessage)
  */
 export type TelegramMaybeInaccessibleMessage =
-    TelegramMessage | TelegramInaccessibleMessage
+    | TelegramMessage
+    | TelegramInaccessibleMessage
 
 export type TelegramMessageEntityType =
     | "mention"
@@ -2494,7 +2498,9 @@ export interface TelegramManagedBotUpdated {
 }
 
 export type TelegramBotSubscriptionUpdatedState =
-    "canceled" | "active" | "failed"
+    | "canceled"
+    | "active"
+    | "failed"
 
 /**
  * This object contains information about changes to a user payment subscription toward the current bot.
@@ -3167,7 +3173,8 @@ export interface TelegramSuggestedPostPaid {
 }
 
 export type TelegramSuggestedPostRefundedReason =
-    "post_deleted" | "payment_refunded"
+    | "post_deleted"
+    | "payment_refunded"
 
 /**
  * Describes a service message about a payment refund for a suggested post.
@@ -3518,7 +3525,7 @@ export interface TelegramReplyKeyboardMarkup {
      */
     input_field_placeholder?: string
     /**
-     * *Optional*. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](https://core.telegram.org/bots/api#message) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.  
+     * *Optional*. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](https://core.telegram.org/bots/api#message) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.
      *
      * *Example:* A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.
      */
@@ -3710,7 +3717,7 @@ export interface TelegramReplyKeyboardRemove {
      */
     remove_keyboard: true
     /**
-     * *Optional*. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](https://core.telegram.org/bots/api#message) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.  
+     * *Optional*. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](https://core.telegram.org/bots/api#message) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.
      *
      * *Example:* A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet.
      */
@@ -3774,7 +3781,7 @@ export interface TelegramInlineKeyboardButton {
      */
     switch_inline_query?: string
     /**
-     * *Optional*. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.  
+     * *Optional*. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
      *
      * This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent in channel direct messages chats and on behalf of a business account.
      */
@@ -3788,13 +3795,13 @@ export interface TelegramInlineKeyboardButton {
      */
     copy_text?: TelegramCopyTextButton
     /**
-     * *Optional*. Description of the game that will be launched when the user presses the button.  
+     * *Optional*. Description of the game that will be launched when the user presses the button.
      *
      * **NOTE:** This type of button **must** always be the first button in the first row.
      */
     callback_game?: TelegramCallbackGame
     /**
-     * *Optional*. Specify *True*, to send a [Pay button](https://core.telegram.org/bots/api#payments). Substrings “![⭐](https://telegram.org/img/emoji/40/E2AD90.png)” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.  
+     * *Optional*. Specify *True*, to send a [Pay button](https://core.telegram.org/bots/api#payments). Substrings “![⭐](https://telegram.org/img/emoji/40/E2AD90.png)” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.
      *
      * **NOTE:** This type of button **must** always be the first button in the first row and can only be used in invoice messages.
      */
@@ -3816,7 +3823,7 @@ export interface TelegramInlineKeyboardButton {
  */
 export interface TelegramLoginUrl {
     /**
-     * An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed. If the user refuses to provide authorization data, the original URL without information about the user will be opened. The data added is the same as described in [Receiving authorization data](https://core.telegram.org/widgets/login#receiving-authorization-data).  
+     * An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed. If the user refuses to provide authorization data, the original URL without information about the user will be opened. The data added is the same as described in [Receiving authorization data](https://core.telegram.org/widgets/login#receiving-authorization-data).
      *
      * **NOTE:** You **must** always check the hash of the received data to verify the authentication and the integrity of the data as described in [Checking authorization](https://core.telegram.org/widgets/login#checking-authorization).
      */
@@ -5202,7 +5209,10 @@ export interface TelegramGifts {
 }
 
 export type TelegramUniqueGiftModelRarity =
-    "uncommon" | "rare" | "epic" | "legendary"
+    | "uncommon"
+    | "rare"
+    | "epic"
+    | "legendary"
 
 /**
  * This object describes the model of a unique gift.
@@ -5429,7 +5439,11 @@ export interface TelegramGiftInfo {
 }
 
 export type TelegramUniqueGiftInfoOrigin =
-    "upgrade" | "transfer" | "resale" | "gifted_upgrade" | "offer"
+    | "upgrade"
+    | "transfer"
+    | "resale"
+    | "gifted_upgrade"
+    | "offer"
 export type TelegramUniqueGiftInfoLastResaleCurrency = "XTR" | "TON"
 
 /**
@@ -5489,7 +5503,8 @@ export interface TelegramUniqueGiftInfo {
  * [Documentation](https://core.telegram.org/bots/api/#ownedgift)
  */
 export type TelegramOwnedGift =
-    TelegramOwnedGiftRegular | TelegramOwnedGiftUnique
+    | TelegramOwnedGiftRegular
+    | TelegramOwnedGiftUnique
 
 /**
  * Describes a regular gift owned by a user or a chat.
@@ -6815,7 +6830,8 @@ export interface TelegramInputPaidMediaVideo {
  * [Documentation](https://core.telegram.org/bots/api/#inputprofilephoto)
  */
 export type TelegramInputProfilePhoto =
-    TelegramInputProfilePhotoStatic | TelegramInputProfilePhotoAnimated
+    | TelegramInputProfilePhotoStatic
+    | TelegramInputProfilePhotoAnimated
 
 /**
  * A static profile photo in the .JPG format.
@@ -6862,7 +6878,8 @@ export interface TelegramInputProfilePhotoAnimated {
  * [Documentation](https://core.telegram.org/bots/api/#inputstorycontent)
  */
 export type TelegramInputStoryContent =
-    TelegramInputStoryContentPhoto | TelegramInputStoryContentVideo
+    | TelegramInputStoryContentPhoto
+    | TelegramInputStoryContentVideo
 
 /**
  * Describes a photo to post as a story.
@@ -7128,13 +7145,17 @@ export interface TelegramInputRichMessageMedia {
     media:
         | TelegramInputMediaAnimation
         | TelegramInputMediaAudio
+        | TelegramInputMediaDocument
         | TelegramInputMediaPhoto
         | TelegramInputMediaVideo
         | TelegramInputMediaVoiceNote
 }
 
 export type TelegramRichMessageButtonStyle =
-    "danger" | "success" | "primary" | "link"
+    | "danger"
+    | "success"
+    | "primary"
+    | "link"
 
 /**
  * This object represents a button in a [RichMessage](https://core.telegram.org/bots/api#richmessage). Exactly one of the fields other than *text* and *style* must be used to specify the type of the button.
@@ -8920,7 +8941,11 @@ export interface TelegramInputRichBlockThinking {
 }
 
 export type TelegramInlineQueryChatType =
-    "sender" | "private" | "group" | "supergroup" | "channel"
+    | "sender"
+    | "private"
+    | "group"
+    | "supergroup"
+    | "channel"
 
 /**
  * This object represents an incoming inline query. When the user sends an empty query, your bot could return some default or trending results.
@@ -8969,7 +8994,7 @@ export interface TelegramInlineQueryResultsButton {
      */
     web_app?: TelegramWebAppInfo
     /**
-     * *Optional*. [Deep-linking](https://core.telegram.org/bots/features#deep-linking) parameter for the /start message sent to the bot when a user presses the button. 1-64 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed.  
+     * *Optional*. [Deep-linking](https://core.telegram.org/bots/features#deep-linking) parameter for the /start message sent to the bot when a user presses the button. 1-64 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed.
      *
      * *Example:* An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an OAuth link. Once done, the bot can offer a [*switch\_inline*](https://core.telegram.org/bots/api#inlinekeyboardmarkup) button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities.
      */
@@ -9141,7 +9166,9 @@ export interface TelegramInlineQueryResultPhoto {
 }
 
 export type TelegramInlineQueryResultGifThumbnailMimeType =
-    "image/jpeg" | "image/gif" | "video/mp4"
+    | "image/jpeg"
+    | "image/gif"
+    | "video/mp4"
 
 /**
  * Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use *input\_message\_content* to send a message with the specified content instead of the animation.
@@ -9214,7 +9241,9 @@ export interface TelegramInlineQueryResultGif {
 }
 
 export type TelegramInlineQueryResultMpeg4GifThumbnailMimeType =
-    "image/jpeg" | "image/gif" | "video/mp4"
+    | "image/jpeg"
+    | "image/gif"
+    | "video/mp4"
 
 /**
  * Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use *input\_message\_content* to send a message with the specified content instead of the animation.
@@ -9469,7 +9498,8 @@ export interface TelegramInlineQueryResultVoice {
 }
 
 export type TelegramInlineQueryResultDocumentMimeType =
-    "application/pdf" | "application/zip"
+    | "application/pdf"
+    | "application/zip"
 
 /**
  * Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use *input\_message\_content* to send a message with the specified content instead of the file. Currently, only **.PDF** and **.ZIP** files can be sent using this method.
@@ -11158,7 +11188,10 @@ export interface TelegramPassportElementErrorDataField {
 }
 
 export type TelegramPassportElementErrorFrontSideType =
-    "passport" | "driver_license" | "identity_card" | "internal_passport"
+    | "passport"
+    | "driver_license"
+    | "identity_card"
+    | "internal_passport"
 
 /**
  * Represents an issue with the front side of a document. The error is considered resolved when the file with the front side of the document changes.
@@ -11185,7 +11218,8 @@ export interface TelegramPassportElementErrorFrontSide {
 }
 
 export type TelegramPassportElementErrorReverseSideType =
-    "driver_license" | "identity_card"
+    | "driver_license"
+    | "identity_card"
 
 /**
  * Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
@@ -11212,7 +11246,10 @@ export interface TelegramPassportElementErrorReverseSide {
 }
 
 export type TelegramPassportElementErrorSelfieType =
-    "passport" | "driver_license" | "identity_card" | "internal_passport"
+    | "passport"
+    | "driver_license"
+    | "identity_card"
+    | "internal_passport"
 
 /**
  * Represents an issue with the selfie with a document. The error is considered resolved when the file with the selfie changes.

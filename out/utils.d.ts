@@ -15,7 +15,7 @@
  *
  * Based on Bot API v10.3 (24.08.2026)
  *
- * Generated at 24.08.2026, 16:05:11 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 25.08.2026, 02:33:22 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"

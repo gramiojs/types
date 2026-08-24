@@ -13,7 +13,7 @@
  *
  * Based on Bot API v10.3 (24.08.2026)
  *
- * Generated at 24.08.2026, 16:05:11 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 25.08.2026, 02:33:22 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -1107,16 +1107,16 @@ export interface APIMethods {
      */
     declineSuggestedPost: CallAPI<Params.DeclineSuggestedPostParams, true>
     /**
-     * Use this method to delete a message, including service messages, with the following limitations:  
-     * \- A message can only be deleted if it was sent less than 48 hours ago.  
-     * \- Service messages about a supergroup, channel, or forum topic creation can't be deleted.  
-     * \- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.  
-     * \- Bots can delete outgoing messages in private chats, groups, and supergroups.  
-     * \- Bots can delete incoming messages in private chats.  
-     * \- Bots granted *can\_post\_messages* permissions can delete outgoing messages in channels.  
-     * \- If the bot is an administrator of a group, it can delete any message there.  
-     * \- If the bot has *can\_delete\_messages* administrator right in a supergroup or a channel, it can delete any message there.  
-     * \- If the bot has *can\_manage\_direct\_messages* administrator right in a channel, it can delete any message in the corresponding direct messages chat.  
+     * Use this method to delete a message, including service messages, with the following limitations:
+     * \- A message can only be deleted if it was sent less than 48 hours ago.
+     * \- Service messages about a supergroup, channel, or forum topic creation can't be deleted.
+     * \- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
+     * \- Bots can delete outgoing messages in private chats, groups, and supergroups.
+     * \- Bots can delete incoming messages in private chats.
+     * \- Bots granted *can\_post\_messages* permissions can delete outgoing messages in channels.
+     * \- If the bot is an administrator of a group, it can delete any message there.
+     * \- If the bot has *can\_delete\_messages* administrator right in a supergroup or a channel, it can delete any message there.
+     * \- If the bot has *can\_manage\_direct\_messages* administrator right in a channel, it can delete any message in the corresponding direct messages chat.
      * Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#deletemessage)
@@ -1273,7 +1273,7 @@ export interface APIMethods {
      */
     sendRichMessageDraft: CallAPI<Params.SendRichMessageDraftParams, true>
     /**
-     * Use this method to send answers to an inline query. On success, *True* is returned.  
+     * Use this method to send answers to an inline query. On success, *True* is returned.
      * No more than **50** results per query are allowed.
      *
      * [Documentation](https://core.telegram.org/bots/api/#answerinlinequery)

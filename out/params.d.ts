@@ -10,7 +10,7 @@
  *
  * Based on Bot API v10.3 (24.08.2026)
  *
- * Generated at 24.08.2026, 16:05:11 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 25.08.2026, 02:33:22 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -33,7 +33,7 @@ export interface GetUpdatesParams {
      */
     timeout?: number
     /**
-     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.  
+     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      *
      * Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.
      */
@@ -61,7 +61,7 @@ export interface SetWebhookParams {
      */
     max_connections?: number
     /**
-     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.  
+     * A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](https://core.telegram.org/bots/api#update) for a complete list of available update types. Specify an empty list to receive all update types except *chat\_member*, *message\_reaction*, and *message\_reaction\_count* (default). If not specified, the previous setting will be used.
      * Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
      */
     allowed_updates?: Exclude<keyof Objects.TelegramUpdate, "update_id">[]
@@ -2513,7 +2513,12 @@ export interface DeleteChatStickerSetParams {
 }
 
 export type CreateForumTopicIconColor =
-    7322096 | 16766590 | 13338331 | 9367192 | 16749490 | 16478047
+    | 7322096
+    | 16766590
+    | 13338331
+    | 9367192
+    | 16749490
+    | 16478047
 
 /**
  * Params object for {@link APIMethods.createForumTopic | createForumTopic} method
@@ -2696,7 +2701,7 @@ export interface AnswerCallbackQueryParams {
      */
     show_alert?: boolean
     /**
-     * URL that will be opened by the user's client. If you have created a [Game](https://core.telegram.org/bots/api#game) and accepted the conditions via [@BotFather](https://t.me/botfather), specify the URL that opens your game - note that this will only work if the query comes from a [*callback\_game*](https://core.telegram.org/bots/api#inlinekeyboardbutton) button.  
+     * URL that will be opened by the user's client. If you have created a [Game](https://core.telegram.org/bots/api#game) and accepted the conditions via [@BotFather](https://t.me/botfather), specify the URL that opens your game - note that this will only work if the query comes from a [*callback\_game*](https://core.telegram.org/bots/api#inlinekeyboardbutton) button.
      *
      * Otherwise, you may use links like `t.me/your_bot?start=XXXX` that open your bot with a parameter.
      */
@@ -4548,13 +4553,21 @@ export interface SendRichMessageDraftParams {
      */
     message_thread_id?: number
     /**
-     * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
+     * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. Otherwise, the draft is replaced without animation.
      */
     draft_id: number
     /**
      * The partial message to be streamed. Direct upload of new files and explicit upload of files by a URL isn't supported.
      */
     rich_message: Objects.TelegramInputRichMessage
+    /**
+     * Pass *True* to show the user a button to stop further drafts. The bot will receive an [Update](https://core.telegram.org/bots/api#update) “stopped\_message\_generation” if the user presses the button.
+     */
+    can_stop?: boolean
+    /**
+     * Pass *True* to keep the draft in the chat when the button is pressed. The draft will still disappear after a short time or if the bot sends a message. To fully preserve the partial draft, the bot should send it as a new message.
+     */
+    keep_on_stop?: boolean
 }
 
 /**

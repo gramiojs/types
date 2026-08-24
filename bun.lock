@@ -6,7 +6,7 @@
       "name": "@gramio/types",
       "devDependencies": {
         "@biomejs/biome": "1.5.3",
-        "@gramio/schema-parser": "^1.0.0",
+        "@gramio/schema-parser": "^1.2.0",
         "@types/node": "^20.11.10",
         "prettier": "^3.2.4",
       },
@@ -31,7 +31,7 @@
 
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@1.5.3", "", { "os": "win32", "cpu": "x64" }, "sha512-fMvbSouZEASU7mZH8SIJSANDm5OqsjgtVXlbUqxwed6BP7uuHRSs396Aqwh2+VoW8fwTpp6ybIUoC9FrzB0kyA=="],
 
-    "@gramio/schema-parser": ["@gramio/schema-parser@1.0.1", "", { "dependencies": { "cheerio": "^1.0.0", "turndown": "^7.2.0" } }, "sha512-0S5hMTdoTDBmQCJ24ktKAqBVO+R1fofuybF6ybU8leAGmVhlu1es1opUXHIBUw/hkYP0Z4OsQHb2Lt6+WUVK+w=="],
+    "@gramio/schema-parser": ["@gramio/schema-parser@1.2.0", "", { "dependencies": { "cheerio": "^1.0.0", "turndown": "^7.2.0" } }, "sha512-uOyLdLw6lI6O3LoBMlW75MGA4U/qSYqJ+AUEHe/lIbcbUo7qbek6w7jZzTcVSREBolRTJq89DVs927Mgi/dP4Q=="],
 
     "@mixmark-io/domino": ["@mixmark-io/domino@2.2.0", "", {}, "sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw=="],
 
