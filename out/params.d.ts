@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v10.2 (14.07.2026)
+ * Based on Bot API v10.3 (24.08.2026)
  *
- * Generated at 10.08.2026, 09:34:45 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 24.08.2026, 16:05:11 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -106,13 +106,9 @@ export interface SendMessageParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Text of the message to be sent, 1-4096 characters after entities parsing
      */
@@ -388,13 +384,9 @@ export interface SendPhotoParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
@@ -478,13 +470,9 @@ export interface SendLivePhotoParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending live photos by a URL is currently unsupported.
      */
@@ -572,13 +560,9 @@ export interface SendAudioParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
@@ -670,13 +654,9 @@ export interface SendDocumentParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * File to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
@@ -760,13 +740,9 @@ export interface SendVideoParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
@@ -878,13 +854,9 @@ export interface SendAnimationParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
@@ -984,13 +956,9 @@ export interface SendVoiceParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files)
      */
@@ -1070,13 +1038,9 @@ export interface SendVideoNoteParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending video notes by a URL is currently unsupported.
      */
@@ -1286,13 +1250,9 @@ export interface SendLocationParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Latitude of the location
      */
@@ -1376,13 +1336,9 @@ export interface SendVenueParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Latitude of the venue
      */
@@ -1474,13 +1430,9 @@ export interface SendContactParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Contact's phone number
      */
@@ -1804,7 +1756,7 @@ export interface SendMessageDraftParams {
      */
     message_thread_id?: number
     /**
-     * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
+     * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. Otherwise, the draft is replaced without animation.
      */
     draft_id: number
     /**
@@ -1819,6 +1771,14 @@ export interface SendMessageDraftParams {
      * A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse\_mode*
      */
     entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Pass *True* to show the user a button to stop further drafts. The bot will receive an [Update](https://core.telegram.org/bots/api#update) “stopped\_message\_generation” if the user presses the button.
+     */
+    can_stop?: boolean
+    /**
+     * Pass *True* to keep the draft in the chat when the button is pressed. The draft will still disappear after a short time or if the bot sends a message. To fully preserve the partial draft, the bot should send it as a new message.
+     */
+    keep_on_stop?: boolean
 }
 
 export type SendChatActionAction =
@@ -2088,6 +2048,10 @@ export interface PromoteChatMemberParams {
      * Pass *True* if the administrator can edit the tags of regular members; for groups and supergroups only
      */
     can_manage_tags?: boolean
+    /**
+     * Pass *True* if the administrator can manage chat welcome messages or directly send them in the case of bots
+     */
+    can_send_welcome_messages?: boolean
 }
 
 /**
@@ -2738,7 +2702,7 @@ export interface AnswerCallbackQueryParams {
      */
     url?: string
     /**
-     * The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0.
+     * The maximum amount of time in seconds that the result of the callback query may be cached client-side. Defaults to 0.
      */
     cache_time?: number
 }
@@ -3690,7 +3654,7 @@ export interface EditMessageTextParams {
      */
     link_preview_options?: Objects.TelegramLinkPreviewOptions
     /**
-     * New rich content of the message; required if *text* isn't specified. Direct upload of new files isn't supported when an inline message is edited.
+     * New rich content of the message; required if *text* isn't specified. Direct upload of new files and explicit upload of files by a URL isn't supported when an inline message is edited.
      */
     rich_message?: Objects.TelegramInputRichMessage
     /**
@@ -3954,9 +3918,9 @@ export interface EditEphemeralMessageTextParams {
      */
     ephemeral_message_id: number
     /**
-     * New text of the message, 1-4096 characters after entity parsing
+     * New text of the message, 1-4096 characters after entity parsing; required if *rich\_message* isn't specified
      */
-    text: string | { toString(): string }
+    text?: string | { toString(): string }
     /**
      * Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
      */
@@ -3965,6 +3929,10 @@ export interface EditEphemeralMessageTextParams {
      * A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse\_mode*
      */
     entities?: Objects.TelegramMessageEntity[]
+    /**
+     * New rich content of the message; required if *text* isn't specified
+     */
+    rich_message?: Objects.TelegramInputRichMessage
     /**
      * Link preview generation options for the message
      */
@@ -3994,7 +3962,7 @@ export interface EditEphemeralMessageMediaParams {
      */
     ephemeral_message_id: number
     /**
-     * A JSON-serialized object for the new media content of the message. A new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL.
+     * A JSON-serialized object for the new media content of the message
      */
     media: Objects.TelegramInputMedia
     /**
@@ -4033,6 +4001,10 @@ export interface EditEphemeralMessageCaptionParams {
      * A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse\_mode*
      */
     caption_entities?: Objects.TelegramMessageEntity[]
+    /**
+     * Pass *True* if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+     */
+    show_caption_above_media?: boolean
     /**
      * A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards)
      */
@@ -4208,13 +4180,9 @@ export interface SendStickerParams {
      */
     direct_messages_topic_id?: number
     /**
-     * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details.
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
      */
-    receiver_user_id?: number
-    /**
-     * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-     */
-    callback_query_id?: string
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
     /**
      * Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Video and animated stickers can't be sent via an HTTP URL.
      */
@@ -4522,6 +4490,10 @@ export interface SendRichMessageParams {
      */
     direct_messages_topic_id?: number
     /**
+     * A JSON-serialized object containing the parameters of the ephemeral message to send
+     */
+    ephemeral_message_parameters?: Objects.TelegramEphemeralMessageParameters
+    /**
      * The message to be sent
      */
     rich_message: Objects.TelegramInputRichMessage
@@ -4580,7 +4552,7 @@ export interface SendRichMessageDraftParams {
      */
     draft_id: number
     /**
-     * The partial message to be streamed. Direct upload of new files isn't supported.
+     * The partial message to be streamed. Direct upload of new files and explicit upload of files by a URL isn't supported.
      */
     rich_message: Objects.TelegramInputRichMessage
 }

@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v10.2 (14.07.2026)
+ * Based on Bot API v10.3 (24.08.2026)
  *
- * Generated at 10.08.2026, 09:34:45 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 24.08.2026, 16:05:11 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -159,7 +159,7 @@ export interface APIMethods {
      */
     sendVoice: CallAPI<Params.SendVoiceParams, Objects.TelegramMessage>
     /**
-     * As of [v.4.0](https://telegram.org/blog/video-messages-and-telescope), Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#sendvideonote)
      */
@@ -1059,7 +1059,7 @@ export interface APIMethods {
      */
     stopPoll: CallAPI<Params.StopPollParams, Objects.TelegramPoll>
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, *True* is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, *True* is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editephemeralmessagetext)
      */
