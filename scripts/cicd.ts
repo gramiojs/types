@@ -14,7 +14,10 @@ const force = process.argv.includes("--force");
 const previousHash = await fs.readFile("./hash.txt").then(String);
 if (previousHash === hash && !force) {
 	console.log("No changes in Telegram Bot API Schema");
-	process.exit(1);
+	if (process.env.GITHUB_OUTPUT) {
+		await fs.appendFile(process.env.GITHUB_OUTPUT, `changed=false${EOL}`);
+	}
+	process.exit(0);
 }
 
 const [major, minor] = version.split(".").map(Number);
@@ -32,6 +35,6 @@ if (process.env.GITHUB_OUTPUT) {
 
 	await fs.appendFile(
 		process.env.GITHUB_OUTPUT!,
-		`version=${version.replace(/"/gi, "")}${EOL}`,
+		`changed=true${EOL}version=${version.replace(/"/gi, "")}${EOL}`,
 	);
 }

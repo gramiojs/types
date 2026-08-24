@@ -11,8 +11,8 @@ on:
                 default: false
 
 permissions:
+    actions: write
     contents: write
-    id-token: write
 
 jobs:
     update_types:
@@ -37,38 +37,21 @@ jobs:
               run: bun cicd ${{ github.event.inputs.force == 'true' && '--force' || '' }}
 
             - name: Generate types
+              if: ${{ steps.cicd.outputs.changed == 'true' }}
               run: bun generate
 
             - name: Prepare to JSR publish
+              if: ${{ steps.cicd.outputs.changed == 'true' }}
               run: bun jsr
 
             - name: Commit and Push changes
+              if: ${{ steps.cicd.outputs.changed == 'true' }}
               uses: EndBug/add-and-commit@v9
               with:
                   message: "release v${{ steps.cicd.outputs.version }}"
 
-            - id: changelog
-              name: Generate changelog
-              run: bun scripts/generate-changelog.ts
-
-            - name: Publish package to JSR
-              run: bunx jsr publish
-              continue-on-error: true
-
-            - name: Publish package to NPM
-              run: bun publish --access public
-              continue-on-error: true
+            - name: Dispatch trusted release workflow
+              if: ${{ steps.cicd.outputs.changed == 'true' }}
+              run: gh workflow run publish.yml --ref "$GITHUB_REF_NAME"
               env:
-                  NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-            - name: GitHub Release
-              continue-on-error: true
-              uses: ncipollo/release-action@v1
-              with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  tag: v${{ steps.cicd.outputs.version }}
-                  name: v${{ steps.cicd.outputs.version }}
-                  body: ${{ steps.changelog.outputs.changelog }}
-                  draft: false
-                  prerelease: false
-                  generateReleaseNotes: true
+                  GH_TOKEN: ${{ github.token }}

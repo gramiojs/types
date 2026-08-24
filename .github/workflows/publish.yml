@@ -38,17 +38,19 @@ jobs:
 
             - name: Publish package to JSR
               run: bunx jsr publish
-              continue-on-error: true
+
+            - name: Setup Node for npm trusted publishing
+              uses: actions/setup-node@v6
+              with:
+                  node-version: "24"
+                  registry-url: "https://registry.npmjs.org"
+                  package-manager-cache: false
 
             - name: Publish package to NPM
-              run: bun publish --access public
-              continue-on-error: true
-              env:
-                  NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npm publish --access public
 
             - name: GitHub Release
               uses: ncipollo/release-action@v1
-              continue-on-error: true
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   tag: v${{ steps.version.outputs.version }}
