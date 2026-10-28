@@ -39,14 +39,18 @@
 		"force-release": "gh workflow run update-types.yml -f force=true",
 		"jsr": "bun scripts/release-jsr.ts",
 		"generate": "bun src/index.ts",
+		"generate:openapi": "bun src/openapi/index.ts",
+		"test:openapi": "bun test src/openapi",
 		"lint": "bunx @biomejs/biome check ./src",
 		"lint:fix": "bun lint --apply"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.5.3",
 		"@gramio/schema-parser": "^1.2.0",
+		"@types/bun": "^1.4.4",
 		"@types/node": "^20.11.10",
-		"prettier": "^3.2.4"
+		"prettier": "^3.2.4",
+		"typescript": "5.9.3"
 	},
 	"files": [
 		"out"

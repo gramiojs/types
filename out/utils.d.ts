@@ -1,46 +1,19 @@
 /**
- * @module
- *
- * This module contains type-utils for convenient work
- *
- * @example import utils
- * ```typescript
- * import { APIMethodParams, APIMethodReturn } from "@gramio/types/utils";
- *
- * type SendMessageReturn = APIMethodReturn<"sendMessage">;
- * //   ^? type SendMessageReturn = TelegramMessage"
- * type SendMessageParams = APIMethodParams<"sendMessage">;
- * //   ^? type SendMessageParams = SendMessageParams"
- * ```
- *
- * Based on Bot API v10.3 (24.08.2026)
- *
- * Generated at 25.08.2026, 02:33:22 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Based on Bot API 10.3; generated from Swagger/OpenAPI JSON. Do not edit.
  */
 
 import type { APIMethods } from "./methods"
 
 export type CallAPI<T, R> = (params: T) => Promise<R>
+
 export type CallAPIWithoutParams<R> = () => Promise<R>
+
 export type CallAPIWithOptionalParams<T, R> = (params?: T) => Promise<R>
 
-/**
- * @example
- * ```typescript
- * type SendMessageParams = APIMethodParams<"sendMessage">;
- * //   ^? type SendMessageParams = SendMessageParams"
- * ```
- */
 export type APIMethodParams<APIMethod extends keyof APIMethods> = Parameters<
     APIMethods[APIMethod]
 >[0]
-/**
- * @example
- * ```typescript
- * type SendMessageReturn = APIMethodReturn<"sendMessage">;
- * //   ^? type SendMessageReturn = TelegramMessage"
- * ```
- */
+
 export type APIMethodReturn<APIMethod extends keyof APIMethods> = Awaited<
     ReturnType<APIMethods[APIMethod]>
 >
