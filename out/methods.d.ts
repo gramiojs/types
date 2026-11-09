@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v10.3 (24.08.2026)
+ * Based on Bot API v10.4 (09.11.2026)
  *
- * Generated at 25.08.2026, 02:33:22 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 09.11.2026, 13:21:57 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -100,13 +100,13 @@ export interface APIMethods {
         Objects.TelegramMessageId[]
     >
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_ids* is known to the bot. The method is analogous to the method [forwardMessage](https://core.telegram.org/bots/api#forwardmessage), but the copied message doesn't have a link to the original message. Returns the [MessageId](https://core.telegram.org/bots/api#messageid) of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, invoice messages, and widget messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_ids* is known to the bot. The method is analogous to the method [forwardMessage](https://core.telegram.org/bots/api#forwardmessage), but the copied message doesn't have a link to the original message. Returns the [MessageId](https://core.telegram.org/bots/api#messageid) of the sent message on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#copymessage)
      */
     copyMessage: CallAPI<Params.CopyMessageParams, Objects.TelegramMessageId>
     /**
-     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_ids* is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
+     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, invoice messages, and widget messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field *correct\_option\_ids* is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#copymessages)
      */
@@ -164,6 +164,21 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#sendvideonote)
      */
     sendVideoNote: CallAPI<Params.SendVideoNoteParams, Objects.TelegramMessage>
+    /**
+     * Use this method to send a message with an [HTML widget](https://core.telegram.org/bots/widgets). Currently, in the production environment, widgets can be sent only to private chats, and sent widgets automatically have protected content and therefore can't be forwarded. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendwidget)
+     */
+    sendWidget: CallAPI<Params.SendWidgetParams, Objects.TelegramMessage>
+    /**
+     * Use this method to send again a shared widget created by the bot. Currently, in the production environment, widgets can be sent only to private chats, and sent widgets automatically have protected content and therefore can't be forwarded. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#sendsharedwidget)
+     */
+    sendSharedWidget: CallAPI<
+        Params.SendSharedWidgetParams,
+        Objects.TelegramMessage
+    >
     /**
      * Use this method to send paid media. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
      *
@@ -484,6 +499,12 @@ export interface APIMethods {
         Objects.TelegramChatMember
     >
     /**
+     * Use this method to get the list of backdrops, which can be used as the background of a theme of the screen for sharing a link to a user or a chat. Requires no parameters. Returns a [ChatShareThemeBackdrops](https://core.telegram.org/bots/api#chatsharethemebackdrops) object.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getchatsharethemebackdrops)
+     */
+    getChatShareThemeBackdrops: CallAPIWithoutParams<Objects.TelegramChatShareThemeBackdrops>
+    /**
      * Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an Array of [Message](https://core.telegram.org/bots/api#message) objects is returned.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getuserpersonalchatmessages)
@@ -511,7 +532,7 @@ export interface APIMethods {
      */
     getForumTopicIconStickers: CallAPIWithoutParams<Objects.TelegramSticker[]>
     /**
-     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator right. Returns information about the created topic as a [ForumTopic](https://core.telegram.org/bots/api#forumtopic) object.
+     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can\_manage\_topics* administrator right. In the case of a private chat, a link to the topic can be created in the format `https://t.me/<bot_username>/<message_thread_id>`; the link opens the topic only for the user. Returns information about the created topic as a [ForumTopic](https://core.telegram.org/bots/api#forumtopic) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#createforumtopic)
      */
@@ -599,6 +620,12 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#answercallbackquery)
      */
     answerCallbackQuery: CallAPI<Params.AnswerCallbackQueryParams, true>
+    /**
+     * Use this method to send an answer to a query from a widget. The query must be answered within 15 seconds. The answer is received only by the widget that sent the query and doesn't change data of the widget; use [editMessageWidgetData](https://core.telegram.org/bots/api#editmessagewidgetdata) or [editSharedWidgetData](https://core.telegram.org/bots/api#editsharedwidgetdata) to change it. On success, *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#answerwidgetquery)
+     */
+    answerWidgetQuery: CallAPI<Params.AnswerWidgetQueryParams, true>
     /**
      * Use this method to reply to a received guest message. On success, a [SentGuestMessage](https://core.telegram.org/bots/api#sentguestmessage) object is returned.
      *
@@ -921,6 +948,15 @@ export interface APIMethods {
      */
     getChatGifts: CallAPI<Params.GetChatGiftsParams, Objects.TelegramOwnedGifts>
     /**
+     * Use this method to get information about a unique gift by its name. Returns a [UniqueGift](https://core.telegram.org/bots/api#uniquegift) object on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#getuniquegift)
+     */
+    getUniqueGift: CallAPI<
+        Params.GetUniqueGiftParams,
+        Objects.TelegramUniqueGift
+    >
+    /**
      * Converts a given regular gift to Telegram Stars. Requires the *can\_convert\_gifts\_to\_stars* business bot right. Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#convertgifttostars)
@@ -938,6 +974,15 @@ export interface APIMethods {
      * [Documentation](https://core.telegram.org/bots/api/#transfergift)
      */
     transferGift: CallAPI<Params.TransferGiftParams, true>
+    /**
+     * Deletes a regular gift owned by a managed business account without receiving Telegram Stars for it. Requires the *can\_convert\_gifts\_to\_stars* business bot right. The gift can be deleted only if it isn't limited (the field *total\_count* of the [Gift](https://core.telegram.org/bots/api#gift) is omitted) and wasn't refunded. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#deletebusinessaccountgift)
+     */
+    deleteBusinessAccountGift: CallAPI<
+        Params.DeleteBusinessAccountGiftParams,
+        true
+    >
     /**
      * Posts a story on behalf of a managed business account. Requires the *can\_manage\_stories* business bot right. Returns [Story](https://core.telegram.org/bots/api#story) on success.
      *
@@ -1044,6 +1089,21 @@ export interface APIMethods {
         Objects.TelegramMessage
     >
     /**
+     * Use this method to edit data of a widget in a message sent by the bot or via the bot (for inline bots). Public data of a shared widget can be changed at most once per second. On success, *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editmessagewidgetdata)
+     */
+    editMessageWidgetData: CallAPIWithOptionalParams<
+        Params.EditMessageWidgetDataParams,
+        true
+    >
+    /**
+     * Use this method to edit public data of a shared widget created by the bot. A shared widget can be edited at most once per second. On success, *True* is returned.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#editsharedwidgetdata)
+     */
+    editSharedWidgetData: CallAPI<Params.EditSharedWidgetDataParams, true>
+    /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
      *
      * [Documentation](https://core.telegram.org/bots/api/#editmessagereplymarkup)
@@ -1107,16 +1167,16 @@ export interface APIMethods {
      */
     declineSuggestedPost: CallAPI<Params.DeclineSuggestedPostParams, true>
     /**
-     * Use this method to delete a message, including service messages, with the following limitations:
-     * \- A message can only be deleted if it was sent less than 48 hours ago.
-     * \- Service messages about a supergroup, channel, or forum topic creation can't be deleted.
-     * \- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
-     * \- Bots can delete outgoing messages in private chats, groups, and supergroups.
-     * \- Bots can delete incoming messages in private chats.
-     * \- Bots granted *can\_post\_messages* permissions can delete outgoing messages in channels.
-     * \- If the bot is an administrator of a group, it can delete any message there.
-     * \- If the bot has *can\_delete\_messages* administrator right in a supergroup or a channel, it can delete any message there.
-     * \- If the bot has *can\_manage\_direct\_messages* administrator right in a channel, it can delete any message in the corresponding direct messages chat.
+     * Use this method to delete a message, including service messages, with the following limitations:  
+     * \- A message can only be deleted if it was sent less than 48 hours ago.  
+     * \- Service messages about a supergroup, channel, or forum topic creation can't be deleted.  
+     * \- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.  
+     * \- Bots can delete outgoing messages in private chats, groups, and supergroups.  
+     * \- Bots can delete incoming messages in private chats.  
+     * \- Bots granted *can\_post\_messages* permissions can delete outgoing messages in channels.  
+     * \- If the bot is an administrator of a group, it can delete any message there.  
+     * \- If the bot has *can\_delete\_messages* administrator right in a supergroup or a channel, it can delete any message there.  
+     * \- If the bot has *can\_manage\_direct\_messages* administrator right in a channel, it can delete any message in the corresponding direct messages chat.  
      * Returns *True* on success.
      *
      * [Documentation](https://core.telegram.org/bots/api/#deletemessage)
@@ -1273,7 +1333,7 @@ export interface APIMethods {
      */
     sendRichMessageDraft: CallAPI<Params.SendRichMessageDraftParams, true>
     /**
-     * Use this method to send answers to an inline query. On success, *True* is returned.
+     * Use this method to send answers to an inline query. On success, *True* is returned.  
      * No more than **50** results per query are allowed.
      *
      * [Documentation](https://core.telegram.org/bots/api/#answerinlinequery)
