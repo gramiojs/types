@@ -8,9 +8,9 @@
  * import { SendMessageParams } from "@gramio/types/params";
  * ```
  *
- * Based on Bot API v10.4 (09.11.2026)
+ * Based on Bot API v10.5 (22.11.2026)
  *
- * Generated at 09.11.2026, 13:21:57 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 22.11.2026, 17:29:50 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type { APIMethods } from "./methods"
@@ -2965,6 +2965,75 @@ export interface SetManagedBotAccessSettingsParams {
      * A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if *is\_access\_restricted* is *False*.
      */
     added_user_ids?: number[]
+}
+
+export type SetMySettingsInlineFeedbackShareDenominator = 1 | 10 | 100 | 1000
+export type SetMySettingsCallbackQueryMode = "default" | "auto" | "inline"
+
+/**
+ * Params object for {@link APIMethods.setMySettings | setMySettings} method
+ */
+export interface SetMySettingsParams {
+    /**
+     * Pass *True* to enable [inline mode](https://core.telegram.org/bots/api#inline-mode) for the bot or *False* to disable it
+     */
+    supports_inline_queries?: boolean
+    /**
+     * New placeholder for inline queries, which is shown in the input field after the bot's username. Pass an empty string to use the default placeholder.
+     */
+    inline_query_placeholder?: string
+    /**
+     * Pass *True* to request the location of the user with every inline query to the bot or *False* to stop requesting it
+     */
+    needs_inline_query_location?: boolean
+    /**
+     * Denominator of the share of [chosen inline results](https://core.telegram.org/bots/api#choseninlineresult) received by the bot; the bot receives 1 out of *inline\_feedback\_share\_denominator* chosen results. Must be one of 1, 10, 100, or 1000. Pass 0 to stop receiving chosen inline results.
+     */
+    inline_feedback_share_denominator?: SetMySettingsInlineFeedbackShareDenominator
+    /**
+     * Pass *True* to allow adding the bot to groups or *False* to disallow it
+     */
+    can_join_groups?: boolean
+    /**
+     * Pass *True* to disable [privacy mode](https://core.telegram.org/bots/features#privacy-mode) for the bot or *False* to enable it
+     */
+    can_read_all_group_messages?: boolean
+    /**
+     * Pass *True* to allow connecting the bot to user accounts to manage them or *False* to disallow it
+     */
+    can_connect_to_business?: boolean
+    /**
+     * Pass *True* to allow creating other bots that will be controlled by the bot or *False* to disallow it
+     */
+    can_manage_bots?: boolean
+    /**
+     * Pass *True* to allow guest queries to the bot from chats it isn't a member of or *False* to disallow them
+     */
+    supports_guest_queries?: boolean
+    /**
+     * Pass *True* to allow assigning the bot to process join request queries or *False* to disallow it
+     */
+    supports_join_request_queries?: boolean
+    /**
+     * Pass *True* to enable forum topic mode in private chats with the bot or *False* to disable it
+     */
+    has_topics_enabled?: boolean
+    /**
+     * Pass *True* to allow users to create and delete topics in private chats with the bot or *False* to disallow it
+     */
+    allows_users_to_create_topics?: boolean
+    /**
+     * Pass *True* to show topics in private chats with the bot in a sidebar or *False* to stop showing them in a sidebar
+     */
+    has_topic_sidebar?: boolean
+    /**
+     * Pass *True* to allow the bot to communicate with other bots in groups, private chats, and through business accounts or *False* to disallow it
+     */
+    can_communicate_with_bots?: boolean
+    /**
+     * Mode in which the bot receives [callback queries](https://core.telegram.org/bots/api#callbackquery) from buttons in messages sent by the bot. Must be one of “default” (the field *message* is always used and contains an [InaccessibleMessage](https://core.telegram.org/bots/api#inaccessiblemessage) if the message is inaccessible to the bot), “auto” (the field *inline\_message\_id* is used instead of the field *message* if the message is inaccessible to the bot; the field *message* can still contain an inaccessible message if the message has just been deleted), or “inline” (the field *inline\_message\_id* is always used instead of the field *message*).
+     */
+    callback_query_mode?: SetMySettingsCallbackQueryMode
 }
 
 /**

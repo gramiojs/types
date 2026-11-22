@@ -11,9 +11,9 @@
  * //   ^? type SendMessageReturn = TelegramMessage"
  * ```
  *
- * Based on Bot API v10.4 (09.11.2026)
+ * Based on Bot API v10.5 (22.11.2026)
  *
- * Generated at 09.11.2026, 13:21:57 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
+ * Generated at 22.11.2026, 17:29:50 using [types](https://github.com/gramiojs/types) and [schema](https://github.com/gramiojs/schema-parser) generators
  */
 
 import type {
@@ -58,11 +58,11 @@ export interface APIMethods {
      */
     getWebhookInfo: CallAPIWithoutParams<Objects.TelegramWebhookInfo>
     /**
-     * A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a [User](https://core.telegram.org/bots/api#user) object.
+     * A simple method for testing your bot's authentication token. Requires no parameters. Returns information about the bot in form of a [BotFullInfo](https://core.telegram.org/bots/api#botfullinfo) object.
      *
      * [Documentation](https://core.telegram.org/bots/api/#getme)
      */
-    getMe: CallAPIWithoutParams<Objects.TelegramUser>
+    getMe: CallAPIWithoutParams<Objects.TelegramBotFullInfo>
     /**
      * Use this method to log out from the cloud Bot API server before launching the bot locally. You **must** log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns *True* on success. Requires no parameters.
      *
@@ -613,7 +613,7 @@ export interface APIMethods {
         true
     >
     /**
-     * Use this method to send answers to callback queries sent from [inline keyboards](https://core.telegram.org/bots/features#inline-keyboards). The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, *True* is returned.
+     * Use this method to send answers to callback queries sent from [inline keyboards](https://core.telegram.org/bots/features#inline-keyboards) or [rich messages](https://core.telegram.org/bots/api#richmessage). The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, *True* is returned.
      *
      * > Alternatively, the user can be redirected to the specified Game URL. For this option to work, you must first create a game for your bot via [@BotFather](https://t.me/botfather) and accept the terms. Otherwise, you may use links like `t.me/your_bot?start=XXXX` that open your bot with a parameter.
      *
@@ -683,6 +683,12 @@ export interface APIMethods {
         Params.SetManagedBotAccessSettingsParams,
         true
     >
+    /**
+     * Use this method to change settings of the bot. Settings that aren't specified remain unchanged. Returns *True* on success.
+     *
+     * [Documentation](https://core.telegram.org/bots/api/#setmysettings)
+     */
+    setMySettings: CallAPIWithOptionalParams<Params.SetMySettingsParams, true>
     /**
      * Use this method to change the list of the bot's commands. See [this manual](https://core.telegram.org/bots/features#commands) for more details about bot commands. Returns *True* on success.
      *
